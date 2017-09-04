@@ -2,9 +2,11 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -95,24 +97,17 @@ public class ENWIAM014 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				boolean registationStatus = registrationEnwForm(first_name, last_name);
 				if (registationStatus) {
-					BrowserWaits.waitTime(2);
 					ob.get("https://www.guerrillamail.com");
-					BrowserWaits.waitTime(12);
+					waitUntilText("Please activate your EndNote account");
 					ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 					pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
-					BrowserWaits.waitTime(2);
 					ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 				}
 
-				BrowserWaits.waitTime(3);
 				String textMessage = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
 				logger.info("Text Message : " + textMessage);
+				waitUntilText("Please activate your account");
 				Assert.assertTrue(textMessage.contains("Please activate your account"));
-				// if (!textMessage.contains("Please activate your account")) {
-				// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-				// this.getClass().getSimpleName() + "_your_account_not_display_activate_page")));// screenshot
-				// closeBrowser();
-				// }
 				test.log(LogStatus.PASS, "Error message displayed 'Please activate your account'");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Error message not displayed 'Please activate your account'");
@@ -136,7 +131,6 @@ public class ENWIAM014 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.cssSelector(OR.getProperty("resend_activation"))).click();
-				BrowserWaits.waitTime(2);
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 				test.log(LogStatus.PASS,
 						"System send an email verification to the correct email address after clicking the 'Resend Activation' button on resend email verification page.");
@@ -164,6 +158,7 @@ public class ENWIAM014 extends TestBase {
 								"Verify that,after clicking the button on resend email verification,the Neon or ENW login page should display a message that informs the user as the email has been sent.")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				waitUntilText("Sign in");
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 				if (!checkElementPresence("login_banner")) {
 
@@ -196,7 +191,23 @@ public class ENWIAM014 extends TestBase {
 								"Verify that,user should sent to ENW home page after clicking the link in the ENW verification email.")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				userAction = userActivation();
+
+				ob.get("https://www.guerrillamail.com");
+				BrowserWaits.waitTime(22);
+				waitUntilText("Please activate your", "account");
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
+				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
+				WebElement myE = email_list.get(0);
+				JavascriptExecutor executor = (JavascriptExecutor) ob;
+				executor.executeScript("arguments[0].click();", myE);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
+				WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
+				List<WebElement> links = email_body.findElements(By.tagName("a"));
+				ob.get(links.get(0).getAttribute("href"));
+				waitUntilText("Success!");
+				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+				waitUntilText("Sign in");
+				
 				test.log(LogStatus.PASS,
 						"User sent to ENW home page after clicking the link in the ENW verification email.");
 			} catch (Throwable t) {
@@ -221,13 +232,10 @@ public class ENWIAM014 extends TestBase {
 								"Verify that system should force the users to verify their email address upon sign in to Neon or ENW with STeAM and provide a way for the user to send another email verification to the user's email address.")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				if (userAction) {
-					// ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+				
 					pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-					BrowserWaits.waitTime(6);
-					// pf.getLoginTRInstance(ob).clickLogin();
-				}
+					
 				test.log(LogStatus.PASS, "User successfylly login ENW application");
 
 			} catch (Throwable t) {
@@ -243,7 +251,6 @@ public class ENWIAM014 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_AGREE_BUTTON_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_AGREE_BUTTON_CSS.toString())).click();
 
@@ -265,7 +272,7 @@ public class ENWIAM014 extends TestBase {
 				closeBrowser();
 
 			}
-
+			waitUntilText("Getting Started","Find","Collect");
 			String profile_name_xpath = "//img[@title='" + first_name + " " + last_name + "']";
 			element = ob.findElement(By.xpath(profile_name_xpath));
 			if (element == null) {

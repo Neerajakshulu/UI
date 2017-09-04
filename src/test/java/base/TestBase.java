@@ -804,7 +804,6 @@ public class TestBase {
 
 	// logging out
 	public void logout() throws Exception {
-		waitUntilText("Newsfeed", "Watchlists", "Groups");
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 30);
@@ -1966,9 +1965,8 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
 			ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
-			BrowserWaits.waitTime(4);
+			waitUntilText("Thank you");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
-
 			String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
 
 			if (!StringContains(text, email)) {

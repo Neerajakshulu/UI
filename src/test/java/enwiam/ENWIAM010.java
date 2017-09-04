@@ -124,6 +124,7 @@ public class ENWIAM010 extends TestBase {
 								"Verify that,user should receive the ENW EULA acceptance after signed into ENW for the first time.")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				waitUntilText("I Agree");
 				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString()), 30);
 				String agreeButton = ob.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString()))
 						.getAttribute("title");
@@ -213,21 +214,21 @@ public class ENWIAM010 extends TestBase {
 								"Verify that A user should not be allowed to sign-in to ENW if an incorrect email address and password combination is provided on the ENW landing screen")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				waitUntilText("Getting Started","Find","Collect");
 				logoutEnw();
-				BrowserWaits.waitTime(6);
+				waitUntilText("Sign in");
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys("userendnote@gmail.com");
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("Pass123!");
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-
+				waitUntilText("Invalid email/password. Please try again.");
 				String status = ob
 						.findElement(By.cssSelector(OnePObjectMap.DRA_INVALIDCREDENTIALS_ERRORMSG_CSS.toString()))
 						.getText();
 				Assert.assertEquals(status, "Invalid email/password. Please try again.");
 				test.log(LogStatus.PASS,
 						"User not sign-in to ENW if an incorrect email address and password combination is provided on the ENW landing screen");
-				BrowserWaits.waitTime(3);
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
 						"User sign-in to ENW if an incorrect email address and password combination is provided on the ENW landing screen"

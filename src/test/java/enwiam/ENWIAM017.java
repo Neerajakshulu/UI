@@ -67,24 +67,28 @@ public class ENWIAM017 extends TestBase {
 			String email = createENWNewUser(firstName, lastName);
 			logger.info("Email Address : " + email);
 			test.log(LogStatus.INFO, " New User created");
-
+			waitUntilText("I Agree");
 			ob.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString())).click();
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()), 30);
 			String text = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
 			if (text.equalsIgnoreCase("Continue")) {
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
-
+			waitUntilText("Getting Started","Find","Collect");
 			logoutEnw();
 			test.log(LogStatus.INFO, " Attempting Login by providing wrong password");
-			for (int i = 0; i < 10; i++) {
-				BrowserWaits.waitTime(4);
+			for (int i = 0; i < 9; i++) {
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("neon@126");
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-				Thread.sleep(3000);
+				waitUntilText("Invalid email/password. Please try again.");
 			}
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("neon@126");
+			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
+			waitUntilText("Your account has been locked.");
 			test.log(LogStatus.INFO, " 10 unsuccessfull login attempts");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("lock_title")), 10);
 			String message = ob.findElement(By.xpath(OR.getProperty("lock_title"))).getText();

@@ -66,20 +66,17 @@ public class ENWIAM011 extends TestBase {
 			// Navigate to FB login page
 			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-			BrowserWaits.waitTime(3);
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
 			//
-			BrowserWaits.waitTime(3);
+			fluentwaitforElement(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
 
 			// Verify that existing FB credentials are working fine
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
-			BrowserWaits.waitTime(4);
 			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
-
-			BrowserWaits.waitTime(8);
 
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
@@ -95,7 +92,7 @@ public class ENWIAM011 extends TestBase {
 				closeBrowser();
 
 			}
-
+			waitUntilText("Getting Started","Find","Collect");
 			logoutEnw();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 

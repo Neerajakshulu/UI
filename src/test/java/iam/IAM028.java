@@ -2,8 +2,10 @@ package iam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -82,15 +84,25 @@ public class IAM028 extends TestBase {
 			waitUntilText("Thank You");
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 			waitUntilText("Sign in");
-			boolean userAction = userActivation();
-			if (userAction) {
-				pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
-				pf.getLoginTRInstance(ob).clickLogin();
-			}
-
-			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
-
-			// Verify that profile image using below xpath is present or not
+			
+			ob.get("https://www.guerrillamail.com");
+			BrowserWaits.waitTime(22);
+			waitUntilText("Please activate your", "account");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
+			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
+			WebElement myE = email_list.get(0);
+			JavascriptExecutor executor = (JavascriptExecutor) ob;
+			executor.executeScript("arguments[0].click();", myE);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
+			WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
+			List<WebElement> links = email_body.findElements(By.tagName("a"));
+			ob.get(links.get(0).getAttribute("href"));
+			waitUntilText("Success!");
+			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+			waitUntilText("Sign in");
+			pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
+			
 			String profile_name_xpath = "//img[@title='" + first_name + " " + last_name + "']";
 			element = ob.findElement(By.xpath(profile_name_xpath));
 			if (element == null) {

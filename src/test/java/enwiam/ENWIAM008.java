@@ -54,11 +54,7 @@ public class ENWIAM008 extends TestBase {
 
 		try {
 			ob.get("https://www.guerrillamail.com");
-			BrowserWaits.waitTime(2);
-			if (CONFIG.getProperty("browserType").equals("IE")) {
-				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-				BrowserWaits.waitTime(4);
-			}
+			waitUntilText("Welcome to Guerrilla Mail");
 			String email1 = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 			logger.info("Email Id:" + email1);
 			String traillingSpaceEmail = " " + email1;
@@ -67,16 +63,10 @@ public class ENWIAM008 extends TestBase {
 			String str = createTraillingSpaceUser("duster", "man", traillingSpaceEmail);
 			logger.info("After Trailling user :" + str);
 			continueToLandingENWPage();
-			BrowserWaits.waitTime(3);
-
 			openBrowser1();
 
 			ob.get("https://www.guerrillamail.com");
-			BrowserWaits.waitTime(2);
-			if (CONFIG.getProperty("browserType").equals("IE")) {
-				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-				BrowserWaits.waitTime(4);
-			}
+			waitUntilText("Welcome to Guerrilla Mail");
 			String email2 = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 			logger.info("Email Id:" + email2);
 			String traillingSpaceEmail1 = email2 + " ";
@@ -103,7 +93,7 @@ public class ENWIAM008 extends TestBase {
 	}
 
 	private void continueToLandingENWPage() throws Exception {
-		BrowserWaits.waitTime(10);
+		waitUntilText("I Agree");
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_AGREE_BUTTON_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_AGREE_BUTTON_CSS.toString())).click();
 		String text1 = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
@@ -121,6 +111,7 @@ public class ENWIAM008 extends TestBase {
 			closeBrowser();
 
 		}
+		waitUntilText("Getting Started","Find","Collect");
 		logoutEnw();
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 

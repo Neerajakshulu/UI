@@ -91,15 +91,23 @@ public class ENWIAM016 extends TestBase {
 			clearCookies();
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-			BrowserWaits.waitTime(3);
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+			waitUntilText("Sign up");
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(password);
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
-			BrowserWaits.waitTime(3);
+			
+			if (validity.equalsIgnoreCase("YES")) {
+				closeBrowser();
+			}else{
+			waitUntilText("Password is too long");
+			closeBrowser();
+			}
+			
 
-			List<WebElement> errMsg = null;
+			/*List<WebElement> errMsg = null;
 			if (validity.equalsIgnoreCase("YES")) {
 
 				errMsg = ob.findElements(By.xpath(OnePObjectMap.SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH.toString()));
@@ -108,13 +116,13 @@ public class ENWIAM016 extends TestBase {
 					throw new Exception("Error message should not display");
 				}
 
-				/*
+				
 				 * passLength = ob.findElement(By.xpath(OnePObjectMap.SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH.toString()))
 				 * .getText(); if (passLength.contains("Password is too long")) { test.log(LogStatus.FAIL,
 				 * "Error message not getting displayed");// extent test.log(LogStatus.INFO, "Snapshot below: " +
 				 * test.addScreenCapture(captureScreenshot( this.getClass().getSimpleName() +
 				 * "_error_message_not_getting_displayed_" + (count + 1)))); closeBrowser(); }
-				 */
+				 
 
 			}
 
@@ -132,7 +140,7 @@ public class ENWIAM016 extends TestBase {
 				ob.findElement(By.xpath(OnePObjectMap.SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH.toString()));
 				BrowserWaits.waitTime(3);
 
-				/*
+				
 				 * passLength = ob.findElement(By.xpath(OnePObjectMap.SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH.toString()))
 				 * .getText(); logger.info("PassWord : " + passLength); if (!passLength.contains("Password is too long"
 				 * )) { test.log(LogStatus.FAIL, "Error message not getting displayed");// extent
@@ -140,11 +148,11 @@ public class ENWIAM016 extends TestBase {
 				 * this.getClass().getSimpleName() + "_error_message_not_getting_displayed_" + (count + 1))));
 				 * closeBrowser(); } ob.findElement(By.xpath(
 				 * OnePObjectMap.SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH.toString())); BrowserWaits.waitTime(3);
-				 */
+				 
 
-			}
+			}*/
 
-			closeBrowser();
+//			closeBrowser();
 
 		}
 

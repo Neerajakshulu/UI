@@ -45,29 +45,27 @@ public class ENWIAM018 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
-			Thread.sleep(3000);
 			ob.findElement(By.name("loginEmail")).sendKeys("userendnote@gmail.com");
 			ob.findElement(By.name("loginPassword")).sendKeys("Neon@123");
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			Thread.sleep(8000);
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
 			if (text.equalsIgnoreCase("Continue")) {
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
-			BrowserWaits.waitTime(3);
+			waitUntilText("Getting Started","Find","Collect");
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString()), 30);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString())));
-			BrowserWaits.waitTime(2);
+			waitUntilText("Account");
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString())).click();
-			BrowserWaits.waitTime(6);
+			waitUntilText("View additional email preferences");
 			String cssValue = ob
 					.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")))
 					.getCssValue("background");
-
+			logger.info("Css Value : "+cssValue);
 			if (cssValue.contains("rgb(69, 183, 231)")) {
 				test.log(LogStatus.INFO, "check box is selected");
 			} else {
@@ -79,7 +77,7 @@ public class ENWIAM018 extends TestBase {
 			cssValue = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")))
 					.getCssValue("background");
 
-			Thread.sleep(5000);
+			logger.info("Css Value : "+cssValue);
 			if (cssValue.contains("rgb(255, 255, 255)")) {
 				test.log(LogStatus.INFO, "unchecking is working fine");
 				ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css"))).click();

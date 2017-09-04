@@ -43,11 +43,10 @@ public class ENWIAM009 extends TestBase {
 		tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 		test = extent.startTest(tests[0], tests_dec[0]).assignCategory("ENWIAM");
 		test.log(LogStatus.INFO, tests[0]);
-		
-		
-//		extent = ExtentManager.getReporter(filePath);
-//		rowData = testcase.get(this.getClass().getSimpleName());
-//		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
+
+		// extent = ExtentManager.getReporter(filePath);
+		// rowData = testcase.get(this.getClass().getSimpleName());
+		// test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 	}
 
 	@Test
@@ -85,34 +84,29 @@ public class ENWIAM009 extends TestBase {
 			String password = "Neon@123";
 
 			ob.get("https://www.guerrillamail.com");
-			BrowserWaits.waitTime(2);
-			if (CONFIG.getProperty("browserType").equals("IE")) {
-				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-				BrowserWaits.waitTime(4);
-			}
+			waitUntilText("Welcome to Guerrilla Mail");
 			String email1 = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 
 			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			BrowserWaits.waitTime(8);
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
 			if (text.equalsIgnoreCase("Continue")) {
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
-			BrowserWaits.waitTime(3);
+			waitUntilText("Getting Started", "Find", "Collect");
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString()), 30);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString())));
-			BrowserWaits.waitTime(2);
+			waitUntilText("Account");
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString())).click();
-			BrowserWaits.waitTime(6);
+			waitUntilText("View additional email preferences");
 			String str = ob.findElement(By.xpath(OR.getProperty("account_email_preference_link"))).getText();
 			String emaiText = "View additional email preferences";
 			try {
@@ -160,8 +154,7 @@ public class ENWIAM009 extends TestBase {
 				}
 
 				ob.switchTo().window(al.get(1));
-				BrowserWaits.waitTime(4);
-				
+				waitUntilText("ACCESS YOUR PREFERENCE CENTER");
 				String str1 = ob
 						.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_PAGE_PREFERENCE_LINK_XPATH.toString()))
 						.getText();
@@ -172,12 +165,11 @@ public class ENWIAM009 extends TestBase {
 						.sendKeys(email1);
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_ACCESS_CENTER_SUBMIT_BUTTON_CSS.toString()))
 						.click();
-				BrowserWaits.waitTime(4);
+				waitUntilText("PLEASE CHECK YOUR INBOX/SPAM FOLDER");
 				String verification = ob
-						.findElement(
-								By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_PAGE_PREFERENCE_LINK_XPATH.toString()))
+						.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_PAGE_PREFERENCE_LINK_XPATH.toString()))
 						.getText();
-				//String verificationEmail = ob.findElement(By.cssSelector("strong font[color='#ff9100']")).getText();
+				// String verificationEmail = ob.findElement(By.cssSelector("strong font[color='#ff9100']")).getText();
 				Assert.assertTrue(verification.contains("PLEASE CHECK YOUR INBOX/SPAM FOLDER"));
 
 				test.log(LogStatus.PASS,
@@ -206,12 +198,12 @@ public class ENWIAM009 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.get("https://www.guerrillamail.com");
-				BrowserWaits.waitTime(22);
+				waitUntilText("Your Preference Center Access Link");
 				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 				WebElement myE = email_list.get(0);
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
-				BrowserWaits.waitTime(3);
+				waitUntilText("Your Preference Center Access Link");
 				String emailSubject = ob.findElement(By.cssSelector("h3[class='email_subject']")).getText();
 				Assert.assertEquals(emailSubject, "Your Preference Center Access Link");
 				test.log(LogStatus.PASS,
@@ -246,7 +238,6 @@ public class ENWIAM009 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath("//span[contains(text(),'ENGLISH')]")).click();
-				BrowserWaits.waitTime(2);
 
 				Set<String> myset = ob.getWindowHandles();
 				Iterator<String> myIT = myset.iterator();
@@ -257,39 +248,19 @@ public class ENWIAM009 extends TestBase {
 				}
 
 				ob.switchTo().window(al.get(2));
-
 				String currentUrl1 = null;
 				String currentUrl = ob.getCurrentUrl();
-				BrowserWaits.waitTime(1);
+				waitForElementTobeVisible(ob, By.cssSelector("input[name='jobtitle']"), 30);
 				ob.findElement(By.cssSelector("input[name='jobtitle']")).sendKeys("Software");
-				BrowserWaits.waitTime(1);
 				Select jobrole = new Select(ob.findElement(By.id("field33")));
 				jobrole.selectByVisibleText("Engineers");
-				BrowserWaits.waitTime(1);
 				Select country = new Select(ob.findElement(By.id("field6")));
 				country.selectByVisibleText("English");
-//				BrowserWaits.waitTime(1);
-//				ob.findElement(By.cssSelector("input[name='optout']")).click();
-//				BrowserWaits.waitTime(1);
+			
 				jsClick(ob, ob.findElement(By.cssSelector("input[name='optout']")));
-				BrowserWaits.waitTime(1);
 				jsClick(ob, ob.findElement(By.cssSelector("input[class='button']")));
-//				ob.findElement(By.cssSelector("input[class='button']")).click();
-				BrowserWaits.waitTime(3);
 				ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_PAGE_PREFERENCE_LINK_XPATH.toString()));
-				/*if (str1.equalsIgnoreCase("OPTED OUT IN ERROR?")) {
-					ob.findElement(By.cssSelector("input[type='submit']")).click();
-					String text1 = "THANK YOU FOR OPTING IN";
-					String text2 = ob.findElement(By.cssSelector("span[class='remove-absolute'] span span")).getText();
-					currentUrl1 = ob.getCurrentUrl();
-					Assert.assertEquals(text1, text2);
-				} else {
-					currentUrl1 = ob.getCurrentUrl();
-					String currentText = ob
-							.findElement(By.cssSelector("td[class='valign-able DynamicContent'] span span")).getText();
-					String finalText = "THANK YOU";
-					Assert.assertEquals(currentText, finalText);
-				}*/
+			
 				Assert.assertNotEquals(currentUrl, currentUrl1);
 				test.log(LogStatus.PASS,
 						"After updating the preferences ,the system update the URL that supports the 'View additional email preferences' link .");

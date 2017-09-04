@@ -68,7 +68,7 @@ public class ENWIAM012 extends TestBase {
 			// Navigate to LI login page
 			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
 
@@ -78,7 +78,6 @@ public class ENWIAM012 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
 			// BrowserWaits.waitTime(2);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
-			BrowserWaits.waitTime(10);
 
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
@@ -95,7 +94,7 @@ public class ENWIAM012 extends TestBase {
 				closeBrowser();
 
 			}
-
+			waitUntilText("Getting Started","Find","Collect");
 			logoutEnw();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 			if (!checkElementPresence("login_banner")) {

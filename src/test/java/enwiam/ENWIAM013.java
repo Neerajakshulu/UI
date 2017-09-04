@@ -90,7 +90,6 @@ public class ENWIAM013 extends TestBase {
 			pf.getIamPage(ob).checkAgreeAndContinueButton();
 
 			logoutEnw();
-			BrowserWaits.waitTime(4);
 
 			try {
 				extent = ExtentManager.getReporter(filePath);

@@ -59,34 +59,31 @@ public class ENWIAM019 extends TestBase {
 			clearCookies();
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
-			Thread.sleep(3000);
 			ob.findElement(By.name("loginEmail")).sendKeys("userendnote@gmail.com");
 			ob.findElement(By.name("loginPassword")).sendKeys("Neon@123");
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			Thread.sleep(8000);
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
 			if (text.equalsIgnoreCase("Continue")) {
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
-			BrowserWaits.waitTime(3);
+			waitUntilText("Getting Started","Find","Collect");
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString()), 30);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString())));
-			BrowserWaits.waitTime(2);
+			waitUntilText("Account");
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString())).click();
-			BrowserWaits.waitTime(6);
+			waitUntilText("View additional email preferences");
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
-			BrowserWaits.waitTime(2);
+			waitUntilText("Forgot password?");
 			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS.toString())).sendKeys("Neon@123");
 			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString())).sendKeys("Neon@1234");
-			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_CANCEL_BUTTON_XPATH.toString())).click();
-			BrowserWaits.waitTime(2);
+			waitUntilText("Change password");
 			/*String resertPassPage = ob
 					.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString())).getText();
 			BrowserWaits.waitTime(3);
