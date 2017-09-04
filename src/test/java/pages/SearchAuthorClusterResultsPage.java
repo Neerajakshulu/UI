@@ -177,9 +177,10 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			List<WebElement> topPubs=pubDetailsList.get(0).findElements(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_TOP_PUBLICATIONS_CSS.toString()));
 			
 			logger.info("top publications-->"+topPubs.size());
-			if (topPubs.size() == 3 && StringUtils.isNotEmpty(topPubs.get(0).getText())
+			
+			if (!(topPubs.size() == 3 && StringUtils.isNotEmpty(topPubs.get(0).getText())
 					&& StringUtils.isNotEmpty(topPubs.get(1).getText())
-					&& StringUtils.isNotEmpty(topPubs.get(2).getText())) {
+					&& StringUtils.isNotEmpty(topPubs.get(2).getText()))) {
 				test.log(LogStatus.FAIL, "Top 3 Recent Publications displayed");
 				throw new Exception("Top 3 publications are not displayed while click Recent Publications");
 			}
