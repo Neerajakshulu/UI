@@ -194,6 +194,15 @@
 		</classes>
 	</test>
 	
+	<test name="author_search_results_with_fields" preserve-order="true">
+		<parameter name="lastName" value="SALMA" />
+		<parameter name="countryName" value="AUSTRALIA" />
+		<parameter name="orgName" value="DEAKIN UNIV" />
+		<classes>
+			<class name="wat.WAT28"></class>
+		</classes>
+	</test>
+	
 	<test name="WAT_Find_btn_enabled_issue" preserve-order="true">
 		<classes>
 			<class name="wat.WAT40"></class>

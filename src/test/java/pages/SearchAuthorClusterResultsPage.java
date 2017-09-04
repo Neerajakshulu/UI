@@ -26,6 +26,9 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	List<WebElement> morePublications;
 	List<WebElement> recentPublications;
 	protected static final String REG_EXP="^[-+]?\\d+(\\ - \\d+)?$";
+	String publications[] = null;
+	String years[] = null;
+	String topJournals = null;
 	
 
 	public SearchAuthorClusterResultsPage(WebDriver ob) {
@@ -111,9 +114,6 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			String countryName,
 			String orgName,
 			ExtentTest test) throws Exception {
-		String publications[] = null;
-		String years[] = null;
-		String topJournals = null;
 		waitForauthorClusterSearchResults(test);
 		pubDetailsList = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
@@ -188,4 +188,61 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		}
 	}
 
+	/**
+	 * Method for Author Cluster Search Results page fields in each cart
+	 * @param test
+	 * @throws Exception
+	 */
+	public void eachAuthorClusterSearchResultsFields(String lastName,String countryName,String orgName,ExtentTest test) throws Exception{
+		waitForauthorClusterSearchResults(test);
+		pubDetailsList=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
+		
+		for(WebElement eachCart:pubDetailsList) {
+			pf.getBrowserActionInstance(ob).scrollingToElement(eachCart);
+			String primaryName=eachCart.findElement(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PRIMARY_NAME_CSS.toString())).getText();
+			String altName=eachCart.findElement(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_ALTERNATIVE_NAME_CSS.toString())).getText();
+			String affiliation=eachCart.findElement(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_AFFILIATION_CSS.toString())).getText();
+			String location=eachCart.findElement(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_LOCATION_CSS.toString())).getText();
+			
+			logger.info("Details-->"+primaryName+","+altName+","+affiliation+","+location);
+			
+			if (!(StringUtils.containsIgnoreCase(primaryName, lastName)
+					&& StringUtils.containsIgnoreCase(altName, lastName)
+					&& StringUtils.containsIgnoreCase(affiliation, orgName)
+					&& StringUtils.containsIgnoreCase(location, countryName))){
+				test.log(LogStatus.FAIL, "Author Metadata Mismatching with Search input content");
+				throw new Exception("Author Metadata Mismatching with Search input content");
+			}
+			
+		}
+		
+		recentPublications=pubDetailsList.get(0).findElements(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_RECENT_PUBLICATIONS_CSS.toString()));
+		if(recentPublications.size()>0) {
+			for(WebElement recentPub:pubDetailsList){
+				recentPub.findElement(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_RECENT_PUBLICATIONS_CSS.toString()));
+				logger.info("Rec pub link name-->"+recentPub.getText());
+				if (!(StringUtils.containsIgnoreCase(recentPub.getText(), "Recent publications")
+						&& StringUtils.containsIgnoreCase(recentPub.getText(), "Publications")
+						&& StringUtils.containsIgnoreCase(recentPub.getText(), "Years")
+						&& StringUtils.containsIgnoreCase(recentPub.getText(), "Top Journals"))) {
+					test.log(LogStatus.FAIL, "Recent publications link, Publications,Years and Top Journals not displayed if author have morethan 1 publications");
+					throw new Exception("Recent publications link, Publications,Years and Top Journals not displayed if author have morethan 1 publications");
+			  }
+			}
+			
+		} else {
+				for(WebElement eachCart:pubDetailsList) {
+					String pubTitle=eachCart.findElement(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_TITLE_CSS.toString())).getText();;
+					String pubSource=eachCart.findElement(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_SOURCE_CSS.toString())).getText();
+					String pubAuthors=eachCart.findElement(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_AUTHORS_CSS.toString())).getText();
+			
+					if(!(StringUtils.isNotEmpty(pubTitle)&&StringUtils.containsIgnoreCase(pubSource, "PUBLISHED") && StringUtils.isNotEmpty(pubAuthors))){
+						test.log(LogStatus.FAIL, "Publication Details are not displayed for count 1");
+						throw new Exception("Publication details are not displyaed for count 1");
+					}
+					
+			 }
+		}
+		
+	}
 }
