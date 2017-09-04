@@ -820,7 +820,7 @@ public class TestBase {
 		// waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_SIGNOUT_LINK_XPATH.toString()), 30);
 		// jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_SIGNOUT_LINK_XPATH.toString())));
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
+		waitUntilText("Sign in");
 	}
 
 	// capturing screenshot
@@ -934,7 +934,7 @@ public class TestBase {
 		try {
 			// BrowserWaits.waitTime(3);
 			ob.get("https://www.guerrillamail.com");
-			waitUntilText("Please activate your Project Neon account");
+			waitUntilText("Please activate your","account");
 			// BrowserWaits.waitTime(22);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
 			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
@@ -2006,7 +2006,6 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(
 					CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			BrowserWaits.waitTime(10);
 		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(
@@ -2043,6 +2042,7 @@ public class TestBase {
 		email = email1;
 		try {
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
@@ -2056,9 +2056,8 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
 			ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
-			BrowserWaits.waitTime(4);
+			waitUntilText("Thank you");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
-
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 		} catch (Throwable t) {
 			t.printStackTrace();
