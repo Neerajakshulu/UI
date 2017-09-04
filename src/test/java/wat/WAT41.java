@@ -118,6 +118,7 @@ public class WAT41 extends TestBase {
 				throw new Exception("FIND button not clicked");
 			}
 			test.log(LogStatus.PASS, "Text above country dropdown matches the expectation.");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (AssertionError t) {
 			logFailureDetails(test, t, "Text above country dropdown dosent match the expectation.", "Text_not_match");
 			pf.getBrowserActionInstance(ob).closeBrowser();

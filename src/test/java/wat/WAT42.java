@@ -18,8 +18,8 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class to Verify that "Select an organization where this author has
- * published." text is mentioned on top of org dropdown
+ * Class to Verify that "Select an organization where this author has published." text is mentioned on top of org
+ * dropdown
  * 
  * @author UC225218
  *
@@ -31,11 +31,9 @@ public class WAT42 extends TestBase {
 	static String Org_drpdwn_text = "Select an organization where this author has published.";
 
 	/**
-	 * Method for displaying JIRA ID's for test case in specified path of Extent
-	 * Reports
+	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
 	 * 
-	 * @throws Exception,
-	 *             When Something unexpected
+	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -47,12 +45,12 @@ public class WAT42 extends TestBase {
 	/**
 	 * Method for login into WAT application using Steam ID
 	 * 
-	 * @throws Exception,
-	 *             When WAT Login is not done
+	 * @throws Exception, When WAT Login is not done
 	 */
 	@Test
-	@Parameters({ "username", "password" })
-	public void testLoginWATApp(String username, String password) throws Exception {
+	@Parameters({"username", "password"})
+	public void testLoginWATApp(String username,
+			String password) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -83,17 +81,16 @@ public class WAT42 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that "Select an organization where this author has
-	 * published." text is mentioned on top of org dropdown
+	 * Method to Verify that "Select an organization where this author has published." text is mentioned on top of org
+	 * dropdown
 	 * 
-	 * @param LastName,
-	 *            FirstName, CountryName, OrgName
-	 * @throws Exception,
-	 *             When Something unexpected
+	 * @param LastName, FirstName, CountryName, OrgName
+	 * @throws Exception, When Something unexpected
 	 */
-	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "LastName", "CountryName" })
-	public void testCountryDropdownStaticText(String LastName, String CountryName) throws Exception {
+	@Test(dependsOnMethods = {"testLoginWATApp"})
+	@Parameters({"LastName", "CountryName"})
+	public void testCountryDropdownStaticText(String LastName,
+			String CountryName) throws Exception {
 		try {
 			// Verify whether control is in Author Search page
 			Assert.assertEquals(pf.getBrowserActionInstance(ob)
@@ -131,6 +128,8 @@ public class WAT42 extends TestBase {
 				throw new Exception("FIND button not clicked");
 			}
 			test.log(LogStatus.PASS, "Text above org dropdown matches the expectation.");
+			pf.getBrowserActionInstance(ob).closeBrowser();
+			
 		} catch (AssertionError t) {
 			logFailureDetails(test, t, "Text above country org dosent match the expectation.", "Text_not_match");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -139,8 +138,7 @@ public class WAT42 extends TestBase {
 	}
 
 	/**
-	 * updating Extent Report with test case status whether it is PASS or FAIL
-	 * or SKIP
+	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
 	 */
 	@AfterTest
 	public void reportTestResult() {
@@ -148,14 +146,11 @@ public class WAT42 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(profilexls,
-		 * "Test Cases", TestUtil.getRowNum(profilexls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(profilexls,
+		 * "Test Cases", TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
+		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 
 	}

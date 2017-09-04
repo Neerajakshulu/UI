@@ -101,6 +101,7 @@ public class WAT40 extends TestBase {
 			} else {
 				throw new Exception("FIND button enabled when there is no First or Last name entered by user");
 			}
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "FIND button enabled when there is no First or Last name entered by user",
 					"Find_btn_enabled_issue");
