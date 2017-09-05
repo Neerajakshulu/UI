@@ -69,7 +69,7 @@ public class ENWIAM63 extends TestBase {
 //			
 	}
 
-	private void loginToLinkedIn() throws Exception {
+	/*private void loginToLinkedIn() throws Exception {
 		openBrowser();
 		maximizeWindow();
 		clearCookies();
@@ -82,7 +82,7 @@ public class ENWIAM63 extends TestBase {
 		closeBrowser();
 		pf.clearAllPageObjects();
 
-	}
+	}*/
 	private void loginTofb() throws Exception {
 		openBrowser();
 		maximizeWindow();

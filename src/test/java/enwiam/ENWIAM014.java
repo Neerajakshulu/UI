@@ -150,7 +150,7 @@ public class ENWIAM014 extends TestBase {
 				extent.endTest(test);
 			}
 
-			boolean userAction = false;
+			//boolean userAction = false;
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
