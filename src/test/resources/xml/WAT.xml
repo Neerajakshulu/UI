@@ -18,9 +18,9 @@
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
-	</test> 
+	</test>  
 
-	<test name="WAT_Author_Search_Lastname_Firstname" preserve-order="true">
+ 	<test name="WAT_Author_Search_Lastname_Firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT02"></class>
 		</classes>
@@ -269,6 +269,12 @@
 	<test name="WAT_orcid_find_btn" preserve-order="true">
 		<classes>
 			<class name="wat.WAT49"></class>
+		</classes>
+	</test> 
+	
+	<test name="WAT_orcid_error" preserve-order="true">
+		<classes>
+			<class name="wat.WAT50"></class>
 		</classes>
 	</test>
 </suite>

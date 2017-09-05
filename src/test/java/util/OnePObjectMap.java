@@ -1262,7 +1262,8 @@ public enum OnePObjectMap {
 	WAT_ORCID_LOGO_XPATH("//div[@class='wat-search__orcid-logo']"),
 	WAT_ORCID_TEXTBOC_XPATH("//input[@class='wui-material-input__input-field ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required ng-valid-pattern']"),
 	WAT_ORCID_SEARCH_WELCOME_TEXT_XPATH("//form[@class='ng-invalid ng-invalid-required ng-valid-pattern ng-dirty ng-valid-parse']/p"),
-	WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH("//button[@ng-click='vm.findOrcidClusters()' and text()[normalize-space() = 'Find']]")
+	WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH("//button[@ng-click='vm.findOrcidClusters()' and text()[normalize-space() = 'Find']]"),
+	WAT_ORCID_SEARCH_ERROR_TEXT_XPATH("//span[@class='ng-scope']")
 	
 	
 	;
