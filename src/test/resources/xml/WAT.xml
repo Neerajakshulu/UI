@@ -218,7 +218,7 @@
 		<classes>
 			<class name="wat.WAT30"></class>
 		</classes>
-	</test> -->
+	</test>
 	
 	<test name="author_search_results_sort_by_relevance" preserve-order="true">
 		<parameter name="lastName" value="MURTHY" />
