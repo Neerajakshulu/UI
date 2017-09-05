@@ -76,6 +76,13 @@
 			<class name="watiam.WATIAM011"></class>
 		</classes>
 	</test>
+	
+	<test name="Forgot_Password"
+		preserve-order="true">
+		<classes>
+			<class name="watiam.WATIAM012"></class>
+		</classes>
+	</test>
 
 </suite>
 

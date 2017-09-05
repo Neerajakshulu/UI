@@ -507,9 +507,36 @@ public class IAMPage extends TestBase {
 			element.get(1).click();
 			BrowserWaits.waitTime(5);
 		}
-		
 	}
 	
+	public void checkWATApplicationName(String appName) throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.GURILLA_LIST_EMAIL_WAT_PROJECT_TITLE_CSS);
+		String emailAppName = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.GURILLA_LIST_EMAIL_WAT_PROJECT_TITLE_CSS).getText();
+		logger.info("EmailAppName--->" + emailAppName);
+		Assert.assertEquals(appName, emailAppName);
+
+	}
+	
+	public void checkWATAppname(String expectedAppName) throws Exception{
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_BRANDING_NAME_CSS);
+		String appName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_BRANDING_NAME_CSS).getText();
+		Assert.assertEquals(appName, expectedAppName);
+	}
+
+	public void checkEmilBodySupportContactEmail(String supportContactEmail) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SUPPORT_CONTACT_EMAIL_CSS);
+		String contactEmail = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SUPPORT_CONTACT_EMAIL_CSS).getText();
+		Assert.assertEquals(contactEmail, supportContactEmail);
+	}
+
+	public void checkFooterSupportContactEmail(String contactEmail) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SUPPORT_CONTACT_FOOTER_EMAIL_CSS);
+		String footerContactEmail = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SUPPORT_CONTACT_FOOTER_EMAIL_CSS).getText();
+		Assert.assertEquals(footerContactEmail, contactEmail);
+		
+	}
 	
 	
 	
