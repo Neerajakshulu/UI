@@ -13,7 +13,7 @@
 	<parameter name="FirstName" value="KRISHNARAJ" />
 	<parameter name="CountryName" value="CANADA" />
 	<parameter name="OrgName" value="MCMASTER UNIV" />
- 
+
  	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
@@ -292,6 +292,12 @@
 	<test name="WAT_orcid_error" preserve-order="true">
 		<classes>
 			<class name="wat.WAT50"></class>
+		</classes>
+	</test> 
+	
+	<test name="WAT_orcid_search" preserve-order="true">
+		<classes>
+			<class name="wat.WAT51"></class>
 		</classes>
 	</test>
 </suite>

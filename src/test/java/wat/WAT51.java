@@ -1,0 +1,155 @@
+package wat;
+
+import org.testng.Assert;
+import org.testng.SkipException;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import util.BrowserWaits;
+import util.ExtentManager;
+import util.OnePObjectMap;
+
+/**
+ * Class for Verify that user is able to search for an Author cluster using
+ * ORCid search
+ * 
+ * 
+ * @author UC225218
+ *
+ */
+public class WAT51 extends TestBase {
+
+	static int status = 1;
+	static String wos_title = "Web of Science: Author search";
+	static String ORCid = "0000-0002-6423-7213";
+
+	/**
+	 * Method for displaying JIRA ID's for test case in specified path of Extent
+	 * Reports
+	 * 
+	 * @throws Exception,
+	 *             When Something unexpected
+	 */
+	@BeforeTest
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("WAT");
+	}
+
+	/**
+	 * Method for login into WAT application using Steam ID
+	 * 
+	 * @throws Exception,
+	 *             When WAT Login is not done
+	 */
+	@Test
+	@Parameters({ "username", "password" })
+	public void testLoginWATApp(String username, String password) throws Exception {
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
+
+		if (!master_condition) {
+			status = 3;
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
+		}
+
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts.... ");
+
+		try {
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			test.log(LogStatus.INFO, "Login to WAT Applicaton using valid WAT Entitled user ");
+			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
+			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+
+		} catch (Throwable t) {
+			logFailureDetails(test, t, "Login Fail", "login_fail");
+			pf.getBrowserActionInstance(ob).closeBrowser();
+		}
+
+	}
+
+	/**
+	 * Method to Verify that user is able to search for an Author cluster using
+	 * ORCid search
+	 * 
+	 * @param LastName,
+	 *            FirstName, CountryName, OrgName
+	 * @throws Exception,
+	 *             When Something unexpected
+	 */
+	@Test(dependsOnMethods = { "testLoginWATApp" })
+	public void testFindButtonFunctionalityORCIDSearch() throws Exception {
+
+		try {
+			// Verify whether control is in Author Search page
+			Assert.assertEquals(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
+					"Control is not in WOS Author Search page");
+			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
+
+			Assert.assertTrue(
+					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
+			test.log(LogStatus.INFO, "ORCiD logo present");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH).sendKeys(ORCid);
+			BrowserWaits.waitTime(2);
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH)
+					.isEnabled()) {
+				test.log(LogStatus.INFO, "FIND button is enabled for author search in ORCid search page");
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
+				Assert.assertEquals(
+						(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH)
+								.getText()),
+						"Search Results",
+						"Unable to search for an author from ORCid Search page and landed in Author search result page.");
+				test.log(LogStatus.PASS, "User is able to search for an author cluster using ORCiD");
+			} else {
+				throw new Exception("FIND button not enabled to search for author in ORCid search page");
+			}
+			pf.getBrowserActionInstance(ob).closeBrowser();
+		} catch (Throwable t) {
+			logFailureDetails(test, t,
+					"Unable to search for an author from ORCid Search page and landed in Author search result page.",
+					"Orcid_search_issue");
+			pf.getBrowserActionInstance(ob).closeBrowser();
+		}
+
+	}
+
+	/**
+	 * updating Extent Report with test case status whether it is PASS or FAIL
+	 * or SKIP
+	 */
+	@AfterTest
+	public void reportTestResult() {
+		pf.getBrowserActionInstance(ob).closeBrowser();
+		extent.endTest(test);
+
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(profilexls,
+		 * "Test Cases", TestUtil.getRowNum(profilexls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
+
+	}
+}
