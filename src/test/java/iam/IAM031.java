@@ -15,7 +15,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import Authoring.LoginTR;
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
