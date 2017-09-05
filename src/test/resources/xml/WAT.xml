@@ -18,7 +18,7 @@
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="WAT_Author_Search_Lastname_Firstname" preserve-order="true">
 		<classes>
@@ -26,7 +26,7 @@
 		</classes>
 	</test>
 
-	<test name="WAT_Author_Search_Page_static_text_Verify"
+ 	<test name="WAT_Author_Search_Page_static_text_Verify"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT03"></class>
@@ -211,6 +211,7 @@
 			<class name="wat.WAT29"></class>
 		</classes>
 	</test>
+	
 	<test name="WAT_Find_btn_enabled_issue" preserve-order="true">
 		<classes>
 			<class name="wat.WAT40"></class>
@@ -250,6 +251,12 @@
 	<test name="WAT_Profile_detail_view" preserve-order="true">
 		<classes>
 			<class name="wat.WAT46"></class>
+		</classes>
+	</test>  
+	
+	<test name="WAT_alt_name_link" preserve-order="true">
+		<classes>
+			<class name="wat.WAT47"></class>
 		</classes>
 	</test>
 </suite>
