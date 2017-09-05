@@ -62,26 +62,16 @@ public class Search90 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
-			// login using TR credentials
+						// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			// Searching for patents
-			// selectSearchTypeFromDropDown("Articles");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 4);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
-
-			// waitForElementTobeClickable(ob, By.xpath("//a[@class='wui-side-menu__link']").partialLinkText("Article"),
-			// 4);
-			waitForElementTobeVisible(ob,
-					By.cssSelector("a[class='wui-dropdown__link ng-binding ng-scope']"),
-					4);
-			Thread.sleep(2000);
+				waitForElementTobeVisible(ob,
+					By.cssSelector("a[class='wui-dropdown__link ng-binding ng-scope']"),60);
 			List<WebElement> sortByValuesList = ob
 					.findElements(By.cssSelector("a[class='wui-dropdown__link ng-binding ng-scope']"));
 			List<String> expectedDropDownValues = Arrays.asList(new String[] {"Relevance", "Times Cited",

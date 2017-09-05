@@ -10,14 +10,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import pages.PageFactory;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search88 extends TestBase {
 
@@ -62,17 +60,15 @@ public class Search88 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-
 			// login using TR credentials
 			login();
 			String patent1 = "ice cream";
-			
+
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patent1);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 20);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 60);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(4);
+			waitForAjax(ob);
 			// click on Patents tab
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 
@@ -81,21 +77,19 @@ public class Search88 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")),
 					120);
-			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 30);
 
 			// validate page is navigating to patent record view page from search results page
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))
 					.getText();
-			System.out.println("jjjjjjjjjjjj"+patentRVTitle);
-			String patentRVTitle1 = ob.findElement(By.cssSelector("h3[class='wui-super-header']"))
-					.getText();
-			System.out.println("jjjjjjjjjjjj"+patentRVTitle1);
+			System.out.println("jjjjjjjjjjjj" + patentRVTitle);
+			String patentRVTitle1 = ob.findElement(By.cssSelector("h3[class='wui-super-header']")).getText();
+			System.out.println("jjjjjjjjjjjj" + patentRVTitle1);
 			boolean patentRVTitleWatchLabel = ob.findElement(
 					By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).isDisplayed();
 
-			boolean patentRVStatus = (StringUtils.containsIgnoreCase(patentRVTitle1,"patent") && patentRVTitleWatchLabel);
-
+			boolean patentRVStatus = (StringUtils.containsIgnoreCase(patentRVTitle1, "patent") && patentRVTitleWatchLabel);
+			test.log(LogStatus.PASS, "Patent record view page is dispalyed");
 			if (!patentRVStatus)
 				throw new Exception("Page is not Navigating to Patent Record View Page");
 

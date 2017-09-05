@@ -10,14 +10,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import pages.PageFactory;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search87 extends TestBase {
 
@@ -34,8 +33,8 @@ public class Search87 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -46,8 +45,8 @@ public class Search87 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -81,15 +80,14 @@ public class Search87 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")),
 					120);
-			BrowserWaits.waitTime(4);
 
 			// validate page is navigating to Article record view page from search results page
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))
 					.getText();
-			boolean patentRVTitleWatchLabel = ob
-					.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).isDisplayed();
-			boolean patentRVStatus = (StringUtils.containsIgnoreCase(patentRVTitle, patent.substring(1, 32))
-					&& patentRVTitleWatchLabel);
+			boolean patentRVTitleWatchLabel = ob.findElement(
+					By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).isDisplayed();
+			boolean patentRVStatus = (StringUtils.containsIgnoreCase(patentRVTitle, patent.substring(1, 32)) && patentRVTitleWatchLabel);
+			test.log(LogStatus.PASS, "Article record view page is dispalyed");
 			if (!patentRVStatus)
 				throw new Exception("Page is not Navigating to Article Record View Page");
 
@@ -106,8 +104,11 @@ public class Search87 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_patent_metadata_failed")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_patent_metadata_failed")));// screenshot
 			closeBrowser();
 		}
 
