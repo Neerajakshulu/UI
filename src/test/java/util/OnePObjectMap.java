@@ -1258,6 +1258,12 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_HIDE_PUBLICATIONS_CSS("button[event-category='wat-hide-publications']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_TOP_PUBLICATIONS_CSS("div[ng-repeat='publication in vm.publications track by $index']"),
 	
+	WAT_ORCID_SEARCH_BTN_XPATH("//span[text()='ORCiD search']"),
+	WAT_ORCID_LOGO_XPATH("//div[@class='wat-search__orcid-logo']"),
+	WAT_ORCID_TEXTBOC_XPATH("//input[@class='wui-material-input__input-field ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required ng-valid-pattern']"),
+	WAT_ORCID_SEARCH_WELCOME_TEXT_XPATH("//form[@class='ng-invalid ng-invalid-required ng-valid-pattern ng-dirty ng-valid-parse']/p"),
+	WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH("//button[@ng-click='vm.findOrcidClusters()' and text()[normalize-space() = 'Find']]")
+	
 	
 	;
 
