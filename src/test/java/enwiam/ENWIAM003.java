@@ -2,10 +2,8 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -16,7 +14,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -76,7 +73,7 @@ public class ENWIAM003 extends TestBase {
 			String temp = checks.substring(0, 1);
 			int tickMarks = Integer.parseInt(temp);
 			logger.info("TickMarks : " + tickMarks);
-			String email = generateRandomName(5) + "@abc.com";
+			//String email = generateRandomName(5) + "@abc.com";
 
 			// selenium code
 			openBrowser();
