@@ -211,6 +211,23 @@
 			<class name="wat.WAT29"></class>
 		</classes>
 	</test>
+	<test name="author_search_results_load_scroll" preserve-order="true">
+		<parameter name="lastName" value="MURTHY" />
+		<parameter name="countryName" value="INDIA" />
+		<parameter name="orgName" value="ANDHRA UNIV" />
+		<classes>
+			<class name="wat.WAT30"></class>
+		</classes>
+	</test> -->
+	
+	<test name="author_search_results_sort_by_relevance" preserve-order="true">
+		<parameter name="lastName" value="MURTHY" />
+		<parameter name="countryName" value="INDIA" />
+		<parameter name="orgName" value="ANDHRA UNIV" />
+		<classes>
+			<class name="wat.WAT31"></class>
+		</classes>
+	</test>
 	
 	<test name="WAT_Find_btn_enabled_issue" preserve-order="true">
 		<classes>

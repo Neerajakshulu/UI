@@ -1241,7 +1241,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_LOCATION_CSS("div[class*='wat-search-results-meta-location']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PUB_YEARS_JOURNALS_CSS("div[class='wat-search-results-meta-publications-years-journals']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_TOP_JOURNALS_CSS("div[class='wat-search-results-meta-journals__list'] span"),
-
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PUB_YEARS_JOURNALS_PUB_COUNT_CSS("div[class='wat-search-results-meta-publications-years-journals'] div[class*='wat-search-results-meta-publications-count__item']"),
+	
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_TITLE_CSS("div[class*='wui-emphasis wat-search-results-publications-title']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_SOURCE_CSS("div[class*='wui-descriptor-uppercase wat-search-results-publications-source-group']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_AUTHORS_CSS("div[class*='wui-descriptor wat-search-results-publications-authors']"),
@@ -1263,8 +1264,7 @@ public enum OnePObjectMap {
 	WAT_ORCID_TEXTBOC_XPATH("//input[@class='wui-material-input__input-field ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required ng-valid-pattern']"),
 	WAT_ORCID_SEARCH_WELCOME_TEXT_XPATH("//form[@class='ng-invalid ng-invalid-required ng-valid-pattern ng-dirty ng-valid-parse']/p"),
 	WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH("//button[@ng-click='vm.findOrcidClusters()' and text()[normalize-space() = 'Find']]"),
-	WAT_ORCID_SEARCH_ERROR_TEXT_XPATH("//span[@class='ng-scope']")
-	
+	WAT_ORCID_SEARCH_ERROR_TEXT_XPATH("//span[@class='ng-scope']"),
 	
 	;
 

@@ -1,5 +1,6 @@
 package pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -30,6 +31,9 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	String years[] = null;
 	String topJournals = null;
 	List<WebElement> journals;
+	int beforeScroll;
+	int afterScroll;
+	List<Integer> sortByRelevance;
 	
 
 	public SearchAuthorClusterResultsPage(WebDriver ob) {
@@ -265,6 +269,57 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 					throw new Exception("Top Journals section should contain max of 3 journal titles");
 				}
 			}
+		}
+	}
+	
+	/**
+	 * Method for Scroll down for author search results
+	 * @param test
+	 * @throws Exception
+	 */
+	public void searchResultsScrollDown(ExtentTest test) throws Exception{
+		waitForauthorClusterSearchResults(test);
+		pubDetailsList=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
+		beforeScroll=pubDetailsList.size();
+		logger.info("beforeScroll-->"+beforeScroll);
+		if(beforeScroll>10){
+			pf.getBrowserActionInstance(ob).scrollingToElement(pubDetailsList.get(pubDetailsList.size()-1));
+			pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
+			pubDetailsList=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
+			afterScroll=pubDetailsList.size();
+			logger.info("afterScroll-->"+afterScroll);
+			if(beforeScroll==afterScroll){
+				test.log(LogStatus.FAIL, "Search Results count not increase while page scroll down");
+				throw new Exception("Search Results count not increase while page scroll down");
+			}
+		}
+	}
+	
+	
+	/**
+	 * Method for Verify sorted by relevance count
+	 * @param test
+	 * @throws Exception
+	 */
+	public void sortByRelevance(ExtentTest test) throws Exception{
+		waitForauthorClusterSearchResults(test);
+		pubDetailsList = pf.getBrowserActionInstance(ob).getElements(
+				OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PUB_YEARS_JOURNALS_PUB_COUNT_CSS);
+
+		sortByRelevance = new ArrayList<Integer>();
+		for (WebElement pubCount : pubDetailsList) {
+			sortByRelevance.add(Integer.parseInt(pubCount.getText()));
+		}
+		logger.info("Sort by Relevance data-->"+sortByRelevance);
+		int val1 = sortByRelevance.get(0);
+		int val2 = sortByRelevance.get(1);
+		for (int i = 2; i < sortByRelevance.size(); i++) {
+			if ( !(val1 >= val2)) {
+				test.log(LogStatus.FAIL, "Publicaiton count is not in Sort order");
+				throw new Exception("Publicaiton count is not in Sort order");
+			}
+			val1=val2;
+			val2=sortByRelevance.get(i);
 		}
 	}
 }
