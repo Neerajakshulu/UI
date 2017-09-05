@@ -117,7 +117,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
+
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
@@ -125,7 +125,7 @@ public class ENWIAM013 extends TestBase {
 								"Verify that Thomson Reuters is replaced with Clarivate Analytics to all endnote pages related  forgot password&&Verify that Thomson Reuters logo is replaced with Clarivate Analytics logo. and placed below the white area")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Forgot password");
 				pf.getIamPage(ob).checkForgotPasswordPageCALogo();
 				test.log(LogStatus.PASS, "Company name displayed successfully in forgot password page");
 
@@ -167,11 +167,6 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
-			
-			
-			
-			
 
 			try {
 				extent = ExtentManager.getReporter(filePath);
@@ -290,6 +285,7 @@ public class ENWIAM013 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
+				pf.getBrowserWaitsInstance(ob).waitUntilText("EndNote password reset");
 				pf.getIamPage(ob).clickReceivedMail("EndNote");
 				pf.getIamPage(ob).checkENWApplicationName("EndNote");
 				test.log(LogStatus.PASS,
@@ -317,6 +313,7 @@ public class ENWIAM013 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).clickResetYourPasswordLink();
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				pf.getIamPage(ob).checkExternalPasswordPageText("Reset your password", "Enter a new password below");
 				test.log(LogStatus.PASS, "Reset your password page is opened successfylly");
 			} catch (Throwable t) {
@@ -358,7 +355,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
+
 			try {
 				test = extent
 						.startTest("OPQA-1950",
@@ -366,13 +363,12 @@ public class ENWIAM013 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("!");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[5]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
 						30);
 				pf.getIamPage(ob).checkTextBox("!@#$%^*()~`{}[]|");
-				BrowserWaits.waitTime(2);
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[5]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -403,7 +399,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).checkTextBox("1");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[3]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -431,7 +427,7 @@ public class ENWIAM013 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("a");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[2]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -462,7 +458,7 @@ public class ENWIAM013 extends TestBase {
 				String maxPassword = name + generateRandomName(93);
 				logger.info("Last Name : " + maxPassword);
 				pf.getIamPage(ob).checkTextBox(maxPassword);
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[6]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
@@ -518,6 +514,7 @@ public class ENWIAM013 extends TestBase {
 				// pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(email, newPassword);
 				pf.getIamPage(ob).login(email, newPassword);
 				pf.getIamPage(ob).checkAgreeAndContinueButton();
+				waitUntilText("Getting Started", "Find", "Collect");
 				logoutEnw();
 				test.log(LogStatus.PASS, "New password text box is available in External Password reset Page");
 			} catch (Throwable t) {
@@ -542,6 +539,7 @@ public class ENWIAM013 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
+				pf.getBrowserWaitsInstance(ob).waitUntilText("EndNote password changed");
 				pf.getIamPage(ob).checkChangedPasswordMailSubject("EndNote");
 				pf.getIamPage(ob).checkENWApplicationName("EndNote");
 
@@ -568,13 +566,9 @@ public class ENWIAM013 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.navigate().to(System.getProperty("host"));
-				// pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(email, newPassword);
-				// logoutEnw();
 				pf.getLoginTRInstance(ob).waitForTRHomePage();
 				pf.getLoginTRInstance(ob).enterTRCredentials(email, newPassword);
 				pf.getLoginTRInstance(ob).clickLogin();
-				// pf.getIamPage(ob).login(email, newPassword);
-				// pf.getIamPage(ob).checkAgreeAndContinueButton();
 				logout();
 				pf.getIamPage(ob).checkLoginPage();
 				test.log(LogStatus.PASS, "User login and logout successfylly other applications");
@@ -626,7 +620,7 @@ public class ENWIAM013 extends TestBase {
 								"Verify that the email address on the External Invalid Password Reset Token Page should be pre-populated with the email address that matches the email that the forgot password email was sent.")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-
+				waitUntilText("Password reset link has expired");
 				pf.getIamPage(ob).checkInvalidPasswordResetPage();
 				test.log(LogStatus.PASS, "Invalid password reset pagee is opend successfylly");
 			} catch (Throwable t) {
@@ -703,7 +697,6 @@ public class ENWIAM013 extends TestBase {
 								"Verify that when Email address is not known from password reset token,email address field should be blank and user should be able to enter any email address")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				BrowserWaits.waitTime(3);
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).checkPrepopulatedText("");
 				pf.getIamPage(ob).clickCancelButton();
@@ -730,7 +723,6 @@ public class ENWIAM013 extends TestBase {
 								"Verify that error message Please enter a valid email address.should be displayed in red color when user enters email address in wrong format")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				BrowserWaits.waitTime(3);
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).sendEamilToTextBox("abcd.com");
 				ob.findElement(By.cssSelector(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS.toString())).click();
@@ -760,13 +752,14 @@ public class ENWIAM013 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
+				BrowserWaits.waitTime(22);
 				pf.getIamPage(ob).clickReceivedMail("EndNote");
 				pf.getIamPage(ob).checkENWApplicationName("EndNote");
 				pf.getIamPage(ob).clickResetYourPasswordLink();
 				pf.getIamPage(ob).checkExternalPasswordPageText("Reset your password", "Enter a new password below");
 				pf.getIamPage(ob).checkTextBox(newPassword);
 				pf.getIamPage(ob).clickResetButton();
-				BrowserWaits.waitTime(3);
+				waitUntilText("New password should not match current password");
 				String str = ob
 						.findElement(
 								By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_ERROR_MESSAGE_CSS.toString()))
@@ -797,7 +790,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("Neon@123");
 				pf.getIamPage(ob).clickResetButton();
-				BrowserWaits.waitTime(3);
+				waitUntilText("New password should not match previous 4 passwords");
 				String str = ob
 						.findElement(
 								By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_ERROR_MESSAGE_CSS.toString()))

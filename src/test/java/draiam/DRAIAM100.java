@@ -106,7 +106,7 @@ public class DRAIAM100 extends TestBase {
 
 			pf.getLoginTRInstance(ob).enterTRCredentials(email, "Neon@123");
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			BrowserWaits.waitTime(5);
+			waitUntilText("Explore targets");
 			pf.getDraPageInstance(ob).logoutDRA();
 
 			try {
@@ -141,7 +141,7 @@ public class DRAIAM100 extends TestBase {
 								"Verify that Thomson Reuters logo should be replaced with Clarivate Analytics logo as per updated UX guidelines(https://thomsonreuters.invisionapp.com/share/XAACS4Z53#/screens/217761229)")
 						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Forgot password");
 				pf.getIamPage(ob).checkForgotPasswordPageCALogo();
 				test.log(LogStatus.PASS, "Company name displayed successfully in forgot password page");
 
@@ -301,6 +301,7 @@ public class DRAIAM100 extends TestBase {
 						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Drug Research Advisor password reset");
 				pf.getIamPage(ob).clickReceivedMail("Drug Research Advisor");
 				pf.getIamPage(ob).checkDRAApplicationName("Drug Research Advisor");
 				test.log(LogStatus.PASS,
@@ -328,6 +329,7 @@ public class DRAIAM100 extends TestBase {
 						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).clickResetYourPasswordLink();
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				pf.getIamPage(ob).checkExternalPasswordPageText("Reset your password", "Enter a new password below");
 				test.log(LogStatus.PASS, "Reset your password page is opened successfylly");
 			} catch (Throwable t) {
@@ -377,13 +379,12 @@ public class DRAIAM100 extends TestBase {
 						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("!");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[5]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
 						30);
 				pf.getIamPage(ob).checkTextBox("!@#$%^*()~`{}[]|");
-				BrowserWaits.waitTime(2);
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[5]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -414,7 +415,7 @@ public class DRAIAM100 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).checkTextBox("1");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[3]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -442,7 +443,7 @@ public class DRAIAM100 extends TestBase {
 						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("a");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[2]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -473,7 +474,7 @@ public class DRAIAM100 extends TestBase {
 				String maxPassword = name + generateRandomName(93);
 				logger.info("Last Name : " + maxPassword);
 				pf.getIamPage(ob).checkTextBox(maxPassword);
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[6]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
@@ -554,6 +555,7 @@ public class DRAIAM100 extends TestBase {
 						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Drug Research Advisor password changed");
 				pf.getIamPage(ob).checkChangedPasswordMailSubject("Drug Research Advisor");
 				pf.getIamPage(ob).checkDRAApplicationName("Drug Research Advisor");
 
@@ -631,7 +633,7 @@ public class DRAIAM100 extends TestBase {
 								"Verify that the email address on the External Invalid Password Reset Token Page should be pre-populated with the email address that matches the email that the forgot password email was sent.")
 						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-
+				waitUntilText("Password reset link has expired");
 				pf.getIamPage(ob).checkInvalidPasswordResetPage();
 				test.log(LogStatus.PASS, "Invalid password reset pagee is opend successfylly");
 			} catch (Throwable t) {
@@ -708,7 +710,6 @@ public class DRAIAM100 extends TestBase {
 								"Verify that when Email address is not known from password reset token,email address field should be blank and user should be able to enter any email address")
 						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				BrowserWaits.waitTime(3);
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).checkPrepopulatedText("");
 				pf.getIamPage(ob).clickCancelButton();
@@ -735,7 +736,6 @@ public class DRAIAM100 extends TestBase {
 								"Verify that error message Please enter a valid email address.should be displayed in red color when user enters email address in wrong format")
 						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				BrowserWaits.waitTime(3);
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).sendEamilToTextBox("abcd.com");
 				ob.findElement(By.cssSelector(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS.toString())).click();
@@ -765,13 +765,14 @@ public class DRAIAM100 extends TestBase {
 						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
+				BrowserWaits.waitTime(22);
 				pf.getIamPage(ob).clickReceivedMail("Drug Research Advisor");
 				pf.getIamPage(ob).checkDRAApplicationName("Drug Research Advisor");
 				pf.getIamPage(ob).clickResetYourPasswordLink();
 				pf.getIamPage(ob).checkExternalPasswordPageText("Reset your password", "Enter a new password below");
 				pf.getIamPage(ob).checkTextBox(newPassword);
 				pf.getIamPage(ob).clickResetButton();
-				BrowserWaits.waitTime(3);
+				waitUntilText("New password should not match current password");
 				String str = ob
 						.findElement(
 								By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_ERROR_MESSAGE_CSS.toString()))
@@ -802,7 +803,7 @@ public class DRAIAM100 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("Neon@123");
 				pf.getIamPage(ob).clickResetButton();
-				BrowserWaits.waitTime(3);
+				waitUntilText("New password should not match previous 4 passwords");
 				String str = ob
 						.findElement(
 								By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_ERROR_MESSAGE_CSS.toString()))

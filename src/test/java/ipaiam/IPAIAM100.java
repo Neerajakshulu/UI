@@ -106,11 +106,9 @@ public class IPAIAM100 extends TestBase {
 
 			pf.getLoginTRInstance(ob).enterTRCredentials(email,"Neon@123");
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			BrowserWaits.waitTime(5);
+			waitUntilText("Explore","Technology areas","Company portfolios");
 			pf.getDraPageInstance(ob).logoutDRA();
-			//pf.getIpaPage(ob).landingScreenIPA();
-			//pf.getDraPageInstance(ob).logoutIPA();
-			
+			waitUntilText("Sign in","Forgot password?");
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
@@ -253,6 +251,7 @@ public class IPAIAM100 extends TestBase {
 						.assignCategory("IPAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
+				pf.getBrowserWaitsInstance(ob).waitUntilText("IP Analytics password reset");
 				pf.getIamPage(ob).clickReceivedMail("IP Analytics");
 				pf.getIamPage(ob).checkIPAApplicationName("IP Analytics");
 				test.log(LogStatus.PASS,
@@ -280,6 +279,7 @@ public class IPAIAM100 extends TestBase {
 						.assignCategory("IPAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).clickResetYourPasswordLink();
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				pf.getIamPage(ob).checkExternalPasswordPageText("Reset your password", "Enter a new password below");
 				test.log(LogStatus.PASS, "Reset your password page is opened successfylly");
 			} catch (Throwable t) {
@@ -296,14 +296,6 @@ public class IPAIAM100 extends TestBase {
 				extent.endTest(test);
 			}
 			
-			
-			
-			
-			
-			
-			
-			
-			
 			try {
 				test = extent
 						.startTest("OPQA-1950",
@@ -311,13 +303,12 @@ public class IPAIAM100 extends TestBase {
 						.assignCategory("IPAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("!");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[5]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
 						30);
 				pf.getIamPage(ob).checkTextBox("!@#$%^*()~`{}[]|");
-				BrowserWaits.waitTime(2);
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[5]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -348,7 +339,7 @@ public class IPAIAM100 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).checkTextBox("1");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[3]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -376,7 +367,7 @@ public class IPAIAM100 extends TestBase {
 						.assignCategory("IPAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("a");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[2]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -407,7 +398,7 @@ public class IPAIAM100 extends TestBase {
 				String maxPassword = name + generateRandomName(93);
 				logger.info("Last Name : " + maxPassword);
 				pf.getIamPage(ob).checkTextBox(maxPassword);
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[6]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
@@ -428,19 +419,6 @@ public class IPAIAM100 extends TestBase {
 				extent.endTest(test);
 			}
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
@@ -498,6 +476,7 @@ public class IPAIAM100 extends TestBase {
 						.assignCategory("IPAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
+				pf.getBrowserWaitsInstance(ob).waitUntilText("IP Analytics password changed");
 				pf.getIamPage(ob).checkChangedPasswordMailSubject("IP Analytics");
 				pf.getIamPage(ob).checkIPAApplicationName("IP Analytics");
 
@@ -525,6 +504,7 @@ public class IPAIAM100 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.navigate().to(System.getProperty("host") + CONFIG.getProperty("appendENWAppUrl"));
 				pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(email, newPassword);
+				waitUntilText("Getting Started","Find","Collect");
 				logoutEnw();
 				test.log(LogStatus.PASS, "User login and logout successfylly other applications");
 			} catch (Throwable t) {
@@ -575,7 +555,7 @@ public class IPAIAM100 extends TestBase {
 								"Verify that the email address on the External Invalid Password Reset Token Page should be pre-populated with the email address that matches the email that the forgot password email was sent.")
 						.assignCategory("IPAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-
+				waitUntilText("Password reset link has expired");
 				pf.getIamPage(ob).checkInvalidPasswordResetPage();
 				test.log(LogStatus.PASS, "Invalid password reset pagee is opend successfylly");
 			} catch (Throwable t) {
@@ -652,7 +632,6 @@ public class IPAIAM100 extends TestBase {
 								"Verify that when Email address is not known from password reset token,email address field should be blank and user should be able to enter any email address")
 						.assignCategory("IPAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				BrowserWaits.waitTime(3);
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).checkPrepopulatedText("");
 				pf.getIamPage(ob).clickCancelButton();
@@ -679,7 +658,6 @@ public class IPAIAM100 extends TestBase {
 								"Verify that error message Please enter a valid email address.should be displayed in red color when user enters email address in wrong format")
 						.assignCategory("IPAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				BrowserWaits.waitTime(3);
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).sendEamilToTextBox("abcd.com");
 				ob.findElement(By.cssSelector(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS.toString())).click();
@@ -710,13 +688,14 @@ public class IPAIAM100 extends TestBase {
 						.assignCategory("IPAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
+				BrowserWaits.waitTime(22);
 				pf.getIamPage(ob).clickReceivedMail("IP Analytics");
 				pf.getIamPage(ob).checkIPAApplicationName("IP Analytics");
 				pf.getIamPage(ob).clickResetYourPasswordLink();
 				pf.getIamPage(ob).checkExternalPasswordPageText("Reset your password", "Enter a new password below");
 				pf.getIamPage(ob).checkTextBox(newPassword);
 				pf.getIamPage(ob).clickResetButton();
-				BrowserWaits.waitTime(3);
+				waitUntilText("New password should not match current password");
 				String str = ob
 						.findElement(
 								By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_ERROR_MESSAGE_CSS.toString()))
@@ -747,7 +726,7 @@ public class IPAIAM100 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("Neon@123");
 				pf.getIamPage(ob).clickResetButton();
-				BrowserWaits.waitTime(3);
+				waitUntilText("New password should not match previous 4 passwords");
 				String str = ob
 						.findElement(
 								By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_ERROR_MESSAGE_CSS.toString()))
