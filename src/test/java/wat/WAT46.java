@@ -14,8 +14,8 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class to Verify that user should be able to view profile details by clicking
- * on the profile pic button top right corner.
+ * Class to Verify that user should be able to view profile details by clicking on the profile pic button top right
+ * corner.
  * 
  * 
  * 
@@ -28,11 +28,9 @@ public class WAT46 extends TestBase {
 	String profile_text = "Profile";
 
 	/**
-	 * Method to displaying JIRA ID's for test case in specified path of Extent
-	 * Reports
+	 * Method to displaying JIRA ID's for test case in specified path of Extent Reports
 	 * 
-	 * @throws Exception,
-	 *             When Something unexpected
+	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -42,17 +40,16 @@ public class WAT46 extends TestBase {
 	}
 
 	/**
-	 * Method for login into WAT application using TR ID and Verify that user
-	 * should be able to view profile details by clicking on the profile pic
-	 * button top right corner.
+	 * Method for login into WAT application using TR ID and Verify that user should be able to view profile details by
+	 * clicking on the profile pic button top right corner.
 	 * 
 	 * 
-	 * @throws Exception,
-	 *             When WAT Login is not done
+	 * @throws Exception, When WAT Login is not done
 	 */
 	@Test
-	@Parameters({ "username", "password" })
-	public void testCALogo(String username, String password) throws Exception {
+	@Parameters({"username", "password"})
+	public void testCALogo(String username,
+			String password) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -86,7 +83,7 @@ public class WAT46 extends TestBase {
 
 			test.log(LogStatus.PASS,
 					"User is be able to view profile details by clicking on the profile pic button top right corner.");
-
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t,
 					"User is be able to view profile details by clicking on the profile pic button top right corner.",
@@ -97,8 +94,7 @@ public class WAT46 extends TestBase {
 	}
 
 	/**
-	 * updating Extent Report with test case status whether it is PASS or FAIL
-	 * or SKIP
+	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
 	 */
 	@AfterTest
 	public void reportTestResult() {
@@ -106,14 +102,11 @@ public class WAT46 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(profilexls,
-		 * "Test Cases", TestUtil.getRowNum(profilexls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(profilexls,
+		 * "Test Cases", TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
+		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 
 	}
