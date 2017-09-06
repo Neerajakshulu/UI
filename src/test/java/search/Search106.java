@@ -13,13 +13,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search106 extends TestBase {
 
@@ -74,14 +73,13 @@ public class Search106 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			waitForElementTobeClickable(ob,
-					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 4);
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 40);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
-			BrowserWaits.waitTime(5);
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS.toString()), 4);
-			Thread.sleep(2000);
-			List<WebElement> postDropdownmenus = ob.findElements(
-					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS.toString()));
+			waitForAllElementsToBePresent(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS.toString()), 40);
+
+			List<WebElement> postDropdownmenus = ob.findElements(By
+					.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS.toString()));
 			String postExpectedDropdown = "Create Date (Newest)|Create Date (Oldest)|Relevance";
 			List<String> postDropdowndata = new ArrayList<String>();
 			for (WebElement postDropdownmenu : postDropdownmenus) {

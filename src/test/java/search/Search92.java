@@ -51,9 +51,6 @@ public class Search92 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			// below user email and password
-			// email:3ewhun+6c4irdugxznv8@sharklasers.com
-			// password:Tr@12345
 			String userName = "STQABLR";
 			String description = "Software Tester, Thomson Reuters, India";
 
@@ -63,9 +60,6 @@ public class Search92 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(3000);
-
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 180);

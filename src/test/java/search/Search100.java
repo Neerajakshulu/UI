@@ -58,13 +58,10 @@ public class Search100 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			// login using TR credentials
 			login();
-			// waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()),60);
 			// Type into the search box and get search results
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SEARCH_TEXTBOX_CSS.toString())).sendKeys("bio");
 			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();

@@ -9,13 +9,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search99 extends TestBase {
 
@@ -31,8 +30,8 @@ public class Search99 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -43,8 +42,8 @@ public class Search99 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -57,32 +56,29 @@ public class Search99 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(3000);
-
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 50);
-
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("John");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 50);
-			Thread.sleep(2000);
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 80);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
 			waitForAjax(ob);
 			// checking for Default sort option
 			// String defaultSort = ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")))
 			// .getText();
-			String defaultSort = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText();
-            System.out.println("dddd"+defaultSort);
+			String defaultSort = ob.findElement(
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText();
+			System.out.println("dddd" + defaultSort);
 			// checking for different options available in sort
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 35);
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 35);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
-			Thread.sleep(3000);
-			String text = ob
-					.findElement(By.xpath("//ul[@class='wui-dropdown__menu dropdown-menu' and @role='menu']"))
+			waitForAllElementsToBePresent(ob,
+					By.xpath("//ul[@class='wui-dropdown__menu dropdown-menu' and @role='menu']"), 60);
+			String text = ob.findElement(By.xpath("//ul[@class='wui-dropdown__menu dropdown-menu' and @role='menu']"))
 					.getText();
 
 			if (defaultSort.equals("Sort by Relevance")) {
@@ -91,8 +87,11 @@ public class Search99 extends TestBase {
 			} else {
 				status = 2;
 				test.log(LogStatus.FAIL, "Relevance is not the default sort in people results page as expected");
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_something_wrong_happened")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_something_wrong_happened")));// screenshot
 			}
 
 			if (text.contains("Relevance") && text.contains("Registration Date")) {
@@ -100,8 +99,11 @@ public class Search99 extends TestBase {
 			} else {
 				status = 2;
 				test.log(LogStatus.FAIL, "PRelevance and Registration Date options are not displayed as expected");
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_something_wrong_happened")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_something_wrong_happened")));// screenshot
 			}
 
 			closeBrowser();
@@ -117,8 +119,11 @@ public class Search99 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
@@ -128,16 +133,6 @@ public class Search99 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		// if (status == 1)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "PASS");
-		// else if (status == 2)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "FAIL");
-		// else
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 }

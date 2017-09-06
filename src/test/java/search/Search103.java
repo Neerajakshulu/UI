@@ -65,7 +65,6 @@ public class Search103 extends TestBase {
 			ob.navigate().to(host);
 			// login using TR credentials
 			login();
-			//
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 30);
 
 			// Type into the search box and get search results

@@ -32,8 +32,8 @@ public class Search94 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -44,8 +44,8 @@ public class Search94 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -60,14 +60,9 @@ public class Search94 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			Thread.sleep(3000);
-
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
-			// Searching for people
-			// selectSearchTypeFromDropDown("People");
-			// Thread.sleep(1000);
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(userName);
 			pf.getSearchProfilePageInstance(ob).clickPeople();
 			waitForAjax(ob);
@@ -80,8 +75,11 @@ public class Search94 extends TestBase {
 			} else {
 				status = 2;
 				test.log(LogStatus.FAIL, "Profile page of a person is not displayed as expected");
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_profle_page_not_displayed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_profle_page_not_displayed")));// screenshot
 			}
 
 			pf.getLoginTRInstance(ob).logOutApp();
@@ -98,8 +96,11 @@ public class Search94 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "__profle_page_not_displayed")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "__profle_page_not_displayed")));// screenshot
 
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

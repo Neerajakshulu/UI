@@ -10,13 +10,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search95 extends TestBase {
 
@@ -32,8 +31,8 @@ public class Search95 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -44,8 +43,8 @@ public class Search95 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -75,15 +74,19 @@ public class Search95 extends TestBase {
 
 			String postTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")))
 					.getText();
-			BrowserWaits.waitTime(2);
-			String postAuthor = ob
-					.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()))
-					.getText();
-			String postCreationDate = ob
-					.findElement(By.cssSelector("div[class='wui-descriptor wui-descriptor--uppercase']")).getText();
-			String profileMetaData = ob
-					.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS.toString()))
-					.getText();
+			fluentwaitforElement(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()), 60);
+			String postAuthor = ob.findElement(
+					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString())).getText();
+			fluentwaitforElement(ob, By.cssSelector("div[class='wui-descriptor wui-descriptor--uppercase']"), 60);
+
+			String postCreationDate = ob.findElement(
+					By.cssSelector("div[class='wui-descriptor wui-descriptor--uppercase']")).getText();
+			fluentwaitforElement(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS.toString()), 60);
+
+			String profileMetaData = ob.findElement(
+					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS.toString())).getText();
 			String statsXpath = "div[class='wui-card__footer-content'] results-metrics span";
 			String postLikeCount = ob.findElements(By.cssSelector(statsXpath)).get(4).getText();
 			String postLikeLabel = ob.findElements(By.cssSelector(statsXpath)).get(5).getText();
@@ -129,8 +132,11 @@ public class Search95 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_patent_metadata_failed")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_patent_metadata_failed")));// screenshot
 			closeBrowser();
 		}
 
@@ -140,16 +146,6 @@ public class Search95 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		// if (status == 1)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "PASS");
-		// else if (status == 2)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "FAIL");
-		// else
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

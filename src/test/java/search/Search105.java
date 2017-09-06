@@ -31,8 +31,8 @@ public class Search105 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -44,8 +44,8 @@ public class Search105 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -58,7 +58,6 @@ public class Search105 extends TestBase {
 			maximizeWindow();
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// login using TR credentials
 			login();
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
@@ -66,7 +65,6 @@ public class Search105 extends TestBase {
 			String post = "sample post";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(15000);
 			waitForAjax(ob);
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
 			waitForAjax(ob);
@@ -79,8 +77,8 @@ public class Search105 extends TestBase {
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))
 					.getText();
 			// System.out.println(patentRVTitle);
-			String patentRVTitleWatchLabel = ob
-					.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
+			String patentRVTitleWatchLabel = ob.findElement(
+					By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
 			// System.out.println(patentRVTitleWatchLabel);
 
 			boolean googleShare = ob
@@ -99,8 +97,8 @@ public class Search105 extends TestBase {
 					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button a")).get(1)
 					.getAttribute("data-uib-tooltip").contains("Share on LinkedIn");
 
-			List<WebElement> postCreationAndEdit = ob
-					.findElements(By.xpath("//span[contains(@class,'ne-publication__metadata--post')]"));
+			List<WebElement> postCreationAndEdit = ob.findElements(By
+					.xpath("//span[contains(@class,'ne-publication__metadata--post')]"));
 			boolean postEditCreateDate;
 			if (postCreationAndEdit.size() >= 2) {
 				postEditCreateDate = postCreationAndEdit.get(0).getText().equalsIgnoreCase("EDITED")
@@ -114,14 +112,15 @@ public class Search105 extends TestBase {
 			String postAuthor = ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")))
 					.getText();
 
-			String postAuthorMetaData = ob
-					.findElement(By.xpath(OR.getProperty("tr_search_people_profile_description_xpath"))).getText();
+			String postAuthorMetaData = ob.findElement(
+					By.xpath(OR.getProperty("tr_search_people_profile_description_xpath"))).getText();
 
 			// System.out.println("post author-->"+postAuthor);
 			// System.out.println("post author metadata-->"+postAuthorMetaData);
 
-			List<WebElement> postSocialShare = ob.findElements(By.cssSelector(
-					("div[class='ne-publication-sidebar'] span[class='wui-icon-metric__value ng-binding']")));
+			List<WebElement> postSocialShare = ob
+					.findElements(By
+							.cssSelector(("div[class='ne-publication-sidebar'] span[class='wui-icon-metric__value ng-binding']")));
 
 			int postCommentCount = Integer.parseInt(postSocialShare.get(0).getText());
 			int postLikeCount = Integer.parseInt(postSocialShare.get(1).getText());
@@ -147,8 +146,11 @@ public class Search105 extends TestBase {
 				test.log(LogStatus.FAIL, "Record view page of a post not getting displayed");// extent
 																								// report
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_record_view_page_of_a_post_not_getting_displayed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_record_view_page_of_a_post_not_getting_displayed")));// screenshot
 			}
 
 			closeBrowser();
@@ -164,8 +166,11 @@ public class Search105 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_patent_recordview_failed")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_patent_recordview_failed")));// screenshot
 			closeBrowser();
 		}
 
@@ -175,16 +180,6 @@ public class Search105 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		// if (status == 1)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "PASS");
-		// else if (status == 2)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "FAIL");
-		// else
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

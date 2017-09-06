@@ -10,13 +10,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search104 extends TestBase {
 
@@ -31,8 +30,8 @@ public class Search104 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -44,8 +43,8 @@ public class Search104 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -71,14 +70,13 @@ public class Search104 extends TestBase {
 			waitForAjax(ob);
 
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
-			BrowserWaits.waitTime(3);
+
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
-			BrowserWaits.waitTime(3);
 
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))
 					.getText();
-			String patentRVTitleWatchLabel = ob
-					.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
+			String patentRVTitleWatchLabel = ob.findElement(
+					By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
 
 			boolean patentRVStatus = StringUtils.containsIgnoreCase(patentRVTitle, post)
 					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "watch");
@@ -99,8 +97,11 @@ public class Search104 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_patent_recordview_failed")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_patent_recordview_failed")));// screenshot
 			closeBrowser();
 		}
 

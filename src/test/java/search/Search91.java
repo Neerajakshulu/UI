@@ -63,16 +63,12 @@ public class Search91 extends TestBase {
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			// Searching for patents
-			// selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.partialLinkText("Patents"), 4);
-			Thread.sleep(7000);
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.partialLinkText("Patents"),40);
 			ob.findElement(By.partialLinkText("Patents")).click();
-
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 4);
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()),60);
 			String defaultSortByValue = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText();
 			if (defaultSortByValue.equalsIgnoreCase("Sort by Relevance")) {
 				test.log(LogStatus.PASS, "Patents results are sorted by RELEVANCE by default");
