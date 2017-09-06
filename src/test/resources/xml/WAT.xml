@@ -229,6 +229,15 @@
 		</classes>
 	</test>
 	
+	<test name="author_search_results_sub_org" preserve-order="true">
+		<parameter name="lastName" value="SHARMA" />
+		<parameter name="countryName" value="INDIA" />
+		<parameter name="orgName" value="ACCENTURE" />
+		<classes>
+			<class name="wat.WAT32"></class>
+		</classes>
+	</test>
+	
 	<test name="WAT_Find_btn_enabled_issue" preserve-order="true">
 		<classes>
 			<class name="wat.WAT40"></class>

@@ -34,6 +34,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	int beforeScroll;
 	int afterScroll;
 	List<Integer> sortByRelevance;
+	String subOrg;
 	
 
 	public SearchAuthorClusterResultsPage(WebDriver ob) {
@@ -320,6 +321,22 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			}
 			val1=val2;
 			val2=sortByRelevance.get(i);
+		}
+	}
+	
+	/**
+	 * Method for Verify Sub-org field displayed in search results page
+	 * @param test
+	 * @throws Exception
+	 */
+	public void searchResultsSubOrgField(ExtentTest test) throws Exception{
+		waitForauthorClusterSearchResults(test);
+		WebElement dept = pf.getBrowserActionInstance(ob).getElement(
+				OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_AFFILIATION_SUB_ORG_CSS);
+		
+		if(!(StringUtils.containsIgnoreCase(dept.getAttribute("class"),"wat-search-results-meta-contact")&&StringUtils.isNotEmpty(dept.getText()))){
+			test.log(LogStatus.FAIL, "Department(sub-org) is not displayed under Org name");
+			throw new Exception("Department(sub-org) is not displayed under Org name");
 		}
 	}
 }
