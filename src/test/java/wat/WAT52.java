@@ -14,15 +14,13 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for Verify that error "Please enter a valid ORCiD number or try the
- * Name Search" is displayed when there is no search result available for a
- * correctly formatted ORCiD.
- * 
+ * Class for Verify that clicking on the text "Name Search" in the error in
+ * ORCid Search page takes the user to Name search tab
  * 
  * @author UC225218
  *
  */
-public class WAT50 extends TestBase {
+public class WAT52 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -80,17 +78,14 @@ public class WAT50 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that error "Please enter a valid ORCiD number or try the
-	 * Name Search" is displayed when there is no search result available for a
-	 * correctly formatted ORCiD.
+	 * Method to Verify that clicking on the text "Name Search" in the error in
+	 * ORCid Search page takes the user to Name search tab
 	 * 
-	 * @param LastName,
-	 *            FirstName, CountryName, OrgName
 	 * @throws Exception,
 	 *             When Something unexpected
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
-	public void testORCIDSearchError() throws Exception {
+	public void testORCIDToNameSearch() throws Exception {
 		String InvalidORCid = "1111-6235-234-2222";
 		try {
 			// Verify whether control is in Author Search page
@@ -111,12 +106,20 @@ public class WAT50 extends TestBase {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH);
 			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH)
 					.isDisplayed()) {
-				test.log(LogStatus.PASS, "Error displayed when the ORCid or format is invalid");
+				test.log(LogStatus.INFO, "Error displayed when the ORCid or format is invalid");
 			} else {
 				throw new Exception("Error not displayed when the ORCid or format is invalid");
 			}
+
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_TO_NAME_SEARCH_LINK_XPATH);
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_NAME_SEARCH_BUTTON_XPATH).isDisplayed()) {
+				test.log(LogStatus.PASS, "Successfully navigated to Name search page");
+			} else {
+				throw new Exception("Didnt navigate to Name search page");
+			}
+
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Error displayed when the ORCid or formar is invalid", "ORCid_Error_issue");
+			logFailureDetails(test, t, "Didnt navigate to Name search page", "ORCid_to_name_search_navigation_issue");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 
