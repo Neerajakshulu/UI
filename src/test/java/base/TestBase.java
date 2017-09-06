@@ -861,7 +861,6 @@ public class TestBase {
 	// Creates a new TR user
 	public String createNewUser(String first_name,
 			String last_name) throws Exception {
-
 		status = registrationForm(first_name, last_name);
 		waitUntilText("Sign in");
 		if (status) {
@@ -970,15 +969,16 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(
 					CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			pf.getLoginTRInstance(ob).closeOnBoardingModal();
-			/*
-			 * // BrowserWaits.waitTime(6); //
-			 * ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-			 * waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_done_button")), 30);
-			 * //BrowserWaits.waitTime(3); ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
-			 * waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_join_button")), 30);
-			 * //BrowserWaits.waitTime(3); ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
-			 */
+			//pf.getLoginTRInstance(ob).closeOnBoardingModal();
+			
+			waitUntilText("Welcome","Next");
+			  //ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+			  waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_done_button")), 30);
+			  ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
+			  waitUntilText("learn about you","Join");
+			  waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_join_button")), 30);
+			  ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
+			 
 			waitUntilText("Newsfeed", "Watchlists", "Groups");
 		} catch (Throwable t) {
 			t.printStackTrace();
@@ -2218,5 +2218,7 @@ public class TestBase {
 			}
 		});
 	}
+	
+	
 
 }
