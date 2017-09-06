@@ -1,6 +1,5 @@
 package wat;
 
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,7 +10,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
-import util.OnePObjectMap;
 
 /**
  * Class for testing Author cluster search functionality with only Last Name
@@ -91,18 +89,7 @@ public class WAT04 extends TestBase {
 			throws Exception {
 
 		try {
-			// Verify whether control is in Author Search page
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
-					"Control is not in WOS Author Search page");
-			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
-			// Search for an author cluster with only Last name
-			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, CountryName, OrgName, test);
-			test.log(LogStatus.PASS,
-					"Successfully searched for an author using only Last name and landed in Author search result page.");
-			pf.getBrowserActionInstance(ob).closeBrowser();
+			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName, OrgName, test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Authorcluster search with only last name failed", "search_fail");

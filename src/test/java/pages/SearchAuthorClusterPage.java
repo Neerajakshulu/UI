@@ -23,6 +23,7 @@ import util.OnePObjectMap;
 public class SearchAuthorClusterPage extends TestBase {
 
 	int k = 1;
+	static String wos_title = "Web of Science: Author search";
 
 	public SearchAuthorClusterPage(WebDriver ob) {
 		this.ob = ob;
@@ -414,6 +415,184 @@ public class SearchAuthorClusterPage extends TestBase {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unable to search for an author using lastname");
 			throw new Exception(e);
+		}
+	}
+
+	/**
+	 * @param LastName
+	 * @param FirstName
+	 * @param CountryName
+	 * @param OrgName
+	 * @throws Exception
+	 */
+	public void searchAuthorClusterLastandFirstname(String LastName, String FirstName, String CountryName,
+			String OrgName, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		// Search for an author cluster
+		test.log(LogStatus.INFO, "Entering author name... ");
+		pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, CountryName, OrgName, test);
+		test.log(LogStatus.PASS, "Successfully searched for an author and landed in Author search result page.");
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void searchAuthorClusterOnlyLastName(String LastName, String CountryName, String OrgName, ExtentTest test)
+			throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		// Search for an author cluster with only Last name
+		test.log(LogStatus.INFO, "Entering author name... ");
+		pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, CountryName, OrgName, test);
+		test.log(LogStatus.PASS,
+				"Successfully searched for an author using only Last name and landed in Author search result page.");
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void searchAuthorClusterWithOnlyFirstName(String FirstName, ExtentTest test)
+			throws Exception, InterruptedException {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		// Search for an author cluster with only FIRST name
+		test.log(LogStatus.INFO, "Entering author First name... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
+		for (int i = 0; i < FirstName.length(); i++) {
+			char c = FirstName.charAt(i);
+			String s = new StringBuilder().append(c).toString();
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, s);
+			BrowserWaits.waitTime(0.5);
+		}
+		test.log(LogStatus.INFO, "Trying to click find button... ");
+
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
+				.isEnabled()) {
+			test.log(LogStatus.FAIL, "Able to search for author cluster with only First name");
+		}
+		test.log(LogStatus.PASS, "User cant search for Author cluster with only first name");
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void searchAuthorClusterLastNameTypeahead(ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+		test.log(LogStatus.INFO, "Entering author name... ");
+
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, "U");
+		if (pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_AUTHOR_LASTNAME_TYPEAHEAD_XPATH))
+				.isDisplayed()) {
+			test.log(LogStatus.PASS, "Typeahead displayed for minimum 1 Letter");
+		}
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void searchAuthorClusterFirstNameTypeahead(String LastName, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+		test.log(LogStatus.INFO, "Entering author name... ");
+
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, "J");
+		if (pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH))
+				.isDisplayed()) {
+			test.log(LogStatus.PASS, "First name Typeahead displayed for minimum 1 Letter - Firststname");
+			pf.getBrowserActionInstance(ob).closeBrowser();
+		}
+	}
+
+	public void searchAuthorClusterBlankLastName(ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		test.log(LogStatus.INFO, "Entering author First name... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, " ");
+		test.log(LogStatus.INFO, "Trying to click find button... ");
+
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
+				.isEnabled()) {
+			test.log(LogStatus.FAIL, "Able to search for author cluster with blank last name");
+			throw new Exception("User is able to search for author cluster with blank last name");
+		}
+		test.log(LogStatus.PASS, "User cant search for Author cluster with blank last name");
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void searchAuthorClusterWithSymbolsLastName(String Symbols, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		// Search for an author cluster with symbols in last name
+		test.log(LogStatus.INFO, "Entering author last name... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, Symbols);
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+		test.log(LogStatus.INFO, "Trying to click find button... ");
+		if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
+			test.log(LogStatus.PASS, "Unable to search for author cluster with special character in Last name");
+		} else {
+			test.log(LogStatus.FAIL,
+					"User is able to search for Author cluster with special character in Last name OR Find button is enabled for Symbol search");
+			throw new Exception(
+					"User is able to search for Author cluster with special character in Last name OR Find button is enabled for Symbol search");
+		}
+	}
+
+	public void searchAuthorClusterWithOnlyFirstName(ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		test.log(LogStatus.INFO, "Entering author Last name... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, "10");
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+		test.log(LogStatus.INFO, "Trying to click find button... ");
+
+		if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
+			test.log(LogStatus.PASS, "Unable to search for author cluster with numbers in Last name");
+		} else {
+			test.log(LogStatus.FAIL,
+					"User is able to search for Author cluster with numbers in Last name OR Find button is enabled for number search");
+			throw new Exception(
+					"User is able to search for Author cluster with numbers in Last name OR Find button is enabled for number search");
 		}
 	}
 

@@ -1,6 +1,5 @@
 package wat;
 
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,7 +10,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
-import util.OnePObjectMap;
 
 /**
  * Class for testing Author cluster search functionality using both Last name
@@ -23,7 +21,6 @@ import util.OnePObjectMap;
 public class WAT02 extends TestBase {
 
 	static int status = 1;
-	static String wos_title = "Web of Science: Author search";
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
@@ -92,18 +89,8 @@ public class WAT02 extends TestBase {
 			String OrgName) throws Exception {
 
 		try {
-			// Verify whether control is in Author Search page
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
-					"Control is not in WOS Author Search page");
-			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
-			// Search for an author cluster
-			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, CountryName, OrgName, test);
-			test.log(LogStatus.PASS, "Successfully searched for an author and landed in Author search result page.");
-			pf.getBrowserActionInstance(ob).closeBrowser();
-
+			pf.getSearchAuthClusterPage(ob).searchAuthorClusterLastandFirstname(LastName, FirstName, CountryName,
+					OrgName, test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Author Search Fail", "author_search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
