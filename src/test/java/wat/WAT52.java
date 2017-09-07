@@ -1,6 +1,5 @@
 package wat;
 
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,7 +10,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
-import util.OnePObjectMap;
 
 /**
  * Class for Verify that clicking on the text "Name Search" in the error in
@@ -88,35 +86,7 @@ public class WAT52 extends TestBase {
 	public void testORCIDToNameSearch() throws Exception {
 		String InvalidORCid = "1111-6235-234-2222";
 		try {
-			// Verify whether control is in Author Search page
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
-					"Control is not in WOS Author Search page");
-			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
-
-			Assert.assertTrue(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
-			test.log(LogStatus.INFO, "ORCiD logo present");
-
-			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH).sendKeys(InvalidORCid);
-			// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH);
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH)
-					.isDisplayed()) {
-				test.log(LogStatus.INFO, "Error displayed when the ORCid or format is invalid");
-			} else {
-				throw new Exception("Error not displayed when the ORCid or format is invalid");
-			}
-
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_TO_NAME_SEARCH_LINK_XPATH);
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_NAME_SEARCH_BUTTON_XPATH).isDisplayed()) {
-				test.log(LogStatus.PASS, "Successfully navigated to Name search page");
-			} else {
-				throw new Exception("Didnt navigate to Name search page");
-			}
+			pf.getSearchAuthClusterPage(ob).oRCIDToNameSearch(InvalidORCid, test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Didnt navigate to Name search page", "ORCid_to_name_search_navigation_issue");

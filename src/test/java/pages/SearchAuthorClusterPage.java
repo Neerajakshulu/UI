@@ -24,6 +24,10 @@ public class SearchAuthorClusterPage extends TestBase {
 
 	int k = 1;
 	static String wos_title = "Web of Science: Author search";
+	static String Org_drpdwn_text = "Select an organization where this author has published.";
+	static String Country_drpdwn_text = "Select a country/territory where this author has published.";
+	static String orcid_Welcome_text = "Enter the author's name or ORCiD to begin your search against Web of Science article groups.";
+	static String ORCid = "0000-0002-6423-7213";
 
 	public SearchAuthorClusterPage(WebDriver ob) {
 		this.ob = ob;
@@ -884,4 +888,325 @@ public class SearchAuthorClusterPage extends TestBase {
 		}
 		pf.getBrowserActionInstance(ob).closeBrowser();
 	}
+
+	public void clientSideValidationLastName(String InvalidText, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		test.log(LogStatus.INFO, "Entering invalid/ No result author last name... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, InvalidText);
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+		test.log(LogStatus.INFO, "Trying to click find button... ");
+		if (ele.size() != 0) {
+			test.log(LogStatus.PASS,
+					"Error message displayed when there is no typeahead suggestions are available for the user entered last name");
+		} else {
+			test.log(LogStatus.FAIL,
+					"Error message not displayed when there is no typeahead suggestions are available for the user entered last name");
+			throw new Exception(
+					"Error message not displayed when there is no typeahead suggestions are available for the user entered last name");
+		}
+	}
+
+	public void clientSideValidationLastName(String LastName, String InvalidText, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		test.log(LogStatus.INFO, "Entering author last name... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, InvalidText);
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+		test.log(LogStatus.INFO, "Trying to click find button... ");
+		if (ele.size() != 0) {
+			test.log(LogStatus.PASS,
+					"Error message displayed when there is no typeahead suggestions are available for the user entered First name");
+		} else {
+			test.log(LogStatus.FAIL,
+					"Error message not displayed when there is no typeahead suggestions are available for the user entered First name");
+			throw new Exception(
+					"Error message not displayed when there is no typeahead suggestions are available for the user entered First name");
+		}
+	}
+
+	public void findButtonFunctionality(ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		if (!pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
+				.isEnabled()) {
+			test.log(LogStatus.PASS, "FIND button disabled when there is no First or Last name entered by user");
+		} else {
+			throw new Exception("FIND button enabled when there is no First or Last name entered by user");
+		}
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void countryDropdownStaticText(String LastName, ExtentTest test) throws Exception, InterruptedException {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		// Search for an author cluster with only Last name
+		test.log(LogStatus.INFO, "Entering author name... ");
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+		test.log(LogStatus.INFO, "Clicking find button... ");
+		BrowserWaits.waitTime(2);
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
+				.isEnabled()) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+			Assert.assertEquals(
+					pf.getBrowserActionInstance(ob)
+							.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_PAGE_COUNTRY_DROPDOWN_TEXT_XPATH).getText(),
+					Country_drpdwn_text);
+		} else {
+			throw new Exception("FIND button not clicked");
+		}
+		test.log(LogStatus.PASS, "Text above country dropdown matches the expectation.");
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void countryDropdownStaticText(String LastName, String CountryName, ExtentTest test)
+			throws Exception, InterruptedException {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		// Search for an author cluster with only Last name
+		test.log(LogStatus.INFO, "Entering author name... ");
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+		test.log(LogStatus.INFO, "Clicking find button... ");
+		BrowserWaits.waitTime(2);
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
+				.isEnabled()) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+
+			List<WebElement> ele = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+			if (ele.size() != 0) {
+				pf.getSearchAuthClusterPage(ob).selectCountryofAuthor(CountryName, test);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
+				Assert.assertEquals(
+						pf.getBrowserActionInstance(ob)
+								.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_PAGE_ORG_DROPDOWN_TEXT_XPATH).getText(),
+						Org_drpdwn_text);
+			} else {
+				test.log(LogStatus.INFO,
+						"Country name selection is not required as the searched user resulted in less than 50 clusters... ");
+			}
+
+		} else {
+			throw new Exception("FIND button not clicked");
+		}
+		test.log(LogStatus.PASS, "Text above org dropdown matches the expectation.");
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void searchAuthorClusterLessthan50DIAS(String LastName, String FirstName, String CountryName, String OrgName,
+			ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		// Search for an author cluster
+		test.log(LogStatus.INFO, "Entering author name... ");
+		pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, CountryName, OrgName, test);
+		test.log(LogStatus.PASS,
+				"Successfully searched for an author who has only one country and one org and landed in Author search result page.");
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void altNameLinkGreyedWhenErrors(String InvalidText, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+		test.log(LogStatus.INFO, "Entering invalid/ No result author last name... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, InvalidText);
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+		test.log(LogStatus.INFO, "Trying to click find button... ");
+		if (ele.size() != 0) {
+			test.log(LogStatus.PASS,
+					"Error message displayed when there is no typeahead suggestions are available for the user entered last name");
+		} else {
+			test.log(LogStatus.FAIL,
+					"Error message not displayed when there is no typeahead suggestions are available for the user entered last name");
+			throw new Exception(
+					"Error message not displayed when there is no typeahead suggestions are available for the user entered last name");
+		}
+		if (!pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH)).isEnabled()) {
+			test.log(LogStatus.PASS, "Add alternate name button not enabled when there is an error.");
+		} else {
+			test.log(LogStatus.FAIL, "Add alternate name button is enabled even when there is an error displayed.");
+			throw new Exception("Add alternate name button is enabled even when there is an error displayed.");
+		}
+	}
+
+	public void orcidSearch(String example_orcid, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
+
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
+		test.log(LogStatus.PASS, "ORCiD logo present");
+
+		Assert.assertTrue(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH).isDisplayed());
+		test.log(LogStatus.PASS, "ORCiD text box present");
+
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_SEARCH_WELCOME_TEXT_XPATH).getText(),
+				orcid_Welcome_text, "Welcome text not matching");
+		test.log(LogStatus.PASS, "Welcome text matching");
+
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH)
+				.getAttribute("placeholder").equals(example_orcid)) {
+			test.log(LogStatus.PASS, "Example text is displayed for orcid field");
+		} else {
+			throw new Exception("Example text is not displayed for orcid field");
+		}
+	}
+
+	public void findButtonFunctionalityORCIDSearch(ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
+
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
+		test.log(LogStatus.INFO, "ORCiD logo present");
+
+		if (!pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH)
+				.isEnabled()) {
+			test.log(LogStatus.PASS, "FIND button disabled in the begining in ORCid search page");
+		} else {
+			throw new Exception("FIND button enabled in the begining in ORCid search page");
+		}
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void oRCIDSearchError(String InvalidORCid, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
+
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
+		test.log(LogStatus.INFO, "ORCiD logo present");
+
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH).sendKeys(InvalidORCid);
+		// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH);
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH).isDisplayed()) {
+			test.log(LogStatus.PASS, "Error displayed when the ORCid or format is invalid");
+		} else {
+			throw new Exception("Error not displayed when the ORCid or format is invalid");
+		}
+	}
+
+	public void oRCIDAuthorClusterSearch(ExtentTest test) throws Exception, InterruptedException {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
+
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
+		test.log(LogStatus.INFO, "ORCiD logo present");
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH).sendKeys(ORCid);
+		BrowserWaits.waitTime(2);
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH)
+				.isEnabled()) {
+			test.log(LogStatus.INFO, "FIND button is enabled for author search in ORCid search page");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
+			Assert.assertEquals(
+					(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).getText()),
+					"Search Results",
+					"Unable to search for an author from ORCid Search page and landed in Author search result page.");
+			test.log(LogStatus.PASS, "User is able to search for an author cluster using ORCiD");
+		} else {
+			throw new Exception("FIND button not enabled to search for author in ORCid search page");
+		}
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void oRCIDToNameSearch(String InvalidORCid, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
+
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
+		test.log(LogStatus.INFO, "ORCiD logo present");
+
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH).sendKeys(InvalidORCid);
+		// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH);
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH).isDisplayed()) {
+			test.log(LogStatus.INFO, "Error displayed when the ORCid or format is invalid");
+		} else {
+			throw new Exception("Error not displayed when the ORCid or format is invalid");
+		}
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_TO_NAME_SEARCH_LINK_XPATH);
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_NAME_SEARCH_BUTTON_XPATH).isDisplayed()) {
+			test.log(LogStatus.PASS, "Successfully navigated to Name search page");
+		} else {
+			throw new Exception("Didnt navigate to Name search page");
+		}
+	}
+
 }

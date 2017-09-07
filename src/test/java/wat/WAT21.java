@@ -1,9 +1,5 @@
 package wat;
 
-import java.util.List;
-
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -14,7 +10,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
-import util.OnePObjectMap;
 
 /**
  * Class for Verifying that when there is no result for the search name entered
@@ -93,28 +88,7 @@ public class WAT21 extends TestBase {
 	public void testClientSideValidationLastName() throws Exception {
 		String InvalidText = "uefuwieflief";
 		try {
-			// Verify whether control is in Author Search page
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
-					"Control is not in WOS Author Search page");
-			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
-			test.log(LogStatus.INFO, "Entering invalid/ No result author last name... ");
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
-			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
-			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, InvalidText);
-			List<WebElement> ele = pf.getBrowserActionInstance(ob)
-					.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
-			test.log(LogStatus.INFO, "Trying to click find button... ");
-			if (ele.size() != 0) {
-				test.log(LogStatus.PASS,
-						"Error message displayed when there is no typeahead suggestions are available for the user entered last name");
-			} else {
-				test.log(LogStatus.FAIL,
-						"Error message not displayed when there is no typeahead suggestions are available for the user entered last name");
-				throw new Exception(
-						"Error message not displayed when there is no typeahead suggestions are available for the user entered last name");
-			}
+			pf.getSearchAuthClusterPage(ob).clientSideValidationLastName(InvalidText, test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Error message functionality not working as expected", "search_fail");

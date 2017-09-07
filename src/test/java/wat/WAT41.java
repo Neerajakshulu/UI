@@ -1,6 +1,5 @@
 package wat;
 
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -10,9 +9,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ExtentManager;
-import util.OnePObjectMap;
 
 /**
  * Class to Verify that "Select a country/territory where this author has
@@ -25,7 +22,6 @@ public class WAT41 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
-	static String Country_drpdwn_text = "Select a country/territory where this author has published.";
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
@@ -92,33 +88,7 @@ public class WAT41 extends TestBase {
 	@Parameters({ "LastName" })
 	public void testCountryDropdownStaticText(String LastName) throws Exception {
 		try {
-			// Verify whether control is in Author Search page
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
-					"Control is not in WOS Author Search page");
-			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
-			// Search for an author cluster with only Last name
-			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
-			pf.getBrowserWaitsInstance(ob)
-					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
-			test.log(LogStatus.INFO, "Clicking find button... ");
-			BrowserWaits.waitTime(2);
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
-					.isEnabled()) {
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
-				Assert.assertEquals(
-						pf.getBrowserActionInstance(ob)
-								.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_PAGE_COUNTRY_DROPDOWN_TEXT_XPATH).getText(),
-						Country_drpdwn_text);
-			} else {
-				throw new Exception("FIND button not clicked");
-			}
-			test.log(LogStatus.PASS, "Text above country dropdown matches the expectation.");
-			pf.getBrowserActionInstance(ob).closeBrowser();
+			pf.getSearchAuthClusterPage(ob).countryDropdownStaticText(LastName, test);
 		} catch (AssertionError t) {
 			logFailureDetails(test, t, "Text above country dropdown dosent match the expectation.", "Text_not_match");
 			pf.getBrowserActionInstance(ob).closeBrowser();

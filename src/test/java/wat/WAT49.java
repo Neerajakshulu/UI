@@ -1,6 +1,5 @@
 package wat;
 
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,7 +10,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
-import util.OnePObjectMap;
 
 /**
  * Class for Verify that FIND button in ORCid Search page is disabled at the
@@ -91,26 +89,7 @@ public class WAT49 extends TestBase {
 	public void testFindButtonFunctionalityORCIDSearch() throws Exception {
 
 		try {
-			// Verify whether control is in Author Search page
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
-					"Control is not in WOS Author Search page");
-			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
-
-			Assert.assertTrue(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
-			test.log(LogStatus.INFO, "ORCiD logo present");
-
-			if (!pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH)
-					.isEnabled()) {
-				test.log(LogStatus.PASS, "FIND button disabled in the begining in ORCid search page");
-			} else {
-				throw new Exception("FIND button enabled in the begining in ORCid search page");
-			}
-			pf.getBrowserActionInstance(ob).closeBrowser();
+			pf.getSearchAuthClusterPage(ob).findButtonFunctionalityORCIDSearch(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "FIND button enabled in the begining in ORCid search page",
 					"Find_btn_enabled_issue");

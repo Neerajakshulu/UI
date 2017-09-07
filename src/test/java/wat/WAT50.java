@@ -1,6 +1,5 @@
 package wat;
 
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,7 +10,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
-import util.OnePObjectMap;
 
 /**
  * Class for Verify that error "Please enter a valid ORCiD number or try the
@@ -93,28 +91,7 @@ public class WAT50 extends TestBase {
 	public void testORCIDSearchError() throws Exception {
 		String InvalidORCid = "1111-6235-234-2222";
 		try {
-			// Verify whether control is in Author Search page
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
-					"Control is not in WOS Author Search page");
-			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
-
-			Assert.assertTrue(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
-			test.log(LogStatus.INFO, "ORCiD logo present");
-
-			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH).sendKeys(InvalidORCid);
-			// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH);
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH)
-					.isDisplayed()) {
-				test.log(LogStatus.PASS, "Error displayed when the ORCid or format is invalid");
-			} else {
-				throw new Exception("Error not displayed when the ORCid or format is invalid");
-			}
+			pf.getSearchAuthClusterPage(ob).oRCIDSearchError(InvalidORCid, test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Error displayed when the ORCid or formar is invalid", "ORCid_Error_issue");
 			pf.getBrowserActionInstance(ob).closeBrowser();

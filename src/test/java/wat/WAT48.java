@@ -1,6 +1,5 @@
 package wat;
 
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,7 +10,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
-import util.OnePObjectMap;
 
 /**
  * Class to Verify that upon clicking ORCiD tab, Orcid search field should be
@@ -25,7 +23,6 @@ public class WAT48 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
-	static String orcid_Welcome_text = "Enter the author's name or ORCiD to begin your search against Web of Science article groups.";
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
@@ -91,34 +88,7 @@ public class WAT48 extends TestBase {
 	public void testOrcidSearch() throws Exception {
 		String example_orcid = "E.g., 0000-0001-5727-2427";
 		try {
-			// Verify whether control is in Author Search page
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
-					"Control is not in WOS Author Search page");
-			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
-
-			Assert.assertTrue(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
-			test.log(LogStatus.PASS, "ORCiD logo present");
-
-			Assert.assertTrue(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH).isDisplayed());
-			test.log(LogStatus.PASS, "ORCiD text box present");
-
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_ORCID_SEARCH_WELCOME_TEXT_XPATH).getText(), orcid_Welcome_text,
-					"Welcome text not matching");
-			test.log(LogStatus.PASS, "Welcome text matching");
-
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH)
-					.getAttribute("placeholder").equals(example_orcid)) {
-				test.log(LogStatus.PASS, "Example text is displayed for orcid field");
-			} else {
-				throw new Exception("Example text is not displayed for orcid field");
-			}
+			pf.getSearchAuthClusterPage(ob).orcidSearch(example_orcid, test);
 
 		} catch (Exception e) {
 			logFailureDetails(test, e, "Issue in orcid search page", "orcid_issue");
