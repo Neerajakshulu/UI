@@ -862,7 +862,6 @@ public class TestBase {
 	public String createNewUser(String first_name,
 			String last_name) throws Exception {
 		status = registrationForm(first_name, last_name);
-		waitUntilText("Sign in");
 		if (status) {
 			activationStatus = userActivation();
 
