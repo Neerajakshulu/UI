@@ -1,8 +1,5 @@
 package wat;
 
-import java.util.List;
-
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -106,25 +103,7 @@ public class WAT13 extends TestBase {
 	public void testSearchAuthorClusterWithSymbolsLastName(String Symbols, String errorMessage) throws Exception {
 
 		try {
-			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
-			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, Symbols);
-			List<WebElement> ele = pf.getBrowserActionInstance(ob)
-					.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
-			if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
-				if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH)
-						.getText().equals(errorMessage)) {
-					test.log(LogStatus.INFO, "Error text matching for symbol -----------    " + Symbols);
-					test.log(LogStatus.PASS,
-							"Unable to search for author cluster with special character in First name");
-				}
-			} else {
-				test.log(LogStatus.FAIL,
-						"User is able to search for Author cluster with special character in First name OR Find button is enabled for Symbol search");
-				throw new Exception(
-						"Test User is able to search for Author cluster with special character in First name OR Find button is enabled for Symbol search");
-			}
+			pf.getSearchAuthClusterPage(ob).searchAuthorClusterWithSymbolsLastName(Symbols, errorMessage, test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Negative search test failed", "search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();

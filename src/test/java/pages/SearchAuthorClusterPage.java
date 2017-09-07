@@ -596,4 +596,292 @@ public class SearchAuthorClusterPage extends TestBase {
 		}
 	}
 
+	public void searchAuthorClusterWithAlphaneumericLastName(ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		test.log(LogStatus.INFO, "Entering author Last name... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, "Test007");
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+		test.log(LogStatus.INFO, "Trying to click find button... ");
+
+		if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
+			test.log(LogStatus.PASS, "Unable to search for author cluster with alphanumeric characters in Last name");
+		} else {
+			test.log(LogStatus.FAIL,
+					"User is able to search for Author cluster with alphanumeric characters in Last name OR Find button is enabled for alphanumeric characters search");
+			throw new Exception(
+					"User is able to search for Author cluster with alphanumeric characters in Last name OR Find button is enabled for alphanumeric characters search");
+		}
+	}
+
+	public void searchAuthorClusterBlankFirstName(String LastName, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+		test.log(LogStatus.INFO, "Entering author Last name... ");
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, " ");
+		test.log(LogStatus.INFO, "Trying to click find button... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
+				.isEnabled()
+				&& pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH)
+						.isEnabled()) {
+			test.log(LogStatus.PASS, "User is able to search for author cluster with blank First name");
+		}
+	}
+
+	public void searchAuthorClusterWithSymbolsLastName(String Symbols, String errorMessage, ExtentTest test)
+			throws Exception {
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, Symbols);
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+		if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH)
+					.getText().equals(errorMessage)) {
+				test.log(LogStatus.INFO, "Error text matching for symbol -----------    " + Symbols);
+				test.log(LogStatus.PASS, "Unable to search for author cluster with special character in First name");
+			}
+		} else {
+			test.log(LogStatus.FAIL,
+					"User is able to search for Author cluster with special character in First name OR Find button is enabled for Symbol search");
+			throw new Exception(
+					"Test User is able to search for Author cluster with special character in First name OR Find button is enabled for Symbol search");
+		}
+	}
+
+	public void searchAuthorClusterNumberFirstName(String LastName, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		test.log(LogStatus.INFO, "Entering author Last name... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, "10");
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+		test.log(LogStatus.INFO, "Trying to click find button... ");
+
+		if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
+			test.log(LogStatus.PASS, "Unable to search for author cluster with numbers in Last name");
+			pf.getBrowserActionInstance(ob).closeBrowser();
+		} else {
+			test.log(LogStatus.FAIL,
+					"User is able to search for Author cluster with numbers in Last name OR Find button is enabled for number search");
+			throw new Exception(
+					"User is able to search for Author cluster with numbers in Last name OR Find button is enabled for number search");
+
+		}
+	}
+
+	public void searchAuthorClusterAlphanuemricFirstName(String LastName, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		test.log(LogStatus.INFO, "Entering author Last name... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, "Test007");
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+		test.log(LogStatus.INFO, "Trying to click find button... ");
+
+		if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
+			test.log(LogStatus.PASS, "Unable to search for author cluster with alphanumeric characters in First name");
+		} else {
+			test.log(LogStatus.FAIL,
+					"User is able to search for Author cluster with alphanumeric characters in First name OR Find button is enabled for alphanumeric characters search");
+			throw new Exception(
+					"User is able to search for Author cluster with alphanumeric characters in First name OR Find button is enabled for alphanumeric characters search");
+		}
+	}
+
+	public void typeaheadMultipleAltNameLastName(String LastName, String Lastname2, String Lastname3, ExtentTest test)
+			throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+		test.log(LogStatus.INFO, "Entering author Last name... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH);
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME2_XPATH);
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(OnePObjectMap.WAT_AUTHOR_LASTNAME2_XPATH, Lastname2, test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH);
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME3_XPATH);
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(OnePObjectMap.WAT_AUTHOR_LASTNAME3_XPATH, Lastname3, test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+	}
+
+	public void typeaheadMultipleAltNameFirstName(String LastName, String FirstName, String Lastname2, String Lastname3,
+			String Firstname2, String Firstname3, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+		test.log(LogStatus.INFO, "Entering first set of Last & First name");
+		// Last and first name 1st time
+		test.log(LogStatus.INFO, "Entering author Last name... ");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
+		pf.getSearchAuthClusterPage(ob).enterAuthorFirstName(FirstName, test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH);
+		test.log(LogStatus.INFO, "Entering second set of Last & First name");
+		// Last and first name 2nd time
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME2_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME2_XPATH).clear();
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(OnePObjectMap.WAT_AUTHOR_LASTNAME2_XPATH, Lastname2, test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME2_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME2_XPATH).clear();
+		pf.getSearchAuthClusterPage(ob).enterAuthorFirstName(OnePObjectMap.WAT_AUTHOR_FIRSTNAME2_XPATH, Firstname2,
+				test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH);
+		test.log(LogStatus.INFO, "Entering third set of Last & First name");
+		// Last and first name 3rd time
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME3_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME3_XPATH).clear();
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(OnePObjectMap.WAT_AUTHOR_LASTNAME3_XPATH, Lastname3, test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME3_XPATH);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME3_XPATH).clear();
+		pf.getSearchAuthClusterPage(ob).enterAuthorFirstName(OnePObjectMap.WAT_AUTHOR_FIRSTNAME3_XPATH, Firstname3,
+				test);
+		test.log(LogStatus.INFO, "Editing first name entered in round 1");
+		//// Only First name last time
+		pf.getSearchAuthClusterPage(ob).enterAuthorFirstName(FirstName, test);
+		test.log(LogStatus.PASS, "Firstname Typeahead displayed during multiple Alternate name search");
+	}
+
+	public void altNameLinkGreyedNoLastname(ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+		test.log(LogStatus.INFO, "Entering author name... ");
+
+		if (!pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH)).isEnabled()) {
+			test.log(LogStatus.INFO, "Add alternate name button not enabled when no data entered into Lastname field");
+		} else {
+			test.log(LogStatus.FAIL, "Add alternate name button is enabled when no data entered into Lastname field");
+			throw new Exception("Add alternate name button is enabled when no data entered into Lastname field");
+		}
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, "U");
+		if (pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH)).isEnabled()) {
+			test.log(LogStatus.PASS,
+					"Add alternate name button enabled after entering a single character into Lastname field");
+		} else {
+			test.log(LogStatus.FAIL,
+					"Add alternate name button is not enabled even after entering a single character into Lastname field");
+			throw new Exception(
+					"Add alternate name button is not enabled even after entering a single character into Lastname field");
+		}
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void altNameLinkGreyedOnlyFirstname(ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+		test.log(LogStatus.INFO, "Entering author name... ");
+
+		if (!pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH)).isEnabled()) {
+			test.log(LogStatus.INFO, "Add alternate name button not enabled when no data entered into Firstname field");
+		} else {
+			test.log(LogStatus.FAIL, "Add alternate name button is enabled when no data entered into Firstname field");
+			throw new Exception("Add alternate name button is enabled when no data entered into Firstname field");
+		}
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, "U");
+		if (!pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH)).isEnabled()) {
+			test.log(LogStatus.PASS,
+					"Add alternate name button not enabled even after entering a single character into Firstname field");
+		} else {
+			test.log(LogStatus.FAIL,
+					"Add alternate name button is enabled after entering a single character into Firstname field");
+			throw new Exception(
+					"Add alternate name button is enabled after entering a single character into Firstname field");
+		}
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	public void searchAuthorClusterLastNameTypeahead(String LastName, ExtentTest test) throws Exception {
+		// Verify whether control is in Author Search page
+		Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+		test.log(LogStatus.INFO, "Entering author name... ");
+
+		if (!pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH)).isEnabled()) {
+			test.log(LogStatus.INFO, "Add alternate name button not enabled when no data entered into Lastname field");
+		} else {
+			test.log(LogStatus.FAIL, "Add alternate name button is enabled when no data entered into Lastname field");
+			throw new Exception("Add alternate name button is enabled when no data entered into Lastname field");
+		}
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		if (pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH)).isEnabled()) {
+			test.log(LogStatus.INFO, "Add alternate name button enabled after entering a value into Lastname field");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+			test.log(LogStatus.INFO, "Cleared value from Lastname field");
+		} else {
+			test.log(LogStatus.FAIL,
+					"Add alternate name button is not enabled even after entering value into Lastname field");
+			throw new Exception(
+					"Add alternate name button is not enabled even after entering value into Lastname field");
+		}
+
+		if (!pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH)).isEnabled()) {
+			test.log(LogStatus.PASS, "Add alternate name button not enabled after clearing Lastname field");
+		} else {
+			test.log(LogStatus.FAIL,
+					"Add alternate name button is enabled evenafter clearing data from Lastname field");
+			throw new Exception("Add alternate name button is enabled evenafter clearing data from Lastname field");
+		}
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
 }

@@ -1,6 +1,5 @@
 package wat;
 
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,7 +10,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
-import util.OnePObjectMap;
 
 /**
  * Class for testing - Typeahead works during multiple alternative name search.
@@ -90,27 +88,7 @@ public class WAT16 extends TestBase {
 		String Lastname2 = "Upadhya";
 		String Lastname3 = "Bhat";
 		try {
-			// Verify whether control is in Author Search page
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
-					"Control is not in WOS Author Search page");
-			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
-			test.log(LogStatus.INFO, "Entering author Last name... ");
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
-			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH);
-
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME2_XPATH);
-			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(OnePObjectMap.WAT_AUTHOR_LASTNAME2_XPATH, Lastname2,
-					test);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH);
-
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME3_XPATH);
-			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(OnePObjectMap.WAT_AUTHOR_LASTNAME3_XPATH, Lastname3,
-					test);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
-			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+			pf.getSearchAuthClusterPage(ob).typeaheadMultipleAltNameLastName(LastName, Lastname2, Lastname3, test);
 			test.log(LogStatus.PASS, "Typeahead displayed during multiple Alternate name search");
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Lastname Typeahead not displayed during multiple Alternate name search",

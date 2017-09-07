@@ -18,7 +18,7 @@
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
-	</test>  
+	</test>   
 
  	<test name="WAT_Author_Search_Lastname_Firstname" preserve-order="true">
 		<classes>
@@ -26,7 +26,7 @@
 		</classes>
 	</test>
 
- 	<test name="WAT_Author_Search_Page_static_text_Verify"
+	<test name="WAT_Author_Search_Page_static_text_Verify"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT03"></class>
@@ -51,7 +51,7 @@
 		</classes>
 	</test>
 
-	<test name="WAT_Author_Search_Typeahead_Firstname" preserve-order="true">
+ 	<test name="WAT_Author_Search_Typeahead_Firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT07"></class>
 		</classes>
@@ -75,7 +75,7 @@
 		</classes>
 	</test>
 
-	<test name="WAT_Author_Search_alphanum_lastname" preserve-order="true">
+ 	<test name="WAT_Author_Search_alphanum_lastname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT11"></class>
 		</classes>
@@ -284,19 +284,19 @@
 		<classes>
 			<class name="wat.WAT47"></class>
 		</classes>
-	</test> 
+	</test>  
 	
-	<test name="WAT_orcid_search" preserve-order="true">
+	<test name="WAT_orcid_searchStatic" preserve-order="true">
 		<classes>
 			<class name="wat.WAT48"></class>
 		</classes>
 	</test>
 	
-	<test name="WAT_orcid_find_btn" preserve-order="true">
+ 	<test name="WAT_orcid_find_btn" preserve-order="true">
 		<classes>
 			<class name="wat.WAT49"></class>
 		</classes>
-	</test> 
+	</test>  
 	
 	<test name="WAT_orcid_error" preserve-order="true">
 		<classes>
@@ -307,6 +307,12 @@
 	<test name="WAT_orcid_search_results" preserve-order="true">
 		<classes>
 			<class name="wat.WAT51"></class>
+		</classes>
+	</test>
+	
+	<test name="WAT_orcid_to_name_search" preserve-order="true">
+		<classes>
+			<class name="wat.WAT52"></class>
 		</classes>
 	</test>
 </suite>

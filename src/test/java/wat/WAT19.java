@@ -1,6 +1,5 @@
 package wat;
 
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,7 +10,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
-import util.OnePObjectMap;
 
 /**
  * Class to Verify that "Add alternative name" button should be in disabled
@@ -91,35 +89,7 @@ public class WAT19 extends TestBase {
 	public void testAltNameLinkGreyedOnlyFirstname() throws Exception {
 
 		try {
-			// Verify whether control is in Author Search page
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
-					"Control is not in WOS Author Search page");
-			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-			test.log(LogStatus.INFO, "Entering author name... ");
-
-			if (!pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH))
-					.isEnabled()) {
-				test.log(LogStatus.INFO,
-						"Add alternate name button not enabled when no data entered into Firstname field");
-			} else {
-				test.log(LogStatus.FAIL,
-						"Add alternate name button is enabled when no data entered into Firstname field");
-				throw new Exception("Add alternate name button is enabled when no data entered into Firstname field");
-			}
-			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
-			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, "U");
-			if (!pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH))
-					.isEnabled()) {
-				test.log(LogStatus.PASS,
-						"Add alternate name button not enabled even after entering a single character into Firstname field");
-			} else {
-				test.log(LogStatus.FAIL,
-						"Add alternate name button is enabled after entering a single character into Firstname field");
-				throw new Exception(
-						"Add alternate name button is enabled after entering a single character into Firstname field");
-			}
-			pf.getBrowserActionInstance(ob).closeBrowser();
+			pf.getSearchAuthClusterPage(ob).altNameLinkGreyedOnlyFirstname(test);
 		} catch (Exception e) {
 			logFailureDetails(test, e, "Add alternate name button functionality has issue", "Typeahead_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
