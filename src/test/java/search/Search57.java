@@ -78,16 +78,13 @@ public class Search57 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob,
-					By.cssSelector((OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString())), 90);
-
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
+				JavascriptExecutor jse = (JavascriptExecutor) ob;
 
 			for (int i = 1; i <= 5; i++) {
 
 				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
 				waitForAjax(ob);
-
+				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString()),60);
 			}
 
 			List<WebElement> tileTags = ob.findElements(By
