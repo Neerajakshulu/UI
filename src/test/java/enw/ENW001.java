@@ -17,6 +17,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class ENW001 extends TestBase {
 	
@@ -101,23 +102,24 @@ public class ENW001 extends TestBase {
 			{
 				pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 				pf.getSearchResultsPageInstance(ob).chooseArticle();
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
 				
 			}
 			else if(recordType.equalsIgnoreCase("Patents"))
 			{
 				pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 				pf.getSearchResultsPageInstance(ob).chooseArticle();
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
 			}else
 			{
 				pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 				pf.getSearchResultsPageInstance(ob).clickOnFirstPostTitle();
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
 			}
 				
 		
-		
+			pf.getBrowserWaitsInstance(ob)
+			.waitUntilElementIsDisplayed(OnePObjectMap.RECORD_VIEW_PAGE_SENDTOENDNOTE_BUTTON_CSS);
 		waitForAjax(ob);
 		
 	
