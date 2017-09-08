@@ -13,7 +13,7 @@
 
 	<!-- ENW -->
 
-	<test name="ENW003" preserve-order="true">
+	<!-- <test name="ENW003" preserve-order="true">
 		<classes>
 
 			<class name="enw.ENW003"></class>
@@ -156,7 +156,7 @@
 
 	</test>
 
-	<!-- IAM -->
+	IAM
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
 		<classes>
 			<class name="iam.IAM036"></class>
@@ -171,8 +171,8 @@
 		</classes>
 	</test>
 
-	<!-- <test name="IAM016"> <classes> <class name="iam.IAM016"></class> </classes> 
-		</test> -->
+	<test name="IAM016"> <classes> <class name="iam.IAM016"></class> </classes> 
+		</test>
 
 	<test name="Deep_linking_account_page_Using_LI_and_facebook">
 		<classes>
@@ -192,10 +192,10 @@
 		</classes>
 	</test>
 
-	<!-- <test name="Validate_change_password_account_page"> <classes> <class 
-		name="iam.IAM038"></class> </classes> </test> -->
+	<test name="Validate_change_password_account_page"> <classes> <class 
+		name="iam.IAM038"></class> </classes> </test>
 
-	<!-- ENW IAM -->
+	ENW IAM
 
 	<test name="Login_and_logout_enw_application_using_LI_account">
 		<classes>
@@ -203,13 +203,13 @@
 		</classes>
 	</test>
 
-	<!-- <test name="ENW_Linking_from_NEON" preserve-order="true"> <classes> 
+	<test name="ENW_Linking_from_NEON" preserve-order="true"> <classes> 
 		<class name="enwiam.ENWIAM100"></class> <class name="enwiam.ENWIAM101"></class> 
 		<class name="enwiam.ENWIAM102"></class> <class name="enwiam.ENWIAM103"></class> 
-		</classes> </test> -->
+		</classes> </test>
 
-	<!-- <test name="Navigation1"> <classes> <class name="enwiam.ENWIAM40"></class> 
-		</classes> </test> -->
+	<test name="Navigation1"> <classes> <class name="enwiam.ENWIAM40"></class> 
+		</classes> </test>
 
 	<test name="ENW_registraiton_and_reset_password7" preserve-order="true">
 		<classes>
@@ -276,7 +276,7 @@
 			<class name="enwiam.ENWIAM019"></class>
 		</classes>
 	</test>
-
+ -->
 	<test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
 			<class name="enw.ENW004"></class>
@@ -307,12 +307,12 @@
 	</test>
 
 
-	<test name="ENWIAM0009">
+	<!-- <test name="ENWIAM0009">
 		<classes>
 			<class name="enwiam.ENWIAM0009"></class>
 		</classes>
 	</test>
-	<!-- Profile START-->
+	Profile START
 
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
 		<parameter name="username" value="49eq13+1gxhb27mqmgkk@sharklasers.com" />
@@ -391,8 +391,8 @@
 		<parameter name="socialLogin" value="FB|LI" />
 		<parameter name="username" value="testing.prasadreddy@gmail.com" /> 
 		<parameter name="password" value="Apple@123" />
-		<!-- <parameter name="username" value="linkedinloginid@gmail.com" />
-		<parameter name="password" value="Neon@1234" /> -->
+		<parameter name="username" value="linkedinloginid@gmail.com" />
+		<parameter name="password" value="Neon@1234" />
 		<parameter name="deepLinkUrl" value="/#/profile/" />
 		<classes>
 			<class name="Profile.Profile52"></class>
@@ -403,8 +403,8 @@
 		<parameter name="socialLogin" value="FB|LI" />
 		<parameter name="username" value="testing.prasadreddy@gmail.com" /> 
 		<parameter name="password" value="Apple@123" />
-		<!-- <parameter name="username" value="linkedinloginid@gmail.com" />
-		<parameter name="password" value="Neon@1234" /> -->
+		<parameter name="username" value="linkedinloginid@gmail.com" />
+		<parameter name="password" value="Neon@1234" />
 		<parameter name="deepLinkUrl"
 			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
 		<classes>
@@ -443,16 +443,16 @@
 		</classes>
 	</test>
 
-  <!-- Profile END-->
+  Profile END
 
-	<!-- search test case -->
+	search test case
 	<test name="Test B1">
 		<classes>
 			<class name="search.Search129"></class>
 		</classes>
 	</test>
 
-	<!-- RCC Testcases -->
+	RCC Testcases
 	<test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group">
 		<classes>
 			<class name="rcc.RCC021"></class>
@@ -486,7 +486,7 @@
 		</classes>
 	</test>
 	
-	<!-- Authoring START -->
+	Authoring START
 	
 	<test name="Authoring80">
 		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
@@ -518,7 +518,7 @@
 		</classes>
 	</test>
 	
-	<!-- Authoring END -->
+	Authoring END
 	
 	<test name="DRAIAMscripts" preserve-order="true" parallel="false">
 		<classes>
@@ -542,7 +542,7 @@
 		</classes>
 	</test>
 
-	<!-- IPAIAM Test cases START -->
+	IPAIAM Test cases START
 
 
 	<test name="IPAIAM100">
@@ -566,7 +566,7 @@
 		<classes>
 			<class name="ipaiam.IPAIAM054"></class>
 		</classes>
-	</test>
+	</test> -->
 	<!-- IPAIAM Test cases END -->
 
 </suite>
