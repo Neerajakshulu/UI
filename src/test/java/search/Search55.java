@@ -68,21 +68,16 @@ public class Search55 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"),90);
-			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),60);
-			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString()), 30);
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
+			waitForAjax(ob);
+			//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString()), 30);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 
 			for (int i = 1; i <= 5; i++) {
 
 				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
 				waitForAjax(ob);
+				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString()),60);
 
 			}
 

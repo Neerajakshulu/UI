@@ -56,7 +56,6 @@ public class Search81 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 
 			// login using TR credentials
@@ -67,7 +66,8 @@ public class Search81 extends TestBase {
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys("bio");
 			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
 			waitForAjax(ob);
-			fluentwaitforElement(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()),90);
+			waitForAllElementsToBePresent(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()),60);
+			fluentwaitforElement(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()),60);
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()))
 					.getText();
 			System.out.println(text);

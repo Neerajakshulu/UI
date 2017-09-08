@@ -63,9 +63,9 @@ public class Search99 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 80);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
-			waitForAjax(ob);
+			/*waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 80);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();*/
+			 pf.getSearchResultsPageInstance(ob).clickOnPeopleTab();
 			// checking for Default sort option
 			// String defaultSort = ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")))
 			// .getText();
