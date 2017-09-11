@@ -806,8 +806,8 @@ public class TestBase {
 	public void logout() throws Exception {
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
-				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 30);
-		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
+				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_XPATH.toString()), 30);
+		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_XPATH.toString())));
 		waitUntilText("Sign in");
 	}
 
