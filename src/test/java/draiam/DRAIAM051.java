@@ -12,7 +12,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -91,7 +90,7 @@ public class DRAIAM051 extends TestBase {
 				test.log(LogStatus.FAIL,
 						"user is not  able to see first name as NULL when first name of user is missing.");
 			}
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			pf.getDraPageInstance(ob).logoutDRA();
 			ob.close();
 		} catch (Throwable t) {

@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -77,14 +76,17 @@ public class DRAIAM0016 extends TestBase {
 	       // pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
 			//pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
 	        pf.getDraPageInstance(ob).logoutDRA();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 			ob.navigate().to(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSERsteam0016"),
 					LOGIN.getProperty("DRAUSERsteamPWD16"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
 			pf.getDraPageInstance(ob).SearchDRAprofileName(DRAProfileName);
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DR_SEARCH_RESULT_CSS);
 			pf.getDraPageInstance(ob).validateSearchResultMsg(test, DRAProfileName);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

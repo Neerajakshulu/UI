@@ -3,8 +3,6 @@ package draiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -16,7 +14,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -58,10 +55,10 @@ public class DRAIAM101 extends TestBase {
 			test.log(LogStatus.PASS, "User is succeccfully sent to the DRA landing page. ");
 			//pf.getDraPageInstance(ob).validateInvalidCredentialsErrorMsg(test);	
 		//	ClarivateAnalyticslogo();
-			BrowserWaits.waitTime(6);
+		//	BrowserWaits.waitTime(6);
 			JavascriptExecutor jse = (JavascriptExecutor)ob;
 			jse.executeScript("window.scrollBy(0,250)", "");
-			BrowserWaits.waitTime(5);
+		//	BrowserWaits.waitTime(5);
 			WebElement ImageFile = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.LOGIN_PAGE_LOGO_IMG_XPATH);
 			Boolean ImagePresent = (Boolean) ((JavascriptExecutor) ob).executeScript(
 					"return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",

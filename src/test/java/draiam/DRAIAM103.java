@@ -15,7 +15,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -55,10 +54,10 @@ public class DRAIAM103 extends TestBase {
 			ob.navigate().to(host);
 			test.log(LogStatus.PASS, "Neon Landing page is displayed. ");
 			VerifyNeonTxt();
-			BrowserWaits.waitTime(6);
+			//BrowserWaits.waitTime(6);
 			JavascriptExecutor jse = (JavascriptExecutor)ob;
 			jse.executeScript("window.scrollBy(0,250)", "");
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			WebElement ImageFile = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.LOGIN_PAGE_LOGO_IMG_XPATH);
 			Boolean ImagePresent = (Boolean) ((JavascriptExecutor) ob).executeScript(
 					"return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",

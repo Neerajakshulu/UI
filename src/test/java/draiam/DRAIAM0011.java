@@ -56,7 +56,7 @@ public class DRAIAM0011 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0011"),
 					LOGIN.getProperty("DRAUSERPWD11"));
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			BrowserWaits.waitTime(5);
+		//	BrowserWaits.waitTime(5);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_CSS);
 			pf.getDraPageInstance(ob).validateInactiveaccount(test);	
 			pf.getDraPageInstance(ob).validateDRAInactiveErrorMsg(test);

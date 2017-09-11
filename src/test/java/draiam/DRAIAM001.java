@@ -211,7 +211,6 @@ public class DRAIAM001 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		} catch (Throwable t) {

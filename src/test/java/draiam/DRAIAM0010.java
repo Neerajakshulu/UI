@@ -59,7 +59,7 @@ public class DRAIAM0010 extends TestBase {
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 			pf.getDraPageInstance(ob).validateInvalidCredentialsErrorMsg(test);
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			ob.navigate().refresh();
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0010"),
 					LOGIN.getProperty("DRAUSERPWD10"));
