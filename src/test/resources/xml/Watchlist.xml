@@ -211,6 +211,7 @@
 		</classes>
 	</test>
 	<test name="Watchlist034">
+		<parameter name="articleName" value="drug delivery" />
 		<classes>
 			<class name="watchlist.Watchlist034"></class>
 		</classes>
