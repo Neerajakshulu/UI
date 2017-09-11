@@ -66,7 +66,7 @@ public class Search105 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
+         pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			waitForAjax(ob);
 
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();

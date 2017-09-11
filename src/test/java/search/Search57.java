@@ -66,19 +66,14 @@ public class Search57 extends TestBase {
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bi");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
 			waitForAjax(ob);
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-				JavascriptExecutor jse = (JavascriptExecutor) ob;
+			JavascriptExecutor jse = (JavascriptExecutor) ob;
 
 			for (int i = 1; i <= 5; i++) {
 

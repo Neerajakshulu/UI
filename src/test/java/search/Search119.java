@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -60,8 +61,8 @@ public class Search119 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 ob.navigate().to(host);
+
 
 			// login using TR credentials
 			login();
@@ -76,8 +77,8 @@ public class Search119 extends TestBase {
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH.toString())).click();
-
-			Thread.sleep(5000);
+			//waitForAllElementsToBePresent(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()),90);
+			BrowserWaits.waitTime(3);
 			List<WebElement> searchResults1 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			ArrayList<String> al1 = new ArrayList<String>();
 			ArrayList<String> al2 = new ArrayList<String>();
