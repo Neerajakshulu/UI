@@ -56,10 +56,11 @@ public class IAM023 extends TestBase {
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
-
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
-			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
-
+			waitUntilText("Account");
+			fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
+			//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
+			//ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())));
 			waitUntilText("Account");
 			String beforeChangePass = ob
 					.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS.toString())).getText();
