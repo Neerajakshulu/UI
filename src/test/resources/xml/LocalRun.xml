@@ -452,8 +452,9 @@
 		</classes>
 	</test>
 
+<!--  Commenting as suggested by Stephanie (Email bounce back issue) -->
 	<!-- RCC Testcases -->
-	<test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group">
+	<!-- <test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group">
 		<classes>
 			<class name="rcc.RCC021"></class>
 			<class name="rcc.RCC023"></class>
@@ -485,7 +486,7 @@
 			<class name="rcc.RCC092"></class>
 		</classes>
 	</test>
-	
+	 -->
 	<!-- Authoring START -->
 	
 	<test name="Authoring80">
