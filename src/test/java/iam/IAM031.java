@@ -163,8 +163,6 @@ public class IAM031 extends TestBase {
 			driver.navigate().to(CONFIG.getProperty("helpLink"));
 
 			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, email, password);
-			waitUntilText("Newsfeed","Watchlists","Groups");
-			waitUntilText("Send feedback to the Project Neon team","Report a problem or submit a support request");
 			waitForPageLoad(driver);
 			String str = driver.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
 			logger.info("Title : " + str);
