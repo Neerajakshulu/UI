@@ -10,6 +10,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import base.TestBase;
@@ -29,8 +30,8 @@ public class Search66 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -41,8 +42,8 @@ public class Search66 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -56,53 +57,44 @@ public class Search66 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-		 // login using TR credentials
+			// login using TR credentials
 			login();
-			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("drugs");
-			waitForElementTobeClickable(ob,By.xpath(OR.getProperty("search_button")),60);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
-			//BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(4);
 			waitForAjax(ob);
-			String all_text = ob
-					.findElement(By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'All')]"))
-					.getText();
+			String all_text = ob.findElement(
+					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'All')]")).getText();
 			// System.out.println(all_text);
 			int all_num = Integer.parseInt(all_text.substring(3, 4));
 			System.out.println(all_num);
 			boolean cond1 = all_num != 0;
 			System.out.println(cond1);
 
-			String articles_text = ob
-					.findElement(
-							By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Articles')]"))
-					.getText();
+			String articles_text = ob.findElement(
+					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Articles')]")).getText();
 			int articles_num = Integer.parseInt(articles_text.substring(8, 9));
 			System.out.println(articles_num);
 			boolean cond2 = articles_num != 0;
 			System.out.println(cond2);
 
-			String patents_text = ob
-					.findElement(By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Patents')]"))
-					.getText();
+			String patents_text = ob.findElement(
+					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Patents')]")).getText();
 			int patents_num = Integer.parseInt(patents_text.substring(7, 8));
 			System.out.println(patents_num);
 			boolean cond3 = patents_num != 0;
 			System.out.println(cond3);
 
-			String people_text = ob
-					.findElement(By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'People')]"))
-					.getText();
+			String people_text = ob.findElement(
+					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'People')]")).getText();
 			int people_num = Integer.parseInt(people_text.substring(6, 7));
 			System.out.println(people_num);
 			boolean cond4 = people_num != 0;
 			System.out.println(cond4);
 
-			String posts_text = ob
-					.findElement(By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Posts')]"))
-					.getText();
+			String posts_text = ob.findElement(
+					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Posts')]")).getText();
 			int posts_num = Integer.parseInt(posts_text.substring(5, 6));
 			System.out.println(posts_num);
 			boolean cond5 = posts_num != 0;
@@ -114,7 +106,8 @@ public class Search66 extends TestBase {
 			try {
 
 				Assert.assertTrue(master_cond);
-				test.log(LogStatus.PASS,
+				test.log(
+						LogStatus.PASS,
 						"Counts of search results of all the content types getting displayed irrespective of the content type chosen for searching");// extent
 																																						// report
 			}
@@ -126,9 +119,11 @@ public class Search66 extends TestBase {
 
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_counts_of_search_results_of_all_the_content_types_not_getting_displayed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_counts_of_search_results_of_all_the_content_types_not_getting_displayed")));// screenshot
 
 			}
 
@@ -145,8 +140,11 @@ public class Search66 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
