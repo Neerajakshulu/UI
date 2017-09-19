@@ -35,6 +35,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	int afterScroll;
 	List<Integer> sortByRelevance;
 	String subOrg;
+	String searchTerms;
 	
 
 	public SearchAuthorClusterResultsPage(WebDriver ob) {
@@ -337,6 +338,48 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		if(!(StringUtils.containsIgnoreCase(dept.getAttribute("class"),"wat-search-results-meta-contact")&&StringUtils.isNotEmpty(dept.getText()))){
 			test.log(LogStatus.FAIL, "Department(sub-org) is not displayed under Org name");
 			throw new Exception("Department(sub-org) is not displayed under Org name");
+		}
+	}
+	
+	
+	/**
+	 * Method for Verify Search Terms are match with Search input data
+	 * @param test
+	 * @throws Exception
+	 */
+	public void searchTermsMatchSearchInputData(ExtentTest test,final String... input) throws Exception{
+		waitForauthorClusterSearchResults(test);
+		for (String each : input) {
+			searchTerms(each, test);
+		}
+	}
+	
+	/**
+	 * Method for Verify Search Terms are match with Search input data
+	 * @param test
+	 * @throws Exception
+	 */
+	public void searchTerms(String searchInput,ExtentTest test) throws Exception{
+		searchTerms=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_CSS).getText();
+		logger.info("SearchTerms-->"+searchTerms);
+		if(!StringUtils.containsIgnoreCase(searchTerms,searchInput)){
+			test.log(LogStatus.FAIL, "Search Input doesn't match with Search Terms");
+			throw new Exception("Search Input doesn't match with Search Terms");
+		}
+	}
+	
+	
+	/**
+	 * Method for Verify Search Tab is highlighted when navigate back to Search Results page from Author Record page
+	 * @param test
+	 * @throws Exception
+	 */
+	public void searchTabHighlight(ExtentTest test) throws Exception{
+		String tabHighlight=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TAB_HIGHLIGHT_XPATH).getAttribute("class");
+		logger.info("tabHighlight-->"+tabHighlight);
+		if(!tabHighlight.contains("active")){
+			test.log(LogStatus.FAIL, "Search Results tab not getting Highlighted");
+			throw new Exception("Search Results tab not getting Highlighted");
 		}
 	}
 }

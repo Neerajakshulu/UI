@@ -1236,6 +1236,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS("div.wui-card"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_NAME_CSS("div.wui-card h3 a"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PRIMARY_NAME_CSS("h3 a"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_CSS("div[class='wat-search-terms-topic-tags']"),
+	
 	
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_ALTERNATIVE_NAME_CSS("div[class*='wat-search-results-meta-names']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_AFFILIATION_CSS("div[class*='wat-search-results-meta-affiliation']"),
@@ -1260,6 +1262,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_RECENT_PUBLICATIONS_CSS("button[event-category='wat-recent-publications']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_HIDE_PUBLICATIONS_CSS("button[event-category='wat-hide-publications']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_TOP_PUBLICATIONS_CSS("div[ng-repeat='publication in vm.publications track by $index']"),
+	WAT_SEARCH_RESULTS_TAB_HIGHLIGHT_XPATH("//span[text()='Search Results']/ancestor::li"),
 	
 	WAT_ORCID_SEARCH_BTN_XPATH("//span[text()='ORCiD search']"),
 	WAT_ORCID_LOGO_XPATH("//div[@class='wat-search__orcid-logo']"),

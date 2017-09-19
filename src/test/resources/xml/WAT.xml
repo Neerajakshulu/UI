@@ -238,6 +238,36 @@
 		</classes>
 	</test>
 	
+	<test name="search_results_tab_on_author_record" preserve-order="true">
+		<parameter name="orcid" value="0000-0002-5895-7935" />
+		<classes>
+			<class name="wat.WAT33"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="navigate_to_orcid_search_results_from_record_page" preserve-order="true">
+		<parameter name="orcid" value="0000-0002-5895-7935" />
+		<classes>
+			<class name="wat.WAT34"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="navigate_to_name_search_results_from_record_page" preserve-order="true">
+		<parameter name="lastName" value="VENUGOPALACHAR" />
+		<classes>
+			<class name="wat.WAT35"></class>
+		</classes>
+	</test>
+	
+	<test name="search_results_tab_highlight" preserve-order="true">
+		<parameter name="lastName" value="VENUGOPALACHAR" />
+		<classes>
+			<class name="wat.WAT36"></class>
+		</classes>
+	</test>
+	
 	<test name="WAT_Find_btn_enabled_issue" preserve-order="true">
 		<classes>
 			<class name="wat.WAT40"></class>

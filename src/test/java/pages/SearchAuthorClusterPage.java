@@ -1208,5 +1208,23 @@ public class SearchAuthorClusterPage extends TestBase {
 			throw new Exception("Didnt navigate to Name search page");
 		}
 	}
+	
+	/**
+	 * Method for ORCID Search
+	 * @param test
+	 * @throws Exception
+	 */
+	public void ORCIDSearch(String orcid,ExtentTest test) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH,orcid);
+		boolean findButtonStatus=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH).isEnabled();
+		if (findButtonStatus) {
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH);
+		} else {
+			throw new Exception("FIND button is disabled for valid ORCID");
+		}
+	}
 
 }

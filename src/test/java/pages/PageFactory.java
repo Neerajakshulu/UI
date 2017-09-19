@@ -45,6 +45,7 @@ public class PageFactory {
 	private WATLogInPage watLogInPage = null;
 	private SearchAuthorClusterPage SearchAuthClusterPage = null;
 	private SearchAuthorClusterResultsPage searchAuthorClusterResultsPage=null;
+	private AuthorRecordPage authorRecordPage=null;
 
 	
 	public IAMPage getIamPage(WebDriver ob) {
@@ -343,12 +344,30 @@ public class PageFactory {
 		return SearchAuthClusterPage;
 	}
 	
+	/**
+	 * Method for Provide Search Author Results page methods
+	 * @param ob
+	 * @return
+	 */
 	public SearchAuthorClusterResultsPage getSearchAuthClusterResultsPage(WebDriver ob) {
 
 		if (searchAuthorClusterResultsPage == null) {
 			searchAuthorClusterResultsPage = new SearchAuthorClusterResultsPage(ob);
 		}
 		return searchAuthorClusterResultsPage;
+	}
+	
+	/**
+	 * Method for Provide Author Record page methods
+	 * @param ob
+	 * @return
+	 */
+	public AuthorRecordPage getAuthorRecordPage(WebDriver ob) {
+
+		if (authorRecordPage == null) {
+			authorRecordPage = new AuthorRecordPage(ob);
+		}
+		return authorRecordPage;
 	}
 
 
@@ -381,5 +400,6 @@ public class PageFactory {
 		gmpage = null;
 		postncommentpage = null;
 		searchAuthorClusterResultsPage=null;
+		authorRecordPage=null;
 	}
 }
