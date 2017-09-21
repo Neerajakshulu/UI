@@ -863,7 +863,7 @@ public enum OnePObjectMap {
 	DRA_SIGNOUT_BUTTON_CSS("button[ng-click='vm.logout()']"),
 	DRA_FORGOT_PASSWORD_LINK_CSS("a[class='forgot-password__link']"),
 	DRA_BGCOLOR_CLASS_CSS("div[class='flex-center-horizontally']"),
-	DRA_PROFILE_FLYOUT_IMAGE_CSS("div[class*='wui-profile-flyout'] a[data-toggle='dropdown']"),
+	DRA_PROFILE_FLYOUT_IMAGE_CSS("div[class*='wui-profile-flyout'] a[aria-label='Profile Menu']"),
 	DRA_PROFILE_FLYOUT_INFO_CSS("div[class='dropdown-menu wui-flyout__menu wui-flyout--profile__menu'] div[class='wui-profile-flyout__info'] div"),
 	DRA_PROFILE_FLYOUT_FOOTER_LINKS_CSS("div[class='wui-profile-flyout__footer']"),
 	DRA_PROFILE_FLYOUT_HEADER_IMAGE_CSS("img[class='wui-profile-flyout__image wui-circle']"),
