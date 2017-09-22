@@ -90,11 +90,13 @@ public class ENW043 extends TestBase {
 		}
 	}
 
-	private void EndNoteSeesion(WebDriver ob) {
+	private void EndNoteSeesion(WebDriver ob) throws Exception {
 		String newWindow = switchToNewWindow(ob);
 		System.out.println("Before Success1");
 		if (newWindow != null) {
 			System.out.println("Before Success2");
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MARKETUSEREMAIL"),(LOGIN.getProperty("MARKETUSERPASSWORD")));
+			BrowserWaits.waitTime(8);
 			if (ob.getCurrentUrl().contains("app.qc.endnote.com") && ob.getTitle().contains("EndNote")) {
 				System.out.println("Success with the url");
 				logger.info("Neon Landing page is opened in the new window ");
