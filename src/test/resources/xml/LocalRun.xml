@@ -13,13 +13,6 @@
 
 	<!-- ENW -->
 
-	<test name="ENW003" preserve-order="true">
-		<classes>
-
-			<class name="enw.ENW003"></class>
-			<class name="enw.ENW023"></class>
-		</classes>
-	</test>
 
 	<test name="ENW008">
 		<classes>
@@ -303,6 +296,9 @@
 			<class name="enwiam.ENWIAM64"></class>
 			<class name="enwiam.ENWIAM63"></class>
 			<class name="enw.ENW00029"></class>
+			<class name="enw.ENW003"></class>
+			<class name="enw.ENW023"></class>
+			<class name="ipaiam.IPAIAM052"></class>
 		</classes>
 	</test>
 
@@ -549,12 +545,6 @@
 	<test name="IPAIAM100">
 		<classes>
 			<class name="ipaiam.IPAIAM100"></class>
-		</classes>
-	</test>
-
-	<test name="IPA052" preserve-order="true" parallel="false">
-		<classes>
-			<class name="ipaiam.IPAIAM052"></class>
 		</classes>
 	</test>
 
