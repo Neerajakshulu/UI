@@ -24,7 +24,7 @@ import util.OnePObjectMap;
 public class ENW010 extends TestBase {
 
 	static int status = 1;
-	String header_Expected = "Thomson Reuters";
+	String header_Expected = "Clarivate Analytics Project Neon ";
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -120,9 +120,9 @@ public class ENW010 extends TestBase {
 
 	private void ValidateAlternativeHeadr() throws Exception {
 		BrowserWaits.waitTime(4);
-		String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();
+		String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getAttribute("title");
 		logger.info("Header Text displayed as:" + actual_result);
-		String profileLink = ob.findElement(By.cssSelector("li[class='dropdown-header'] a")).getAttribute("class");
+		String profileLink = ob.findElement(By.cssSelector("h1[class='ne-nav-logo'] a")).getAttribute("class");
 		logger.info("is profile image linked -->" + profileLink);
 
 		logger.info("Actual result displayed as :" + actual_result

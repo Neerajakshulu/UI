@@ -16,7 +16,7 @@ public enum OnePObjectMap {
 
 	ENW_CONTINUE_DIOLOG_BOX_XPATH("//*[@id='connect']"),
 	ENW_CONTINUE_DIALOG_BOX_XPATH("//div[@id='noticeDialog']"),
-	ENW_HEADER_XPATH("//h1[@class='ne-nav-logo']"),
+	ENW_HEADER_XPATH("//img[@id='trlogo']"),
 	WOS_HEADER_XPATH("//div[@class='logoBar']//img[@title='Web of Science']"),
 	ENW_PROFILE_USER_ICON_XPATH("//img[@id='proSmallImg']"),
 	ENW_PROFILE_USER_ACCOUNT_LINK_CSS("span[class='fa fa-cog profile_account_link']"),
