@@ -151,7 +151,9 @@ public class ENWIAM59 extends TestBase {
 				pf.getLinkingModalsInstance(ob).clickOnSignInWithFB();
 				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("PWDUserFBENWIAM80"));
 				test.log(LogStatus.PASS, "User is able to link social with steam account ");
+				///Need to modify the script from here
 				pf.getENWReferencePageInstance(ob).clickAccount();
+				
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 				accountType = "Neon";
 
