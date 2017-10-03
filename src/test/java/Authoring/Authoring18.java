@@ -66,9 +66,12 @@ public class Authoring18 extends TestBase {
 			loginAs("USERNAME16", "PASSWORD16");
 			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
 			pf.getHFPageInstance(ob).searchForText("Biology");
+			BrowserWaits.waitTime(5);
 			pf.getSearchResultsPageInstance(ob).chooseArticle();
+			BrowserWaits.waitTime(5);
+			scrollingToElementofAPage();
 			pf.getpostRVPageInstance(ob).createComment("test flag in own comment");
-			//Commented by KR
+			// Commented by KR
 			BrowserWaits.waitTime(10);
 			waitForAllElementsToBePresent(ob,
 					By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
@@ -123,11 +126,14 @@ public class Authoring18 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(authoringxls,
-		 * "Test Cases", TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases" , TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls,
+		 * "Test Cases", TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 	}
 

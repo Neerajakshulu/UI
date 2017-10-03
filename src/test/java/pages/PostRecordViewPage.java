@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
@@ -13,12 +12,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
-import util.BrowserWaits;
-import util.OnePObjectMap;
-import base.TestBase;
-
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import util.BrowserWaits;
+import util.OnePObjectMap;
 
 /**
  * This class contains all the methods related to Post record view page
@@ -94,12 +93,14 @@ public class PostRecordViewPage extends TestBase {
 
 	/**
 	 * Method to click on EDIT post icon in post record view
-	 * @throws InterruptedException 
+	 * 
+	 * @throws InterruptedException
 	 */
 	public void clickOnEditButton() throws InterruptedException {
 		// Commented by KR
-//		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString()),
-//				180);
+		// waitForElementTobeVisible(ob,
+		// By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString()),
+		// 180);
 		BrowserWaits.waitTime(5);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString())));
 	}
@@ -129,11 +130,10 @@ public class PostRecordViewPage extends TestBase {
 		BrowserWaits.waitTime(10);
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()), 180);
-		countBefore = Integer
-				.parseInt(ob
-						.findElement(By.cssSelector(
-								OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
-						.getText().replaceAll(",", "").trim());
+		countBefore = Integer.parseInt(ob
+				.findElement(
+						By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
+				.getText().replaceAll(",", "").trim());
 		appreciationButton = ob
 				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS.toString()));
 
@@ -142,11 +142,10 @@ public class PostRecordViewPage extends TestBase {
 			Thread.sleep(15000);// After clicking on like button wait for status
 								// to change and count update
 			new Actions(ob).moveByOffset(100, 200).build().perform();
-			countAfter = Integer
-					.parseInt(ob
-							.findElement(By.cssSelector(
-									OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
-							.getText().replaceAll(",", "").trim());
+			countAfter = Integer.parseInt(ob
+					.findElement(
+							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
+					.getText().replaceAll(",", "").trim());
 			try {
 				Assert.assertEquals(countAfter, countBefore + 1);
 				test.log(LogStatus.PASS, "Appreciation action on post is working as expected");
@@ -161,11 +160,10 @@ public class PostRecordViewPage extends TestBase {
 			Thread.sleep(15000);// After clicking on unlike button wait for
 								// status to change and count update
 			new Actions(ob).moveByOffset(100, 200).build().perform();
-			countAfter = Integer
-					.parseInt(ob
-							.findElement(By.cssSelector(
-									OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
-							.getText().replaceAll(",", "").trim());
+			countAfter = Integer.parseInt(ob
+					.findElement(
+							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
+					.getText().replaceAll(",", "").trim());
 			try {
 				Assert.assertEquals(countAfter, countBefore - 1);
 				test.log(LogStatus.PASS, "un Appreciation action on post is working as expected");
@@ -204,7 +202,8 @@ public class PostRecordViewPage extends TestBase {
 
 		Assert.assertEquals(post, postTitle);
 		BrowserWaits.waitTime(5);
-		String postRVProfileTitle = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
+		String postRVProfileTitle = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
 		logger.info("Post RV title-->" + postRVProfileTitle);
 		logger.info("Profile info-->" + profileInfo);
 
@@ -302,18 +301,18 @@ public class PostRecordViewPage extends TestBase {
 		return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS)
 				.getText();
 	}
-	
+
 	/**
-	 * This method captures and returns the post video attachment url from Post record view
-	 * page
+	 * This method captures and returns the post video attachment url from Post
+	 * record view page
 	 * 
 	 * @return
 	 * @throws Exception
 	 */
 	public String getPostVideoUrl() throws Exception {
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_VIDEO_BOX_XPATH);
-		String VideoUrl = ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIDEO_BOX_XPATH.toString())).getAttribute("src");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_VIDEO_BOX_XPATH);
+		String VideoUrl = ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIDEO_BOX_XPATH.toString()))
+				.getAttribute("src");
 		return VideoUrl.substring(2, VideoUrl.indexOf("?"));
 
 	}
@@ -364,7 +363,7 @@ public class PostRecordViewPage extends TestBase {
 	 * @throws Exception
 	 */
 	public boolean validateURL(String url) throws Exception {
-		boolean result=false;
+		boolean result = false;
 		waitForPageLoad(ob);
 		BrowserWaits.waitTime(6);
 		String PARENT_WINDOW = ob.getWindowHandle();
@@ -380,12 +379,12 @@ public class PostRecordViewPage extends TestBase {
 				// ob.switchTo().window(PARENT_WINDOW);
 			}
 			if (ob.getCurrentUrl().toLowerCase().contains(url.toLowerCase())) {
-				result =true;
+				result = true;
 				ob.switchTo().window(PARENT_WINDOW);
-			} 
+			}
 		}
 		return result;
-		
+
 	}
 
 	/**
@@ -665,8 +664,9 @@ public class PostRecordViewPage extends TestBase {
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
 		jsClick(ob, ob.findElement(
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString())));
-//		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()),
-//				60);
+		// waitForElementTobeVisible(ob,
+		// By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()),
+		// 60);
 		BrowserWaits.waitTime(5);
 		jsClick(ob, ob.findElement(
 				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_LI_SHARE_MODAL_SHARE_BUTTON_CSS.toString())));
@@ -797,20 +797,22 @@ public class PostRecordViewPage extends TestBase {
 
 	/**
 	 * Method to click on FLAG or UNFLAG on the comment
-	 * @throws InterruptedException 
+	 * 
+	 * @throws InterruptedException
 	 */
 	private void flagOrUnflagAPost() throws InterruptedException {
 		BrowserWaits.waitTime(2);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).click();
 		BrowserWaits.waitTime(3);
-		//Commented by KR
-//		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()),
-//				40);
-		
+		// Commented by KR
+		// waitForElementTobeVisible(ob,
+		// By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()),
+		// 40);
+
 		ob.findElement(By.xpath("//span[ng-transclude[span[text()='Other']]]/preceding-sibling::span")).click();
 
-//		jsClick(ob, ob
-//				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));
+		// jsClick(ob, ob
+		// .findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));
 		BrowserWaits.waitTime(3);
 		jsClick(ob, ob.findElement(
 				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString())));
@@ -844,18 +846,17 @@ public class PostRecordViewPage extends TestBase {
 		BrowserWaits.waitTime(15);
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTAREA_CSS.toString()),
 				40);
-		ob
-				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTAREA_CSS.toString())).click();
+		ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTAREA_CSS.toString())).click();
 		BrowserWaits.waitTime(4);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS.toString())).click();
 		scrollingToElementofAPage();
-		pf.getBrowserActionInstance(ob).getElement(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_URL_TEXT_BOX_CSS).sendKeys(url);
-		
-		
-				pf.getBrowserActionInstance(ob).getElement(
-						OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_URL_INSERT_CSS).click();
+		pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_URL_TEXT_BOX_CSS)
+				.sendKeys(url);
+
+		pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_URL_INSERT_CSS).click();
 		BrowserWaits.waitTime(5);
 	}
 
@@ -1021,8 +1022,7 @@ public class PostRecordViewPage extends TestBase {
 
 	public void selectReasonInFlagModal() {
 
-		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_XPATH.toString()),
-				180);
+		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_XPATH.toString()), 180);
 		jsClick(ob, ob
 				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));
 	}
@@ -1044,23 +1044,25 @@ public class PostRecordViewPage extends TestBase {
 	}
 
 	public void createComment(String comment) throws InterruptedException {
-		//Commented by KR
-//		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()),
-//			40);
-//		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString())));
-//		ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()))
-//				.sendKeys(comment);
-//		jsClick(ob, ob.findElement(
-//				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString())));
+		// Commented by KR
+		// waitForElementTobeVisible(ob,
+		// By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()),
+		// 40);
+		// jsClick(ob,
+		// ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString())));
+		// ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()))
+		// .sendKeys(comment);
+		// jsClick(ob, ob.findElement(
+		// By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString())));
 		BrowserWaits.waitTime(2);
 		WebElement commentArea = ob.findElement(By.xpath("//textarea[@placeholder='Join the discussion']"));
 		commentArea.click();
 		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
 		innerTextBox.clear();
-		for(int i=0;i<comment.length();i++){
-			innerTextBox.sendKeys(comment.charAt(i)+"");
+		for (int i = 0; i < comment.length(); i++) {
+			innerTextBox.sendKeys(comment.charAt(i) + "");
 			Thread.sleep(100);
-			}
+		}
 		BrowserWaits.waitTime(5);
 		pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 		Thread.sleep(100);// after entering the comments wait for submit button
