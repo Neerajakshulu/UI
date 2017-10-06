@@ -345,4 +345,19 @@
 			<class name="wat.WAT52"></class>
 		</classes>
 	</test>
+	
+	
+	<test name="WAT_Help_File_Access_ProfileMenu" preserve-order="true">
+		<parameter name="proflieFlyoutLinks" value="Privacy|Terms of Use|Help|Feedback"/>
+		<classes>
+			<class name="wat.WAT53"></class>
+		</classes>
+	</test>
+	
+	<test name="WAT_Help_File_ProfileMenu" preserve-order="true">
+		<parameter name="proflieFlyoutLinks" value="Account|Sign out|Privacy|Terms of Use|Help|Feedback"/>
+		<classes>
+			<class name="wat.WAT54"></class>
+		</classes>
+	</test>
 </suite>
