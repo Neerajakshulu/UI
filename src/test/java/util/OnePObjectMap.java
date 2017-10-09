@@ -346,7 +346,7 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS("button[ng-click='vm.cancelCreate()']"), 
 	// HOME PAGE
 	NEWSFEED_SHAREANIDEA_LINK_XPATH("(//button[@id='posting'])[2]"),
-	NEWSFEED_MOST_VIEWED_ARTICLES_XPATH("//ne-most-viewed-documents"),
+	NEWSFEED_MOST_VIEWED_ARTICLES_XPATH("//div[@class='wui-card--most-viewed-articles wui-card']"),
 	NEWSFEED_FEATURED_POST_XPATH("//div[@class='wui-card--featured-post wui-card']"),
 	NEWSFEED_TRENDINDING_MENU_XPATH("//ul[@class='nav nav-tabs']//h3[contains(.,'FILTER_TYPE')]"),
 	NEWSFEED_TRENDINDING_CATEGORIES_LINKS_XPATH("//ne-trending-categories[@class='ng-scope ng-isolate-scope']//li"),
