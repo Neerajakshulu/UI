@@ -46,6 +46,7 @@ public class PageFactory {
 	private SearchAuthorClusterPage SearchAuthClusterPage = null;
 	private SearchAuthorClusterResultsPage searchAuthorClusterResultsPage=null;
 	private AuthorRecordPage authorRecordPage=null;
+	private WATProfilePage watProfilePage=null;
 
 	
 	public IAMPage getIamPage(WebDriver ob) {
@@ -371,6 +372,19 @@ public class PageFactory {
 	}
 
 
+	/**
+	 * Method for Provide WAT Profile page methods
+	 * @param ob
+	 * @return
+	 */
+	public WATProfilePage getWatProfilePage(WebDriver ob) {
+
+		if (watProfilePage == null) {
+			watProfilePage = new WATProfilePage(ob);
+		}
+		return watProfilePage;
+	}
+	
 	public void clearAllPageObjects() {
 		searchResultsPage = null;
 		accountPage = null;
@@ -401,5 +415,6 @@ public class PageFactory {
 		postncommentpage = null;
 		searchAuthorClusterResultsPage=null;
 		authorRecordPage=null;
+		watProfilePage=null;
 	}
 }
