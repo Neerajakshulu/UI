@@ -29,7 +29,7 @@ public class HeaderFooterLinksPage extends TestBase {
 	 * @throws Exception, When validation not done and Element Not found
 	 */
 	public void validateLinks(String appHeadFooterLinks) throws Exception {
-		String headerFooterLinks[] = appHeadFooterLinks.split("\\|");
+		String headerFooterLinks[] = appHeadFooterLinks.split("\\|"); 
 
 		for (int i = 0; i < headerFooterLinks.length; i++) {
 
@@ -50,7 +50,7 @@ public class HeaderFooterLinksPage extends TestBase {
 			else if (headerFooterLinks[i].equalsIgnoreCase("Terms of Use")){ 
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK);
 				pf.getBrowserWaitsInstance(ob).waitUntilText(
-						"These Terms of Use shall govern your use of the online service known as","Last updated");
+						"These Terms of Use shall govern your use of this online service and associated applications","Last updated");
 				
 				pf.getBrowserWaitsInstance(ob).waitUntilText(headerFooterLinks[i]);
 				String tcText = ob.findElement(By.tagName("h2")).getText();
