@@ -342,7 +342,8 @@
 		</classes>
 	</test>
 
-	<test name="ENW_to_Neon_with_market_test_groups_using_feedback_link">
+	<!-- Commenting due to functionality No longer valid -->
+	<!-- <test name="ENW_to_Neon_with_market_test_groups_using_feedback_link">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
 		<parameter name="enwProfileFlyout"
@@ -374,7 +375,7 @@
 			<class name="Profile.Profile66"></class>
 		</classes>
 	</test>
-
+ -->
 	<test name="Deep_linking_other_profile">
 		<parameter name="deepLinkUrl"
 			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
@@ -424,8 +425,8 @@
 			<class name="Profile.Profile70"></class>
 		</classes>
 	</test>
-
-	<test name="ENW_to_Neon_Onboarding_with_market_test_groups"
+	<!-- Commenting due to functionality No longer valid -->
+	<!-- <test name="ENW_to_Neon_Onboarding_with_market_test_groups"
 		preserve-order="true" parallel="false">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
@@ -437,7 +438,7 @@
 			<class name="Profile.Profile62"></class>
 			<class name="Profile.Profile63"></class>
 		</classes>
-	</test>
+	</test> -->
 
   <!-- Profile END-->
 
