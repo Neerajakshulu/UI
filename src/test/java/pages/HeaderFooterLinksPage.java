@@ -35,7 +35,7 @@ public class HeaderFooterLinksPage extends TestBase {
 
 			clickProfileImage();
 
-			if (headerFooterLinks[i].equalsIgnoreCase("Privacy")) {
+			if (headerFooterLinks[i].equalsIgnoreCase("Privacy")) {  
 				
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK);
 				pf.getBrowserWaitsInstance(ob).waitUntilText("Scope", "Highlights", "Full Privacy Statement","Cookies", "Last updated");
