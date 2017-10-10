@@ -216,11 +216,11 @@
 		</classes>
 	</test>
 
-	<test name="ENW_registraiton_and_reset_password1" preserve-order="true">
+	<!-- <test name="ENW_registraiton_and_reset_password1" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM009"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="ENW_registraiton_and_reset_password2" preserve-order="true">
 		<classes>
@@ -258,7 +258,7 @@
 		</classes>
 	</test>
 
-	<test name="Receive_email_notifications_for_likes_checkbox_in_account_page">
+	<!-- <test name="Receive_email_notifications_for_likes_checkbox_in_account_page">
 		<classes>
 			<class name="enwiam.ENWIAM018"></class>
 		</classes>
@@ -268,7 +268,7 @@
 		<classes>
 			<class name="enwiam.ENWIAM019"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
