@@ -348,7 +348,7 @@
 	
 	
 	<test name="WAT_Help_File_Access_ProfileMenu" preserve-order="true">
-		<parameter name="proflieFlyoutLinks" value="Privacy|Terms of Use|Help|Feedback"/>
+		<parameter name="helpLink" value="Help"/>
 		<classes>
 			<class name="wat.WAT53"></class>
 		</classes>
@@ -360,4 +360,19 @@
 			<class name="wat.WAT54"></class>
 		</classes>
 	</test>
+	
+	<test name="WAT_Account_link_Access_ProfileMenu" preserve-order="true">
+		<parameter name="accountLink" value="Account"/>
+		<classes>
+			<class name="wat.WAT55"></class>
+		</classes>
+	</test>
+	
+	<test name="WAT_TermsofUse_Access_ProfileMenu" preserve-order="true">
+		<parameter name="tcLink" value="Terms of Use"/>
+		<classes>
+			<class name="wat.WAT56"></class>
+		</classes>
+	</test>
+	
 </suite>

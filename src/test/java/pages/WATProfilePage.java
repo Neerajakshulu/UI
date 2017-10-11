@@ -77,7 +77,7 @@ public class WATProfilePage extends ProfilePage {
 					pf.getBrowserWaitsInstance(ob).waitUntilText(flyoutLinks[i]);
 					String tcText = ob.findElement(By.tagName("h2")).getText();
 					logger.info("Terms of Use text-->"+tcText);
-					if(!StringUtils.equalsIgnoreCase(tcText, flyoutLinks[i])) {
+					if(!(StringUtils.equalsIgnoreCase(tcText, flyoutLinks[i])&& (StringUtils.containsIgnoreCase(ob.getTitle(), "/#/terms-of-use-app")))) {
 						logFailureDetails(test, tcText+"Page not opened", "WAT-Terms of Use Fail");
 					}
 					ob.close();

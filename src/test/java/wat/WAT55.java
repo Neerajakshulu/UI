@@ -13,11 +13,11 @@ import util.ExtentManager;
 
 /**
  * /**
- * Class for validate Profile flyout Help links accessable Help PDF file
+ * Class for validate Account Settings link under Profile Menu
  * @author UC202376
  */
  
-public class WAT53 extends TestBase {
+public class WAT55 extends TestBase {
 
 	static int count = -1;
 
@@ -76,23 +76,20 @@ public class WAT53 extends TestBase {
 	}
 	
 	/**
-	 * Method for validate WAT Profile flyout Help link
+	 * Method for validate WAT Profile flyout Account link
 	 * @param proflieFlyoutLinks
-	 * @throws Exception, When Profile flyout Help link is not working 
+	 * @throws Exception, When Profile flyout Account link is not working 
 	 */
 	@Test(dependsOnMethods = "testLoginWATApp")
-	@Parameters("helpLink")
-	public void validateAppHeaderFooterLinks(String helpLink) throws Exception {
+	@Parameters("accountLink")
+	public void validateAppHeaderFooterLinks(String accountLink) throws Exception {
 		try {
-			
-			pf.getWatProfilePage(ob).validateProflileFlyoutLinks(test,helpLink);
-			
-			test.log(LogStatus.INFO, "WAT Profile Flyout - Signout link validaton");
-			pf.getWatPageInstance(ob).logoutWAT();
-			test.log(LogStatus.PASS, "WAT Profile Flyout - Signout link validaton Successful");
+			test.log(LogStatus.INFO, "WAT Profile Flyout - Account Settings link validation");
+			pf.getWatProfilePage(ob).validateProflileFlyoutLinks(test,accountLink);
+			test.log(LogStatus.PASS, "WAT Profile Flyout - Account Settings link validaton Successful");
 			closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Profile flyout Help link is not working", "flyout_Help_is_not_working");
+			logFailureDetails(test, t, "Profile flyout Account link is not working", "flyout_Account_is_not_working");
 			closeBrowser();
 		}
 	}
