@@ -53,8 +53,8 @@ public class WATProfilePage extends ProfilePage {
 					pf.getBrowserWaitsInstance(ob).waitUntilText("Scope", "Highlights", "Full Privacy Statement","Cookies","Last updated:");
 					pf.getBrowserWaitsInstance(ob).waitUntilText(flyoutLinks[i]);
 					String psText = ob.findElement(By.tagName("h2")).getText();
-					logger.info("ps text-->"+psText);
-					if(!StringUtils.containsIgnoreCase(psText, flyoutLinks[i])) {
+					logger.info("ps text-->"+psText+"-->"+ob.getCurrentUrl());
+					if(!((StringUtils.containsIgnoreCase(psText, flyoutLinks[i])) && (StringUtils.containsIgnoreCase(ob.getCurrentUrl(), "/#/privacy-statement-app")))) {
 						logFailureDetails(test, psText+"Page not opened", "WAT-Privacy Fail");
 					}
 					ob.close();
@@ -77,7 +77,7 @@ public class WATProfilePage extends ProfilePage {
 					pf.getBrowserWaitsInstance(ob).waitUntilText(flyoutLinks[i]);
 					String tcText = ob.findElement(By.tagName("h2")).getText();
 					logger.info("Terms of Use text-->"+tcText);
-					if(!(StringUtils.equalsIgnoreCase(tcText, flyoutLinks[i])&& (StringUtils.containsIgnoreCase(ob.getTitle(), "/#/terms-of-use-app")))) {
+					if(!((StringUtils.equalsIgnoreCase(tcText, flyoutLinks[i])) && (StringUtils.containsIgnoreCase(ob.getTitle(), "/#/terms-of-use-app")))) {
 						logFailureDetails(test, tcText+"Page not opened", "WAT-Terms of Use Fail");
 					}
 					ob.close();

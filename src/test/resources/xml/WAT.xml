@@ -375,11 +375,17 @@
 		</classes>
 	</test>
 	
-	
-	<test name="WAT_signOut_ProfileMenu" preserve-order="true">
+	<test name="WAT_SignOut_ProfileMenu" preserve-order="true">
 		<parameter name="signOutLink" value="Sign out"/>
 		<classes>
 			<class name="wat.WAT57"></class>
+		</classes>
+	</test>
+	
+	<test name="WAT_Privacy_ProfileMenu" preserve-order="true">
+		<parameter name="privacyLink" value="Privacy"/>
+		<classes>
+			<class name="wat.WAT58"></class>
 		</classes>
 	</test>
 	
