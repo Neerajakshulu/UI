@@ -376,5 +376,16 @@ public class LoginTR extends TestBase {
 		test.log(LogStatus.INFO, "Logged into WAT Applicaton Successfully");
 
 	}
+	
+	
+	/**
+	 * Method for WAT login page
+	 * @throws Exception, When login page not displayed after succesfully logout or when launch the application 
+	 */
+	public void waitForloginToWATPage() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilText("SaR Labs", "Sign in", "Forgot password?");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_USERNAME_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
+	}
 
 }

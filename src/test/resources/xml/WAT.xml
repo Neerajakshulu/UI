@@ -375,4 +375,12 @@
 		</classes>
 	</test>
 	
+	
+	<test name="WAT_signOut_ProfileMenu" preserve-order="true">
+		<parameter name="signOutLink" value="Sign out"/>
+		<classes>
+			<class name="wat.WAT57"></class>
+		</classes>
+	</test>
+	
 </suite>
