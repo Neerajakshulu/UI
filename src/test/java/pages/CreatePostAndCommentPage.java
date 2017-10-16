@@ -1,30 +1,17 @@
 package pages;
 
-// This page will contain methods related to create post and Article/patent commenting pages combined
-
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-import Authoring.Authoring1;
 import base.TestBase;
 import util.BrowserWaits;
 import util.OnePObjectMap;
@@ -40,18 +27,19 @@ public class CreatePostAndCommentPage extends TestBase {
 		this.ob = ob;
 		pf = new PageFactory();
 	}
-	
+
 	/**
 	 * Method to enter the text into comment text area
 	 * 
 	 * @param addComments
-	 * @throws InterruptedException
+	 * @throws Exception
 	 */
-	public void enterArticleComment(String addComments) throws InterruptedException {
+	public void enterArticleComment(String addComments) throws Exception {
 		commentSizeBeforeAdd = pf.getProfilePageInstance(ob).getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		BrowserWaits.waitTime(8);
 		WebElement commentArea = ob.findElement(By.xpath("//textarea[@placeholder='Join the discussion']"));
+		scrollingToElementofAPage();
 		commentArea.click();
 		BrowserWaits.waitTime(2);
 		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
@@ -60,7 +48,7 @@ public class CreatePostAndCommentPage extends TestBase {
 		Thread.sleep(1000);// after entering the comments wait for submit button
 							// to get enabled or disabled
 	}
-	
+
 	public void enterArticleComments(String addComments) throws InterruptedException {
 		commentSizeBeforeAdd = pf.getProfilePageInstance(ob).getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
@@ -71,19 +59,19 @@ public class CreatePostAndCommentPage extends TestBase {
 		BrowserWaits.waitTime(1);
 		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
 		innerTextBox.clear();
-		for(int i=0;i<addComments.length();i++){
-			innerTextBox.sendKeys(addComments.charAt(i)+"");
+		for (int i = 0; i < addComments.length(); i++) {
+			innerTextBox.sendKeys(addComments.charAt(i) + "");
 			Thread.sleep(10);
-			}
+		}
 		Thread.sleep(100);// after entering the comments wait for submit button
 							// to get enabled or disabled
 	}
-	
+
 	public void validateCommentAdd(ExtentTest test, int expCommentCount) throws Exception {
 		int commentCount = pf.getProfilePageInstance(ob).getCommentCount();
 
-		//Commented by KR
-		//System.out.println("After-->" + commentSizeAfterAdd);
+		// Commented by KR
+		// System.out.println("After-->" + commentSizeAfterAdd);
 		System.out.println("After-->" + commentCount);
 		test.log(LogStatus.INFO, "before-->" + expCommentCount);
 		test.log(LogStatus.INFO, "After-->" + commentCount);
@@ -93,12 +81,12 @@ public class CreatePostAndCommentPage extends TestBase {
 			test.log(LogStatus.PASS, "Comment count validation passed");
 		}
 	}
-	
-	public void cancelComment(){
+
+	public void cancelComment() {
 		waitForElementTobeClickable(ob,
 				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS.toString()), 60);
-		ob
-		.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS.toString())).click();	
+		ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS.toString()))
+				.click();
 	}
 
 	public void clickAddCommentButton() throws InterruptedException {
@@ -111,9 +99,9 @@ public class CreatePostAndCommentPage extends TestBase {
 		executor.executeScript("arguments[0].click();", addCommentElement);
 		waitForAjax(ob);
 	}
-	
+
 	public void updateComment(ExtentTest test, String steComment) throws Exception {
-		//commented by KR
+		// commented by KR
 		BrowserWaits.waitTime(3);
 		scrollingToElementofAPage();
 		waitForElementTobeVisible(ob,
@@ -128,8 +116,8 @@ public class CreatePostAndCommentPage extends TestBase {
 		System.out.println("no of comment areas enabled-->" + commentArea.size());
 		commentArea.get(1).clear();
 		commentArea.get(1).sendKeys(steComment);
-		
-		//commented by KR
+
+		// commented by KR
 		BrowserWaits.waitTime(2);
 		List<WebElement> subButtons = ob.findElements(
 				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS.toString()));
@@ -138,9 +126,9 @@ public class CreatePostAndCommentPage extends TestBase {
 			System.out.println("Button Text-->" + subButton.getText());
 			if (subButton.getText().trim().equalsIgnoreCase("Submit")) {
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
-				//Added by KR
-				//scrollElementIntoView(ob,subButton);
-				
+				// Added by KR
+				// scrollElementIntoView(ob,subButton);
+
 				executor.executeScript("arguments[0].click();", subButton);
 				waitForPageLoad(ob);
 				break;
@@ -149,7 +137,7 @@ public class CreatePostAndCommentPage extends TestBase {
 		BrowserWaits.waitTime(3);
 		test.log(LogStatus.INFO, "Comment is updated");
 	}
-	
+
 	public void validateUpdatedComment(String updatedComments) throws Exception {
 		scrollingToElementofAPage();
 		String commentText = ob
@@ -157,7 +145,7 @@ public class CreatePostAndCommentPage extends TestBase {
 				.getText();
 		System.out.println("Commentary Text-->" + commentText);
 		if (!(commentText.contains(updatedComments) && commentText.contains("EDITED"))) {
-			//new Authoring1().status = 2;
+			// new Authoring1().status = 2;
 			throw new Exception("Updated " + updatedComments + " not present");
 		}
 	}
@@ -196,11 +184,9 @@ public class CreatePostAndCommentPage extends TestBase {
 				continue;
 			}
 
-			int apprEarCount = Integer
-					.parseInt(apprSubDivs
-							.findElement(By
-									.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
-							.getText().replaceAll(",", "").trim());
+			int apprEarCount = Integer.parseInt(apprSubDivs
+					.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
+					.getText().replaceAll(",", "").trim());
 			System.out.println("Before count-->" + apprEarCount);
 
 			String attrStatus = apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
@@ -213,11 +199,10 @@ public class CreatePostAndCommentPage extends TestBase {
 				exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 				Thread.sleep(4000);// After clicking on like button wait for
 									// status to change and count update
-				int apprAftCount = Integer
-						.parseInt(apprSubDivs
-								.findElement(By.cssSelector(
-										OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
-								.getText().replaceAll(",", "").trim());
+				int apprAftCount = Integer.parseInt(apprSubDivs
+						.findElement(
+								By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
+						.getText().replaceAll(",", "").trim());
 				System.out.println("Already liked  After count-->" + apprAftCount);
 				if (!(apprAftCount < apprEarCount)) {
 					// status=2;
@@ -235,11 +220,10 @@ public class CreatePostAndCommentPage extends TestBase {
 
 				Thread.sleep(4000);// After clicking on unlike button wait
 									// for status to change and count update
-				int apprAftCount = Integer
-						.parseInt(apprSubDivs
-								.findElement(By.cssSelector(
-										OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
-								.getText().replaceAll(",", "").trim());
+				int apprAftCount = Integer.parseInt(apprSubDivs
+						.findElement(
+								By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
+						.getText().replaceAll(",", "").trim());
 				System.out.println("Not liked --After count-->" + apprAftCount);
 				if (!(apprAftCount > apprEarCount)) {
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
@@ -252,7 +236,7 @@ public class CreatePostAndCommentPage extends TestBase {
 			break;
 		}
 	}
-	
+
 	public void validateViewComment(ExtentTest test, String addComments) throws Exception {
 		String commentText = ob
 				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0)
@@ -264,7 +248,7 @@ public class CreatePostAndCommentPage extends TestBase {
 			test.log(LogStatus.PASS, "Comment Text validation passed");
 		}
 	}
-	
+
 	/**
 	 * Method to Validate Prevent Bot Comment
 	 * 
