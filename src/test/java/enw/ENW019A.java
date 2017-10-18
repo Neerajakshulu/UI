@@ -125,7 +125,7 @@ public class ENW019A extends TestBase {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		BrowserWaits.waitTime(8);
+		/*BrowserWaits.waitTime(8);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_HEADER_XPATH);
 		String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();
 		logger.info("Header Text displayed as:" + actual_result);
@@ -143,7 +143,7 @@ public class ENW019A extends TestBase {
 			status = 2;// excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 					this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
-		}
+		}*/
 	}
 
 	@AfterTest
