@@ -77,7 +77,7 @@ public class ENW042 extends TestBase {
 			}
 			ob.navigate().refresh();
 			BrowserWaits.waitTime(2);
-			NavigateToENW();
+			//NavigateToENW();
 			logout();
 			closeBrowser();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");

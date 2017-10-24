@@ -38,7 +38,7 @@ public class ENW016 extends TestBase {
 	public void testcaseENW016() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		String expected = "https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote";
+		String expected = "https://access.dev-stable.clarivate.com/#/login?referrer=https:%252F%252Fapp.qc.endnote.com&app=endnote";
 		if (!master_condition) {
 
 			test.log(LogStatus.SKIP,
@@ -63,7 +63,9 @@ public class ENW016 extends TestBase {
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 			// ob.findElement(By.cssSelector("button[class*='login-button']"));
+			
 			if (!ob.getCurrentUrl().contains(expected)) {
+				System.out.println(ob.getCurrentUrl());
 				test.log(LogStatus.FAIL, "Log out is not functional");
 				Assert.assertEquals(true, false);
 			} else {

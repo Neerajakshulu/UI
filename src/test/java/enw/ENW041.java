@@ -93,21 +93,21 @@ public class ENW041 extends TestBase {
 		BrowserWaits.waitTime(9);
 		// pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters",
 		// "EndNote", "Downloads", "Options");
-		/*String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();
-		logger.info("Header Text displayed as:" + actual_result);
-		logger.info("Actual result displayed as :" + actual_result
-				+ " text without the hot link and not allow user to Navigate to Neon");
-		try {
-			Assert.assertEquals(header_Expected, actual_result);
-			test.log(LogStatus.PASS,
-					"community enabled version of ENDNOTE logo has been displayed for the Market users");
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "community enabled version of ENDNOTE logo is not displayed for the Market users");// extent
-			ErrorUtil.addVerificationFailure(t);// testng reports
-			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-					this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
-		}*/
+//		String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();
+//		logger.info("Header Text displayed as:" + actual_result);
+//		logger.info("Actual result displayed as :" + actual_result
+//				+ " text without the hot link and not allow user to Navigate to Neon");
+//		try {
+//			Assert.assertEquals(header_Expected, actual_result);
+//			test.log(LogStatus.PASS,
+//					"community enabled version of ENDNOTE logo has been displayed for the Market users");
+//		} catch (Throwable t) {
+//			test.log(LogStatus.FAIL, "community enabled version of ENDNOTE logo is not displayed for the Market users");// extent
+//			ErrorUtil.addVerificationFailure(t);// testng reports
+//			status = 2;// excel
+//			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+//					this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
+//		}
 		BrowserWaits.waitTime(3);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 		BrowserWaits.waitTime(3);
