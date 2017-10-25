@@ -52,8 +52,8 @@ public class IAM004 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
-		String email = "testing.prasadreddy@gmail.com";
-		String password = "Apple@123";
+		String email = "linkingndmerging@gmail.com";
+		String password = "clarivate@123";
 
 		try {
 			openBrowser();
