@@ -46,7 +46,7 @@ public enum OnePObjectMap {
 	COMMON_FEEDBACK_COMMENTS_XPATH_ENDNOTE(".//*[@id='comment']"),
 	COMMON_FEEDBACK_SUBMIT_BTN_XPATH_ENDNOTE("//input[@class='blue_btn']"),
 	COMMON_FEEDBACK_SENT_CONFIRMATION_XPATH("//*[@CLASS('NG-BINDING' AND CONTAINS(TEXT(),'YOUR FEEDBACK HAS BEEN SENT')]"),
-	COMMON_FEEDBACK_CLOSE_XPATH("//a[text()='Close window.']"),
+	COMMON_FEEDBACK_CLOSE_XPATH("//button[text()='Close']"),
 	COMMON_ENW_REPORT_PROBLEM_XPATH("//a[contains(text(),'Report a problem or submit a support request')]"),
 	EXPECTED_PAGE_DISPLAYED_XPATH(".//*[@ID('HEADER']/H1/A[1]"),
 	EXPECTED_PAGE_DISPLAYED1_XPATH("//*[@title='science home']"),
