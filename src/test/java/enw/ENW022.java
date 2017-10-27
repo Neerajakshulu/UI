@@ -51,7 +51,7 @@ public class ENW022 extends TestBase {
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("NONMARKETUSEREMAIL"),
 					(LOGIN.getProperty("NONMARKETUSERPASSWORD")));
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(6);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FEEDBACK_XPATH.toString())).click();

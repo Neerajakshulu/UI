@@ -150,8 +150,8 @@ public class IAM031 extends TestBase {
 	private void facebookLogin() throws Exception {
 
 		WebDriver driver = null;
-		String email = "testing.prasadreddy@gmail.com";
-		String password = "Apple@123";
+		String email = "munna.clarivate@yahoo.com";
+		String password = "clarivate@123";
 		try {
 
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()

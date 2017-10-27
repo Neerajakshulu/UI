@@ -57,7 +57,7 @@ public class ENW011 extends TestBase {
 			String user_Last_Name = "";
 			String user_Full_name = "";
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("ENW011USERNAME"),(LOGIN.getProperty("ENW011PASSWORD")));
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(6);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_OPTIONS_TAB_XPATH.toString())));
 			BrowserWaits.waitTime(4);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_TAB_XPATH.toString())));

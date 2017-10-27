@@ -113,7 +113,7 @@ public class ENW017 extends TestBase {
 					Assert.assertEquals(true, false);
 				} else {
 					test.log(LogStatus.PASS, "Feedback has been sent successfully.");
-					ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
+					ob.close();
 					Thread.sleep(2000);
 				}
 		        ob.switchTo().window(parentWindow_Id);

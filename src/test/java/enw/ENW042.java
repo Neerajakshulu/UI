@@ -54,7 +54,7 @@ public class ENW042 extends TestBase {
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MarketUser42"),
 					(LOGIN.getProperty("MarketUser42PWD")));
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(6);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HEADER_XPATH);
 			String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();
 			logger.info("Header Text displayed as:" + actual_result);
