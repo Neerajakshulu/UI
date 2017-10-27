@@ -52,7 +52,7 @@ public class IAM004 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
-		String email = "linkingndmerging@gmail.com";
+		String email = "munna.clarivate@yahoo.com";
 		String password = "clarivate@123";
 
 		try {
