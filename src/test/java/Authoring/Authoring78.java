@@ -128,16 +128,15 @@ public class Authoring78 extends TestBase {
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
 			clearCookies();
-			ob.get(host + url);
-			String u = host + url;
-			System.out.println("************************************************"+u);
-			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("SOCIALLOGINEMAIL"),
-					LOGIN.getProperty("SOCIALLOGINPASSWORD"));
+			String hosts = "https://apps.dev-stable.clarivate.com/";
+			ob.get(hosts+ url);
+			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("SOCIALLOGINEMAILLINKEDIN"),
+					LOGIN.getProperty("SOCIALLOGINPASSWORDLINKEDIN"));
 			BrowserWaits.waitTime(10);
 			waitForPageLoad(ob);
 
 			try {
-				Assert.assertEquals(ob.getCurrentUrl(), host + url);
+				Assert.assertEquals(ob.getCurrentUrl(), hosts + url);
 				test.log(LogStatus.PASS, "Deep linking url is matching after login for " + recordType);
 				Assert.assertEquals(pf.getpostRVPageInstance(ob).getRecordType(), recordType);
 				test.log(LogStatus.PASS, "Deep linking is redirecting to the appropriate page for " + recordType);
