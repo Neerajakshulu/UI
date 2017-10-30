@@ -386,8 +386,8 @@
 
 	<test name="Deep_linking_own_profile_Using_Facebook and LI">
 		<parameter name="socialLogin" value="FB|LI" />
-		<parameter name="username" value="testing.prasadreddy@gmail.com" /> 
-		<parameter name="password" value="Apple@123" />
+		<parameter name="username" value="munna.clarivate@yahoo.com" /> 
+		<parameter name="password" value="clarivate@123" />
 		<!-- <parameter name="username" value="linkedinloginid@gmail.com" />
 		<parameter name="password" value="Neon@1234" /> -->
 		<parameter name="deepLinkUrl" value="/#/profile/" />
@@ -398,8 +398,8 @@
 
 	<test name="Deep_linking_Other_profile_Using_Facebook and LI">
 		<parameter name="socialLogin" value="FB|LI" />
-		<parameter name="username" value="testing.prasadreddy@gmail.com" /> 
-		<parameter name="password" value="Apple@123" />
+		<parameter name="username" value="munna.clarivate@yahoo.com" /> 
+		<parameter name="password" value="clarivate@123" />
 		<!-- <parameter name="username" value="linkedinloginid@gmail.com" />
 		<parameter name="password" value="Neon@1234" /> -->
 		<parameter name="deepLinkUrl"
