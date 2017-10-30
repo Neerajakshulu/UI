@@ -49,8 +49,8 @@ public class ENWIAM011 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
-		String email = "munna.clarivate@yahoo.com";
-		String password = "clarivate@123";
+		String email = "neonlifb@gmail.com";
+		String password = "Neon@123";
 
 		try {
 			openBrowser();

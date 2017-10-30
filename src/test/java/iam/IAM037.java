@@ -50,7 +50,7 @@ public class IAM037 extends TestBase {
 			String first_name = "duster";
 			String last_name = "man";
 
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("SOCIALLOGINEMAIL"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("LINKINGANDMERGINGNAME"));
 			logger.info("User Status : " + statuCode);
 			if (statuCode.equalsIgnoreCase("200")) {
 				logger.info("User Deleted Successfully");
@@ -72,9 +72,9 @@ public class IAM037 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
-			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(LOGIN.getProperty("SOCIALLOGINEMAIL"));
+			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(LOGIN.getProperty("LINKINGANDMERGINGNAME"));
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox")))
-					.sendKeys(LOGIN.getProperty("SOCIALLOGINPASSWORD"));
+					.sendKeys(LOGIN.getProperty("LINKINGANDMERGINGPASS"));
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
 			pf.getLoginTRInstance(ob).clickNotnowLink();
@@ -89,7 +89,7 @@ public class IAM037 extends TestBase {
 			System.out.println(actualEmail);
 
 			try {
-				Assert.assertEquals(LOGIN.getProperty("SOCIALLOGINEMAIL"), actualEmail);
+				Assert.assertEquals(LOGIN.getProperty("LINKINGANDMERGINGNAME"), actualEmail);
 				test.log(LogStatus.PASS, " Email id getting displayed in Account Setting page is correct");
 			}
 
