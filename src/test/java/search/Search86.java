@@ -73,7 +73,8 @@ public class Search86 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + search_query + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
+			//ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
 			BrowserWaits.waitTime(5);
