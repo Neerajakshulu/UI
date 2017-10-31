@@ -216,11 +216,8 @@
 		</classes>
 	</test>
 
-	<!-- <test name="ENW_registraiton_and_reset_password1" preserve-order="true">
-		<classes>
-			<class name="enwiam.ENWIAM009"></class>
-		</classes>
-	</test> -->
+	<!-- <test name="ENW_registraiton_and_reset_password1" preserve-order="true"> 
+		<classes> <class name="enwiam.ENWIAM009"></class> </classes> </test> -->
 
 	<test name="ENW_registraiton_and_reset_password2" preserve-order="true">
 		<classes>
@@ -258,17 +255,10 @@
 		</classes>
 	</test>
 
-	<!-- <test name="Receive_email_notifications_for_likes_checkbox_in_account_page">
-		<classes>
-			<class name="enwiam.ENWIAM018"></class>
-		</classes>
-	</test>
-
-	<test name="Change_password_link_in_account_page">
-		<classes>
-			<class name="enwiam.ENWIAM019"></class>
-		</classes>
-	</test> -->
+	<!-- <test name="Receive_email_notifications_for_likes_checkbox_in_account_page"> 
+		<classes> <class name="enwiam.ENWIAM018"></class> </classes> </test> <test 
+		name="Change_password_link_in_account_page"> <classes> <class name="enwiam.ENWIAM019"></class> 
+		</classes> </test> -->
 
 	<test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
@@ -308,7 +298,7 @@
 			<class name="enwiam.ENWIAM0009"></class>
 		</classes>
 	</test>
-	<!-- Profile START-->
+	<!-- Profile START -->
 
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
 		<parameter name="username" value="49eq13+1gxhb27mqmgkk@sharklasers.com" />
@@ -343,39 +333,22 @@
 	</test>
 
 	<!-- Commenting due to functionality No longer valid -->
-	<!-- <test name="ENW_to_Neon_with_market_test_groups_using_feedback_link">
-		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
-		<parameter name="password" value="Thomson@123" />
-		<parameter name="enwProfileFlyout"
-			value="Account|Sign out|Privacy|Terms of use|Help|Feedback" />
-		<parameter name="link" value="Feedback" />
-		<classes>
-			<class name="Profile.Profile64"></class>
-		</classes>
-	</test>
-
-	<test name="ENW_to_Neon_with_market_test_groups_using_privacy_link">
-		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
-		<parameter name="password" value="Thomson@123" />
-		<parameter name="enwProfileFlyout"
-			value="Account|Sign out|Privacy|Terms of use|Help|Feedback" />
-		<parameter name="link" value="Privacy" />
-		<classes>
-			<class name="Profile.Profile65"></class>
-		</classes>
-	</test>
-
-	<test name="ENW_to_Neon_with_market_test_groups_using_TersofUse_link">
-		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
-		<parameter name="password" value="Thomson@123" />
-		<parameter name="enwProfileFlyout"
-			value="Account|Sign out|Privacy|Terms of use|Help|Feedback" />
-		<parameter name="link" value="Terms of use" />
-		<classes>
-			<class name="Profile.Profile66"></class>
-		</classes>
-	</test>
- -->
+	<!-- <test name="ENW_to_Neon_with_market_test_groups_using_feedback_link"> 
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" /> <parameter 
+		name="password" value="Thomson@123" /> <parameter name="enwProfileFlyout" 
+		value="Account|Sign out|Privacy|Terms of use|Help|Feedback" /> <parameter 
+		name="link" value="Feedback" /> <classes> <class name="Profile.Profile64"></class> 
+		</classes> </test> <test name="ENW_to_Neon_with_market_test_groups_using_privacy_link"> 
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" /> <parameter 
+		name="password" value="Thomson@123" /> <parameter name="enwProfileFlyout" 
+		value="Account|Sign out|Privacy|Terms of use|Help|Feedback" /> <parameter 
+		name="link" value="Privacy" /> <classes> <class name="Profile.Profile65"></class> 
+		</classes> </test> <test name="ENW_to_Neon_with_market_test_groups_using_TersofUse_link"> 
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" /> <parameter 
+		name="password" value="Thomson@123" /> <parameter name="enwProfileFlyout" 
+		value="Account|Sign out|Privacy|Terms of use|Help|Feedback" /> <parameter 
+		name="link" value="Terms of use" /> <classes> <class name="Profile.Profile66"></class> 
+		</classes> </test> -->
 	<test name="Deep_linking_other_profile">
 		<parameter name="deepLinkUrl"
 			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
@@ -386,10 +359,10 @@
 
 	<test name="Deep_linking_own_profile_Using_Facebook and LI">
 		<parameter name="socialLogin" value="FB|LI" />
-		<parameter name="username" value="munna.clarivate@yahoo.com" /> 
+		<parameter name="username" value="munna.clarivate@yahoo.com" />
 		<parameter name="password" value="clarivate@123" />
-		<!-- <parameter name="username" value="linkedinloginid@gmail.com" />
-		<parameter name="password" value="Neon@1234" /> -->
+		<!-- <parameter name="username" value="linkedinloginid@gmail.com" /> <parameter 
+			name="password" value="Neon@1234" /> -->
 		<parameter name="deepLinkUrl" value="/#/profile/" />
 		<classes>
 			<class name="Profile.Profile52"></class>
@@ -398,10 +371,10 @@
 
 	<test name="Deep_linking_Other_profile_Using_Facebook and LI">
 		<parameter name="socialLogin" value="FB|LI" />
-		<parameter name="username" value="munna.clarivate@yahoo.com" /> 
+		<parameter name="username" value="munna.clarivate@yahoo.com" />
 		<parameter name="password" value="clarivate@123" />
-		<!-- <parameter name="username" value="linkedinloginid@gmail.com" />
-		<parameter name="password" value="Neon@1234" /> -->
+		<!-- <parameter name="username" value="linkedinloginid@gmail.com" /> <parameter 
+			name="password" value="Neon@1234" /> -->
 		<parameter name="deepLinkUrl"
 			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
 		<classes>
@@ -426,21 +399,15 @@
 		</classes>
 	</test>
 	<!-- Commenting due to functionality No longer valid -->
-	<!-- <test name="ENW_to_Neon_Onboarding_with_market_test_groups"
-		preserve-order="true" parallel="false">
-		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
-		<parameter name="password" value="Thomson@123" />
-		<parameter name="truid" value="f5e86f1f-b0b9-4bb2-ab2b-6b14145344a9" />
-		<parameter name="enwProfileFlyout"
-			value="Account|Sign out|Privacy|Terms of use|Help|Feedback" />
-		<classes>
-			<class name="Profile.Profile61"></class>
-			<class name="Profile.Profile62"></class>
-			<class name="Profile.Profile63"></class>
-		</classes>
-	</test> -->
+	<!-- <test name="ENW_to_Neon_Onboarding_with_market_test_groups" preserve-order="true" 
+		parallel="false"> <parameter name="username" value="chinna.putha@thomsonreuters.com" 
+		/> <parameter name="password" value="Thomson@123" /> <parameter name="truid" 
+		value="f5e86f1f-b0b9-4bb2-ab2b-6b14145344a9" /> <parameter name="enwProfileFlyout" 
+		value="Account|Sign out|Privacy|Terms of use|Help|Feedback" /> <classes> 
+		<class name="Profile.Profile61"></class> <class name="Profile.Profile62"></class> 
+		<class name="Profile.Profile63"></class> </classes> </test> -->
 
-  <!-- Profile END-->
+	<!-- Profile END -->
 
 	<!-- search test case -->
 	<test name="Test B1">
@@ -449,43 +416,19 @@
 		</classes>
 	</test>
 
-<!--  Commenting as suggested by Stephanie (Email bounce back issue) -->
+	<!-- Commenting as suggested by Stephanie (Email bounce back issue) -->
 	<!-- RCC Testcases -->
-	<!-- <test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group">
-		<classes>
-			<class name="rcc.RCC021"></class>
-			<class name="rcc.RCC023"></class>
-		</classes>
-	</test>
-
-	<test name="Validate_adding_GD_doc_action_for_article_and_to_the_group">
-		<classes>
-
-			<class name="rcc.RCC022"></class>
-			<class name="rcc.RCC024"></class>
-		</classes>
-	</test>
-
-	<test name="Adding_Cover_Photo_to_Group_and_verifying_cover_photo_displayed">
-		<classes>
-			<class name="rcc.RCC090"></class>
-		</classes>
-	</test>
-
-	<test name="modify_the_cover photo">
-		<classes>
-			<class name="rcc.RCC091"></class>
-		</classes>
-	</test>
-
-	<test name="option_to_add_image_ from_group_details_page">
-		<classes>
-			<class name="rcc.RCC092"></class>
-		</classes>
-	</test>
-	 -->
+	<!-- <test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group"> 
+		<classes> <class name="rcc.RCC021"></class> <class name="rcc.RCC023"></class> 
+		</classes> </test> <test name="Validate_adding_GD_doc_action_for_article_and_to_the_group"> 
+		<classes> <class name="rcc.RCC022"></class> <class name="rcc.RCC024"></class> 
+		</classes> </test> <test name="Adding_Cover_Photo_to_Group_and_verifying_cover_photo_displayed"> 
+		<classes> <class name="rcc.RCC090"></class> </classes> </test> <test name="modify_the_cover 
+		photo"> <classes> <class name="rcc.RCC091"></class> </classes> </test> <test 
+		name="option_to_add_image_ from_group_details_page"> <classes> <class name="rcc.RCC092"></class> 
+		</classes> </test> -->
 	<!-- Authoring START -->
-	
+
 	<test name="Authoring80">
 		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
 		<parameter name="gpassword" value="likhithreddy@123" />
@@ -509,15 +452,15 @@
 			<class name="Authoring.Authoring82"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Authoring83">
 		<classes>
 			<class name="Authoring.Authoring83"></class>
 		</classes>
 	</test>
-	
+
 	<!-- Authoring END -->
-	
+
 	<test name="DRAIAMscripts" preserve-order="true" parallel="false">
 		<classes>
 			<class name="draiam.DRAIAM002"></class>
@@ -534,17 +477,14 @@
 		</classes>
 	</test>
 
-	<test name="DRA_Forgot_Password">
-		<classes>
-			<class name="draiam.DRAIAM100"></class>
-		</classes>
-	</test>
-
+	<!-- <test name="DRA_Forgot_Password"> <classes> <class name="draiam.DRAIAM100"></class> 
+		</classes> </test> -->
 	<!-- IPAIAM Test cases START -->
 
 
-	<test name="IPAIAM100">
+	<test name="IPAIAM100" preserve-order="true">
 		<classes>
+			<class name="draiam.DRAIAM100"></class>
 			<class name="ipaiam.IPAIAM100"></class>
 		</classes>
 	</test>
