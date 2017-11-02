@@ -820,7 +820,12 @@ public class TestBase {
 		// waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_SIGNOUT_LINK_XPATH.toString()), 30);
 		// jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_SIGNOUT_LINK_XPATH.toString())));
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
-		waitUntilText("Sign in");
+		try{
+			waitUntilText("Sign in");
+			}catch (Throwable t) {
+				ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+			}
+		
 	}
 
 	// capturing screenshot

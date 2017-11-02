@@ -95,7 +95,11 @@ public class ENWIAM012 extends TestBase {
 			}
 			waitUntilText("Getting Started","Find","Collect");
 			logoutEnw();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
+			try{
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
+				}catch (Throwable t) {
+					ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+				}
 			if (!checkElementPresence("login_banner")) {
 
 				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent

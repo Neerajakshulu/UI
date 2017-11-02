@@ -215,7 +215,12 @@ public class ENWIAM010 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				waitUntilText("Getting Started","Find","Collect");
 				logoutEnw();
-				waitUntilText("Sign in");
+				try{
+					waitUntilText("Sign in");
+				}catch (Throwable t) {
+					ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+				}
+				
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys("userendnote@gmail.com");

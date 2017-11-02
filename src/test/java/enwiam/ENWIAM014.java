@@ -158,8 +158,12 @@ public class ENWIAM014 extends TestBase {
 								"Verify that,after clicking the button on resend email verification,the Neon or ENW login page should display a message that informs the user as the email has been sent.")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				waitUntilText("Sign in");
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
+				//waitUntilText("Sign in");
+				try{
+					waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
+					}catch (Throwable t) {
+						ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+					}
 				if (!checkElementPresence("login_banner")) {
 
 					test.log(LogStatus.FAIL, "User not get login page successfully");// extent reports
