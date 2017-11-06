@@ -87,6 +87,7 @@ public class Search8 extends TestBase {
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
 			//BrowserWaits.waitTime(6);
 			waitForAjax(ob);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
 			searchResults.clear();
 			searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			System.out.println("No of search results visible="+searchResults.size());
@@ -95,6 +96,7 @@ public class Search8 extends TestBase {
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
 			//BrowserWaits.waitTime(6);
 			waitForAjax(ob);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
 			searchResults.clear();
 			searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			System.out.println("No of search results visible="+searchResults.size());
