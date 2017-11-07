@@ -129,7 +129,7 @@
 
 	</test>
 
-	<test name="ENW042">
+	<!-- <test name="ENW042">
 		<classes>
 			<class name="enw.ENW042"></class>
 		</classes>
@@ -141,7 +141,7 @@
 			<class name="enw.ENW043"></class>
 		</classes>
 
-	</test>
+	</test> -->
 	<test name="ENW044">
 		<classes>
 			<class name="enw.ENW044"></class>
