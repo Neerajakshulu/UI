@@ -128,7 +128,7 @@ public class Authoring78 extends TestBase {
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
 			clearCookies();
-			String hosts = "https://apps.dev-stable.clarivate.com/";
+			String hosts = "https://apps.dev-stable.clarivate.com";
 			ob.get(hosts+ url);
 			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("SOCIALLOGINEMAILLINKEDIN"),
 					LOGIN.getProperty("SOCIALLOGINPASSWORDLINKEDIN"));

@@ -136,12 +136,12 @@ public class Authoring79 extends TestBase {
 			driver.manage().deleteAllCookies();
 			driver.get(host + url);
 
-			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, LOGIN.getProperty("SOCIALLOGINEMAIL"),
-					LOGIN.getProperty("SOCIALLOGINPASSWORD"));
+			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, "neonlifb@gmail.com",
+					"Neon@123");
 			BrowserWaits.waitTime(10);
 			waitForPageLoad(driver);
 			// Temprorary solution for micro url
-			String hosts = "https://apps.dev-stable.clarivate.com/";
+			String hosts = "https://apps.dev-stable.clarivate.com";
 			try {
 				Assert.assertEquals(driver.getCurrentUrl(), hosts + url);
 				test.log(LogStatus.PASS, "Deep linking url is matching after login for " + recordType);
