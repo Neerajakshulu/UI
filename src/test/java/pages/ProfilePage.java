@@ -2253,7 +2253,7 @@ public class ProfilePage extends TestBase {
 						ob.switchTo().window(winHan);
 					}
 					pf.getBrowserWaitsInstance(ob).waitUntilText(
-							"These Terms of Use shall govern your use of the online service known as", "Last updated:");
+							"These Terms of Use shall govern your", "Last updated:");
 					pf.getBrowserWaitsInstance(ob).waitUntilText(flyoutLinks[i]);
 					String tcText = ob.findElement(By.tagName("h2")).getText();
 					logger.info("Terms of Use text-->" + tcText);
