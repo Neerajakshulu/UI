@@ -71,15 +71,17 @@ public class IPAIAM051 extends TestBase {
      
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERDRA051"),
 					LOGIN.getProperty("USERPWDDRA051"));
+			
+			pf.getBrowserWaitsInstance(ob)
+			.waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		test.log(LogStatus.PASS,
 					"user is able to login to IPA when first name of user is missing.");
-		   
-           String Profilename=pf.getDraPageInstance(ob).getProfileNameDRA();
-           
+		    
            pf.getDraPageInstance(ob).clickProfileLink();
            String firstnameerrormessage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS).getText();
-           if(Profilename.equals("sadiya")&& firstnameerrormessage.equals("Please enter your first name.") )
+           if(firstnameerrormessage.equals("Please enter your first name.") )
 			{test.log(LogStatus.PASS,
 					"user is able to see first name as NULL when first name of user is missing.");
 			}
