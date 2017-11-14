@@ -81,7 +81,7 @@ public class Search15 extends TestBase {
 			List<WebElement> commentsList;
 			int timeCiteCount = 0, viewsCount = 0, commentsCount = 0;
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_timecited_search_results_xpath")), 40);
+			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_timecited_search_results_xpath")), 40);
 			timeCiteList = ob.findElements(By.xpath(OR.getProperty("tr_timecited_search_results_xpath")));
 			System.out.println("time cite list" + timeCiteList.size());
 			if (timeCiteList.size() != 0) {
@@ -111,7 +111,7 @@ public class Search15 extends TestBase {
 										+ "TimeCite for search results validation failed")));// screenshot
 
 			}
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_views_search_results_xpath")), 40);
+			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_views_search_results_xpath")), 40);
 			viewsList = ob.findElements(By.xpath(OR.getProperty("tr_views_search_results_xpath")));
 			if (viewsList.size() != 0) {
 				for (WebElement views : viewsList) {
