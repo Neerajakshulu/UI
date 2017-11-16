@@ -392,9 +392,9 @@
 		</classes>
 	</test> 
 	
-	<test name="WAT_Author_Combine" preserve-order="true">
+	<!-- <test name="WAT_Author_Combine" preserve-order="true">
 		<classes>
 			<class name="wat.WAT37"></class>
 		</classes>
-	</test>
+	</test> -->
 </suite>
