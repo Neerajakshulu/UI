@@ -88,11 +88,11 @@ public class WAT43 extends TestBase {
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "FirstName", "CountryName", "OrgName" })
-	public void testSearchAuthorClusterLessthan50DIAS(String LastName, String FirstName, String CountryName,
-			String OrgName) throws Exception {
+	public void testSearchAuthorClusterLessthan50DIAS(String LastName, String FirstName, String CountryName1,String CountryName2,
+			String OrgName1,String OrgName2) throws Exception {
 
 		try {
-			pf.getSearchAuthClusterPage(ob).searchAuthorClusterLessthan50DIAS(LastName, FirstName, CountryName, OrgName,
+			pf.getSearchAuthClusterPage(ob).searchAuthorClusterLessthan50DIAS(LastName, FirstName, CountryName1,CountryName2, OrgName1,OrgName2,
 					test);
 
 		} catch (Throwable t) {

@@ -43,31 +43,24 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * @throws Exception
 	 * 
 	 */
-	public void SearchAuthorCluster(String LastName, String Country, String org, ExtentTest test) throws Exception {
+	public void SearchAuthorClusterLastName(String LastName, String Country1,String Country2, String org1, String org2,ExtentTest test) throws Exception {
 		try {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
 			enterAuthorLastName(LastName, test);
-			pf.getBrowserWaitsInstance(ob)
-					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
-			test.log(LogStatus.INFO, "Clicking find button... ");
-			BrowserWaits.waitTime(2);
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
-					.isEnabled()) {
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
-			} else {
-				throw new Exception("FIND button not clicked");
-			}
+			cliclFindBtn(test);
 			List<WebElement> ele = pf.getBrowserActionInstance(ob)
 					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
 			if (ele.size() != 0) {
-				selectCountryofAuthor(Country, test);
+				selectCountryofAuthor(Country1, Country2, test);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
 				List<WebElement> orgName = pf.getBrowserActionInstance(ob)
 						.getElements(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
 				if (orgName.size() != 0) {
-					selectOrgofAuthor(org, test);
-				}
+					selectOrgofAuthor(org1,org2, test);
+					cliclFindBtn(test);
+				}else{
 				test.log(LogStatus.INFO, "Org name selection is not required as the searched user has only one org. ");
+				}
 			} else {
 				test.log(LogStatus.INFO,
 						"Country name selection is not required as the searched user resulted in less than 50 clusters... ");
@@ -82,6 +75,19 @@ public class SearchAuthorClusterPage extends TestBase {
 		}
 	}
 
+	private void cliclFindBtn(ExtentTest test) throws Exception, InterruptedException {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+		test.log(LogStatus.INFO, "Clicking find button... ");
+		BrowserWaits.waitTime(2);
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
+				.isEnabled()) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+		} else {
+			throw new Exception("FIND button not clicked");
+		}
+	}
+
 	/**
 	 * Common method to search for an author cluster with LastName and FirstName
 	 * 
@@ -91,41 +97,44 @@ public class SearchAuthorClusterPage extends TestBase {
 	 *            FirstName
 	 * @throws Exception
 	 */
-	public void SearchAuthorCluster(String LastName, String FirstName, String Country, String org, ExtentTest test)
+	public void SearchAuthorClusterLastAndFirstName(String LastName, String FirstName, String Country1, String Country2,String org1, String org2, ExtentTest test)
 			throws Exception {
 		try {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
 			enterAuthorLastName(LastName, test);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
 			enterAuthorFirstName(FirstName, test);
-			pf.getBrowserWaitsInstance(ob)
-					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
-			test.log(LogStatus.INFO, "Clicking find button... ");
-
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
-					.isEnabled()) {
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
-			}
+			cliclFindBtn(test);
+			BrowserWaits.waitTime(2);
 			List<WebElement> ele = pf.getBrowserActionInstance(ob)
 					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
-			if (ele.size() != 0) {
-				selectCountryofAuthor(Country, test);
+			
+//			boolean x = ob.findElement(By.xpath(ele.get(1).getText())).isDisplayed();
+//			System.out.println("element value is @@@@@@@@@@@@@@@@@@@@ "+ele.size());
+//			System.out.println(x);
+			if (ele.size() != 0)
+				{
+				selectCountryofAuthor(Country1, Country2,test);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
 				List<WebElement> orgName = pf.getBrowserActionInstance(ob)
 						.getElements(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
 				if (orgName.size() != 0) {
-					selectOrgofAuthor(org, test);
-				}
+					selectOrgofAuthor(org1,org2,test);
+					cliclFindBtn(test);
+				}else{
 				test.log(LogStatus.INFO, "Org name selection is not required as the searched user has only one org. ");
+				}
 			} else {
 				test.log(LogStatus.INFO,
 						"Country name selection is not required as the searched user resulted in less than 50 clusters... ");
+				
 			}
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
 			Assert.assertEquals(
 					(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).getText()),
 					"Search Results", "Unable to search for an author and landed in Author search result page.");
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Unable to search for an author and landed in Author search result page.");
+			test.log(LogStatus.FAIL, "Unable to search for an author and land in Author search result page.");
 			throw new Exception(e);
 		}
 	}
@@ -146,7 +155,7 @@ public class SearchAuthorClusterPage extends TestBase {
 				char c = LastName.charAt(i);
 				pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH,
 						String.valueOf(c));
-				BrowserWaits.waitTime(0.5);
+				BrowserWaits.waitTime(0.25);
 			}
 			selectLastNameFromTypeahead(LastName, test);
 		} catch (Exception e) {
@@ -328,7 +337,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * 
 	 * 
 	 */
-	public void selectCountryofAuthor(String CountryName, ExtentTest test) throws Exception {
+	public void selectCountryofAuthor(String CountryName1,String CountryName2,ExtentTest test) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH.toString()), 3,
 				"Country dropdown is not present in Author search page");
@@ -340,15 +349,16 @@ public class SearchAuthorClusterPage extends TestBase {
 					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_OPTION_XPATH);
 			if (ctry.size() != 0) {
 				for (int j = 0; j < ctry.size(); j++) {
-					if (ctry.get(j).getText().equals(CountryName)) {
-						ctry.get(j).click();
+					if (ctry.get(j).getText().equals(CountryName1.trim())) {
+						String xpath = OnePObjectMap.WAT_COUNTRY_CHECKBOX_XPATH.toString();
+						ob.findElement(By.xpath(xpath.replace("Country", CountryName1))).click();
 						test.log(LogStatus.INFO, "Country name clicked");
 						break;
 					}
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			test.log(LogStatus.FAIL, "Unable to select country name from the list.");
 			e.printStackTrace();
 		}
 	}
@@ -362,7 +372,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * 
 	 * 
 	 */
-	public void selectOrgofAuthor(String orgName, ExtentTest test) throws Exception {
+	public void selectOrgofAuthor(String orgName1,String orgName2, ExtentTest test) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH, 5);
 		try {
 			test.log(LogStatus.INFO, "Selecting relavent organization... ");
@@ -371,8 +381,9 @@ public class SearchAuthorClusterPage extends TestBase {
 					.getElements(OnePObjectMap.WAT_AUTHOR_ORG_OPTION_XPATH);
 			if (org.size() != 0) {
 				for (int j = 0; j < org.size(); j++) {
-					if (org.get(j).getText().equals(orgName)) {
-						org.get(j).click();
+					if (org.get(j).getText().equals(orgName1.trim())) {
+						String xpath = OnePObjectMap.WAT_ORG_CHECKBOX_XPATH.toString();
+						ob.findElement(By.xpath(xpath.replace("OrgName", orgName1))).click();
 						test.log(LogStatus.INFO, "Org name clicked");
 						break;
 					}
@@ -380,6 +391,7 @@ public class SearchAuthorClusterPage extends TestBase {
 			}
 
 		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Unable to select Org name from the list.");
 			e.printStackTrace();
 		}
 	}
@@ -430,8 +442,8 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * @param OrgName
 	 * @throws Exception
 	 */
-	public void searchAuthorClusterLastandFirstname(String LastName, String FirstName, String CountryName,
-			String OrgName, ExtentTest test) throws Exception {
+	public void searchAuthorClusterLastandFirstname(String LastName, String FirstName, String CountryName1,String CountryName2,
+			String OrgName1, String OrgName2,ExtentTest test) throws Exception {
 		// Verify whether control is in Author Search page
 		Assert.assertEquals(
 				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
@@ -440,12 +452,12 @@ public class SearchAuthorClusterPage extends TestBase {
 
 		// Search for an author cluster
 		test.log(LogStatus.INFO, "Entering author name... ");
-		pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, CountryName, OrgName, test);
+		pf.getSearchAuthClusterPage(ob).SearchAuthorClusterLastAndFirstName(LastName, FirstName, CountryName1, CountryName2,OrgName1,OrgName2, test);
 		test.log(LogStatus.PASS, "Successfully searched for an author and landed in Author search result page.");
 		pf.getBrowserActionInstance(ob).closeBrowser();
 	}
 
-	public void searchAuthorClusterOnlyLastName(String LastName, String CountryName, String OrgName, ExtentTest test)
+	public void searchAuthorClusterOnlyLastName(String LastName, String CountryName1, String CountryName2,String OrgName1, String OrgName2,ExtentTest test)
 			throws Exception {
 		// Verify whether control is in Author Search page
 		Assert.assertEquals(
@@ -455,7 +467,7 @@ public class SearchAuthorClusterPage extends TestBase {
 
 		// Search for an author cluster with only Last name
 		test.log(LogStatus.INFO, "Entering author name... ");
-		pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, CountryName, OrgName, test);
+		pf.getSearchAuthClusterPage(ob).SearchAuthorClusterLastName(LastName, CountryName1, CountryName2, OrgName1,OrgName2, test);
 		test.log(LogStatus.PASS,
 				"Successfully searched for an author using only Last name and landed in Author search result page.");
 		pf.getBrowserActionInstance(ob).closeBrowser();
@@ -642,6 +654,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, " ");
 		test.log(LogStatus.INFO, "Trying to click find button... ");
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH, 2);
 		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
 				.isEnabled()
 				&& pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH)
@@ -989,7 +1002,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getBrowserActionInstance(ob).closeBrowser();
 	}
 
-	public void countryDropdownStaticText(String LastName, String CountryName, ExtentTest test)
+	public void countryDropdownStaticText(String LastName, String CountryName1, String CountryName2,ExtentTest test)
 			throws Exception, InterruptedException {
 		// Verify whether control is in Author Search page
 		Assert.assertEquals(
@@ -1011,7 +1024,7 @@ public class SearchAuthorClusterPage extends TestBase {
 			List<WebElement> ele = pf.getBrowserActionInstance(ob)
 					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
 			if (ele.size() != 0) {
-				pf.getSearchAuthClusterPage(ob).selectCountryofAuthor(CountryName, test);
+				pf.getSearchAuthClusterPage(ob).selectCountryofAuthor(CountryName1, CountryName2,test);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
 				Assert.assertEquals(
 						pf.getBrowserActionInstance(ob)
@@ -1029,7 +1042,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getBrowserActionInstance(ob).closeBrowser();
 	}
 
-	public void searchAuthorClusterLessthan50DIAS(String LastName, String FirstName, String CountryName, String OrgName,
+	public void searchAuthorClusterLessthan50DIAS(String LastName, String FirstName, String CountryName1, String CountryName2,String OrgName1,String OrgName2,
 			ExtentTest test) throws Exception {
 		// Verify whether control is in Author Search page
 		Assert.assertEquals(
@@ -1039,7 +1052,7 @@ public class SearchAuthorClusterPage extends TestBase {
 
 		// Search for an author cluster
 		test.log(LogStatus.INFO, "Entering author name... ");
-		pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, CountryName, OrgName, test);
+		pf.getSearchAuthClusterPage(ob).SearchAuthorClusterLastAndFirstName(LastName, FirstName, CountryName1, CountryName1,OrgName1, OrgName2,test);
 		test.log(LogStatus.PASS,
 				"Successfully searched for an author who has only one country and one org and landed in Author search result page.");
 		pf.getBrowserActionInstance(ob).closeBrowser();

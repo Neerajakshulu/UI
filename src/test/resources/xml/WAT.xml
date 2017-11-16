@@ -11,9 +11,12 @@
 	<parameter name="password" value="Thomson@123" />
 	<parameter name="LastName" value="UPADHYAYA" />
 	<parameter name="FirstName" value="KRISHNARAJ" />
-	<parameter name="CountryName" value="CANADA" />
-	<parameter name="OrgName" value="MCMASTER UNIV" />
-
+	<parameter name="CountryName1" value="CANADA" />
+	<parameter name="OrgName1" value="MCMASTER UNIV" />
+	<parameter name="CountryName2" value="CANADA" />
+	<parameter name="OrgName2" value="MCMASTER UNIV" />
+	
+	
  	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
@@ -387,6 +390,11 @@
 		<classes>
 			<class name="wat.WAT58"></class>
 		</classes>
-	</test>
+	</test> 
 	
+	<test name="WAT_Author_Combine" preserve-order="true">
+		<classes>
+			<class name="wat.WAT37"></class>
+		</classes>
+	</test>
 </suite>

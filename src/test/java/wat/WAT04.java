@@ -84,12 +84,12 @@ public class WAT04 extends TestBase {
 	 *             When Something unexpected
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "LastName", "CountryName", "OrgName" })
-	public void testSearchAuthorClusterOnlyLastName(String LastName, String CountryName, String OrgName)
+	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1","OrgName2" })
+	public void testSearchAuthorClusterOnlyLastName(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
 			throws Exception {
 
 		try {
-			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName, OrgName, test);
+			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2, OrgName1,OrgName1, test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Authorcluster search with only last name failed", "search_fail");

@@ -1211,12 +1211,16 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_FIRSTNAME2_XPATH("//div[@class='ng-scope'][2]/descendant::input[2]"),
 	WAT_AUTHOR_FIRSTNAME3_XPATH("//div[@class='ng-scope'][3]/descendant::input[2]"),
 	WAT_AUTHOR_FIRSTSTNAME_INNERTEXT_XPATH("//label[text()='First name and middle initial(s)']"),
-	WAT_AUTHOR_COUNTRY_OPTION_XPATH("//div[@class='wat-search__field wat-search__field-country']/descendant::div/button"),
-	WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH("//div[@class='wat-search__field wat-search__field-country']/descendant::div"),
-	WAT_AUTHOR_ORG_DROPDOWN_XPATH("//div[@class='wat-search__field wat-search__field-affiliation']/descendant::div"),
-	WAT_AUTHOR_ORG_OPTION_XPATH("//div[@class='wat-search__field wat-search__field-affiliation']/descendant::div/button"),
-	WAT_AUTHOR_LASTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
 	
+	WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH("//wat-select-box[@data-wat-select-box-options='vm.countryOptions']"),
+	WAT_AUTHOR_COUNTRY_OPTION_XPATH("//div[@class='wat-select-box__option ng-scope']/descendant::span[2]"),
+	WAT_COUNTRY_CHECKBOX_XPATH("//div[@class='wat-select-box__option ng-scope']/descendant::input[@id='Country']/following-sibling::span[1]"),
+	
+	WAT_AUTHOR_ORG_DROPDOWN_XPATH("//wat-select-box[@data-wat-select-box-options='vm.affiliationOptions']"),
+	WAT_AUTHOR_ORG_OPTION_XPATH("//wat-select-box[@data-wat-select-box-options='vm.affiliationOptions']/descendant::span[@class='wui-checkbox__label']"),	
+	WAT_ORG_CHECKBOX_XPATH("//wat-select-box[@data-wat-select-box-options='vm.affiliationOptions']/descendant::input[@id='OrgName']/following-sibling::span[1]"),
+	
+	WAT_AUTHOR_LASTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
 	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
 	
 	WAT_SEARCH_LINK_XPATH("//span[text()='Search']"),
@@ -1229,7 +1233,7 @@ public enum OnePObjectMap {
 	WAT_SEARCH_SUGGESTION_TEXT_XPATH("//p[contains(text(),'Enter the author')]"),
 	WAT_NAME_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='Name search']"),
 	WAT_ORCiD_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='ORCiD search']"),
-	WAT_ADD_ALT_NAME_BTN_TEXT_XPATH("//button[text()[normalize-space() = 'Add alternative name']]"),
+	WAT_ADD_ALT_NAME_BTN_TEXT_XPATH("//button[text()[normalize-space() = 'Include alternative name']]"),
 	
 	WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH("//span[@class='wat-material-input__error']"),
 	WAT_AUTHOR_LASTNAME_TYPEAHEAD_OPTION_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']/li"),
@@ -1279,9 +1283,7 @@ public enum OnePObjectMap {
 	GURILLA_LIST_EMAIL_WAT_PROJECT_TITLE_CSS("span[style*='color:#45749B;']"),
 	WAT_BRANDING_NAME_CSS("h3[class='wui-title login-header__app-name ng-binding']"),
 	WAT_SUPPORT_CONTACT_EMAIL_CSS("td[bgcolor='#ffffff'] span a"),
-	WAT_SUPPORT_CONTACT_FOOTER_EMAIL_CSS("td[bgcolor='#e6e7e9'] span a"),
-
-	
+	WAT_SUPPORT_CONTACT_FOOTER_EMAIL_CSS("td[bgcolor='#e6e7e9'] span a")
 	;
 
 	private String locator;

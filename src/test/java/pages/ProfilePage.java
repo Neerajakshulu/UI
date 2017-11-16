@@ -765,7 +765,8 @@ public class ProfilePage extends TestBase {
 		// int count = Integer.parseInt(ob.findElement(
 		// By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS.toString())).getText());
 		BrowserWaits.waitTime(5);
-		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
+		//pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
+		scrollingToElementofAPage();
 		String commentsCount = ob
 				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS.toString()))
 				.getText();

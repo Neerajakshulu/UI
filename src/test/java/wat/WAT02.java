@@ -84,13 +84,13 @@ public class WAT02 extends TestBase {
 	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "LastName", "FirstName", "CountryName", "OrgName" })
-	public void testSearchAuthorClusterLastAndFirstName(String LastName, String FirstName, String CountryName,
-			String OrgName) throws Exception {
+	@Parameters({ "LastName", "FirstName", "CountryName1","CountryName2", "OrgName1","OrgName2" })
+	public void testSearchAuthorClusterLastAndFirstName(String LastName, String FirstName, String CountryName1,String CountryName2,
+			String OrgName1,String OrgName2) throws Exception {
 
 		try {
-			pf.getSearchAuthClusterPage(ob).searchAuthorClusterLastandFirstname(LastName, FirstName, CountryName,
-					OrgName, test);
+			pf.getSearchAuthClusterPage(ob).searchAuthorClusterLastandFirstname(LastName, FirstName, CountryName1,CountryName2,
+					OrgName1,OrgName2, test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Author Search Fail", "author_search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();

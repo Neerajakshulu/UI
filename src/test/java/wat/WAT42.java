@@ -86,9 +86,9 @@ public class WAT42 extends TestBase {
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName" })
-	public void testCountryDropdownStaticText(String LastName, String CountryName) throws Exception {
+	public void testCountryDropdownStaticText(String LastName, String CountryName1,String CountryName2) throws Exception {
 		try {
-			pf.getSearchAuthClusterPage(ob).countryDropdownStaticText(LastName, CountryName, test);
+			pf.getSearchAuthClusterPage(ob).countryDropdownStaticText(LastName, CountryName1, CountryName2,test);
 
 		} catch (AssertionError t) {
 			logFailureDetails(test, t, "Text above country org dosent match the expectation.", "Text_not_match");

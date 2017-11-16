@@ -34,7 +34,7 @@ public class WAT03 extends TestBase {
 	static String orcid_search_button_text = "ORCiD search";
 	static String last_name_inner_text = "Last name";
 	static String first_name_inner_text = "First name and middle initial(s)";
-	static String add_alt_name_text = "Add alternative name";
+	static String add_alt_name_text = "Include alternative name";
 	static String find_btn_text = "Find";
 
 	/**
@@ -247,10 +247,10 @@ public class WAT03 extends TestBase {
 						.getElement(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH).getText(), add_alt_name_text,
 						"Add alternate name inner text not matching");
 				test.log(LogStatus.PASS,
-						"Add alternate name inner text is present and is displayed as expected in Author search page.");
+						"Include alternate name inner text is present and is displayed as expected in Author search page.");
 			} catch (AssertionError e) {
 				test.log(LogStatus.FAIL,
-						"Add alternate name inner text is not present or is not displayed as expected in Author search page.");
+						"Include alternate name inner text is not present or is not displayed as expected in Author search page.");
 				logFailureDetails(test, e, "Add alternate name button is not displayed", "alt_name_btn_fail");
 			}
 

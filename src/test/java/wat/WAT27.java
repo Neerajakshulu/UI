@@ -84,7 +84,7 @@ public class WAT27 extends TestBase {
 
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName,countryName,orgName,test);
+			pf.getSearchAuthClusterPage(ob).SearchAuthorClusterLastName(lastName,countryName,orgName,test);
 			test.log(LogStatus.PASS, "Author Search Results are displayed");
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Publications_count_morethan1_results_fail","publication_count_morethan1");
