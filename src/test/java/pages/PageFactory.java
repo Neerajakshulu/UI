@@ -7,6 +7,10 @@ import Authoring.LoginTR;
 import util.BrowserAction;
 import util.BrowserWaits;
 import util.Utility;
+import watpages.SearchAuthorClusterPage;
+import watpages.SearchAuthorClusterResultsPage;
+import watpages.WATLogInPage;
+import watpages.WATProfilePage;
 
 public class PageFactory {
 

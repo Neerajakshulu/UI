@@ -1,4 +1,4 @@
-package pages;
+package watpages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 

@@ -1,4 +1,4 @@
-package pages;
+package watpages;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +13,8 @@ import org.openqa.selenium.WebElement;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import pages.PageFactory;
+import pages.ProfilePage;
 import util.BrowserWaits;
 import util.OnePObjectMap;
 
@@ -99,7 +101,7 @@ public class WATProfilePage extends ProfilePage {
 					logger.info("Help page url-->"+currentPageUrl);
 					logger.info("Help link address-->"+helpLinkAddressURL); 
 					if(!StringUtils.equalsIgnoreCase(currentPageUrl, helpLinkAddressURL)) {
-						logFailureDetails(test, flyoutLinks[i]+"Page not opened", "WAT-Help Fail");
+						logFailureDetails(test, flyoutLinks[i]+"PDF Page not opened", "WAT-Help Fail");
 					}
 					
 					ob.close();
@@ -116,17 +118,16 @@ public class WATProfilePage extends ProfilePage {
 					for(String winHan : windows){
 						ob.switchTo().window(winHan);
 					}
-					BrowserWaits.waitTime(4);
 					pf.getBrowserWaitsInstance(ob).waitUntilText("SaR Labs Feedback","To contact the SaR Labs team, please email");
 					String currentPageUrl=ob.getCurrentUrl();
 					logger.info("Feedback page url-->"+currentPageUrl);
 					logger.info("Feedback link address-->"+feedbankLinkAddressURL);
 					if(!StringUtils.containsIgnoreCase(currentPageUrl, feedbankLinkAddressURL)) {
-						logFailureDetails(test, flyoutLinks[i]+"Page not opened", "WAT -Feedback Fail");
+						logFailureDetails(test, flyoutLinks[i]+"Survey Page not opened", "WAT -Feedback Fail");
 					}
 					ob.close();
 					ob.switchTo().window(main);
-					test.log(LogStatus.PASS, "WAT Proflie flyout  "+flyoutLinks[i]+" Link validation is Successful");
+					test.log(LogStatus.PASS, "WAT Proflie flyout  "+flyoutLinks[i]+" Link validation is Successful & Feedback Survey page Opened");
 				}
 			} 
 			
