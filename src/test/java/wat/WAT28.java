@@ -85,7 +85,7 @@ public class WAT28 extends TestBase {
 
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorClusterLastName(lastName,countryName,orgName,test);
+			//pf.getSearchAuthClusterPage(ob).SearchAuthorClusterLastName(lastName,countryName,orgName,test);
 			test.log(LogStatus.INFO, "Author Search Results are displayed");
 			pf.getSearchAuthClusterResultsPage(ob).eachAuthorClusterSearchResultsFields(lastName,countryName,orgName,test);
 			test.log(LogStatus.PASS, "Author Search Results Publication fields displayed in each publication cart");

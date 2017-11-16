@@ -84,7 +84,7 @@ public class WAT26 extends TestBase {
 
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorClusterLastName(lastName,countryName,orgName,test);
+		//	pf.getSearchAuthClusterPage(ob).SearchAuthorClusterLastName(lastName,countryName,orgName,test);
 			test.log(LogStatus.PASS, "Author Search Results are displayed");
 			test.log(LogStatus.INFO, "Validate Publication Details if count is morethan 1");
 			pf.getSearchAuthClusterResultsPage(ob).validateMorePublicationsCount(lastName,countryName,orgName,test);

@@ -85,7 +85,7 @@ public class WAT23 extends TestBase {
 
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, countryName, orgName, test);
+			//pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, countryName, orgName, test);
 			pf.getSearchAuthClusterResultsPage(ob).validatePublicationCount1Details(lastName, countryName, orgName,test);
 			test.log(LogStatus.PASS, "Author Search Results displayed for Publication cart count 1");
 			pf.getBrowserActionInstance(ob).closeBrowser();
