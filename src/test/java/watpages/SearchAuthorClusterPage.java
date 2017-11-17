@@ -108,10 +108,6 @@ public class SearchAuthorClusterPage extends TestBase {
 			BrowserWaits.waitTime(2);
 			List<WebElement> ele = pf.getBrowserActionInstance(ob)
 					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
-			
-//			boolean x = ob.findElement(By.xpath(ele.get(1).getText())).isDisplayed();
-//			System.out.println("element value is @@@@@@@@@@@@@@@@@@@@ "+ele.size());
-//			System.out.println(x);
 			if (ele.size() != 0)
 				{
 				selectCountryofAuthor(Country1, Country2,test);
@@ -470,7 +466,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getSearchAuthClusterPage(ob).SearchAuthorClusterLastName(LastName, CountryName1, CountryName2, OrgName1,OrgName2, test);
 		test.log(LogStatus.PASS,
 				"Successfully searched for an author using only Last name and landed in Author search result page.");
-		pf.getBrowserActionInstance(ob).closeBrowser();
+		//pf.getBrowserActionInstance(ob).closeBrowser();
 	}
 
 	public void searchAuthorClusterWithOnlyFirstName(String FirstName, ExtentTest test)
