@@ -17,7 +17,7 @@
 	<parameter name="OrgName2" value="MCMASTER UNIV" />
 	
 	
- 	<test name="WAT_Login" preserve-order="true">
+ <!-- 	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -389,6 +389,13 @@
 		<parameter name="privacyLink" value="Privacy"/>
 		<classes>
 			<class name="wat.WAT58"></class>
+		</classes>
+	</test>  -->
+	
+	<test name="WAT_author_record_default_avatar" preserve-order="true">
+		<parameter name="lastName" value="JOHN B.F."/>
+		<classes>
+			<class name="wat.WAT59"></class>
 		</classes>
 	</test> 
 	

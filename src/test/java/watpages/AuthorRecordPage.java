@@ -1,4 +1,4 @@
-package pages;
+package watpages;
 
 import org.openqa.selenium.WebDriver;
 
@@ -6,6 +6,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.OnePObjectMap;
 
 /**
@@ -15,6 +16,7 @@ import util.OnePObjectMap;
  *
  */
 public class AuthorRecordPage extends TestBase {
+	boolean isDefaultAvatarPresent=false;
 
 	public AuthorRecordPage(WebDriver ob) {
 		this.ob = ob;
@@ -42,6 +44,18 @@ public class AuthorRecordPage extends TestBase {
 	public void clickSearchResultsTab(ExtentTest test) throws Exception{
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
 		waitForAjax(ob);
+    }
+	
+	/**
+	 * Method for click Search Results tab
+	 * @param test
+	 * @throws Exception
+	 */
+	public void defaultAvatar() throws Exception{
+		isDefaultAvatarPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS).isDisplayed();
+		if(!isDefaultAvatarPresent){
+			throw new Exception("No Default Avatar/Author Profile Pic is not displayed in Author Record page");
+		}
     }
 	
 	

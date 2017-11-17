@@ -7,6 +7,7 @@ import Authoring.LoginTR;
 import util.BrowserAction;
 import util.BrowserWaits;
 import util.Utility;
+import watpages.AuthorRecordPage;
 import watpages.SearchAuthorClusterPage;
 import watpages.SearchAuthorClusterResultsPage;
 import watpages.WATLogInPage;

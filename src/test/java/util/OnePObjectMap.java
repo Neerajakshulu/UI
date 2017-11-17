@@ -1283,7 +1283,9 @@ public enum OnePObjectMap {
 	GURILLA_LIST_EMAIL_WAT_PROJECT_TITLE_CSS("span[style*='color:#45749B;']"),
 	WAT_BRANDING_NAME_CSS("h3[class='wui-title login-header__app-name ng-binding']"),
 	WAT_SUPPORT_CONTACT_EMAIL_CSS("td[bgcolor='#ffffff'] span a"),
-	WAT_SUPPORT_CONTACT_FOOTER_EMAIL_CSS("td[bgcolor='#e6e7e9'] span a")
+	WAT_SUPPORT_CONTACT_FOOTER_EMAIL_CSS("td[bgcolor='#e6e7e9'] span a"),
+	WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS("i[class='wui-icon wui-icon--profile wat-author-record-icon--profile']")
+	
 	;
 
 	private String locator;
