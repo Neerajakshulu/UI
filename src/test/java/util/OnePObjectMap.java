@@ -1284,8 +1284,12 @@ public enum OnePObjectMap {
 	WAT_BRANDING_NAME_CSS("h3[class='wui-title login-header__app-name ng-binding']"),
 	WAT_SUPPORT_CONTACT_EMAIL_CSS("td[bgcolor='#ffffff'] span a"),
 	WAT_SUPPORT_CONTACT_FOOTER_EMAIL_CSS("td[bgcolor='#e6e7e9'] span a"),
-	WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS("i[class='wui-icon wui-icon--profile wat-author-record-icon--profile']")
+	WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS("i[class='wui-icon wui-icon--profile wat-author-record-icon--profile']"),
 	
+	WAT_AUTHOR_SEARCH_RESULT_CARD1_XPATH("//div[@class='wui-card'][1]/descendant::i[@class='fa fa-check']"),
+	WAT_AUTHOR_SEARCH_RESULT_CARD2_XPATH("//div[@class='wui-card'][2]/descendant::i[@class='fa fa-check']"),
+	WAT_COMBINE_BUTTON_XPATH("//button[@class='wui-btn wui-btn--primary']"),
+	WAT_AUTHOR_RECORD_PAGE_AUTHOR_ICON_XPATH("//i[@class='wui-icon wui-icon--profile wat-author-record-icon--profile']")
 	;
 
 	private String locator;

@@ -64,7 +64,6 @@ public class WAT37 extends TestBase {
 			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
 			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
 			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
-
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -86,6 +85,7 @@ public class WAT37 extends TestBase {
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2,
 					OrgName1, OrgName2,test);
+			pf.getSearchAuthClusterResultsPage(ob).clickAuthorCard(test);
 			
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Author Search Fail", "author_search_fail");
@@ -99,6 +99,7 @@ public class WAT37 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
+		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -383,4 +384,37 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			throw new Exception("Search Results tab not getting Highlighted");
 		}
 	}
+	
+	/**
+	 * Method to click on author card in search author result page.
+	 * @param test
+	 * @throws Exception
+	 */
+	public void clickAuthorCard(ExtentTest test) throws Exception{
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_CARD1_XPATH, 5);
+		try{
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_CARD1_XPATH);
+			test.log(LogStatus.INFO, "Author card 1 is selected.");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_CARD2_XPATH);
+			test.log(LogStatus.INFO, "Author card 2 is selected.");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH, 5);
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH).isEnabled())
+			{
+				test.log(LogStatus.INFO, "Author Combine button  is enabled");
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH);
+				test.log(LogStatus.INFO, "Author Combine button is clicked.");
+			}
+			else{
+				throw new Exception("Combine button not enabled");
+			}
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_AUTHOR_ICON_XPATH, 5);
+			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_AUTHOR_ICON_XPATH).isDisplayed());
+			test.log(LogStatus.PASS, "2 author records combined and user landed in Combined author record page successfully");
+		}catch(Exception e)
+		{
+			test.log(LogStatus.FAIL, "Unable to search for an author using lastname");
+			throw new Exception(e);
+		}
+	}
+	
 }
