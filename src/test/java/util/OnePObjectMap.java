@@ -1290,8 +1290,12 @@ public enum OnePObjectMap {
 	
 	WAT_AUTHOR_SEARCH_RESULT_CARD1_XPATH("//div[@class='wui-card'][1]/descendant::i[@class='fa fa-check']"),
 	WAT_AUTHOR_SEARCH_RESULT_CARD2_XPATH("//div[@class='wui-card'][2]/descendant::i[@class='fa fa-check']"),
+	WAT_AUTHOR_SEARCH_RESULT_CARDS_XPATH("//div[@class='wui-card']/descendant::i[@class='fa fa-check']"),
 	WAT_COMBINE_BUTTON_XPATH("//button[@class='wui-btn wui-btn--primary']"),
-	WAT_AUTHOR_RECORD_PAGE_AUTHOR_ICON_XPATH("//i[@class='wui-icon wui-icon--profile wat-author-record-icon--profile']")
+	WAT_AUTHOR_RECORD_PAGE_AUTHOR_PROFILE_ICON_XPATH("//i[@class='wui-icon wui-icon--profile wat-author-record-icon--profile']"),
+	WAT_AUTHOR_CARD_AFTER_SELECT_ALL_XPATH("//div[@class='wui-card']/descendant::button[@class='pull-right wui-icon-only-btn wui-icon-only-btn--mini wat-icon-only-btn--check-selected']"),
+	WAT_SELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
+	WAT_DESELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']")
 	;
 
 	private String locator;

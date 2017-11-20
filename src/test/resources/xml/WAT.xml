@@ -418,6 +418,7 @@
 		</classes>
 	</test> 
 	
+
 	<test name="author_record_meta_org" preserve-order="true">
 		<parameter name="lastName" value="JOHN B.F."/>
 		<classes>
@@ -425,4 +426,9 @@
 		</classes>
 	</test> 
 	
+ <test name="WAT_Author_Combine_Selectall" preserve-order="true">
+		<classes>
+			<class name="wat.WAT38"></class>
+		</classes>
+	</test>
 </suite>

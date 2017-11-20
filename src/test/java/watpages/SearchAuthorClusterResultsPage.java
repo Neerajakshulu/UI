@@ -2,6 +2,7 @@ package watpages;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
@@ -38,7 +39,8 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	List<Integer> sortByRelevance;
 	String subOrg;
 	String searchTerms;
-	
+	String Checkbox_class_name = "pull-right wui-icon-only-btn wui-icon-only-btn--mini wat-icon-only-btn--check-selected";
+
 
 	public SearchAuthorClusterResultsPage(WebDriver ob) {
 		this.ob = ob;
@@ -407,8 +409,8 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			else{
 				throw new Exception("Combine button not enabled");
 			}
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_AUTHOR_ICON_XPATH, 5);
-			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_AUTHOR_ICON_XPATH).isDisplayed());
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_AUTHOR_PROFILE_ICON_XPATH, 5);
+			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_AUTHOR_PROFILE_ICON_XPATH).isDisplayed());
 			test.log(LogStatus.PASS, "2 author records combined and user landed in Combined author record page successfully");
 		}catch(Exception e)
 		{
@@ -417,4 +419,22 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		}
 	}
 	
+	/**
+	 * Method to click on Select all link in search author result page.
+	 * @param test
+	 * @throws Exception
+	 */
+	public void selectAllAuthorCard(ExtentTest test) throws Exception{
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SELECT_ALL_LINK_XPATH, 5);
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SELECT_ALL_LINK_XPATH).isDisplayed())
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SELECT_ALL_LINK_XPATH);
+		test.log(LogStatus.INFO, "Select all link clicked.");
+		List<WebElement> List = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_CARD_AFTER_SELECT_ALL_XPATH);
+		ListIterator<WebElement> litr = List.listIterator();
+		while(litr.hasNext()){
+			Assert.assertEquals(litr.next().getAttribute("class"),Checkbox_class_name);
+			test.log(LogStatus.INFO, "Author card checkbox is clicked.");
+		}
+	}
 }
+
