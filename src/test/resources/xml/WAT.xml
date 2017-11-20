@@ -16,13 +16,13 @@
 	<parameter name="CountryName2" value="CANADA" />
 	<parameter name="OrgName2" value="MCMASTER UNIV" />
 
-<test name="WAT_Login" preserve-order="true">
+	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
-	</test>   
+	</test>
 
- 	<test name="WAT_Author_Search_Lastname_Firstname" preserve-order="true">
+	<test name="WAT_Author_Search_Lastname_Firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT02"></class>
 		</classes>
@@ -53,7 +53,7 @@
 		</classes>
 	</test>
 
- 	<test name="WAT_Author_Search_Typeahead_Firstname" preserve-order="true">
+	<test name="WAT_Author_Search_Typeahead_Firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT07"></class>
 		</classes>
@@ -77,7 +77,7 @@
 		</classes>
 	</test>
 
- 	<test name="WAT_Author_Search_alphanum_lastname" preserve-order="true">
+	<test name="WAT_Author_Search_alphanum_lastname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT11"></class>
 		</classes>
@@ -160,8 +160,9 @@
 			<class name="wat.WAT23"></class>
 		</classes>
 	</test>
-	
-	<test name="author_results_count_publication_count" preserve-order="true">
+
+	<test name="author_results_count_publication_count"
+		preserve-order="true">
 		<parameter name="lastName" value="SMITH" />
 		<parameter name="firstName" value="JOHN" />
 		<parameter name="countryName" value="USA" />
@@ -170,15 +171,17 @@
 			<class name="wat.WAT24"></class>
 		</classes>
 	</test>
-	
-	<test name="author_search_results_publication_default_avatar" preserve-order="true">
+
+	<test name="author_search_results_publication_default_avatar"
+		preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
 			<class name="wat.WAT25"></class>
 		</classes>
 	</test>
-	
-	<test name="author_search_results_publication_count_morethan1" preserve-order="true">
+
+	<test name="author_search_results_publication_count_morethan1"
+		preserve-order="true">
 		<parameter name="lastName" value="SALMA" />
 		<parameter name="countryName" value="AUSTRALIA" />
 		<parameter name="orgName" value="DEAKIN UNIV" />
@@ -186,7 +189,7 @@
 			<class name="wat.WAT26"></class>
 		</classes>
 	</test>
-	
+
 	<test name="top_3_recent_publications" preserve-order="true">
 		<parameter name="lastName" value="SALMA" />
 		<parameter name="countryName" value="AUSTRALIA" />
@@ -195,7 +198,7 @@
 			<class name="wat.WAT27"></class>
 		</classes>
 	</test>
-	
+
 	<test name="author_search_results_with_fields" preserve-order="true">
 		<parameter name="lastName" value="SALMA" />
 		<parameter name="countryName" value="AUSTRALIA" />
@@ -204,7 +207,7 @@
 			<class name="wat.WAT28"></class>
 		</classes>
 	</test>
-	
+
 	<test name="author_search_results_Top_journals" preserve-order="true">
 		<parameter name="lastName" value="MURTHY" />
 		<parameter name="countryName" value="INDIA" />
@@ -221,8 +224,9 @@
 			<class name="wat.WAT30"></class>
 		</classes>
 	</test>
-	
-	<test name="author_search_results_sort_by_relevance" preserve-order="true">
+
+	<test name="author_search_results_sort_by_relevance"
+		preserve-order="true">
 		<parameter name="lastName" value="MURTHY" />
 		<parameter name="countryName" value="INDIA" />
 		<parameter name="orgName" value="ANDHRA UNIV" />
@@ -230,7 +234,7 @@
 			<class name="wat.WAT31"></class>
 		</classes>
 	</test>
-	
+
 	<test name="author_search_results_sub_org" preserve-order="true">
 		<parameter name="lastName" value="SHARMA" />
 		<parameter name="countryName" value="INDIA" />
@@ -239,30 +243,32 @@
 			<class name="wat.WAT32"></class>
 		</classes>
 	</test>
-	
+
 	<test name="search_results_tab_on_author_record" preserve-order="true">
 		<parameter name="orcid" value="0000-0002-5895-7935" />
 		<classes>
 			<class name="wat.WAT33"></class>
 		</classes>
 	</test>
-	
-	
-	<test name="navigate_to_orcid_search_results_from_record_page" preserve-order="true">
+
+
+	<test name="navigate_to_orcid_search_results_from_record_page"
+		preserve-order="true">
 		<parameter name="orcid" value="0000-0002-5895-7935" />
 		<classes>
 			<class name="wat.WAT34"></class>
 		</classes>
 	</test>
-	
-	
-	<test name="navigate_to_name_search_results_from_record_page" preserve-order="true">
+
+
+	<test name="navigate_to_name_search_results_from_record_page"
+		preserve-order="true">
 		<parameter name="lastName" value="VENUGOPALACHAR" />
 		<classes>
 			<class name="wat.WAT35"></class>
 		</classes>
 	</test>
-	
+
 	<test name="search_results_tab_highlight" preserve-order="true">
 		<parameter name="lastName" value="VENUGOPALACHAR" />
 		<classes>
@@ -270,18 +276,24 @@
 		</classes>
 	</test>
 	
+	<test name="WAT_Author_Combine" preserve-order="true">
+		<classes>
+			<class name="wat.WAT37"></class>
+		</classes>
+	</test>
+
 	<test name="WAT_Find_btn_enabled_issue" preserve-order="true">
 		<classes>
 			<class name="wat.WAT40"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Country_drpdwn_text" preserve-order="true">
 		<classes>
 			<class name="wat.WAT41"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Org_drpdwn_text" preserve-order="true">
 		<classes>
 			<class name="wat.WAT42"></class>
@@ -293,7 +305,7 @@
 			<class name="wat.WAT43"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_CA_LOGO" preserve-order="true">
 		<classes>
 			<class name="wat.WAT44"></class>
@@ -310,96 +322,107 @@
 		<classes>
 			<class name="wat.WAT46"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="WAT_alt_name_link" preserve-order="true">
 		<classes>
 			<class name="wat.WAT47"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="WAT_orcid_searchStatic" preserve-order="true">
 		<classes>
 			<class name="wat.WAT48"></class>
 		</classes>
 	</test>
-	
- 	<test name="WAT_orcid_find_btn" preserve-order="true">
+
+	<test name="WAT_orcid_find_btn" preserve-order="true">
 		<classes>
 			<class name="wat.WAT49"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="WAT_orcid_error" preserve-order="true">
 		<classes>
 			<class name="wat.WAT50"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_orcid_search_results" preserve-order="true">
 		<classes>
 			<class name="wat.WAT51"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_orcid_to_name_search" preserve-order="true">
 		<classes>
 			<class name="wat.WAT52"></class>
 		</classes>
 	</test>
-	
-	
+
+
 	<test name="WAT_Help_File_Access_ProfileMenu" preserve-order="true">
-		<parameter name="helpLink" value="Help"/>
+		<parameter name="helpLink" value="Help" />
 		<classes>
 			<class name="wat.WAT53"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Help_File_ProfileMenu" preserve-order="true">
-		<parameter name="proflieFlyoutLinks" value="Account|Sign out|Privacy|Terms of Use|Help|Feedback"/>
+		<parameter name="proflieFlyoutLinks"
+			value="Account|Sign out|Privacy|Terms of Use|Help|Feedback" />
 		<classes>
 			<class name="wat.WAT54"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Account_link_Access_ProfileMenu" preserve-order="true">
-		<parameter name="accountLink" value="Account"/>
+		<parameter name="accountLink" value="Account" />
 		<classes>
 			<class name="wat.WAT55"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_TermsofUse_Access_ProfileMenu" preserve-order="true">
-		<parameter name="tcLink" value="Terms of Use"/>
+		<parameter name="tcLink" value="Terms of Use" />
 		<classes>
 			<class name="wat.WAT56"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_SignOut_ProfileMenu" preserve-order="true">
-		<parameter name="signOutLink" value="Sign out"/>
+		<parameter name="signOutLink" value="Sign out" />
 		<classes>
 			<class name="wat.WAT57"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Privacy_ProfileMenu" preserve-order="true">
-		<parameter name="privacyLink" value="Privacy"/>
+		<parameter name="privacyLink" value="Privacy" />
 		<classes>
 			<class name="wat.WAT58"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="WAT_author_record_default_avatar" preserve-order="true">
-		<parameter name="lastName" value="JOHN B.F."/>
+		<parameter name="lastName" value="JOHN B.F." />
 		<classes>
 			<class name="wat.WAT59"></class>
 		</classes>
-	</test>  
-	 <test name="WAT_Author_Combine" preserve-order="true">
+	</test>
+	
+	<test name="author_record_meta_title" preserve-order="true">
+		<parameter name="lastName" value="JOHN B.F."/>
 		<classes>
-			<class name="wat.WAT37"></class>
+			<class name="wat.WAT60"></class>
 		</classes>
 	</test> 
+	
+	<test name="author_record_meta_org" preserve-order="true">
+		<parameter name="lastName" value="JOHN B.F."/>
+		<classes>
+			<class name="wat.WAT61"></class>
+		</classes>
+	</test> 
+	
 </suite>
