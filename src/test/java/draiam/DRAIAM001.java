@@ -103,9 +103,9 @@ public class DRAIAM001 extends TestBase {
 			// terms of use links
 			try {
 				WebElement tl_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.DRA_LANDINGPAGE_TERMS_LINK_CSS);
+						.getElement(OnePObjectMap.DRA_LANDINGPAGE_TERMS_LINK_XPATH);
 				WebElement pl_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.DRA_LANDINGPAGE_PRIVACY_LINK_CSS);
+						.getElement(OnePObjectMap.DRA_LANDINGPAGE_PRIVACY_LINK_XPATH);
 
 				if (tl_element.isDisplayed() && pl_element.isDisplayed()) {
 					test.log(LogStatus.PASS, "DRA Landing page displays terms of use and privacy links");
@@ -180,12 +180,13 @@ public class DRAIAM001 extends TestBase {
 			// Verifying the Learn more link is displaying
 			//pf.getDraPageInstance(ob).validateProductOverviewPage(test);
 			try {
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_LEARNMORE_LINK_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_LEARNMORE_LINK_XPATH);
 				WebElement lm_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.DRA_LANDINGPAGE_LEARNMORE_LINK_CSS);
+						.getElement(OnePObjectMap.DRA_LANDINGPAGE_LEARNMORE_LINK_XPATH);
 				if(lm_element.isDisplayed())
 				{
-					lm_element.click();
+					//lm_element.click();
+					pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_LANDINGPAGE_LEARNMORE_LINK_XPATH);
 					BrowserWaits.waitTime(4);
 					
 					Set<String> myset=ob.getWindowHandles();
@@ -198,6 +199,7 @@ public class DRAIAM001 extends TestBase {
 					
 					ob.switchTo().window(al.get(1));
 					String actual_URL = ob.getCurrentUrl();
+					System.out.println(actual_URL);
 					String expected_URL = "https://clarivate.com/products/drug-research-advisor/";
 					Assert.assertTrue(actual_URL.contains(expected_URL));
 					test.log(LogStatus.PASS,
