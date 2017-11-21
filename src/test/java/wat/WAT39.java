@@ -1,5 +1,6 @@
 package wat;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -10,15 +11,16 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 
 /**
- * Class to Verify that user should be able to select all the records by clicking SELECT ALL link
+ * Class to Verify that there is a COMBINE button provided to combine multiple record 
  * 
  * @author UC225218
  *
  */
-public class WAT38 extends TestBase {
+public class WAT39 extends TestBase {
 
 	static int status = 1;
 
@@ -73,23 +75,27 @@ public class WAT38 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that user should be able to select all the records by clicking SELECT ALL link
+	 * Method to Verify that there is a COMBINE button provided to combine multiple record 
 	 * 
 	 * @param orcid
 	 * @throws Exception, When Something unexpected
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1", "OrgName2" })
-	public void CombineTwoAuthorRecord(String LastName, String CountryName1,String CountryName2,
+	public void CombineButtonCheck(String LastName, String CountryName1,String CountryName2,
 			String OrgName1,String OrgName2) throws Exception {
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2,
 					OrgName1, OrgName2,test);
-			pf.getSearchAuthClusterResultsPage(ob).selectAllAuthorCard(test);
-			test.log(LogStatus.PASS, "Selec all link successfully selects all author cards.");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SELECT_ALL_LINK_XPATH, 5);
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SELECT_ALL_LINK_XPATH).isDisplayed())
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SELECT_ALL_LINK_XPATH);
+			test.log(LogStatus.INFO, "Select all link clicked.");
+			Assert.assertEquals(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH).getText(), "Combine");
+			test.log(LogStatus.PASS, "Combine Button is present");
 		} catch (Throwable t) {
 			t.printStackTrace();
-			logFailureDetails(test, t, "Author Selection for combining Fail", "author_combine_fail");
+			logFailureDetails(test, t, "Combine button not present", "author_combine_Btn_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 	}
