@@ -16,7 +16,7 @@
 	<parameter name="CountryName2" value="CANADA" />
 	<parameter name="OrgName2" value="MCMASTER UNIV" />
 
-<!-- 	<test name="WAT_Login" preserve-order="true">
+ 	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -436,11 +436,17 @@
 		<classes>
 			<class name="wat.WAT39"></class>
 		</classes>
-	</test> -->
+	</test> 
 	
 	<test name="WAT_Author_Combine_Btn_dsbl" preserve-order="true">
 		<classes>
 			<class name="wat.WAT70"></class>
+		</classes>
+	</test>
+	
+	<test name="WAT_Author_Combine_Btn_functionality" preserve-order="true">
+		<classes>
+			<class name="wat.WAT71"></class>
 		</classes>
 	</test>
 </suite>
