@@ -40,7 +40,9 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	String subOrg;
 	String searchTerms;
 	String Checkbox_class_name = "pull-right wui-icon-only-btn wui-icon-only-btn--mini wat-results-selector wat-icon-only-btn--check-selected";
-	String Author_card_class_name = "wui-card__content wat-card-content-selected";
+	String Author_card_after_class_name = "wui-card__content wat-card-content-selected";
+	String Author_card_before_class_name = "wui-card__content";
+	
 
 	public SearchAuthorClusterResultsPage(WebDriver ob) {
 		this.ob = ob;
@@ -432,6 +434,17 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	}
 	
 	/**
+	 * Method to click on DeSelect all link in search author result page.
+	 * @param test
+	 * @throws Exception
+	 */
+	public void DeselectAllAuthorCard(ExtentTest test) throws Exception{
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_DESELECT_ALL_LINK_XPATH).isDisplayed())
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_DESELECT_ALL_LINK_XPATH);
+		test.log(LogStatus.INFO, "DeSelect all link clicked.");
+	}
+	
+	/**
 	 * Method to verify card selection in search author result page after clicking select all link.
 	 * @param test
 	 * @throws Exception
@@ -454,9 +467,23 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		List<WebElement> List = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_CARD_AFTER_SELECTION_XPATH);
 		ListIterator<WebElement> litr = List.listIterator();
 		while(litr.hasNext()){
-			Assert.assertEquals(litr.next().getAttribute("class"),Author_card_class_name);
+			Assert.assertEquals(litr.next().getAttribute("class"),Author_card_after_class_name);
 		}
 		test.log(LogStatus.INFO, "All Author cards are Selected/Highlighted.");
+	}
+	
+	/**
+	 * Method to verify card highlight after deselection in search author result page after clicking select all link.
+	 * @param test
+	 * @throws Exception
+	 */
+	public void verifyCardHighlightafterDeselection(ExtentTest test) throws Exception{
+		List<WebElement> List = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_CARD_BEFORE_SELECTION_XPATH);
+		ListIterator<WebElement> litr = List.listIterator();
+		while(litr.hasNext()){
+			Assert.assertEquals(litr.next().getAttribute("class"),Author_card_before_class_name);
+		}
+		test.log(LogStatus.INFO, "All Author cards are DeSelected.");
 	}
 }
 

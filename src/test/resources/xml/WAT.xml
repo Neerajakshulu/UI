@@ -15,7 +15,9 @@
 	<parameter name="OrgName1" value="MCMASTER UNIV" />
 	<parameter name="CountryName2" value="CANADA" />
 	<parameter name="OrgName2" value="MCMASTER UNIV" />
-  	<test name="WAT_Login" preserve-order="true">
+	
+	
+   	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -458,6 +460,12 @@
 		<test name="WAT_Author_Card_Highlight" preserve-order="true">
 		<classes>
 			<class name="wat.WAT73"></class>
+		</classes>
+	</test> 
+	
+			<test name="WAT_Author_Card_Deselect" preserve-order="true">
+		<classes>
+			<class name="wat.WAT74"></class>
 		</classes>
 	</test>
 </suite>
