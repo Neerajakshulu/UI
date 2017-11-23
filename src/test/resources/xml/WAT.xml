@@ -15,9 +15,9 @@
 	<parameter name="OrgName1" value="MCMASTER UNIV" />
 	<parameter name="CountryName2" value="CANADA" />
 	<parameter name="OrgName2" value="MCMASTER UNIV" />
-	
-	
-   	<test name="WAT_Login" preserve-order="true">
+
+
+	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -276,7 +276,7 @@
 			<class name="wat.WAT36"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Author_Combine" preserve-order="true">
 		<classes>
 			<class name="wat.WAT37"></class>
@@ -411,61 +411,81 @@
 			<class name="wat.WAT59"></class>
 		</classes>
 	</test>
-	
+
 	<test name="author_record_meta_title" preserve-order="true">
-		<parameter name="lastName" value="JOHN B.F."/>
+		<parameter name="lastName" value="JOHN B.F." />
 		<classes>
 			<class name="wat.WAT60"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 
 	<test name="author_record_meta_org" preserve-order="true">
-		<parameter name="lastName" value="JOHN B.F."/>
+		<parameter name="lastName" value="JOHN B.F." />
 		<classes>
 			<class name="wat.WAT61"></class>
 		</classes>
-	</test> 
-	
- 	<test name="WAT_Author_Combine_Selectall" preserve-order="true">
+	</test>
+
+	<test name="WAT_Author_Combine_Selectall" preserve-order="true">
 		<classes>
 			<class name="wat.WAT38"></class>
 		</classes>
 	</test>
-	
-	 <test name="WAT_Author_Combine_Btn_Check" preserve-order="true">
+
+	<test name="WAT_Author_Combine_Btn_Check" preserve-order="true">
 		<classes>
 			<class name="wat.WAT39"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Author_Combine_Btn_dsbl" preserve-order="true">
 		<classes>
 			<class name="wat.WAT70"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Author_Combine_Btn_functionality" preserve-order="true">
 		<classes>
 			<class name="wat.WAT71"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Author_Combine_Btn_text" preserve-order="true">
 		<classes>
 			<class name="wat.WAT72"></class>
 		</classes>
-	</test> 
-	
-		<test name="WAT_Author_Card_Highlight" preserve-order="true">
+	</test>
+
+	<test name="WAT_Author_Card_Highlight" preserve-order="true">
 		<classes>
 			<class name="wat.WAT73"></class>
 		</classes>
-	</test> 
-	
-			<test name="WAT_Author_Card_Deselect" preserve-order="true">
+	</test>
+
+	<test name="WAT_Author_Card_Deselect" preserve-order="true">
 		<classes>
 			<class name="wat.WAT74"></class>
+		</classes>
+	</test>
+	<test name="author_record_page_alternative_names" preserve-order="true">
+		<parameter name="lastName" value="JOHN B.F." />
+		<classes>
+			<class name="wat.WAT81"></class>
+		</classes>
+	</test>
+	<test name="author_record_page_alternative_names_tab"
+		preserve-order="true">
+		<parameter name="lastName" value="JOHN B.F." />
+		<classes>
+			<class name="wat.WAT82"></class>
+		</classes>
+	</test>
+	<test name="author_record_page_alternative_names_count"
+		preserve-order="true">
+		<parameter name="lastName" value="JOHN B.F." />
+		<classes>
+			<class name="wat.WAT83"></class>
 		</classes>
 	</test>
 </suite>

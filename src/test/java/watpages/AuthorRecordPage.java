@@ -1,7 +1,11 @@
 package watpages;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -20,6 +24,8 @@ public class AuthorRecordPage extends TestBase {
 	boolean isDefaultAvatarPresent=false;
 	String metaTitle;
 	String metaOrg;
+	boolean hilightedTab=false;
+	List<WebElement> namesCount;
 
 	public AuthorRecordPage(WebDriver ob) {
 		this.ob = ob;
@@ -88,5 +94,43 @@ public class AuthorRecordPage extends TestBase {
 		}
     }
 	
+	public void checkForAlternativeNames() throws Exception {
+		String altName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS)
+				.getText();
+		logger.info("Actual Value : "+altName);
+		Assert.assertTrue(altName.equals("Alternative names"));
+		//test.log(LogStatus.PASS, "Alternative names tab displayed in author record page");
+
+	}
+
+	public void clickAlternativeNamesTab() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS);
+		waitForAjax(ob);
+		hilightedTab = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_HILIGHTED_CSS).isDisplayed();
+		if (!hilightedTab) {
+			throw new Exception("Alternative tab is not hilighted");
+		}
+		
+		
+	}
+
+	public void checkAlternativeNamesCount(ExtentTest test) throws Exception {
+		namesCount=pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS);
+		if(namesCount.size()<=5){
+			test.log(LogStatus.INFO, "Below five Alternative names are displyed");
+		}else{
+			throw new Exception("Below five Alternative names are not displyed");
+		}
+	}
+
+	public void checkForAuthorNames() {
+		for(int i=0;i<namesCount.size();i++){
+			String name=namesCount.get(i).getText();
+			Assert.assertTrue(name.equals("Alternative names"));
+		}
+	}
+
 	
 }

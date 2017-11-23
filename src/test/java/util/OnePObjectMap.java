@@ -1298,7 +1298,10 @@ public enum OnePObjectMap {
 	WAT_DESELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
 	WAT_COMBINE_BTN_PRECEDING_TEXT_XPATH("//div[button[@class='wui-btn wui-btn--primary']]/preceding-sibling::div"),
 	WAT_AUTHOR_CARD_BEFORE_SELECTION_XPATH("//div[@class='wui-card__content']"),
-	WAT_AUTHOR_CARD_AFTER_SELECTION_XPATH("//div[@class='wui-card__content wat-card-content-selected']")
+	WAT_AUTHOR_CARD_AFTER_SELECTION_XPATH("//div[@class='wui-card__content wat-card-content-selected']"),
+	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS("ul[class='nav nav-tabs'] li+li a"),
+	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_HILIGHTED_CSS("li[class='uib-tab nav-item ng-isolate-scope active']"),
+	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS("div[class='tab-pane ng-scope active'] div div"),
 	;
 
 	private String locator;
