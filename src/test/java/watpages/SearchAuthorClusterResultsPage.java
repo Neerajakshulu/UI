@@ -39,8 +39,8 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	List<Integer> sortByRelevance;
 	String subOrg;
 	String searchTerms;
-	String Checkbox_class_name = "pull-right wui-icon-only-btn wui-icon-only-btn--mini wat-icon-only-btn--check-selected";
-
+	String Checkbox_class_name = "pull-right wui-icon-only-btn wui-icon-only-btn--mini wat-results-selector wat-icon-only-btn--check-selected";
+	String Author_card_class_name = "wui-card__content wat-card-content-selected";
 
 	public SearchAuthorClusterResultsPage(WebDriver ob) {
 		this.ob = ob;
@@ -429,12 +429,34 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SELECT_ALL_LINK_XPATH).isDisplayed())
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SELECT_ALL_LINK_XPATH);
 		test.log(LogStatus.INFO, "Select all link clicked.");
+	}
+	
+	/**
+	 * Method to verify card selection in search author result page after clicking select all link.
+	 * @param test
+	 * @throws Exception
+	 */
+	public void verifyCardSelection(ExtentTest test) throws Exception{
 		List<WebElement> List = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_CARD_AFTER_SELECT_ALL_XPATH);
 		ListIterator<WebElement> litr = List.listIterator();
 		while(litr.hasNext()){
 			Assert.assertEquals(litr.next().getAttribute("class"),Checkbox_class_name);
-			test.log(LogStatus.INFO, "Author card checkbox is clicked.");
 		}
+		test.log(LogStatus.INFO, "Author card checkbox is clicked.");
+	}
+	
+	/**
+	 * Method to verify card highlight after selection in search author result page after clicking select all link.
+	 * @param test
+	 * @throws Exception
+	 */
+	public void verifyCardHighlight(ExtentTest test) throws Exception{
+		List<WebElement> List = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_CARD_AFTER_SELECTION_XPATH);
+		ListIterator<WebElement> litr = List.listIterator();
+		while(litr.hasNext()){
+			Assert.assertEquals(litr.next().getAttribute("class"),Author_card_class_name);
+		}
+		test.log(LogStatus.INFO, "All Author cards are Selected/Highlighted.");
 	}
 }
 

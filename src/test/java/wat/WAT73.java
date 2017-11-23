@@ -13,12 +13,12 @@ import util.ExtentManager;
 
 
 /**
- * Class to Verify that user should be able to select all the records by clicking SELECT ALL link
+ * Class to Verify that when user clicks on SELECT ALL link all records should be highlighted
  * 
  * @author UC225218
  *
  */
-public class WAT38 extends TestBase {
+public class WAT73 extends TestBase {
 
 	static int status = 1;
 
@@ -73,21 +73,21 @@ public class WAT38 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that user should be able to select all the records by clicking SELECT ALL link
+	 * Method to Verify that when user clicks on SELECT ALL link all records should be highlighted
 	 * 
 	 * @param orcid
 	 * @throws Exception, When Something unexpected
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1", "OrgName2" })
-	public void CombineTwoAuthorRecord(String LastName, String CountryName1,String CountryName2,
+	public void VerifySelectallcardlHighlight(String LastName, String CountryName1,String CountryName2,
 			String OrgName1,String OrgName2) throws Exception {
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2,
 					OrgName1, OrgName2,test);
 			pf.getSearchAuthClusterResultsPage(ob).selectAllAuthorCard(test);
-			pf.getSearchAuthClusterResultsPage(ob).verifyCardSelection(test);
-			test.log(LogStatus.PASS, "Selec all link successfully selects all author cards.");
+			pf.getSearchAuthClusterResultsPage(ob).verifyCardHighlight(test);
+			test.log(LogStatus.PASS, "Selec all link successfully highlighted all author cards.");
 		} catch (Throwable t) {
 			t.printStackTrace();
 			logFailureDetails(test, t, "Author Selection for combining Fail", "author_combine_fail");
