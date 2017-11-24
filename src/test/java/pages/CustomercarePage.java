@@ -89,7 +89,7 @@ public class CustomercarePage extends TestBase {
 			}
 			ob.switchTo().window(al.get(1));
 			String actual_URL = ob.getCurrentUrl();
-			String expected_URL = "https://access.dev-stable.clarivate.com/cmty/#/customer-care?app=dra";                  
+			String expected_URL = "https://dev-stable.1p.thomsonreuters.com/cmty/#/customer-care?app=dra";                  
 			Assert.assertTrue(actual_URL.contains(expected_URL));
 			test.log(LogStatus.PASS,
 					"DRA customer care page URL is opened in a second window/tab (based on user/browser preference)");
