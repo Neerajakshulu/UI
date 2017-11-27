@@ -87,6 +87,7 @@ public class ENW001 extends TestBase {
 	
 	private void sendRecordTOENW(String username, String password) throws Exception
 	{
+		ob.navigate().refresh();
 		List<String> list =Arrays.asList(new String[]{"Articles","Patents","Posts"});
 		String expectedSuccessMessage="Sent To EndNote";
 		pf.getLoginTRInstance(ob).enterTRCredentials(username,password);
