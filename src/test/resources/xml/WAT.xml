@@ -17,7 +17,7 @@
 	<parameter name="OrgName2" value="MCMASTER UNIV" />
 
 
-<!-- 	<test name="WAT_Login" preserve-order="true">
+ 	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -467,14 +467,20 @@
 		<classes>
 			<class name="wat.WAT74"></class>
 		</classes>
-	</test> -->
+	</test> 
 	
 	<test name="WAT_Author_Select_Deselect" preserve-order="true">
 		<classes>
 			<class name="wat.WAT75"></class>
 		</classes>
 	</test>
-<!-- 	
+	
+		<test name="WAT_Author_Select_All_Functionality" preserve-order="true">
+		<classes>
+			<class name="wat.WAT76"></class>
+		</classes>
+	</test>
+
 	<test name="author_record_page_alternative_names" preserve-order="true">
 		<parameter name="lastName" value="JOHN B.F." />
 		<classes>
@@ -494,5 +500,5 @@
 		<classes>
 			<class name="wat.WAT83"></class>
 		</classes>
-	</test> -->
+	</test> 
 </suite>

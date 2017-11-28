@@ -1293,15 +1293,18 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULT_CARDS_XPATH("//div[@class='wui-card']/descendant::i[@class='fa fa-check']"),
 	WAT_COMBINE_BUTTON_XPATH("//button[@class='wui-btn wui-btn--primary']"),
 	WAT_AUTHOR_RECORD_PAGE_AUTHOR_PROFILE_ICON_XPATH("//i[@class='wui-icon wui-icon--profile wat-author-record-icon--profile']"),
-	WAT_AUTHOR_CARD_AFTER_SELECT_ALL_XPATH("//div[@class='wui-card']/descendant::button[@class='pull-right wui-icon-only-btn wui-icon-only-btn--mini wat-results-selector wat-icon-only-btn--check-selected']"),
+	
 	WAT_SELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
 	WAT_DESELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
 	WAT_COMBINE_BTN_PRECEDING_TEXT_XPATH("//div[button[@class='wui-btn wui-btn--primary']]/preceding-sibling::div"),
 	WAT_AUTHOR_CARD_BEFORE_SELECTION_XPATH("//div[@class='wui-card__content']"),
 	WAT_AUTHOR_CARD_AFTER_SELECTION_XPATH("//div[@class='wui-card__content wat-card-content-selected']"),
+	WAT_AUTHOR_CARD_CHECKBOX_AFTER_SELECT_ALL_XPATH("//div[@class='wui-card']/descendant::button[@class='pull-right wui-icon-only-btn wui-icon-only-btn--mini wat-results-selector wat-icon-only-btn--check-selected']"),
+	
+	
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS("ul[class='nav nav-tabs'] li+li a"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_HILIGHTED_CSS("li[class='uib-tab nav-item ng-isolate-scope active']"),
-	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS("div[class='tab-pane ng-scope active'] div div"),
+	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS("div[class='tab-pane ng-scope active'] div div")
 	;
 
 	private String locator;
