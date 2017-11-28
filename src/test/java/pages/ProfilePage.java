@@ -1060,9 +1060,9 @@ public class ProfilePage extends TestBase {
 					.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH);
 			List<WebElement> postLike = pf.getBrowserActionInstance(ob)
 					.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH);
-			List<WebElement> postWatch = pf.getBrowserActionInstance(ob)
-					.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
-			if (!(postsTimeStamp.size() == 10 && postLike.size() == 10 && postWatch.size() == 10)) {
+			/*List<WebElement> postWatch = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);*/
+			if (!(postsTimeStamp.size() == 10 && postLike.size() == 10 )) {
 				throw new Exception("Post's count by default should be 10 if Post tab having more than 10 posts");
 			}
 
