@@ -1044,7 +1044,7 @@ public class ProfilePage extends TestBase {
 									// occured in sauce labs
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
-	}
+	} 
 
 	/**
 	 * Method for validate profile posts, posts are more than 10, by default 10
