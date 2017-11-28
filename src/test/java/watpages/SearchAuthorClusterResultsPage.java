@@ -450,12 +450,12 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void verifyCardSelection(ExtentTest test) throws Exception{
-		List<WebElement> List = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_CARD_AFTER_SELECT_ALL_XPATH);
+		List<WebElement> List = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_CARD_CHECKBOX_AFTER_SELECT_ALL_XPATH);
 		ListIterator<WebElement> litr = List.listIterator();
 		while(litr.hasNext()){
 			Assert.assertEquals(litr.next().getAttribute("class"),Checkbox_class_name);
 		}
-		test.log(LogStatus.INFO, "Author card checkbox is clicked.");
+		test.log(LogStatus.INFO, "Author card checkboxes are being clicked Successfully.");
 	}
 	
 	/**

@@ -10,15 +10,16 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 
 /**
- * Class to Verify that user should be able to select all the records by clicking SELECT ALL link
+ * Class to Verify that System toggles the "Select all" option to "Deselect all" when user clicks on the Select all option.
  * 
  * @author UC225218
  *
  */
-public class WAT38 extends TestBase {
+public class WAT75 extends TestBase {
 
 	static int status = 1;
 
@@ -73,24 +74,25 @@ public class WAT38 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that user should be able to select all the records by clicking SELECT ALL link
+	 * Method to Verify that System toggles the "Select all" option to "Deselect all" when user clicks on the Select all option.
 	 * 
 	 * @param orcid
 	 * @throws Exception, When Something unexpected
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1", "OrgName2" })
-	public void CombineTwoAuthorRecord(String LastName, String CountryName1,String CountryName2,
+	public void VerifySelectAllToDeSelectall(String LastName, String CountryName1,String CountryName2,
 			String OrgName1,String OrgName2) throws Exception {
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2,
 					OrgName1, OrgName2,test);
 			pf.getSearchAuthClusterResultsPage(ob).selectAllAuthorCard(test);
-			pf.getSearchAuthClusterResultsPage(ob).verifyCardSelection(test);
-			test.log(LogStatus.PASS, "Select all link successfully selects all author cards.");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_DESELECT_ALL_LINK_XPATH, 5);
+			if(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_DESELECT_ALL_LINK_XPATH).isDisplayed())
+				test.log(LogStatus.PASS, "DeSelect all link is displayed after clicking on Select all.");
 		} catch (Throwable t) {
 			t.printStackTrace();
-			logFailureDetails(test, t, "Author Selection for combining Fail", "author_combine_fail");
+			logFailureDetails(test, t, "Author DeSelection Fail", "author_deselection_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 	}
