@@ -141,9 +141,9 @@ public class Authoring79 extends TestBase {
 			BrowserWaits.waitTime(10);
 			waitForPageLoad(driver);
 			// Temprorary solution for micro url
-			String hosts = "https://apps.dev-stable.clarivate.com";
+			//String hosts = "https://apps.dev-stable.clarivate.com";
 			try {
-				Assert.assertEquals(driver.getCurrentUrl(), hosts + url);
+				Assert.assertEquals(driver.getCurrentUrl(), host + url);
 				test.log(LogStatus.PASS, "Deep linking url is matching after login for " + recordType);
 				Assert.assertEquals(getRecordType(driver), recordType);
 				test.log(LogStatus.PASS, "Deep linking is redirecting to the appropriate page for " + recordType);
