@@ -136,8 +136,8 @@ public class Authoring79 extends TestBase {
 			driver.manage().deleteAllCookies();
 			driver.get(host + url);
 
-			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, "wosatca@gmail.com",
-					"Techm@123");
+			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, "test_qrsvbhr_user@tfbnw.net",
+					"auth123*");
 			BrowserWaits.waitTime(10);
 			waitForPageLoad(driver);
 			// Temprorary solution for micro url
