@@ -121,7 +121,7 @@ public class ENWReferencePage extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_FB_PROFILE_IMGCIRCLE_ACCOUNT_XPATH);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_IMGCIRCLE_ACCOUNT_XPATH.toString())).click();
 			//BrowserWaits.waitTime(3)
-			closeOnBoardingModal();
+			//closeOnBoardingModal();
 			
 			/*} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -158,8 +158,8 @@ public class ENWReferencePage extends TestBase {
 		//modified
 		public void logout() throws InterruptedException
 		{
-			ob.findElement(By.xpath(OnePObjectMap.ENW_BACK_TO_ENDNOTE_BUTTON_XPATH.toString())).click();
-			BrowserWaits.waitTime(3);
+//			ob.findElement(By.xpath(OnePObjectMap.ENW_BACK_TO_ENDNOTE_BUTTON_XPATH.toString())).click();
+//			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_IMGCIRCLE_XPATH.toString())).click();
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();

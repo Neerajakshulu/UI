@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -94,7 +95,7 @@ public class ENWIAM0001 extends TestBase {
 
 		// On ENW, Navigate to TR login page and login with valid TR credentials
 		ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
-		String accountType = "Facebook";
+		//String accountType = "Facebook";
 
 		pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials(LOGIN.getProperty("UserFBENWIAM80"), LOGIN.getProperty("PWDUserFBENWIAM80"));
 		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("PWDUserFBENWIAM80"));
@@ -108,9 +109,9 @@ public class ENWIAM0001 extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 		}
-		pf.getENWReferencePageInstance(ob).clickAccount();
-		pf.getENWReferencePageInstance(ob).closeOnBoardingModal();
-		validateLinkedAccounts(2, accountType);
+	pf.getENWReferencePageInstance(ob).clickAccount();
+		//pf.getENWReferencePageInstance(ob).closeOnBoardingModal();
+		//validateLinkedAccounts(2, accountType);
 		pf.getENWReferencePageInstance(ob).logout();
 
 
