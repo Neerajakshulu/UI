@@ -145,7 +145,6 @@ public class Authoring13 extends TestBase {
 					ob.switchTo().window(PARENT_WINDOW);
 				}
 			}
-
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 
@@ -161,7 +160,7 @@ public class Authoring13 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_Unable_to_Tweet_Article_On_Twitter")));
 			closeBrowser();
 		}
-
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	@AfterTest

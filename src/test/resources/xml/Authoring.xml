@@ -95,8 +95,8 @@
 	</test>
 
 	<test name="Authoring13">
-		<parameter name="fbusername" value="wosatca@gmail.com" />
-        <parameter name="fbpassword" value="Techm@123" />
+		<parameter name="fbusername" value="test_qrsvbhr_user@tfbnw.net" />
+        <parameter name="fbpassword" value="auth123*" />
 		<classes>
 			<class name="Authoring.Authoring13"></class>
 		</classes>
@@ -337,8 +337,8 @@
 	</test>
 
 	<test name="Authoring52">
-		<parameter name="fbusername" value="wosatca@gmail.com" />
-        <parameter name="fbpassword" value="Techm@123" />
+		<parameter name="fbusername" value="test_wnqvjum_user@tfbnw.net" />
+        <parameter name="fbpassword" value="auth123*" />
 		<classes>
 			<class name="Authoring.Authoring52"></class>
 		</classes>
