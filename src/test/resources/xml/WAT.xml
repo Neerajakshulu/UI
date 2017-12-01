@@ -486,6 +486,12 @@
 			<class name="wat.WAT77"></class>
 		</classes>
 	</test>
+	
+	<test name="WAT_Author_DeSelect_All_Functionality" preserve-order="true">
+		<classes>
+			<class name="wat.WAT78"></class>
+		</classes>
+	</test>
 
 	<test name="author_record_page_alternative_names" preserve-order="true">
 		<parameter name="lastName" value="JOHN B.F." />
