@@ -78,8 +78,8 @@ public class Watchlist031 extends TestBase {
 			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
 
-			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys("wosatca@gmail.com");
-			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys("Techm@123");
+			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys("test_nhgucui_user@tfbnw.net");
+			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys("auth123*");
 			//ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("FB_page_login_button1"))));
 
