@@ -125,10 +125,15 @@ public class AuthorRecordPage extends TestBase {
 		}
 	}
 
-	public void checkForAuthorNames() {
+	public void checkForAuthorNames(String lastName,ExtentTest test) {
+		if(namesCount.size()<=5){
+			String[] names=lastName.split(" ");
 		for(int i=0;i<namesCount.size();i++){
 			String name=namesCount.get(i).getText();
-			Assert.assertTrue(name.equals("Alternative names"));
+			if(name.contains(names[0])||name.contains(names[1])){
+				test.log(LogStatus.INFO, "Alternative names matching with last name");
+			}
+		}
 		}
 	}
 

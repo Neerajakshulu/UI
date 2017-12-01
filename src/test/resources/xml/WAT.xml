@@ -512,5 +512,12 @@
 		<classes>
 			<class name="wat.WAT83"></class>
 		</classes>
+	</test>
+	<test name="author_record_page_alternative_names_compare"
+		preserve-order="true">
+		<parameter name="lastName" value="JOHN B.F." />
+		<classes>
+			<class name="wat.WAT84"></class>
+		</classes>
 	</test> 
 </suite>
