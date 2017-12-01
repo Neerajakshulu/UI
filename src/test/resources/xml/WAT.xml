@@ -475,9 +475,15 @@
 		</classes>
 	</test>
 	
-		<test name="WAT_Author_Select_All_Functionality" preserve-order="true">
+	<test name="WAT_Author_Select_All_Functionality" preserve-order="true">
 		<classes>
 			<class name="wat.WAT76"></class>
+		</classes>
+	</test>
+	
+	<test name="WAT_Author_Select_All_DeSelect_All" preserve-order="true">
+		<classes>
+			<class name="wat.WAT77"></class>
 		</classes>
 	</test>
 
