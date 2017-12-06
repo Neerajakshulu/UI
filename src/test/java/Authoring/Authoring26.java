@@ -126,7 +126,7 @@ public class Authoring26 extends TestBase {
 	}
 
 	private void selectAnArticle() throws Exception {
-		pf.getHFPageInstance(ob).searchForText("Biology");
+		pf.getHFPageInstance(ob).searchForText("physics");
 		pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 80);
 		List<WebElement> itemList;
