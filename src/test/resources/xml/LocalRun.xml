@@ -264,22 +264,17 @@
 		<classes>
 			<class name="enw.ENW004"></class>
 			<class name="enwiam.ENWIAM00018"></class>
-			<class name="enwiam.ENWIAM080"></class>
-			<class name="enwiam.ENWIAM081"></class>
 			<class name="enwiam.ENWIAM0001"></class>
 			<class name="enwiam.ENWIAM52"></class>
 			<class name="enwiam.ENWIAM57"></class>
 			<class name="enwiam.ENWIAM091"></class>
 			<!-- <class name="enwiam.ENWIAM58"></class> -->
 			<class name="enwiam.ENWIAM56"></class>
-			<class name="enwiam.ENWIAM59"></class>
 			<class name="enwiam.ENWIAM54"></class>
 			<class name="enwiam.ENWIAM53"></class>
 			<class name="enwiam.ENWIAM55"></class>
 			<class name="enwiam.ENWIAM61"></class>
-			<class name="enwiam.ENWIAM62"></class>
 			<class name="enwiam.ENWIAM00016"></class>
-			<class name="enwiam.ENWIAM90"></class>
 			<!-- <class name="enwiam.ENWIAM41"></class> -->
 			<class name="enwiam.ENWIAM0005"></class>
 			<class name="enw.ENW000010"></class>

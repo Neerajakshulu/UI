@@ -118,38 +118,39 @@ public class ENWIAM00016 extends TestBase {
 				ob.findElement(By.xpath(OnePObjectMap.ENW_NOTNOW_XPATH.toString())).click();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-
+				BrowserWaits.waitTime(5);
 				ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
-
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString()), 30);
-				ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString())).click();
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-				pf.getLoginTRInstance(ob).closeOnBoardingModal();
-				String accountType1 = "Neon";
+				ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
+				
+//				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString()), 30);
+//				ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString())).click();
+//				pf.getBrowserWaitsInstance(ob)
+//						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+//				pf.getLoginTRInstance(ob).closeOnBoardingModal();
+//				String accountType1 = "Neon";
+//				BrowserWaits.waitTime(5);
+//				validateAccounts(1, accountType1);
+//				pf.getLoginTRInstance(ob).logoutEnw();
 				BrowserWaits.waitTime(5);
-				validateAccounts(1, accountType1);
-				pf.getLoginTRInstance(ob).logOutApp();
-				BrowserWaits.waitTime(5);
 
-				ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
+				//ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
 						LOGIN.getProperty("PWDUserFBENWIAM80"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				BrowserWaits.waitTime(2);
 
-				List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.ENW_NOTNOW_XPATH);
-
-				if (list.size() == 0) {
-					test.log(LogStatus.PASS, " link account modal is not displayed again on subsequent login.");
-
-				} else {
-					test.log(LogStatus.FAIL, "link account modal is displayed again on subsequent login.");
-				}
+//				List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.ENW_NOTNOW_XPATH);
+//
+//				if (list.size() == 0) {
+//					test.log(LogStatus.PASS, " link account modal is not displayed again on subsequent login.");
+//
+//				} else {
+//					test.log(LogStatus.FAIL, "link account modal is displayed again on subsequent login.");
+//				}
 
 				ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
-
 				ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
+				
 				closeBrowser();
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 
