@@ -137,5 +137,31 @@ public class AuthorRecordPage extends TestBase {
 		}
 	}
 
-	
+	/**
+	 * Entering curation mode and verify
+	 * 
+	 * @param LastName
+	 * @author UC225218
+	 * @throws Exception
+	 * 
+	 */
+	public void enterCurationMode(ExtentTest test)
+	{
+		try {
+			pf.getBrowserWaitsInstance(ob).waitForAllElementsToBePresent(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_AUTHOR_PROFILE_ICON_XPATH);
+			if(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_AUTHOR_PROFILE_ICON_XPATH).isDisplayed())
+			{
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SUGGEST_UPDATE_BTN_XPATH);
+				test.log(LogStatus.INFO, "Entering curation mode");
+				Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_CANCEL_UPDATE_BTN_XPATH).isDisplayed());
+				test.log(LogStatus.PASS, "Entered curation mode, Checking for confirmation");
+				scrollElementIntoView(ob, pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_PUBLICATION_REMOVE_CHKBOX_XPATH));
+				Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_PUBLICATION_REMOVE_CHKBOX_XPATH).isDisplayed());
+				test.log(LogStatus.PASS, "Entered curation mode and confirmed successfully");
+			}
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Didnt entered curation mode");
+			e.printStackTrace();
+		}
+	}
 }

@@ -1304,7 +1304,14 @@ public enum OnePObjectMap {
 	
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS("ul[class='nav nav-tabs'] li+li a"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_HILIGHTED_CSS("li[class='uib-tab nav-item ng-isolate-scope active']"),
-	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS("div[class='tab-pane ng-scope active'] div div")
+	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS("div[class='tab-pane ng-scope active'] div div"),
+	
+	WAT_SUGGEST_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Suggest updates')]"),
+	WAT_SUBMIT_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Submit updates')]"),
+	WAT_CANCEL_UPDATE_BTN_XPATH("//button[@class='wat-improve-author-message-cancel']"),
+	WAT_PUBLICATION_REMOVE_CHKBOX_XPATH("//div[@class='wui-card__body']/descendant::button[2]"),
+	WAT_PUBLICATION_REMOVE_CHKBOX_DISABLED_XPATH("//div[@class='wui-card__body']/descendant::button[@class='wui-icon-only-btn wui-icon-only-btn ng-hide'][2]"),
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH("//div[@class='wui-card'][1]/descendant::h3[@class='wui-content-title wui-content-title--medium wat-search-results-meta-title ng-scope']/a")
 	;
 
 	private String locator;

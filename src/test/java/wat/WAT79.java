@@ -12,12 +12,12 @@ import base.TestBase;
 import util.ExtentManager;
 
 /**
- * Class to Verify that user is be able to select two or more author records to view a combined record
+ * Class to Verify that system must display a "Suggest updates" button, which when clicked will enter into curation mode.
  * 
  * @author UC225218
  *
  */
-public class WAT37 extends TestBase {
+public class WAT79 extends TestBase {
 
 	static int status = 1;
 
@@ -72,27 +72,26 @@ public class WAT37 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that user is be able to select two or more author records to view a combined record
-	 * 
+	 * Method to Verify that system must display a "Suggest updates" button, which when clicked will enter into curation mode.
+	 *  
 	 * @param orcid
 	 * @throws Exception, When Something unexpected
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1", "OrgName2" })
-	public void CombineTwoAuthorRecord(String LastName, String CountryName1,String CountryName2,
+	public void VerifyCurationMode(String LastName, String CountryName1,String CountryName2,
 			String OrgName1,String OrgName2) throws Exception {
-
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2,
 					OrgName1, OrgName2,test);
-			pf.getSearchAuthClusterResultsPage(ob).combineAuthorCard(test);
-			
+			pf.getSearchAuthClusterResultsPage(ob).clickAuthorCard(test);
+			pf.getAuthorRecordPage(ob).enterCurationMode(test);			
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Author Search Fail", "author_search_fail");
+			t.printStackTrace();
+			logFailureDetails(test, t, "Didnt enter Curation mode", "Curation_mode_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 	}
-
 
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
