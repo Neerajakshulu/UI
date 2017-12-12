@@ -38,6 +38,7 @@ public class Search130 extends TestBase {
 	static boolean master_condition;
 
 	static int time = 30;
+	public String host1="https://apps.dev-stable.clarivate.com";
 	PageFactory pf = new PageFactory();
 
 	@BeforeTest
@@ -132,7 +133,9 @@ public class Search130 extends TestBase {
 					LOGIN.getProperty("SOCIALLOGINPASSWORD"));
 
 			try {
-				Assert.assertEquals(driver.getCurrentUrl(), host + url);
+				System.out.println("current host "+driver.getCurrentUrl());
+				Assert.assertEquals(driver.getCurrentUrl(), host1+url);
+				System.out.println("host url"+host1 + url);
 				test.log(LogStatus.PASS, "Deep linking url is matching after login " + recordType);
 				Assert.assertTrue(isSearchPageDisplayed(driver));
 				test.log(LogStatus.PASS, "Deep linking is redirecting to the appropriate page " + recordType);
