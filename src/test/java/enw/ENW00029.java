@@ -64,12 +64,10 @@ public class ENW00029 extends TestBase {
 
 				String actualEmail = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL_XPATH.toString()))
 						.getText();
-				System.out.println(actualEmail);
 				try {
 					Assert.assertEquals(LOGIN.getProperty("UserName18"), actualEmail);
 					test.log(LogStatus.PASS, "First  Email id getting displayed in Account Setting page ");
 				}
-
 				catch (Throwable t) {
 
 					test.log(LogStatus.FAIL, "Email id getting displayed in Account Setting page is incorrect");// extent
