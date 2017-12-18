@@ -83,7 +83,7 @@ public class ENW00029 extends TestBase {
 				validateSocialAccounts(2, accountType);
 				String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL1_XPATH.toString())).getText();
 				try {
-					Assert.assertEquals(actualEmail1,LOGIN.getProperty("UserName18"));
+					Assert.assertEquals(actualEmail1,LOGIN.getProperty("UserENWsteam000010"));
 					test.log(LogStatus.PASS, "alternate Email id is displayed in Account Setting page.");
 				}
 
@@ -144,7 +144,7 @@ public class ENW00029 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserName18")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", LOGIN.getProperty("UserName18")));
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserName18")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));

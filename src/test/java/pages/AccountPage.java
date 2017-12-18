@@ -39,7 +39,7 @@ public class AccountPage extends TestBase {
 				}
 			}
 
-			if ((accountType.equalsIgnoreCase("Neon") && type.equalsIgnoreCase("change password"))
+			if ((accountType.equalsIgnoreCase("Facebook") && type.equalsIgnoreCase("change password"))
 					|| accountType.equalsIgnoreCase(type.trim())) {
 				String emailid = null;
 				emailid = element.findElement(By.cssSelector("span[class='ng-binding']")).getText();
