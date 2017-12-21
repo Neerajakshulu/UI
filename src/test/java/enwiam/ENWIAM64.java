@@ -58,6 +58,7 @@ public class ENWIAM64 extends TestBase {
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 
 		} catch (Throwable t) {
+			t.printStackTrace();
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}

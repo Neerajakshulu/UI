@@ -142,7 +142,6 @@ public class ENWIAM0001 extends TestBase {
 
 
 	// Validating the linked accounts with STeAM
-
 	private void validateLinkedAccounts(int accountCount,
 			String linkName) throws Exception {
 		try {

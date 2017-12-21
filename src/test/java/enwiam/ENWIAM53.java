@@ -170,7 +170,7 @@ public class ENWIAM53 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserFBENWIAM80")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Change password", LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));

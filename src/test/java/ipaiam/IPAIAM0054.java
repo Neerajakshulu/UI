@@ -70,6 +70,7 @@ public class IPAIAM0054 extends TestBase {
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
 			BrowserWaits.waitTime(5);
 			ob.navigate().to(host);
+			BrowserWaits.waitTime(5);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSERsteam0016"),
 					LOGIN.getProperty("DRAUSERsteamPWD16"));
 			pf.getLoginTRInstance(ob).clickLogin();

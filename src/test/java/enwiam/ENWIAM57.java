@@ -120,7 +120,7 @@ public class ENWIAM57 extends TestBase {
 				test.log(LogStatus.INFO, "Steam account profile name: " + secondAccountProfileName);
 				pf.getHFPageInstance(ob).clickProfileImage();
 				pf.getHFPageInstance(ob).clickOnAccountLink();
-				accountType = "Neon";
+				accountType = "Change password";
 
 				validateNeonAccount(1, accountType);
 
@@ -151,7 +151,7 @@ public class ENWIAM57 extends TestBase {
 					pf.getBrowserWaitsInstance(ob)
 							.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 					pf.getHFPageInstance(ob).clickOnAccountLink();
-					accountType = "Neon";
+					accountType = "Change password";
 
 					try {
 						// validating two accounts are linked or not

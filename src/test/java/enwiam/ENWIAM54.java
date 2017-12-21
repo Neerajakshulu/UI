@@ -121,7 +121,7 @@ public class ENWIAM54 extends TestBase {
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS);
 				pf.getHFPageInstance(ob).clickOnAccountLink();
-				accountType = "Neon";
+				accountType = "Change password";
 
 				try {
 					validateLinkedAccounts(2, accountType);
@@ -220,7 +220,7 @@ public class ENWIAM54 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserFBENWIAM80")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Change password", LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Steam account is available and is not linked to Social account");
 

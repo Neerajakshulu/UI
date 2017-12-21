@@ -39,7 +39,7 @@ public class ENW023 extends TestBase {
 	public void testcaseENW023() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		String expected_URL = "https://dev-stable.1p.thomsonreuters.com/#/login?referrer=%252Fcmty%252F%23%252Fhome&app=cmty&pageview=";
+		String expected_URL = "https://access.dev-stable.clarivate.com/#/login?referrer=%252Fcmty%252F%23%252Fhome&app=cmty&pageview=";
 		String uRl="";
 		//String neonHomePage = "https://dev-stable.1p.thomsonreuters.com/#/home";
 		//String Expected_Result = "Sign in";

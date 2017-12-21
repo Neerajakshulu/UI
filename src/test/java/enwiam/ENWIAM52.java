@@ -92,7 +92,7 @@ public class ENWIAM52 extends TestBase {
 			test.log(LogStatus.INFO, "Steam account profile name: " + firstAccountProfileName);
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getHFPageInstance(ob).clickOnAccountLink();
-			String accountType = "Neon";
+			String accountType = "Change password";
 
 			validateNeonAccount(1, accountType);
 

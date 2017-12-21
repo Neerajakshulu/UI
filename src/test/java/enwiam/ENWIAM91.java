@@ -90,7 +90,7 @@ public class ENWIAM91 extends TestBase {
 			test.log(LogStatus.INFO, "Social account profile name: " + firstAccountProfileName);
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getHFPageInstance(ob).clickOnAccountLink();
-			accountType = "Neon";
+			accountType = "Change password";
 			validateAccounts(1, accountType);
 			BrowserWaits.waitTime(5);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
@@ -184,7 +184,7 @@ public class ENWIAM91 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("FACEBOOKACCOUNT")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Change password", LOGIN.getProperty("FACEBOOKACCOUNT")));
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("FACEBOOKACCOUNT")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
