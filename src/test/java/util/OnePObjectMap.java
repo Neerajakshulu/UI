@@ -77,7 +77,7 @@ public enum OnePObjectMap {
 
 	// sendtoendnote locators
 	NEON_LOGIN_ERROR_MESSAGE_CSS("div[class='form-level-error__message'] label"),
-	NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS("label[class*='wui-input-with-label__error']"),
+	NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS("span[class*='wui-material-input__error'] span"),
 	NEON_RECORDVIEW_NOTES1_XPATH("//span[text()='Times Cited']//preceding::span[1]"),
 	NEON_RECORDVIEW_NOTES2_XPATH("//span[text()='Cited References']//preceding::span[1]"),
 	NEON_RECORDVIEW_TITLE_XPATH("//div[@class='ne-publication__header']//h2"),
