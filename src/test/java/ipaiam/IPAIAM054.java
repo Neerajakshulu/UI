@@ -111,6 +111,7 @@ public class IPAIAM054 extends TestBase {
 				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 
 				validateLinkedAccounts(2, accountType);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.IPA_PROFILE_FLYOUT_USERNAME_XPATH);
 				String secondAccountProfileName =pf.getIpaPage(ob).getProfileNameIPA();
 				test.log(LogStatus.INFO, "Steam account profile name: " + secondAccountProfileName);
 				BrowserWaits.waitTime(2);

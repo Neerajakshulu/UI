@@ -289,12 +289,12 @@ public class LoginTR extends TestBase {
 
 	public void socialLinking() throws Exception {
 
-		waitForElementTobeVisible(ob,
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_CSS.toString()), 30);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_CSS.toString()))
-				.click();
+//		waitForElementTobeVisible(ob,
+//				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_CSS.toString()), 30);
+//		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_CSS.toString()))
+//				.click();
 		BrowserWaits.waitTime(3);
-		ob.findElement(By.cssSelector("div[class='modal-content ng-scope'] div[class='wui-input-with-label'] input"))
+		ob.findElement(By.xpath("//input[@name='steamPassword']"))
 				.sendKeys(LOGIN.getProperty("PWDUserFBENWIAM80"));
 		ob.findElement(
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString()))

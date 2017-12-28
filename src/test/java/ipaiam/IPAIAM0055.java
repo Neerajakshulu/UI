@@ -135,7 +135,9 @@ public class IPAIAM0055 extends TestBase {
 
 					try {
 						// validating two accounts are linked or not
-						validateLinkedAccounts(2, accountType);
+						validateLinkedAccounts(2, accountType);	
+						pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.IPA_PROFILE_FLYOUT_USERNAME_XPATH);
+						
 						String winingAccountProfileName = pf.getIpaPage(ob).getProfileNameIPA();
 						test.log(LogStatus.INFO, "After merging account profile name: " + winingAccountProfileName);
 
