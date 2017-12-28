@@ -113,7 +113,7 @@ public class IAM041 extends TestBase {
 		ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS.toString()), 30);
 		String lastNameErrorMessage = ob
-				.findElements(By.cssSelector(OnePObjectMap.NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS.toString())).get(4)
+				.findElements(By.cssSelector(OnePObjectMap.NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS.toString())).get(3)
 				.getText();
 		Assert.assertTrue(lastNameErrorMessage.contains("Please enter your last name."));
 		

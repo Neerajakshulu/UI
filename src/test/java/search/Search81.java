@@ -66,7 +66,7 @@ public class Search81 extends TestBase {
 					60);
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys("cancer");
 			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(5);
 			waitForAllElementsToBePresent(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()),60);
 			fluentwaitforElement(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()),60);
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()))

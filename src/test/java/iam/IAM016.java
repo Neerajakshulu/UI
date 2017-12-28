@@ -645,7 +645,7 @@ public class IAM016 extends TestBase {
 				extent.endTest(test);
 			}
 
-			try {
+			/*try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
 						.startTest("OPQA-4246",
@@ -671,7 +671,7 @@ public class IAM016 extends TestBase {
 			} finally {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
-			}
+			}*/
 
 			try {
 				extent = ExtentManager.getReporter(filePath);
