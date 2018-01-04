@@ -464,7 +464,7 @@ public class TestBase {
 				}
 			}
 			ob = new RemoteWebDriver(new URL(
-					"http://mohana-yalamarthi:4cc2c2ac-35f6-4cc3-a751-9c6758fffe96@ondemand.saucelabs.com:80/wd/hub"),
+					"http://chinna_putha:e58d38dc-3d93-43e8-af25-5e3a1df25e8b@ondemand.saucelabs.com:80/wd/hub"),
 					desiredCapabilities);
 			String waitTime = CONFIG.getProperty("defaultImplicitWait");
 			String pageWait = CONFIG.getProperty("defaultPageWait");
@@ -538,8 +538,8 @@ public class TestBase {
 	public void runOnSauceLabsFromLocal(String os,
 			String browser) throws Exception {
 
-		String username = "amneetsingh";
-		String access_key = "f48a9e78-a431-4779-9592-1b49b6d406a4";
+		String username = "chinna_putha";
+		String access_key = "e58d38dc-3d93-43e8-af25-5e3a1df25e8b";
 		String url = "http://" + username + ":" + access_key + "@ondemand.saucelabs.com:80/wd/hub";
 
 		DesiredCapabilities caps = null;
@@ -549,7 +549,7 @@ public class TestBase {
 			if (browser.equalsIgnoreCase("Chrome")) {
 				caps = DesiredCapabilities.chrome();
 				caps.setCapability("platform", "Windows 7");
-				caps.setCapability("version", "48.0");
+				caps.setCapability("version", "61");
 				caps.setCapability("name", this.getClass().getSimpleName());
 			}
 
