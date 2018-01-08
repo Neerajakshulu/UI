@@ -19,7 +19,7 @@ import util.ExtentManager;
 
 public class Authoring69 extends TestBase {
 
-	private static final String URL = "https://www.yahoo.com";
+	private static final String URL = "https://clarivate.com/";
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
