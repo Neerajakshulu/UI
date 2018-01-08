@@ -16,7 +16,7 @@
 	<parameter name="CountryName2" value="INDIA" ></parameter>
 	<parameter name="OrgName2" value="APOLLO HOSP" />
 
-<!-- 
+ 
  	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
@@ -34,7 +34,7 @@
 		<classes>
 			<class name="wat.WAT03"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="WAT_Author_Search_Only_Lastname" preserve-order="true">
 		<classes>
@@ -42,7 +42,7 @@
 		</classes>
 	</test>
 
-	<test name="WAT_Author_Search_Only_firstname" preserve-order="true">
+ <test name="WAT_Author_Search_Only_firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT05"></class>
 		</classes>
@@ -64,19 +64,19 @@
 		<classes>
 			<class name="wat.WAT08"></class>
 		</classes>
-	</test>
+	</test> 
 
-	<test name="WAT_Author_Search_spcl_char_lastname" preserve-order="true">
+ 	<test name="WAT_Author_Search_spcl_char_lastname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT09"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="WAT_Author_Search_number_lastnamee" preserve-order="true">
 		<classes>
 			<class name="wat.WAT10"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="WAT_Author_Search_alphanum_lastname" preserve-order="true">
 		<classes>
@@ -94,7 +94,7 @@
 		<classes>
 			<class name="wat.WAT13"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="WAT_Author_Search_number_firstname" preserve-order="true">
 		<classes>
@@ -108,7 +108,7 @@
 		</classes>
 	</test>
 
-	<test name="WAT_Multiple_alt_name_typeahead_Lastname"
+<test name="WAT_Multiple_alt_name_typeahead_Lastname"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT16"></class>
@@ -519,7 +519,7 @@
 		<classes>
 			<class name="wat.WAT84"></class>
 		</classes>
-	</test> --> 
+	</test> 
 	
 	<test name="WAT_Curation_mode_test" preserve-order="true">
 		<classes>
