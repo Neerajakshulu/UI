@@ -93,9 +93,9 @@ public class Customercare021 extends TestBase{
 					.getElement(OnePObjectMap. CUSTOMER_CARE_USER_REQUEST_NAME).click();
 	          //  ob.findElement(By.name("request")).click();
 	            err = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_PHONE_NAME_ERROR_MESSAGE_XPATH).getText();
-	               BrowserWaits.waitTime(1);
-	               pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap. CUSTOMER_CARE_CLEARBTN_XPATH).click();
+	               //BrowserWaits.waitTime(1);
+	               pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CLEARBTN_XPATH);
+	               pf.getBrowserActionInstance(ob).getElement(OnePObjectMap. CUSTOMER_CARE_CLEARBTN_XPATH).click();
 	            System.out.println(invalid);
 	      }
 	         if (alertMessage.equals(err)) {
