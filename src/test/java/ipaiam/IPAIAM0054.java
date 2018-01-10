@@ -65,18 +65,20 @@ public class IPAIAM0054 extends TestBase {
 			String DRAProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 
 			test.log(LogStatus.INFO, "DRA account profile name: " + DRAProfileName);
-			pf.getBrowserWaitsInstance(ob)
-					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			ob.navigate().to(host);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSERsteam0016"),
 					LOGIN.getProperty("DRAUSERsteamPWD16"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
 			pf.getDraPageInstance(ob).SearchDRAprofileName(DRAProfileName);
-			BrowserWaits.waitTime(3);
+			
+			//BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DR_SEARCH_RESULT_CSS);
 			pf.getIpaPage(ob).validateSearchResultMsg(test, DRAProfileName);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

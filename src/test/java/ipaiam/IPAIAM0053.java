@@ -59,8 +59,9 @@ public class IPAIAM0053 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("IPAUSER0053"),
 					LOGIN.getProperty("IPAPWD0053"));
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			BrowserWaits.waitTime(5);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_CSS);
+			//BrowserWaits.waitTime(5);
+			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_CSS, 5);
 			pf.getDraPageInstance(ob).validateInactiveaccount(test);	
 			pf.getIpaPage(ob).validateIPAInactiveErrorMsg(test);
 			closeBrowser();

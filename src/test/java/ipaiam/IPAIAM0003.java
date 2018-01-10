@@ -89,7 +89,8 @@ public class IPAIAM0003 extends TestBase {
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
@@ -98,9 +99,10 @@ public class IPAIAM0003 extends TestBase {
 				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUserNameValid"),
 						LOGIN.getProperty("DRAPasswordValid"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NOT_NOW_BUTTON_CSS);
 				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
 				test.log(LogStatus.PASS, "User is able to click on not now on the modal");		
 				pf.getDraPageInstance(ob).logoutDRA();
@@ -140,7 +142,7 @@ public class IPAIAM0003 extends TestBase {
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link")));
 			}
 
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

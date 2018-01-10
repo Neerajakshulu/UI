@@ -95,7 +95,7 @@ public class IPAIAM0055 extends TestBase {
 				test.log(LogStatus.INFO, "Social account profile name: " + secondAccountProfileName);
 				pf.getHFPageInstance(ob).clickProfileImage();
 				pf.getHFPageInstance(ob).clickOnAccountLink();
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				accountType = "Facebook";
 
 				validateAccounts(1, accountType);
@@ -116,7 +116,8 @@ public class IPAIAM0055 extends TestBase {
 				}
 
 				pf.getLoginTRInstance(ob).logOutApp();
-				BrowserWaits.waitTime(5);
+				//BrowserWaits.waitTime(5);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 				ob.navigate().to(host);
 				// Trying to Link the accounts
 				try {
@@ -165,7 +166,7 @@ public class IPAIAM0055 extends TestBase {
 						closeBrowser();
 
 					}
-					BrowserWaits.waitTime(2);
+					//BrowserWaits.waitTime(2);
 					closeBrowser();
 
 				} catch (Throwable t) {

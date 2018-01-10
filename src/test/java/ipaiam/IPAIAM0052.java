@@ -62,7 +62,8 @@ public class IPAIAM0052 extends TestBase {
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 			pf.getDraPageInstance(ob).validateInvalidCredentialsErrorMsg(test);
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("IPAUSER0052"),
 					LOGIN.getProperty("IPAPWD0052"));
 			pf.getIpaPage(ob).clickLoginIPA();

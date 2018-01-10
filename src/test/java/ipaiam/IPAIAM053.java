@@ -85,18 +85,21 @@ public class IPAIAM053 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERIPA053"),
 					LOGIN.getProperty("USERPWDIPA053"));
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			BrowserWaits.waitTime(5);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
+//			BrowserWaits.waitTime(5);
+//			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS, 5);
 			test.log(LogStatus.PASS, "user has logged in with Steam account in ipa to make it Activated");
 			String firstAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 			test.log(LogStatus.INFO, "Steam account profile name: " + firstAccountProfileName);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
 			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS);
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_APP_SWITCHER_CSS);
 			pf.getIpaPage(ob).clickOnAppswitcher();
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_PROJECTNEON_APP_SWITCHER_CSS);
 			pf.getIpaPage(ob).clickOnNeonfromAppswitcher();
 			switchToNewWindow(ob);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
@@ -111,7 +114,8 @@ public class IPAIAM053 extends TestBase {
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon to make it Activated");
 			pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
+			//BrowserWaits.waitTime(5);
 
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
@@ -120,9 +124,10 @@ public class IPAIAM053 extends TestBase {
 				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERIPA053"),
 						LOGIN.getProperty("USERPWDIPA053"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LINKINGMODAL_FB_SIGN_IN_BUTTON_CSS);
 				pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
 				test.log(LogStatus.PASS, "User is able to link steam account with facebook account");
 
@@ -152,7 +157,7 @@ public class IPAIAM053 extends TestBase {
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link")));
 			}
 
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

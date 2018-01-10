@@ -87,7 +87,7 @@ public class IPAIAM0050 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			ob.close();
 
 		} catch (Throwable t) {

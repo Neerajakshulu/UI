@@ -14,6 +14,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IPAIAM0006 extends TestBase {
 	
@@ -83,14 +84,15 @@ public class IPAIAM0006 extends TestBase {
 			pf.getIpaPage(ob).validateThirdTextOnIPAStepUp(test);
 			test.log(LogStatus.INFO, "Verified whether user is able to see Third text on step up modal");
 			//pf.getDraPageInstance(ob).validateProductOverviewPage(test);
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS);
 			try{
 				pf.getDraPageInstance(ob).validateForgotPwOnStepup(test);
 				test.log(LogStatus.INFO, "forgot password link is present on Stepup");
 			}catch(Throwable t){
 				test.log(LogStatus.FAIL, "forgot password link is not present on Stepup");
 			}	
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		} catch (Throwable t) {
