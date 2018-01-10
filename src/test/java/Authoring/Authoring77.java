@@ -131,7 +131,8 @@ public class Authoring77 extends TestBase {
 			waitForPageLoad(ob);
 
 			try {
-				Assert.assertEquals(ob.getCurrentUrl(), host + url);
+				String hosts = "https://apps.dev-stable.clarivate.com";
+				Assert.assertEquals(ob.getCurrentUrl(), hosts + url);
 				test.log(LogStatus.PASS, "Deep linking url is matching after login for " + recordType);
 				Assert.assertEquals(pf.getpostRVPageInstance(ob).getRecordType(), recordType);
 				test.log(LogStatus.PASS, "Deep linking is redirecting to the appropriate page for " + recordType);

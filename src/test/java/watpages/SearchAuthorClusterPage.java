@@ -79,7 +79,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
 		test.log(LogStatus.INFO, "Clicking find button... ");
-		BrowserWaits.waitTime(2);
+		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
 		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
 				.isEnabled()) {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
@@ -488,7 +488,7 @@ public class SearchAuthorClusterPage extends TestBase {
 			BrowserWaits.waitTime(0.5);
 		}
 		test.log(LogStatus.INFO, "Trying to click find button... ");
-
+		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
 		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
 				.isEnabled()) {
 			test.log(LogStatus.FAIL, "Able to search for author cluster with only First name");
@@ -546,7 +546,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, " ");
 		test.log(LogStatus.INFO, "Trying to click find button... ");
-
+		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
 		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
 				.isEnabled()) {
 			test.log(LogStatus.FAIL, "Able to search for author cluster with blank last name");
@@ -572,6 +572,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		List<WebElement> ele = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
 		test.log(LogStatus.INFO, "Trying to click find button... ");
+		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
 		if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
 			test.log(LogStatus.PASS, "Unable to search for author cluster with special character in Last name");
@@ -597,7 +598,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		List<WebElement> ele = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
 		test.log(LogStatus.INFO, "Trying to click find button... ");
-
+		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
 		if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
 			test.log(LogStatus.PASS, "Unable to search for author cluster with numbers in Last name");
@@ -623,7 +624,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		List<WebElement> ele = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
 		test.log(LogStatus.INFO, "Trying to click find button... ");
-
+		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
 		if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
 			test.log(LogStatus.PASS, "Unable to search for author cluster with alphanumeric characters in Last name");
@@ -698,7 +699,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		List<WebElement> ele = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
 		test.log(LogStatus.INFO, "Trying to click find button... ");
-
+		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
 		if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
 			test.log(LogStatus.PASS, "Unable to search for author cluster with numbers in Last name");
@@ -729,7 +730,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		List<WebElement> ele = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
 		test.log(LogStatus.INFO, "Trying to click find button... ");
-
+		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
 		if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
 			test.log(LogStatus.PASS, "Unable to search for author cluster with alphanumeric characters in First name");

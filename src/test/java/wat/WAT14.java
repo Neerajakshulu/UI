@@ -103,7 +103,7 @@ public class WAT14 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-
+		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*
