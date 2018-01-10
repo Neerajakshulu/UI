@@ -86,7 +86,7 @@ public class WAT24 extends TestBase {
 
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
-		//	pf.getSearchAuthClusterPage(ob).SearchAuthorClusterLastAndFirstName(lastName, firstName,countryName, orgName, test);
+			pf.getSearchAuthClusterPage(ob).SearchAuthorClusterLastAndFirstName(lastName, firstName,countryName, orgName, test);
 			test.log(LogStatus.PASS, "Author Search Results are displayed");
 
 		} catch (Throwable t) {
