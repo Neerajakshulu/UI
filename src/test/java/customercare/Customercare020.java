@@ -118,7 +118,7 @@ public class Customercare020 extends TestBase {
        	     }
        	   });*/
 			test.log(LogStatus.PASS, " 2nd fluentwait");
-			BrowserWaits.waitTime(6);
+			//BrowserWaits.waitTime(6);
 			
 			
 			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
@@ -137,7 +137,7 @@ public class Customercare020 extends TestBase {
 
 	       	     }
 	       	   });*/
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			test.log(LogStatus.PASS, " 3nd fluentwait");
 			pf.getDraPageInstance(ob).clickOnHelpDRA();
 
@@ -149,7 +149,7 @@ public class Customercare020 extends TestBase {
 			}
 			ob.switchTo().window(al.get(1));
 			pf.getDraPageInstance(ob).clickOnSupportLinkHelp();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			// pf.getDraPageInstance(ob).validateFeedbackPageDRA(test);
 			validateFeedbackDRA();
 			String actualName = pf.getBrowserActionInstance(ob)
@@ -234,7 +234,7 @@ public class Customercare020 extends TestBase {
 			test.log(LogStatus.FAIL, "New browser is not displayed and content is not matching");
 			Assert.assertEquals(true, false);
 		}
-		BrowserWaits.waitTime(5);
+		//BrowserWaits.waitTime(5);
 	}
 
 	@AfterTest

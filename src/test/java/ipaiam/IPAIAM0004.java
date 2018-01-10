@@ -14,6 +14,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IPAIAM0004 extends TestBase{
 
@@ -78,11 +79,12 @@ public class IPAIAM0004 extends TestBase{
 			
 			for (int i = 0; i < 9; i++) {
 				pf.getIpaPage(ob).changepwdIPA(LOGIN.getProperty("IPAcurrentsteampw4"), LOGIN.getProperty("IPAnewsteampw4"));
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS);
 				test.log(LogStatus.INFO, "User entered incorrect password 10 times");
 			}
 			
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 			
 		} catch (Throwable t) {

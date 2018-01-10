@@ -95,7 +95,7 @@ public class IPAIAM0055 extends TestBase {
 				test.log(LogStatus.INFO, "Social account profile name: " + secondAccountProfileName);
 				pf.getHFPageInstance(ob).clickProfileImage();
 				pf.getHFPageInstance(ob).clickOnAccountLink();
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				accountType = "Facebook";
 
 				validateAccounts(1, accountType);
@@ -116,7 +116,8 @@ public class IPAIAM0055 extends TestBase {
 				}
 
 				pf.getLoginTRInstance(ob).logOutApp();
-				BrowserWaits.waitTime(5);
+				//BrowserWaits.waitTime(5);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 				ob.navigate().to(host);
 				// Trying to Link the accounts
 				try {
@@ -135,7 +136,9 @@ public class IPAIAM0055 extends TestBase {
 
 					try {
 						// validating two accounts are linked or not
-						validateLinkedAccounts(2, accountType);
+						validateLinkedAccounts(2, accountType);	
+						pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.IPA_PROFILE_FLYOUT_USERNAME_XPATH);
+						
 						String winingAccountProfileName = pf.getIpaPage(ob).getProfileNameIPA();
 						test.log(LogStatus.INFO, "After merging account profile name: " + winingAccountProfileName);
 
@@ -163,7 +166,7 @@ public class IPAIAM0055 extends TestBase {
 						closeBrowser();
 
 					}
-					BrowserWaits.waitTime(2);
+					//BrowserWaits.waitTime(2);
 					closeBrowser();
 
 				} catch (Throwable t) {

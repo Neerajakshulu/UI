@@ -109,7 +109,7 @@ public class Customercare015 extends TestBase {
 				test.log(LogStatus.FAIL, "user is not able to submit the form in DRA Customer care page .");
 			}
 
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

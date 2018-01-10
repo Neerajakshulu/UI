@@ -90,7 +90,7 @@ public class IPAIAM0002 extends TestBase {
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
@@ -180,7 +180,7 @@ public class IPAIAM0002 extends TestBase {
 				
 					
 
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "User is not able to login to IPA");// extent
