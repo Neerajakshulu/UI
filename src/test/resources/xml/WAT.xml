@@ -538,4 +538,10 @@
 			<class name="wat.WAT86"></class>
 		</classes>
 	</test>
+	
+	<test name="WAT_Delete_Alt_Name_btn_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT87"></class>
+		</classes>
+	</test>
 </suite>
