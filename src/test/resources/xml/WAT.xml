@@ -16,7 +16,7 @@
 	<parameter name="CountryName2" value="INDIA" ></parameter>
 	<parameter name="OrgName2" value="APOLLO HOSP" />
 
-
+ 
  	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
@@ -542,6 +542,11 @@
 	<test name="WAT_Delete_Alt_Name_btn_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT87"></class>
+		</classes>
+	</test>
+		<test name="WAT_Delete_Alt_Name_btn_functionality" preserve-order="true">
+		<classes>
+			<class name="wat.WAT88"></class>
 		</classes>
 	</test>
 </suite>
