@@ -1295,6 +1295,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULT_CARDS_XPATH("//div[@class='wui-card']/descendant::i[@class='fa fa-check']"),
 	WAT_COMBINE_BUTTON_XPATH("//button[@class='wui-btn wui-btn--primary']"),
 	WAT_AUTHOR_RECORD_PAGE_AUTHOR_PROFILE_ICON_XPATH("//i[@class='wui-icon wui-icon--profile wat-author-record-icon--profile']"),
+	WAT_AUTHOR_CARD_1_XPATH("//div[@class='wui-card'][1]/descendant::a"),
 	
 	WAT_SELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
 	WAT_DESELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
@@ -1313,7 +1314,11 @@ public enum OnePObjectMap {
 	WAT_CANCEL_UPDATE_BTN_XPATH("//button[@class='wat-improve-author-message-cancel']"),
 	WAT_PUBLICATION_REMOVE_CHKBOX_XPATH("//div[@class='wui-card__body']/descendant::button[2]"),
 	WAT_PUBLICATION_REMOVE_CHKBOX_DISABLED_XPATH("//div[@class='wui-card__body']/descendant::button[@class='wui-icon-only-btn wui-icon-only-btn ng-hide'][2]"),
-	WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH("//div[@class='wui-card'][1]/descendant::h3[@class='wui-content-title wui-content-title--medium wat-search-results-meta-title ng-scope']/a")
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH("//div[@class='wui-card'][1]/descendant::h3[@class='wui-content-title wui-content-title--medium wat-search-results-meta-title ng-scope']/a"),
+	WAT_FEEDBACK_AUTHOR_SEARCH_PAGE_XPATH("//a[contains(text(),'your feedback')]"),
+	WAT_FEEDBACK_AUTHOR_SEARCH_RESULT_PAGE_XPATH("//a[contains(text(),'Tell us what you think')]"),
+	WAT_FEEDBACK_AUTHOR_RECORD_PAGE_XPATH("//a[contains(text(),'Tell us what you think')]"),
+	WAT_FEEDBACK_PAGE_TITLE_XPATH("//span[contains(text(),'SaR Labs Feedback')]")
 	;
 
 	private String locator;

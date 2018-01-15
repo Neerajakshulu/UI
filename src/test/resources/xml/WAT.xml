@@ -13,8 +13,8 @@
 	<parameter name="FirstName" value="KRISHNARAJ" />
 	<parameter name="CountryName1" value="INDIA" />
 	<parameter name="OrgName1" value="AMITY UNIV" />
-	<parameter name="CountryName2" value="INDIA" ></parameter>
-	<parameter name="OrgName2" value="APOLLO HOSP" />
+	<parameter name="CountryName2" value="USA" ></parameter>
+	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
  
  	<test name="WAT_Login" preserve-order="true">
@@ -547,6 +547,24 @@
 		<test name="WAT_Delete_Alt_Name_btn_functionality" preserve-order="true">
 		<classes>
 			<class name="wat.WAT88"></class>
+		</classes>
+	</test>
+	
+ 	<test name="WAT_Feedback_Link_Authorsearch_page" preserve-order="true">
+		<classes>
+			<class name="wat.WAT89"></class>
+		</classes>
+	</test>
+	
+ 	<test name="WAT_Feedback_Link_Authorsearchresult_page" preserve-order="true">
+		<classes>
+			<class name="wat.WAT90"></class>
+		</classes>
+	</test>
+	
+	<test name="WAT_Feedback_Link_AuthorRecord_page" preserve-order="true">
+		<classes>
+			<class name="wat.WAT91"></class>
 		</classes>
 	</test>
 </suite>
