@@ -272,6 +272,9 @@ public class DRAPage extends TestBase {
 	}
 
 	public void clickProfileLink() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_PROFILE_FLYOUT_IMAGE_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.IPA_PROFILE_FLYOUT_IMAGE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_NAME_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_PROFILE_FLYOUT_NAME_CSS);
 		// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
 		// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);

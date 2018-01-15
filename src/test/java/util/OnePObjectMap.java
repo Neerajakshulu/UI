@@ -857,7 +857,7 @@ public enum OnePObjectMap {
 	
 	// DRA_PROFILE_FLYOUT_NAME_CSS("div[class='wui-profile-flyout__info'] div[class*='wui-subtitle
 	// wui-profile-flyout__name ng-binding']"),
-	DRA_PROFILE_FLYOUT_NAME_CSS("div[class='dropdown-menu wui-flyout__menu wui-flyout--profile__menu'] div[class='wui-profile-flyout__info'] div"),
+	DRA_PROFILE_FLYOUT_NAME_CSS("img[class='wui-profile-flyout__image wui-circle']"),
 	DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS("label[class='wui-input__error ng-scope']"),
 
 	DRA_PROFILE_CSS("div[class='header-profile-picture']"),
