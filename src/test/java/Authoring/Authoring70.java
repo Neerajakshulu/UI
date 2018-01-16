@@ -19,7 +19,7 @@ import util.ExtentManager;
 
 public class Authoring70 extends TestBase {
 
-	private static final String URL = "/#/profile/f8606cb6-8765-4ad4-878b-baf1175b9a52";
+	private static final String URL = "/cmty/#/profile/f8606cb6-8765-4ad4-878b-baf1175b9a52";
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
@@ -74,7 +74,8 @@ public class Authoring70 extends TestBase {
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateCommentForExternalLink(host + URL));
 				test.log(LogStatus.PASS, "Comment is published with internal link");
 				pf.getpostRVPageInstance(ob).clickExternalLinkInComments(host + URL);
-				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateURL(host + URL));
+				String hosts = "https://apps.dev-stable.clarivate.com";
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateURL(hosts + URL));
 				test.log(LogStatus.PASS, "Internal links added to comment are working fine");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Internal links added to comment are not working fine");
