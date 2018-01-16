@@ -83,12 +83,12 @@ public class DRAIAM053 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUserNameValid"),
 					LOGIN.getProperty("DRAPasswordValid"));
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 			test.log(LogStatus.PASS, "user has logged in with Steam account in dra to make it Activated");
 			String firstAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 			test.log(LogStatus.INFO, "Steam account profile name: " + firstAccountProfileName);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
 			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 			String accountType = "Facebook";
@@ -100,8 +100,8 @@ public class DRAIAM053 extends TestBase {
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon to make it Activated");
 			pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
-
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 				ob.navigate().refresh();
@@ -109,16 +109,16 @@ public class DRAIAM053 extends TestBase {
 				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUserNameValid"),
 						LOGIN.getProperty("DRAPasswordValid"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 				test.log(LogStatus.PASS, "User is able to link steam account with facebook account");
 
 				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 				validateAccounts(2, accountType);
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNT_CROSS_CSS);
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				String winingAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 				test.log(LogStatus.INFO, "After merging account profile name: " + winingAccountProfileName);
 
@@ -143,7 +143,7 @@ public class DRAIAM053 extends TestBase {
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link")));
 			}
 
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

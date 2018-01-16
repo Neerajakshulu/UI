@@ -90,7 +90,8 @@ public class DRAIAM003 extends TestBase {
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
@@ -174,7 +175,7 @@ public class DRAIAM003 extends TestBase {
 				
 				
 				
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "User is not able to login to DRA");// extent

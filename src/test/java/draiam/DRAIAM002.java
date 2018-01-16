@@ -94,7 +94,8 @@ public class DRAIAM002 extends TestBase {
 
 			validateAccounts(1, accountType);
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
@@ -108,14 +109,14 @@ public class DRAIAM002 extends TestBase {
 				test.log(LogStatus.PASS, "User is able to click the link button");
 				String secondAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 				test.log(LogStatus.INFO, "Steam account profile name: " + secondAccountProfileName);
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				pf.getDraPageInstance(ob).clickOnProfileImageDRA();
 				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
 				validateLinkedAccounts(2, accountType);
 
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNT_CROSS_CSS);
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 
 				Assert.assertEquals(secondAccountProfileName, firstAccountProfileName);
 				test.log(LogStatus.PASS, "Forward Merge is happened");
@@ -134,7 +135,7 @@ public class DRAIAM002 extends TestBase {
 
 			}
 
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		} catch (Throwable t) {

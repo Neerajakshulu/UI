@@ -14,6 +14,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class DRAIAM006 extends TestBase {
 
@@ -75,7 +76,8 @@ public class DRAIAM006 extends TestBase {
 			test.log(LogStatus.PASS, "User is able to click on change password link and enter the current & new password");
 			pf.getDraPageInstance(ob).validateCurrentPwdErrorMsg(test);
 			test.log(LogStatus.INFO, "User is able to see the correct message when user enters current password in new password field");
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS);
 			pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAsteampw5"), LOGIN.getProperty("DRASteam5pw1"));
 			pf.getDraPageInstance(ob).validateNewPwdErrorMsg(test);
 			test.log(LogStatus.INFO, "User is able to see the correct message when user enters password in new password field which is matching with the previous 4 passwords.");

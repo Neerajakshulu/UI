@@ -14,6 +14,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class DRAIAM005 extends TestBase {
 
@@ -77,7 +78,8 @@ public class DRAIAM005 extends TestBase {
 			
 			for (int i = 0; i < 9; i++) {
 				pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAcurrentsteampw4"), LOGIN.getProperty("DRAnewsteampw4"));
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS);
 			}
 			
 			closeBrowser();

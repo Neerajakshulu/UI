@@ -91,7 +91,7 @@ public class DRAIAM0014 extends TestBase {
 			String firstAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 
 			test.log(LogStatus.INFO, "Steam account profile name: " + firstAccountProfileName);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
@@ -100,7 +100,8 @@ public class DRAIAM0014 extends TestBase {
 			validateAccounts(1, accountType);
 			pf.getDraPageInstance(ob).logoutDRA();
 			// closeBrowser();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 			ob.navigate().to(host);
 			try {
 
@@ -116,7 +117,7 @@ public class DRAIAM0014 extends TestBase {
 				test.log(LogStatus.INFO, "Social account profile name: " + secondAccountProfileName);
 				pf.getHFPageInstance(ob).clickProfileImage();
 				pf.getHFPageInstance(ob).clickOnAccountLink();
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				accountType = "Facebook";
 
 				validateAccountsFB(1, accountType);
@@ -135,7 +136,8 @@ public class DRAIAM0014 extends TestBase {
 
 				}
 				pf.getLoginTRInstance(ob).logOutApp();
-				BrowserWaits.waitTime(5);
+				//BrowserWaits.waitTime(5);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 
 				// Trying to Link the accounts
 
@@ -155,7 +157,7 @@ public class DRAIAM0014 extends TestBase {
 					// validating two accounts are linked or not
 					validateLinkedAccounts(2, accountType);
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNT_CROSS_CSS);
-					BrowserWaits.waitTime(2);
+					//BrowserWaits.waitTime(2);
 					String winingAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 					test.log(LogStatus.INFO, "After merging account profile name: " + winingAccountProfileName);
 
@@ -182,7 +184,7 @@ public class DRAIAM0014 extends TestBase {
 					ErrorUtil.addVerificationFailure(t);
 
 				}
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				closeBrowser();
 
 			} catch (Throwable t) {

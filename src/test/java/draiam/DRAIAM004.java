@@ -90,10 +90,12 @@ public class DRAIAM004 extends TestBase {
 					LOGIN.getProperty("DRAPasswordValid"));
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
+			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
@@ -102,9 +104,9 @@ public class DRAIAM004 extends TestBase {
 				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUserNameValid"),
 						LOGIN.getProperty("DRAPasswordValid"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 				test.log(LogStatus.PASS, "User is able to click on not now on the modal");
 				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
@@ -146,7 +148,7 @@ public class DRAIAM004 extends TestBase {
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link")));
 			}
 
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

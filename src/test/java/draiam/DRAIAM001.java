@@ -187,8 +187,7 @@ public class DRAIAM001 extends TestBase {
 				{
 					//lm_element.click();
 					pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_LANDINGPAGE_LEARNMORE_LINK_XPATH);
-					BrowserWaits.waitTime(4);
-					
+					//BrowserWaits.waitTime(4);	
 					Set<String> myset=ob.getWindowHandles();
 					Iterator<String> myIT=myset.iterator();
 					ArrayList<String> al=new ArrayList<String>();

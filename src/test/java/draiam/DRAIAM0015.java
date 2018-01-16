@@ -92,7 +92,7 @@ public class DRAIAM0015 extends TestBase {
 				test.log(LogStatus.INFO, "Social account profile name: " + FirstAccountProfileName);
 				pf.getHFPageInstance(ob).clickProfileImage();
 				pf.getHFPageInstance(ob).clickOnAccountLink();
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
 				String accountType = "Facebook";
 
 				validateAccounts(1, accountType);
@@ -111,8 +111,8 @@ public class DRAIAM0015 extends TestBase {
 
 				}
 				pf.getLoginTRInstance(ob).logOutApp();
-				BrowserWaits.waitTime(5);
-
+				//BrowserWaits.waitTime(5);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 				// Trying to Link the accounts
 				try {
 
@@ -131,7 +131,7 @@ public class DRAIAM0015 extends TestBase {
 						// validating two accounts are linked or not
 						validateLinkedAccounts(2, accountType);
 						pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNT_CROSS_CSS);
-						BrowserWaits.waitTime(2);
+						//BrowserWaits.waitTime(2);
 						String winingAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 						test.log(LogStatus.INFO, "After merging account profile name: " + winingAccountProfileName);
 
@@ -158,7 +158,7 @@ public class DRAIAM0015 extends TestBase {
 						ErrorUtil.addVerificationFailure(t);
 
 					}
-					BrowserWaits.waitTime(2);
+					//BrowserWaits.waitTime(2);
 					closeBrowser();
 
 				} catch (Throwable t) {

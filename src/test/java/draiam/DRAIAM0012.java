@@ -54,12 +54,13 @@ public class DRAIAM0012 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 			pf.getDraPageInstance(ob).steamLockedDRA(LOGIN.getProperty("DRAUSER0012Locked"));
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()),
 					30);
 			locked = ob.findElement(By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()))
 					.getText();
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			if (locked.equalsIgnoreCase(str)) {
 				test.log(LogStatus.PASS, "The locked string is displayed, the account got locked on ENW");
 			}
@@ -69,7 +70,8 @@ public class DRAIAM0012 extends TestBase {
 			}
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_OK_BUTTON_XPATH);
 
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 			pf.getDraPageInstance(ob).loginTofbSuspended();
 			String evict = ob.findElement(By.xpath(OnePObjectMap.DRA_EVICT_MSG_XPATH.toString())).getText();
 			if (evict.equalsIgnoreCase(evictMsg)) {
@@ -79,7 +81,8 @@ public class DRAIAM0012 extends TestBase {
 				test.log(LogStatus.FAIL, "The evicted string is not displayed");
 
 			}
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_OK_BUTTON_XPATH);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_OK_BUTTON_XPATH);
 			closeBrowser();
 
