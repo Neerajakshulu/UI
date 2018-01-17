@@ -56,6 +56,16 @@ public class AuthorRecordPage extends TestBase {
     }
 	
 	/**
+	 * Method for click Search tab
+	 * @param test
+	 * @throws Exception
+	 */
+	public void clickSearchTab(ExtentTest test) throws Exception{
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_LINK_XPATH);
+		waitForAjax(ob);
+    }
+	
+	/**
 	 * Method for default avatar 
 	 * @param test
 	 * @throws Exception
