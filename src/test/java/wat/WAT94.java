@@ -1,5 +1,6 @@
 package wat;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -10,24 +11,23 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 /**
- * Class for testing Author cluster search functionality with only Last Name
+ * Class for Verify that System must provide a "Search" tab on the Results page.
  * 
- * @author UC225218
+ * @author UC202376
  *
  */
-public class WAT04 extends TestBase {
+public class WAT94 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
 
 	/**
-	 * Method for displaying JIRA ID's for test case in specified path of Extent
-	 * Reports
+	 * Method to displaying JIRA ID's for test case in specified path of Extent Reports
 	 * 
-	 * @throws Exception,
-	 *             When Something unexpected
+	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -37,14 +37,14 @@ public class WAT04 extends TestBase {
 	}
 
 	/**
-	 * Method for login into WAT application using Steam ID
+	 * Method for login into WAT application using TR ID
 	 * 
-	 * @throws Exception,
-	 *             When WAT Login is not done
+	 * @throws Exception, When WAT Login is not done
 	 */
 	@Test
-	@Parameters({ "username", "password" })
-	public void testLoginWATApp(String username, String password) throws Exception {
+	@Parameters({"username", "password"})
+	public void testLoginWATApp(String username,
+			String password) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -57,15 +57,16 @@ public class WAT04 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts.... ");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Login to WAT Applicaton using valid WAT Entitled user ");
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
 			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
 			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -75,48 +76,43 @@ public class WAT04 extends TestBase {
 	}
 
 	/**
-	 * Method to search for an author cluster after successful login into WAT
-	 * application
+	 * Method for Verify that System must provide a "Search" tab on the Results page.
 	 * 
-	 * @param LastName,
-	 *            FirstName, CountryName, OrgName
-	 * @throws Exception,
-	 *             When Something unexpected
+	 * 
+	 * @throws Exception, When Something unexpected
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1","OrgName2" })
-	public void testSearchAuthorClusterOnlyLastName(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
+	public void ORCIDSearchToAuthorRecordPage(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
 			throws Exception {
-
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2, OrgName1,OrgName2, test);
-
+			pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
+			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_LINK_XPATH).isDisplayed(), "Search Link not displayed");
+			test.log(LogStatus.PASS, "Search Link displayed in Author search page.");
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Authorcluster search with only last name failed", "search_fail");
+			logFailureDetails(test, t, "Search Link not displayed","Search_Link_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
-
 	}
-
+	
+	
 	/**
-	 * updating Extent Report with test case status whether it is PASS or FAIL
-	 * or SKIP
+	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
 	 */
 	@AfterTest
 	public void reportTestResult() {
-
+		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(profilexls,
-		 * "Test Cases", TestUtil.getRowNum(profilexls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(profilexls,
+		 * "Test Cases", TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
+		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 
 	}
+
 }
