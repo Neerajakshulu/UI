@@ -16,7 +16,7 @@ import util.OnePObjectMap;
 /**
  * Class for Verify that System must provide a "Search" tab on the Results page.
  * 
- * @author UC202376
+ * @author UC225218
  *
  */
 public class WAT94 extends TestBase {

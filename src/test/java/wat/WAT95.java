@@ -14,12 +14,12 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for Verify that User must be navigated back to the search results page and the original search results must be displayed when the "Search results" tab is clicked.
+ * Class for Verify that System must navigate from search result page to the Search page when the "Search" tab is clicked.
  * 
  * @author UC225218
  *
  */
-public class WAT92 extends TestBase {
+public class WAT95 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -76,7 +76,7 @@ public class WAT92 extends TestBase {
 	}
 
 	/**
-	 * Method for Navigate to Author Record page from Search page
+	 * Method for Verify that System must navigate from search result page to the Search page when the "Search" tab is clicked.
 	 * 
 	 * @param orcid
 	 * @throws Exception, When Something unexpected
@@ -87,35 +87,15 @@ public class WAT92 extends TestBase {
 
 		try {
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, test);
-			test.log(LogStatus.PASS, "user is successfully navigated to Author record page from Search/Search Results page");
-		} catch (Throwable t) {
-			logFailureDetails(test, t, "Navigation is fail from Search/Search Results page Author Record page","author_record_navigation_fail");
-			pf.getBrowserActionInstance(ob).closeBrowser();
-		}
-	}
-	
-	
-	/**
-	 * Method for Navigate from Author Record page to Search page
-	 * 
-	 * @param orcid
-	 * @throws Exception, When Something unexpected
-	 */
-	@Test(dependsOnMethods = {"ORCIDSearchToAuthorRecordPage"})
-	@Parameters("LastName")
-	public void navigateBackAuthorRecordToSearchPage(String LastName) throws Exception {
-
-		try {
-			test.log(LogStatus.INFO, "Click Search Results tab");
-			pf.getAuthorRecordPage(ob).clickSearchTab(test);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_LINK_XPATH);
 			// Verify whether control is back in Author Search page
 			Assert.assertEquals(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
-					wos_title, "Control is not back in WOS Author Search page");
-					test.log(LogStatus.INFO, "Control is back in WOS Author Search page");
-			test.log(LogStatus.PASS, "user is successfully navigated to Author Search page after clicking search link");
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not back in WOS Author Search page");
+				test.log(LogStatus.INFO, "Control is back in WOS Author Search page");
+				test.log(LogStatus.PASS, "user is successfully navigated to Author Search page after clicking search link from author search result page");
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Navigation is fail from Search Results page","author_Search_navigation_fail");
+			logFailureDetails(test, t, "Navigation is fail from Search/Search Results page to Search page","author_search_result_navigation_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 	}
