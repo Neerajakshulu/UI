@@ -95,7 +95,7 @@ public class WAT77 extends TestBase {
 			pf.getSearchAuthClusterResultsPage(ob).verifyCardHighlightafterDeselection(test);
 			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SELECT_ALL_LINK_XPATH).isDisplayed())
 				test.log(LogStatus.PASS, "Select all link displayed after clicking deselect all link.");
-			
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();
 			logFailureDetails(test, t, "Select all functionality Fail", "SelectAll_fail");
@@ -108,7 +108,6 @@ public class WAT77 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

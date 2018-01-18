@@ -89,7 +89,7 @@ public class WAT78 extends TestBase {
 			pf.getSearchAuthClusterResultsPage(ob).DeselectAllAuthorCard(test);
 			pf.getSearchAuthClusterResultsPage(ob).verifyCardHighlightafterDeselection(test);
 			test.log(LogStatus.PASS, "DeSelect all link deselects all cards after clicking deselect all link.");
-			
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();
 			logFailureDetails(test, t, "Select all functionality Fail", "SelectAll_fail");
@@ -102,7 +102,6 @@ public class WAT78 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

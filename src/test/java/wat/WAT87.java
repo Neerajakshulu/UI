@@ -102,6 +102,7 @@ public class WAT87 extends TestBase {
 			{
 				test.log(LogStatus.PASS,"Remove Alternate button is not displayed when user gets into Author search page");
 			}
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Remove Alternate button functionality failed", "Remove_altName_Fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -115,7 +116,6 @@ public class WAT87 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

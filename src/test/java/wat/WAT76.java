@@ -90,6 +90,7 @@ public class WAT76 extends TestBase {
 			test.log(LogStatus.PASS, "Select all link successfully Highlights all author cards.");
 			pf.getSearchAuthClusterResultsPage(ob).verifyCardSelection(test);
 			test.log(LogStatus.PASS, "Select all link successfully selects all author cards.");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();
 			logFailureDetails(test, t, "Select all functionality Fail", "SelectAll_fail");
@@ -102,7 +103,6 @@ public class WAT76 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

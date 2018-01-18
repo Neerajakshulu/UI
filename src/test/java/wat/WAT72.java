@@ -90,6 +90,7 @@ public class WAT72 extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH, 5);
 			Assert.assertEquals(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_COMBINE_BTN_PRECEDING_TEXT_XPATH).getText(), Combine_btn_text, "Text not matching");
 			test.log(LogStatus.PASS, "Combine button preceding text is displayed as expected");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();
 			logFailureDetails(test, t, "Combine button text not disabled", "Combine_btn_text_fail");
@@ -102,7 +103,6 @@ public class WAT72 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

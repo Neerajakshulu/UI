@@ -114,6 +114,7 @@ public class WAT92 extends TestBase {
 					wos_title, "Control is not back in WOS Author Search page");
 					test.log(LogStatus.INFO, "Control is back in WOS Author Search page");
 			test.log(LogStatus.PASS, "user is successfully navigated to Author Search page after clicking search link");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Navigation is fail from Search Results page","author_Search_navigation_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -125,7 +126,6 @@ public class WAT92 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*
