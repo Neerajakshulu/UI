@@ -90,6 +90,7 @@ public class WAT75 extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_DESELECT_ALL_LINK_XPATH, 5);
 			if(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_DESELECT_ALL_LINK_XPATH).isDisplayed())
 				test.log(LogStatus.PASS, "DeSelect all link is displayed after clicking on Select all.");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();
 			logFailureDetails(test, t, "Author DeSelection Fail", "author_deselection_fail");
@@ -102,7 +103,6 @@ public class WAT75 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

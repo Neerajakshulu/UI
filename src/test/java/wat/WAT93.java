@@ -90,6 +90,7 @@ public class WAT93 extends TestBase {
 		try {
 			Assert.assertEquals(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH).getText(), "Last name","Last name textbox inner text not matching");
 			test.log(LogStatus.PASS, "Last name textbox inner text matching");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Last name textbox inner text not matching", "Innertext_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -103,7 +104,6 @@ public class WAT93 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

@@ -90,6 +90,7 @@ public class WAT94 extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
 			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_LINK_XPATH).isDisplayed(), "Search Link not displayed");
 			test.log(LogStatus.PASS, "Search Link displayed in Author search page.");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Search Link not displayed","Search_Link_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -102,7 +103,6 @@ public class WAT94 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

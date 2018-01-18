@@ -109,6 +109,7 @@ public class WAT91 extends TestBase {
 			pf.getBrowserActionInstance(ob).switchToNewWindow(ob);
 			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_FEEDBACK_PAGE_TITLE_XPATH).isDisplayed(),"Navigation to feedback page failed");
 			test.log(LogStatus.PASS,"Feed back link available and navigated to feedback page successfully from author record page");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Feedback link in Author search result page is not available", "Feedbacklink_Fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -122,7 +123,6 @@ public class WAT91 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*
