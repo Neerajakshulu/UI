@@ -1319,7 +1319,11 @@ public enum OnePObjectMap {
 	WAT_FEEDBACK_AUTHOR_SEARCH_RESULT_PAGE_XPATH("//a[contains(text(),'Tell us what you think')]"),
 	WAT_AUTHOR_SEARCH_RESULT_PAGE_STATICTEXT_XPATH("//div[@class='wat-search-results__message']"),
 	WAT_FEEDBACK_AUTHOR_RECORD_PAGE_XPATH("//a[contains(text(),'Tell us what you think')]"),
-	WAT_FEEDBACK_PAGE_TITLE_XPATH("//span[contains(text(),'SaR Labs Feedback')]")
+	WAT_FEEDBACK_PAGE_TITLE_XPATH("//span[contains(text(),'SaR Labs Feedback')]"),
+	WAT_SEARCH_RESULTS_FILTER_ORG_XPATH("//button[contains(text(),'Organizations')]"),
+	WAT_SEARCH_RESULTS_FILTER_OPTIONS_ORG_XPATH("//button[contains(text(),'Organizations')]/following-sibling::div"),
+	WAT_SEARCH_RESULTS_FILTER_NAME_XPATH("//button[contains(text(),'Author name')]"),
+	WAT_SEARCH_RESULTS_FILTER_OPTIONS_NAME_XPATH("//button[contains(text(),'Author name')]/following-sibling::div")
 	;
 
 	private String locator;
