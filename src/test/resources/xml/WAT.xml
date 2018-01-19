@@ -17,7 +17,7 @@
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
  
-   	<test name="WAT_Login" preserve-order="true">
+  	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -589,6 +589,12 @@
 	<test name="WAT_Search_Link_navigate" preserve-order="true">
 		<classes>
 			<class name="wat.WAT95"></class>
+		</classes>
+	</test>
+	
+	<test name="WAT_Static_text" preserve-order="true">
+		<classes>
+			<class name="wat.WAT80"></class>
 		</classes>
 	</test>
 </suite>

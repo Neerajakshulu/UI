@@ -1317,6 +1317,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH("//div[@class='wui-card'][1]/descendant::h3[@class='wui-content-title wui-content-title--medium wat-search-results-meta-title ng-scope']/a"),
 	WAT_FEEDBACK_AUTHOR_SEARCH_PAGE_XPATH("//a[contains(text(),'your feedback')]"),
 	WAT_FEEDBACK_AUTHOR_SEARCH_RESULT_PAGE_XPATH("//a[contains(text(),'Tell us what you think')]"),
+	WAT_AUTHOR_SEARCH_RESULT_PAGE_STATICTEXT_XPATH("//div[@class='wat-search-results__message']"),
 	WAT_FEEDBACK_AUTHOR_RECORD_PAGE_XPATH("//a[contains(text(),'Tell us what you think')]"),
 	WAT_FEEDBACK_PAGE_TITLE_XPATH("//span[contains(text(),'SaR Labs Feedback')]")
 	;
