@@ -590,4 +590,54 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			throw new Exception(e);
 		}
 	}
+	
+	/**
+	 *  Method to Verify that the user should be able to further refine the search result based on Subject Category
+	 * @param LastName
+	 * @param CountryName1
+	 * @param CountryName2
+	 * @param OrgName1
+	 * @param OrgName2
+	 * @throws Exception
+	 * @throws NumberFormatException
+	 * @throws InterruptedException
+	 */
+	@SuppressWarnings("static-access")
+	public void verifySubCatFunctionality(ExtentTest test) throws Exception, NumberFormatException, InterruptedException {
+		int result_Count_old;
+		int result_Count_new;
+		
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_SUBCAT_XPATH).isDisplayed(), "Subject categories filter name not displayed in Author search results page");
+		test.log(LogStatus.PASS, "Subject categories filter name displayed in Author search results page");
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_SUBCAT_XPATH).isDisplayed(), "Subject categories filter not displayed in Author search results page");
+		test.log(LogStatus.PASS, "Subject categories filter displayed in Author search results page");
+		result_Count_old = getResultCount();
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_SUBCAT_XPATH);	
+		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
+		pf.getBrowserWaitsInstance(ob).waitTime(3);
+		result_Count_new = getResultCount();
+		
+		Assert.assertTrue(result_Count_old>result_Count_new, "User is not able to further refine the search result based on Subject Category");
+		test.log(LogStatus.INFO, "New result count is less than old result count");			
+		test.log(LogStatus.PASS, "User is able to further refine the search result based on Subject Category");
+
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	/**
+	 * @return
+	 * @throws Exception
+	 * @throws NumberFormatException
+	 */
+	public int getResultCount() throws Exception, NumberFormatException {
+		int result_Count_old;
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_COUNT_XPATH);
+		String[] Search_result_Count_old = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_COUNT_XPATH).getText().split(" ");
+		if(Search_result_Count_old[0].contains("Approx"))
+				result_Count_old = Integer.parseInt(Search_result_Count_old[1]);
+		else
+			result_Count_old = Integer.parseInt(Search_result_Count_old[0]);
+		return result_Count_old;
+	}
 }
