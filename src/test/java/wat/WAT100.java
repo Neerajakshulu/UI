@@ -18,13 +18,13 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for Verify that the user should be able to further refine the search result based on Subject Category
+ * Class for Verify that the user should be able to further refine the search result based on Organization
  * 
  * @author UC225218
  *
  */
 
-public class WAT99 extends TestBase {
+public class WAT100 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -85,7 +85,7 @@ public class WAT99 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that the user should be able to further refine the search result based on Subject Category
+	 * Method to Verify that the user should be able to further refine the search result based on Organization
 	 * 
 	 * @throws Exception,
 	 *             When Something unexpected
@@ -96,10 +96,10 @@ public class WAT99 extends TestBase {
 	public void testFilterInAuthorSearchResultPageFunctionality(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2) throws Exception {
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2, OrgName1,OrgName2, test);			
-			pf.getSearchAuthClusterResultsPage(ob).verifySubCatFilterFunctionality(test);
+			pf.getSearchAuthClusterResultsPage(ob).verifyOrgFilterFunctionality(test);
 		} catch (AssertionError e) {
-				test.log(LogStatus.FAIL, "User is not able to further refine the search result based on Subject Category");
-				logFailureDetails(test, e, "User is not able to further refine the search result based on Subject Category", "Sub_cat_filter_fail");
+				test.log(LogStatus.FAIL, "User is not able to further refine the search result based on Organization");
+				logFailureDetails(test, e, "User is not able to further refine the search result based on Organization", "Org_filter_fail");
 				pf.getBrowserActionInstance(ob).closeBrowser();
 			}
 	}

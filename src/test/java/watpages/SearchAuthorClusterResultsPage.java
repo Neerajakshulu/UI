@@ -603,7 +603,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	@SuppressWarnings("static-access")
-	public void verifySubCatFunctionality(ExtentTest test) throws Exception, NumberFormatException, InterruptedException {
+	public void verifySubCatFilterFunctionality(ExtentTest test) throws Exception, NumberFormatException, InterruptedException {
 		int result_Count_old;
 		int result_Count_new;
 		
@@ -624,7 +624,73 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 
 		pf.getBrowserActionInstance(ob).closeBrowser();
 	}
+	
+	/**
+	 *  Method to Verify that the user should be able to further refine the search result based on Organization
+	 * @param LastName
+	 * @param CountryName1
+	 * @param CountryName2
+	 * @param OrgName1
+	 * @param OrgName2
+	 * @throws Exception
+	 * @throws NumberFormatException
+	 * @throws InterruptedException
+	 */
+	@SuppressWarnings("static-access")
+	public void verifyOrgFilterFunctionality(ExtentTest test) throws Exception, NumberFormatException, InterruptedException {
+		int result_Count_old;
+		int result_Count_new;
+		
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_ORG_XPATH).isDisplayed(), "Organization filter name not displayed in Author search results page");
+		test.log(LogStatus.PASS, "Organization filter name displayed in Author search results page");
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_ORG_XPATH).isDisplayed(), "Organization filter not displayed in Author search results page");
+		test.log(LogStatus.PASS, "Organization filter displayed in Author search results page");
+		result_Count_old = getResultCount();
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_ORG_XPATH);	
+		pf.getBrowserWaitsInstance(ob).waitTime(3);
+		result_Count_new = getResultCount();
+		
+		Assert.assertTrue(result_Count_old>result_Count_new, "User is not able to further refine the search result based on Organization");
+		test.log(LogStatus.INFO, "New result count is less than old result count");			
+		test.log(LogStatus.PASS, "User is able to further refine the search result based on Organization");
 
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+
+	/**
+	 *  Method to Verify that the user should be able to further refine the search result based on Author name
+	 * @param LastName
+	 * @param CountryName1
+	 * @param CountryName2
+	 * @param OrgName1
+	 * @param OrgName2
+	 * @throws Exception
+	 * @throws NumberFormatException
+	 * @throws InterruptedException
+	 */
+	@SuppressWarnings("static-access")
+	public void verifyNameFilterFunctionality(ExtentTest test) throws Exception, NumberFormatException, InterruptedException {
+		int result_Count_old;
+		int result_Count_new;
+		
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_NAME_XPATH).isDisplayed(), "Author name filter not displayed in Author search results page");
+		test.log(LogStatus.PASS, "Author name filter displayed in Author search results page");
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_NAME_XPATH).isDisplayed(), "Author name filter not displayed in Author search results page");
+		test.log(LogStatus.PASS, "Author name filter displayed in Author search results page");
+		result_Count_old = getResultCount();
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_NAME_XPATH);	
+		pf.getBrowserWaitsInstance(ob).waitTime(3);
+		result_Count_new = getResultCount();
+		
+		Assert.assertTrue(result_Count_old>result_Count_new, "User is not able to further refine the search result based on Author name");
+		test.log(LogStatus.INFO, "New result count is less than old result count");			
+		test.log(LogStatus.PASS, "User is able to further refine the search result based on Author name");
+
+		pf.getBrowserActionInstance(ob).closeBrowser();
+	}
+	
 	/**
 	 * @return
 	 * @throws Exception

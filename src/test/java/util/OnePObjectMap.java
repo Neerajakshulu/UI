@@ -1333,7 +1333,7 @@ public enum OnePObjectMap {
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_SUBCAT_XPATH("//button[contains(text(),'Subject categories')]/following-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_1st_SUBCAT_XPATH("//div[button[contains(text(),'Subject categories')]]/descendant::span[2]"),
 	
-	WAT_SEARCH_RESULTS_COUNT_XPATH("//h2[contains(text(),'results')]")
+	WAT_SEARCH_RESULTS_COUNT_XPATH("//h2[contains(text(),'result')]")
 	;
 
 	private String locator;
