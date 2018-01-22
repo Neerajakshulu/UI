@@ -1323,7 +1323,9 @@ public enum OnePObjectMap {
 	WAT_SEARCH_RESULTS_FILTER_ORG_XPATH("//button[contains(text(),'Organizations')]"),
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_ORG_XPATH("//button[contains(text(),'Organizations')]/following-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_NAME_XPATH("//button[contains(text(),'Author name')]"),
-	WAT_SEARCH_RESULTS_FILTER_OPTIONS_NAME_XPATH("//button[contains(text(),'Author name')]/following-sibling::div")
+	WAT_SEARCH_RESULTS_FILTER_OPTIONS_NAME_XPATH("//button[contains(text(),'Author name')]/following-sibling::div"),
+	WAT_SEARCH_RESULTS_FILTER_SUBCAT_XPATH("//button[contains(text(),'Subject categories')]"),
+	WAT_SEARCH_RESULTS_FILTER_OPTIONS_SUBCAT_XPATH("//button[contains(text(),'Subject categories')]/following-sibling::div")
 	;
 
 	private String locator;

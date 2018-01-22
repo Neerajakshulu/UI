@@ -608,5 +608,11 @@
 		<classes>
 			<class name="wat.WAT97"></class>
 		</classes>
+	</test> 
+	
+	<test name="WAT_Filter_Author_search_result_page_ALL_FILTERS" preserve-order="true">
+		<classes>
+			<class name="wat.WAT98"></class>
+		</classes>
 	</test>
 </suite>
