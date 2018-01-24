@@ -1296,7 +1296,9 @@ public enum OnePObjectMap {
 	WAT_COMBINE_BUTTON_XPATH("//button[@class='wui-btn wui-btn--primary']"),
 	WAT_AUTHOR_RECORD_PAGE_AUTHOR_PROFILE_ICON_XPATH("//i[@class='wui-icon wui-icon--profile wat-author-record-icon--profile']"),
 	WAT_AUTHOR_CARD_1_XPATH("//div[@class='wui-card'][1]/descendant::a"),
-	
+	WAT_ORCID_LINK_XPATH("//a[@class='wat-author-record__orcid ng-binding']"),
+	WAT_ORCID_ID("orcid-id"),
+
 	WAT_SELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
 	WAT_DESELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
 	WAT_COMBINE_BTN_PRECEDING_TEXT_XPATH("//div[button[@class='wui-btn wui-btn--primary']]/preceding-sibling::div"),

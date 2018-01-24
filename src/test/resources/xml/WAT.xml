@@ -16,7 +16,7 @@
 	<parameter name="CountryName2" value="USA" ></parameter>
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
-<!--   	<test name="WAT_Login" preserve-order="true">
+   	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -619,7 +619,7 @@
 		<classes>
 			<class name="wat.WAT99"></class>
 		</classes>
-	</test> -->
+	</test>
 	
 	<test name="WAT_Filter_Author_search_result_page_ORG" preserve-order="true">
 		<classes>
@@ -630,6 +630,13 @@
 	<test name="WAT_Filter_Author_search_result_page_NAME" preserve-order="true">
 		<classes>
 			<class name="wat.WAT101"></class>
+		</classes>
+	</test>  
+	
+	<test name="WAT_ORCID_Functionality" preserve-order="true">
+		<parameter name="lastName" value="BENZ-SCOTT" />
+		<classes>
+			<class name="wat.WAT102"></class>
 		</classes>
 	</test>
 </suite>

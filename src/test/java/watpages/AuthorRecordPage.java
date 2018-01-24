@@ -174,4 +174,19 @@ public class AuthorRecordPage extends TestBase {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * @throws Exception
+	 * @throws InterruptedException
+	 */
+	@SuppressWarnings("static-access")
+	public void orcidFunctionality(ExtentTest test) throws Exception, InterruptedException {
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_CARD_1_XPATH).click();
+		pf.getBrowserWaitsInstance(ob).waitTime(3);
+		String ORCID =pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LINK_XPATH).getText();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_LINK_XPATH);
+		pf.getBrowserActionInstance(ob).switchToNewWindow(ob);
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_ID).getText().contains(ORCID), "User not taken to the ORCID page of the Author");
+		test.log(LogStatus.PASS, "User is taken to the ORCID page of the Author successfully");
+	}
 }
