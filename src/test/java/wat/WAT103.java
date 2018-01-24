@@ -18,13 +18,13 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for Verify that The user shall be taken to the Verify that The user shall be taken to the ORCID record in a new browser window/tab when they click on the ORCID record in a new browser window/tab when they click on the Verify that The user shall be taken to the ORCID record in a new browser window/tab when they click on the ORCID
+ * Class for Verify that The user shall be taken to the ResearcherID record in a new browser window/tab when they click on the ResearcherID
  * 
  * @author UC225218
  *
  */
 
-public class WAT102 extends TestBase {
+public class WAT103 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -85,7 +85,7 @@ public class WAT102 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that The user shall be taken to the Verify that The user shall be taken to the ORCID record in a new browser window/tab when they click on the ORCID record in a new browser window/tab when they click on the Verify that The user shall be taken to the ORCID record in a new browser window/tab when they click on the ORCID
+	 * Method to Verify that The user shall be taken to the ResearcherID record in a new browser window/tab when they click on the ResearcherID
 	 * 
 	 * @throws Exception,
 	 *             When Something unexpected
@@ -93,14 +93,14 @@ public class WAT102 extends TestBase {
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "lastName", "CountryName1", "CountryName2","OrgName1","OrgName2" })
-	public void testOrcidLinkFunctionality(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2) throws Exception {
+	public void testResearcherIDLinkFunctionality(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2) throws Exception {
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2, OrgName1,OrgName2, test);			
-			pf.getAuthorRecordPage(ob).orcidFunctionality(test);
+			pf.getAuthorRecordPage(ob).researcherIdFunctionality(test);
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (AssertionError e) {
-				test.log(LogStatus.FAIL, "User not taken to the ORCID page of the Author");
-				logFailureDetails(test, e, "User not taken to the ORCID page of the Author", "Orcid_link_fail");
+				test.log(LogStatus.FAIL, "User not taken to the ResearcherID page of the Author");
+				logFailureDetails(test, e, "User not taken to the ResearcherID page of the Author", "Orcid_link_fail");
 				pf.getBrowserActionInstance(ob).closeBrowser();
 			}
 	}

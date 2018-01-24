@@ -1298,6 +1298,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_CARD_1_XPATH("//div[@class='wui-card'][1]/descendant::a"),
 	WAT_ORCID_LINK_XPATH("//a[@class='wat-author-record__orcid ng-binding']"),
 	WAT_ORCID_ID("orcid-id"),
+	WAT_RESEARCHER_XPATH("//table[@class='profileTable']/descendant::td[2]"),
+	WAT_RESEARCHERID_LINK_XPATH("//a[@class='wat-author-record__rid ng-binding']"),
 
 	WAT_SELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
 	WAT_DESELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
