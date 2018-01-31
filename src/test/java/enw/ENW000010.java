@@ -148,11 +148,14 @@ public class ENW000010 extends TestBase {
 
 			}
 			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_BUTTON_XPATH.toString())).click();
-			BrowserWaits.waitTime(5);
-			ob.findElement(By.name("email")).sendKeys(LOGIN.getProperty("UserENWsteam000010"));
-			BrowserWaits.waitTime(5);
-			ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty("PWDuserENW000010"));
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(3);
+			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ACCOUNT_STEAM_EMAILID_NAME);
+			ob.findElement(By.name(OnePObjectMap.ACCOUNT_STEAM_EMAILID_NAME.toString())).sendKeys(LOGIN.getProperty("UserENWsteam000010"));
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ACCOUNT_STEAM_PASSWORD_NAME);
+			ob.findElement(By.name(OnePObjectMap.ACCOUNT_STEAM_PASSWORD_NAME.toString())).sendKeys(LOGIN.getProperty("PWDuserENW000010"));
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DONE_BUTTON_CLICK_XPATH);
 			ob.findElement(By.xpath(OnePObjectMap.DONE_BUTTON_CLICK_XPATH.toString())).click();
 			
 			String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL1_XPATH.toString()))
@@ -191,7 +194,7 @@ public class ENW000010 extends TestBase {
 				System.out.println("fail");
 
 			}
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_RADIOBUTTON1_XPATH.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_RADIOBUTTON1_XPATH.toString())).click();
 

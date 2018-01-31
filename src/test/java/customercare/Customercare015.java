@@ -88,7 +88,7 @@ public class Customercare015 extends TestBase {
 				String Orgname = "Clarivate Analytics";
 				String Email = "naznina.b@clarivate.com";
 				String Phone = "74873023486";
-				String Extension = "+91@*%*#";
+				String Extension = "+91";
 				Select dropdown = new Select(ob.findElement(By.name("country")));
 				dropdown.selectByIndex(10);
 				String Country = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_USER_COUNTRY_NAME).getAttribute("value");

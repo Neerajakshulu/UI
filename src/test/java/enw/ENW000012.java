@@ -158,10 +158,14 @@ public class ENW000012 extends TestBase {
 			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_BUTTON_XPATH.toString())).click();
 
 			waitForElementTobeVisible(ob, By.name(OnePObjectMap.LINK_LOGIN_NAME.toString()), 30);
-			BrowserWaits.waitTime(5);
-			ob.findElement(By.name("email")).sendKeys(LOGIN.getProperty("UsersteamENW000011"));
-			BrowserWaits.waitTime(5);
-			ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty("PWDuserENW000011"));
+			BrowserWaits.waitTime(3);
+//			ob.findElement(By.name("email")).sendKeys(LOGIN.getProperty("UsersteamENW000011"));
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ACCOUNT_STEAM_EMAILID_NAME);
+			ob.findElement(By.name(OnePObjectMap.ACCOUNT_STEAM_EMAILID_NAME.toString())).sendKeys(LOGIN.getProperty("UsersteamENW000011"));
+			//BrowserWaits.waitTime(5);
+//			ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty("PWDuserENW000011"));
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ACCOUNT_STEAM_PASSWORD_NAME);
+			ob.findElement(By.name(OnePObjectMap.ACCOUNT_STEAM_PASSWORD_NAME.toString())).sendKeys(LOGIN.getProperty("PWDuserENW000011"));
 			waitForElementTobeClickable(ob, By.xpath(OnePObjectMap.DONE_BUTTON_CLICK_XPATH.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.DONE_BUTTON_CLICK_XPATH.toString())).click();
 
@@ -183,7 +187,7 @@ public class ENW000012 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_LINKEDIN_ICON_XPATH.toString()), 8);
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_STEAM_ICON_XPATH.toString()), 8);
 
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_RADIOBUTTON1_XPATH.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_RADIOBUTTON1_XPATH.toString())).click();
 			String TextcompareAfterLink = ob

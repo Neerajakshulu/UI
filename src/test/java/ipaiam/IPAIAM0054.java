@@ -63,11 +63,12 @@ public class IPAIAM0054 extends TestBase {
 			test.log(LogStatus.PASS,
 					"user successfully authenticated to the platform by by supplying correct STeAM credentials (email address + password), on the DRA sign in screen.");
 			String DRAProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
-
+			
 			test.log(LogStatus.INFO, "DRA account profile name: " + DRAProfileName);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
 			//BrowserWaits.waitTime(5);
+			ob.navigate().refresh();
 			ob.navigate().to(host);
 			//BrowserWaits.waitTime(5);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
@@ -75,11 +76,11 @@ public class IPAIAM0054 extends TestBase {
 					LOGIN.getProperty("DRAUSERsteamPWD16"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
-			pf.getDraPageInstance(ob).SearchDRAprofileName(DRAProfileName);
+			pf.getDraPageInstance(ob).SearchDRAprofileName("kavita manaz");
 			
 			//BrowserWaits.waitTime(3);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DR_SEARCH_RESULT_CSS);
-			pf.getIpaPage(ob).validateSearchResultMsg(test, DRAProfileName);
+			pf.getIpaPage(ob).validateSearchResultMsg(test, "kavita manaz");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 

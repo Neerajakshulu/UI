@@ -804,6 +804,7 @@ public class TestBase {
 
 	// logging out
 	public void logout() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		waitUntilText("Sign out");
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,

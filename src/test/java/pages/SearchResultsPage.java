@@ -308,11 +308,11 @@ public class SearchResultsPage extends TestBase {
 			return false;
 	}
 	
-	public void clickSendToEndnoteSearchPage() throws InterruptedException {
+	public void clickSendToEndnoteSearchPage() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULTS_PAGE_SENDTOENDNOTE_BUTTON_CSS);
 		WebElement button = ob
 				.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_SENDTOENDNOTE_BUTTON_CSS.toString()));
 		button.click();
-
 		BrowserWaits.waitTime(5);
 
 	}
@@ -733,15 +733,16 @@ public void verifylinkDiffSteamAcctText(ExtentTest test) throws Exception {
 	}
 
 
-	public void searchArticle(String article) throws InterruptedException {
+	public void searchArticle(String article) throws Exception {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 90);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).sendKeys(article);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
 		waitForPageLoad(ob);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).clear();
-		BrowserWaits.waitTime(3);
+		waitForPageLoad(ob);
 	}
 
 	public void chooseArticle() throws InterruptedException {

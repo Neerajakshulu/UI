@@ -65,10 +65,10 @@ public class Customercare022 extends TestBase{
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/#/customer-care");
+			ob.navigate().to("https://access.dev-stable.clarivate.com/cmty/#/customer-care?app=ipa");
 
 			
-				pf.getBrowserWaitsInstance(ob).waitUntilText("Clarivate Analytics Customer Care");
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Welcome to Clarivate Analytics Customer Care");
 				
 				pf.getBrowserWaitsInstance(ob).waitForAllElementsToBePresent(OnePObjectMap.CUSTOMER_CARELINK_IN_ERRORPAGE_CSS);
 				
