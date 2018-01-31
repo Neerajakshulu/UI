@@ -1,5 +1,8 @@
 package wat;
 
+import java.util.Set;
+
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -8,19 +11,26 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import watpages.SearchAuthorClusterResultsPage;
+
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 /**
- * Class for testing Author cluster search functionality with only Last Name
+ * Class for Verify that the user should be able to further refine the search result based on Subject Category
  * 
  * @author UC225218
  *
  */
-public class WAT04 extends TestBase {
+
+public class WAT99 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
+	static String Search_result_static_text = "The following author records match your search. Author records are algorithmically generated and may not be complete, or an individual author may be represented by multiple records.\n"
+
+			+ "Select results to combine them into a single author record. Tell us what you think.";
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
@@ -75,27 +85,23 @@ public class WAT04 extends TestBase {
 	}
 
 	/**
-	 * Method to search for an author cluster after successful login into WAT
-	 * application
+	 * Method to Verify that the user should be able to further refine the search result based on Subject Category
 	 * 
-	 * @param LastName,
-	 *            FirstName, CountryName, OrgName
 	 * @throws Exception,
 	 *             When Something unexpected
+	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1","OrgName2" })
-	public void testSearchAuthorClusterOnlyLastName(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
-			throws Exception {
-
+	public void testFilterInAuthorSearchResultPageFunctionality(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2) throws Exception {
 		try {
-			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2, OrgName1,OrgName2, test);
-
-		} catch (Throwable t) {
-			logFailureDetails(test, t, "Authorcluster search with only last name failed", "search_fail");
-			pf.getBrowserActionInstance(ob).closeBrowser();
-		}
-
+			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2, OrgName1,OrgName2, test);			
+			pf.getSearchAuthClusterResultsPage(ob).verifySubCatFilterFunctionality(test);
+		} catch (AssertionError e) {
+				test.log(LogStatus.FAIL, "User is not able to further refine the search result based on Subject Category");
+				logFailureDetails(test, e, "User is not able to further refine the search result based on Subject Category", "Sub_cat_filter_fail");
+				pf.getBrowserActionInstance(ob).closeBrowser();
+			}
 	}
 
 	/**

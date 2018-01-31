@@ -62,20 +62,15 @@ public class Watchlist017 extends TestBase {
 
 			// Opening the browser
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
-
 			// Creating new user as need to test default watch list
 			createNewUser("mask", "man");
 
 			// Step1: Checking the default watch list
 			// Clicking on first watch button from home page
 			waitForPageLoad(ob);
+			BrowserWaits.waitTime(6);
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 
 			// Wait until select a watch list model loads

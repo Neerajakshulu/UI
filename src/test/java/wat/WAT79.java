@@ -85,7 +85,8 @@ public class WAT79 extends TestBase {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2,
 					OrgName1, OrgName2,test);
 			pf.getSearchAuthClusterResultsPage(ob).clickAuthorCard(test);
-			pf.getAuthorRecordPage(ob).enterCurationMode(test);			
+			pf.getAuthorRecordPage(ob).enterCurationMode(test);		
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();
 			logFailureDetails(test, t, "Didnt enter Curation mode", "Curation_mode_fail");
@@ -98,7 +99,6 @@ public class WAT79 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

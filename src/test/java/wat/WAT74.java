@@ -91,6 +91,7 @@ public class WAT74 extends TestBase {
 			pf.getSearchAuthClusterResultsPage(ob).DeselectAllAuthorCard(test);
 			pf.getSearchAuthClusterResultsPage(ob).verifyCardHighlightafterDeselection(test);
 			test.log(LogStatus.PASS, "DeSelected all cards successfully.");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();
 			logFailureDetails(test, t, "Author DeSelection Fail", "author_deselection_fail");
@@ -103,7 +104,6 @@ public class WAT74 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

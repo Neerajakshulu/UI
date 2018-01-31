@@ -1,5 +1,6 @@
 package wat;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -10,17 +11,22 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 /**
- * Class for testing Author cluster search functionality with only Last Name
+ * Class for Verify the static text in Author search result page
  * 
  * @author UC225218
  *
  */
-public class WAT04 extends TestBase {
+
+public class WAT80 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
+	static String Search_result_static_text = "The following author records match your search. Author records are algorithmically generated and may not be complete, or an individual author may be represented by multiple records.\n"
+
+			+ "Select results to combine them into a single author record. Tell us what you think.";
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
@@ -75,27 +81,34 @@ public class WAT04 extends TestBase {
 	}
 
 	/**
-	 * Method to search for an author cluster after successful login into WAT
-	 * application
+	 * Method to verify all the static page content in author search result page.
 	 * 
-	 * @param LastName,
-	 *            FirstName, CountryName, OrgName
 	 * @throws Exception,
 	 *             When Something unexpected
+	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1","OrgName2" })
-	public void testSearchAuthorClusterOnlyLastName(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
-			throws Exception {
+	public void testStaticPageContent(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2) throws Exception {
 
+		// NOTE - Assertion ERRORs are caught in EXCEPTION block just for
+		// Reporting purpose
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2, OrgName1,OrgName2, test);
-
-		} catch (Throwable t) {
-			logFailureDetails(test, t, "Authorcluster search with only last name failed", "search_fail");
+			pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
+			Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_PAGE_STATICTEXT_XPATH).isDisplayed(),
+				"Author Search result page static text is not displayed");
+			Assert.assertEquals(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_PAGE_STATICTEXT_XPATH).getText(), Search_result_static_text,
+				"Author Search result page static text not matching");
+			test.log(LogStatus.PASS, "Author Search result page static text is displayed as expected");
 			pf.getBrowserActionInstance(ob).closeBrowser();
-		}
-
+		} catch (AssertionError e) {
+				test.log(LogStatus.FAIL, "Author Search result page static text is not present or not matching");
+				logFailureDetails(test, e, "Author Search result page static text is not displayed", "author_search_result_Static_text_error");
+				pf.getBrowserActionInstance(ob).closeBrowser();
+			}
 	}
 
 	/**

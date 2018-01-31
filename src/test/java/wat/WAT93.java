@@ -1,5 +1,6 @@
 package wat;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -10,14 +11,15 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 /**
- * Class for testing Author cluster search functionality with only Last Name
+ * Class for verifying Default LastName field value should be "Last Name"
  * 
  * @author UC225218
  *
  */
-public class WAT04 extends TestBase {
+public class WAT93 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -75,24 +77,22 @@ public class WAT04 extends TestBase {
 	}
 
 	/**
-	 * Method to search for an author cluster after successful login into WAT
+	 * Method to verify Default LastName field value should be "Last Name"
 	 * application
 	 * 
-	 * @param LastName,
-	 *            FirstName, CountryName, OrgName
 	 * @throws Exception,
 	 *             When Something unexpected
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1","OrgName2" })
-	public void testSearchAuthorClusterOnlyLastName(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
+	public void testSearchAuthorClusterOnlyLastName()
 			throws Exception {
 
 		try {
-			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2, OrgName1,OrgName2, test);
-
+			Assert.assertEquals(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH).getText(), "Last name","Last name textbox inner text not matching");
+			test.log(LogStatus.PASS, "Last name textbox inner text matching");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Authorcluster search with only last name failed", "search_fail");
+			logFailureDetails(test, t, "Last name textbox inner text not matching", "Innertext_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 
@@ -104,7 +104,6 @@ public class WAT04 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-
 		extent.endTest(test);
 
 		/*

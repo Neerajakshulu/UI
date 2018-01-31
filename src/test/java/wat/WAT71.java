@@ -99,6 +99,7 @@ public class WAT71 extends TestBase {
 			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH).isEnabled());
 			test.log(LogStatus.INFO, "Combine button is in enabled state");
 			test.log(LogStatus.PASS, "Combine button functionality is working as expected");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();
 			logFailureDetails(test, t, "Combine button not disabled", "author_combine_Btn_fail");
@@ -111,7 +112,6 @@ public class WAT71 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

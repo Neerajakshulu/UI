@@ -1,5 +1,6 @@
 package wat;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -10,17 +11,18 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
-
+import util.OnePObjectMap;
 
 /**
- * Class to Verify that when user clicks on select all link, system must highlight all records and checkbox must be selected in each author record
+ * Class for Verify that System must navigate from search result page to the Search page when the "Search" tab is clicked.
  * 
  * @author UC225218
  *
  */
-public class WAT76 extends TestBase {
+public class WAT95 extends TestBase {
 
 	static int status = 1;
+	static String wos_title = "Web of Science: Author search";
 
 	/**
 	 * Method to displaying JIRA ID's for test case in specified path of Extent Reports
@@ -65,6 +67,7 @@ public class WAT76 extends TestBase {
 			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
 			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
 			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -73,27 +76,27 @@ public class WAT76 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that when user clicks on select all link, system must highlight all records and checkbox must be selected in each author record
-	 *  
+	 * Method for Verify that System must navigate from search result page to the Search page when the "Search" tab is clicked.
+	 * 
 	 * @param orcid
 	 * @throws Exception, When Something unexpected
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
-	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1", "OrgName2" })
-	public void VerifySelectAllFunctionality(String LastName, String CountryName1,String CountryName2,
-			String OrgName1,String OrgName2) throws Exception {
+	@Parameters("LastName")
+	public void ORCIDSearchToAuthorRecordPage(String LastName) throws Exception {
+
 		try {
-			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2,
-					OrgName1, OrgName2,test);
-			pf.getSearchAuthClusterResultsPage(ob).selectAllAuthorCard(test);
-			pf.getSearchAuthClusterResultsPage(ob).verifyCardHighlight(test);
-			test.log(LogStatus.PASS, "Select all link successfully Highlights all author cards.");
-			pf.getSearchAuthClusterResultsPage(ob).verifyCardSelection(test);
-			test.log(LogStatus.PASS, "Select all link successfully selects all author cards.");
-			pf.getBrowserActionInstance(ob).closeBrowser();
+			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, test);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_LINK_XPATH);
+			// Verify whether control is back in Author Search page
+			Assert.assertEquals(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+				wos_title, "Control is not back in WOS Author Search page");
+				test.log(LogStatus.INFO, "Control is back in WOS Author Search page");
+				test.log(LogStatus.PASS, "user is successfully navigated to Author Search page after clicking search link from author search result page");
+				pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			t.printStackTrace();
-			logFailureDetails(test, t, "Select all functionality Fail", "SelectAll_fail");
+			logFailureDetails(test, t, "Navigation is fail from Search/Search Results page to Search page","author_search_result_navigation_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 	}
@@ -103,6 +106,7 @@ public class WAT76 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
+		
 		extent.endTest(test);
 
 		/*

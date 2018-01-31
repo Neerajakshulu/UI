@@ -1,5 +1,6 @@
 package wat;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -10,17 +11,22 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 /**
- * Class for testing Author cluster search functionality with only Last Name
+ * Class for Verify that system provides the filter option "Filter by Author Name" in the Author search result page
  * 
  * @author UC225218
  *
  */
-public class WAT04 extends TestBase {
+
+public class WAT97 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
+	static String Search_result_static_text = "The following author records match your search. Author records are algorithmically generated and may not be complete, or an individual author may be represented by multiple records.\n"
+
+			+ "Select results to combine them into a single author record. Tell us what you think.";
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
@@ -75,27 +81,28 @@ public class WAT04 extends TestBase {
 	}
 
 	/**
-	 * Method to search for an author cluster after successful login into WAT
-	 * application
+	 * Method to Verify that system provides the filter option "Filter by Author Name" in the Author search result page
 	 * 
-	 * @param LastName,
-	 *            FirstName, CountryName, OrgName
 	 * @throws Exception,
 	 *             When Something unexpected
+	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1","OrgName2" })
-	public void testSearchAuthorClusterOnlyLastName(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
-			throws Exception {
-
+	public void testFilterInAuthorSearchResultPageName(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2) throws Exception {
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2, OrgName1,OrgName2, test);
-
-		} catch (Throwable t) {
-			logFailureDetails(test, t, "Authorcluster search with only last name failed", "search_fail");
+			pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
+			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_NAME_XPATH).isDisplayed(), "Author filter name not displayed in Author search results page");
+			test.log(LogStatus.PASS, "Author filter name displayed in Author search results page");
+			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_NAME_XPATH).isDisplayed(), "Author Name filter not displayed in Author search results page");
+			test.log(LogStatus.PASS, "Author Name filter displayed in Author search results page");
 			pf.getBrowserActionInstance(ob).closeBrowser();
-		}
-
+		} catch (AssertionError e) {
+				test.log(LogStatus.FAIL, "Author Name filter displayed in Author search results page");
+				logFailureDetails(test, e, "Author Name filter displayed in Author search results page", "Name_filter_fail");
+				pf.getBrowserActionInstance(ob).closeBrowser();
+			}
 	}
 
 	/**

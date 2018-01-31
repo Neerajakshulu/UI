@@ -88,6 +88,7 @@ public class WAT73 extends TestBase {
 			pf.getSearchAuthClusterResultsPage(ob).selectAllAuthorCard(test);
 			pf.getSearchAuthClusterResultsPage(ob).verifyCardHighlight(test);
 			test.log(LogStatus.PASS, "Selec all link successfully highlighted all author cards.");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();
 			logFailureDetails(test, t, "Author Selection for combining Fail", "author_combine_fail");
@@ -100,7 +101,6 @@ public class WAT73 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*

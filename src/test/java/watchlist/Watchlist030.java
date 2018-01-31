@@ -57,17 +57,11 @@ public class Watchlist030 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-			// runOnSauceLabsFromLocal("Windows","Chrome");
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			// 1)Open browser,enter WATCHLIST URL in the address bar and hit return key
-			String tempURL = host + "/#/watchlist";
+			String tempURL = "https://apps.dev-stable.clarivate.com/cmty" + "/#/watchlist";
 			ob.navigate().to(tempURL);
 
 			// 2)Login with Steam login

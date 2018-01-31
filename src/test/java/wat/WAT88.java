@@ -113,6 +113,7 @@ public class WAT88 extends TestBase {
 			{
 				test.log(LogStatus.PASS,"Upon clicking the symbol (-) corresponding LN & FN is deleted");
 			}
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Upon clicking the symbol (-) corresponding LN & FN is not deleted", "Remove_altName_Fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -126,7 +127,6 @@ public class WAT88 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*
