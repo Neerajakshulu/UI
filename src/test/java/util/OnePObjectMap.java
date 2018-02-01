@@ -1317,6 +1317,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS("div[class='tab-pane ng-scope active'] div div"),
 	WAT_AUTHOR_RECORD_PAGE_ORGANISATION_NAME_XPATH("//ul[@class='nav nav-tabs']/li[3]/a"),
 	WAT_AUTHOR_RECORD_PAGE_ORGANISATION_TAB_STATUS_XPATH("//ul[@class='nav nav-tabs']/li[3]/a/ancestor::li"),
+	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_STATUS_XPATH("//ul[@class='nav nav-tabs']/li[2]/a/ancestor::li"),
 	
 	
 	

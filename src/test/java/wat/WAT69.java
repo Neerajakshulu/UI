@@ -11,7 +11,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ExtentManager;
 
-public class WAT67 extends TestBase {
+public class WAT69 extends TestBase {
 
 	static int status = 1;
 
@@ -67,28 +67,26 @@ public class WAT67 extends TestBase {
 	}
 
 	/**
-	 * Method for validate alternative names tab in Author Record page
+	 * Method for validate alternative names tab status in Author Record page
 	 * 
 	 * @param lastName
 	 * @throws Exception, When Something unexpected
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters("lastName")
-	public void authorRecordPageOrgTabNamesCount(String lastName) throws Exception {
+	public void authorRecordPageAlternativeNameTabStatus(String lastName) throws Exception {
 
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, test);
 			//pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
-			pf.getAuthorRecordPage(ob).checkOrganizationsTab();
-			pf.getAuthorRecordPage(ob).clickOrganizationsTab();
-			pf.getAuthorRecordPage(ob).checkAltNamesOrOrgNamesCount(test,"Organizations");
-			test.log(LogStatus.PASS, "5 or <5 Organizations are displyed");
+			pf.getAuthorRecordPage(ob).checkAlternativenamesTabStatus();
+			test.log(LogStatus.PASS, "Alternativenames Tab should be disabled");
 			pf.getWatPageInstance(ob).logoutWAT();
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Fail to display 5 or <5 Organizations",
-					"Organizations_display_Fail");
+			logFailureDetails(test, t, "Alternativenames Tab should be disabled",
+					"Alternativenames_tab_disabled_Fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

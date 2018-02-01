@@ -74,7 +74,7 @@ public class WAT66 extends TestBase {
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters("lastName")
-	public void authorRecordPageAlternativeNameTab(String lastName) throws Exception {
+	public void authorRecordPageOrgNameTabHighlight(String lastName) throws Exception {
 
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");

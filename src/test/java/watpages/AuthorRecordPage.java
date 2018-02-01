@@ -196,9 +196,9 @@ public class AuthorRecordPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void checkAlternativenamesTabStatus() throws Exception {
-		String orgName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS)
+		String orgName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_STATUS_XPATH)
 				.getText();
-		String tabStatus=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS).getAttribute("class");
+		String tabStatus=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_STATUS_XPATH).getAttribute("class");
 	    isTabDisabled=	tabStatus.contains("disabled");
 		logger.info("Alternative names Tab Status : "+isTabDisabled);
 		logger.info("Actual Value : "+orgName);

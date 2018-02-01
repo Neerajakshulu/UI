@@ -545,6 +545,13 @@
 		<classes>
 			<class name="wat.WAT68"></class>
 		</classes>
+	</test>
+	
+	<test name="author_record_page_alternatives_tab_inactiive" preserve-order="true">
+		<parameter name="lastName" value="JOHN BALAZS" />
+		<classes>
+			<class name="wat.WAT69"></class>
+		</classes>
 	</test>	
 
 	<test name="WAT_Curation_mode_test" preserve-order="true">
