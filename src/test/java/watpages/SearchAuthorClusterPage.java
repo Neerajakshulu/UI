@@ -35,6 +35,8 @@ public class SearchAuthorClusterPage extends TestBase {
 
 	List<String> unSortedOrgname = new ArrayList<String>();
 	List<String> SortedOrgname = new ArrayList<String>();
+	List<String> unSortedCountryname = new ArrayList<String>();
+	List<String> SortedCountryname = new ArrayList<String>();
 	
 	public SearchAuthorClusterPage(WebDriver ob) {
 		this.ob = ob;
@@ -506,6 +508,51 @@ public class SearchAuthorClusterPage extends TestBase {
 		} catch (AssertionError e) {
 				test.log(LogStatus.FAIL, "Org Names are not sorted as expected");
 				logFailureDetails(test, e, "Org Names are not sorted as expected", "Org_sorting_fail");
+				pf.getBrowserActionInstance(ob).closeBrowser();
+			}
+	}
+	
+	/**
+	 * @param LastName
+	 * @param CountryName1
+	 * @throws Exception
+	 * @throws InterruptedException
+	 */
+	public void CountryOrderTest(ExtentTest test, String LastName, String CountryName1) throws Exception, InterruptedException {
+		try {
+			// Verify whether control is in Author Search page
+			Assert.assertEquals(
+					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+					wos_title, "Control is not in WOS Author Search page");
+			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+			// Search for an author cluster with only Last name
+			test.log(LogStatus.INFO, "Entering author name... ");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+			pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
+			List<WebElement> ele = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+			if (ele.size() != 0) {
+				List<WebElement> CountryList = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_INNER_XPATH);
+				ListIterator<WebElement> litr = CountryList.listIterator();
+				while(litr.hasNext())
+				{
+					String temp = litr.next().getText();
+					unSortedCountryname.add(temp);
+					SortedCountryname.add(temp);
+				}
+				Collections.sort(SortedCountryname);
+				for(int i=0;i<unSortedCountryname.size();i++)
+				{
+					Assert.assertEquals(SortedCountryname.get(i), unSortedCountryname.get(i),"Country Names are not sorted as expected");
+				}
+				test.log(LogStatus.PASS, "Country Names are sorted as expected");
+		    pf.getBrowserActionInstance(ob).closeBrowser();
+			}
+		} catch (AssertionError e) {
+				test.log(LogStatus.FAIL, "Country Names are not sorted as expected");
+				logFailureDetails(test, e, "Country Names are not sorted as expected", "Country_sorting_fail");
 				pf.getBrowserActionInstance(ob).closeBrowser();
 			}
 	}

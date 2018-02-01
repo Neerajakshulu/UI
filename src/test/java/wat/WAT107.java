@@ -26,13 +26,13 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for Verify that the Organization list provided should be arranged alphabetically.
+ * Class for Verify that the Country name list provided should be arranged alphabetically.
  * 
  * @author UC225218
  *
  */
 
-public class WAT106 extends TestBase {
+public class WAT107 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -90,7 +90,7 @@ public class WAT106 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that the Organization list provided should be arranged alphabetically.
+	 * Method to  Verify that the Country name list provided should be arranged alphabetically.
 	 * 
 	 * @throws Exception,
 	 *             When Something unexpected
@@ -99,9 +99,9 @@ public class WAT106 extends TestBase {
 	@SuppressWarnings({ "static-access", "null" })
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1","OrgName2" })
-	public void testOrgListOrder(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2) throws Exception {
+	public void testCountryNameListOrder(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2) throws Exception {
 		
-		pf.getSearchAuthClusterPage(ob).orgOrderTest(test,LastName, CountryName1);
+		pf.getSearchAuthClusterPage(ob).CountryOrderTest(test,LastName, CountryName1);
 	}
 
 

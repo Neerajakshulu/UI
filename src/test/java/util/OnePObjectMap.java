@@ -1216,6 +1216,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_FIRSTSTNAME_INNERTEXT_XPATH("//label[text()='First name and middle initial(s)']"),
 	
 	WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH("//wat-select-box[@data-wat-select-box-options='vm.countryOptions']"),
+	WAT_AUTHOR_COUNTRY_DROPDOWN_INNER_XPATH("//wat-select-box[@class='ng-isolate-scope' and @data-wat-select-box-options='vm.countryOptions']/descendant::div[1]/div"),
 	WAT_AUTHOR_COUNTRY_OPTION_XPATH("//div[@class='wat-select-box__option ng-scope']/descendant::span[2]"),
 	WAT_COUNTRY_CHECKBOX_XPATH("//div[@class='wat-select-box__option ng-scope']/descendant::input[@id='Country']/following-sibling::span[1]"),
 	

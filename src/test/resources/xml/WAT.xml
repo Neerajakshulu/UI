@@ -699,6 +699,12 @@
 		<classes>
 			<class name="wat.WAT106"></class>
 		</classes>
+	</test> 
+	
+	<test name="WAT_Country_Name_Order" preserve-order="true">
+		<classes>
+			<class name="wat.WAT107"></class>
+		</classes>
 	</test>
 	
 </suite>
