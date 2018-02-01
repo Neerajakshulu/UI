@@ -1314,6 +1314,10 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS("ul[class='nav nav-tabs'] li+li a"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_HILIGHTED_CSS("li[class='uib-tab nav-item ng-isolate-scope active']"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS("div[class='tab-pane ng-scope active'] div div"),
+	WAT_AUTHOR_RECORD_PAGE_ORGANISATION_NAME_XPATH("//ul[@class='nav nav-tabs']/li[3]/a"),
+	WAT_AUTHOR_RECORD_PAGE_ORGANISATION_TAB_STATUS_XPATH("//ul[@class='nav nav-tabs']/li[3]/a/ancestor::li"),
+	
+	
 	
 	WAT_SUGGEST_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Suggest updates')]"),
 	WAT_SUBMIT_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Submit updates')]"),

@@ -82,13 +82,13 @@ public class WAT84 extends TestBase {
 			pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
 			pf.getAuthorRecordPage(ob).checkForAlternativeNames();
 			pf.getAuthorRecordPage(ob).clickAlternativeNamesTab();
-			pf.getAuthorRecordPage(ob).checkAlternativeNamesCount(test);
+			pf.getAuthorRecordPage(ob).checkAltNamesOrOrgNamesCount(test,"Alternative names");
 			pf.getAuthorRecordPage(ob).checkForAuthorNames(lastName, test);
 			test.log(LogStatus.PASS, "Below five Alternative names are displyed");
 			pf.getWatPageInstance(ob).logoutWAT();
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Below five Alternative names are displyedv related to lastname",
+			logFailureDetails(test, t, "Below five Alternative names are displayed related to lastname",
 					"alternative_names_five_users");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}

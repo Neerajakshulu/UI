@@ -11,7 +11,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ExtentManager;
 
-public class WAT83 extends TestBase {
+public class WAT66 extends TestBase {
 
 	static int status = 1;
 
@@ -79,19 +79,17 @@ public class WAT83 extends TestBase {
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, test);
-			pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
-			pf.getAuthorRecordPage(ob).checkForAlternativeNames();
-			pf.getAuthorRecordPage(ob).clickAlternativeNamesTab();
-			pf.getAuthorRecordPage(ob).checkAltNamesOrOrgNamesCount(test,"Alternative names");
-			test.log(LogStatus.PASS, "Below five Alternative names are displyed");
+			//pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
+			pf.getAuthorRecordPage(ob).checkOrganizationsTab();
+			pf.getAuthorRecordPage(ob).clickOrganizationsTab();
+			test.log(LogStatus.PASS, "Organizations tab highlighted by highlight bar when user clicked on Organizations tab");
 			pf.getWatPageInstance(ob).logoutWAT();
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Below five Alternative names are displyed",
-					"alternative_names_five_users");
+			logFailureDetails(test, t, "Organizations tab not highlighted by highlight bar when user clicked on Organizations tab",
+					"Organizations_tab_not_highlighted");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
-
 	}
 
 	/**

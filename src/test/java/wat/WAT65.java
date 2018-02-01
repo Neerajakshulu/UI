@@ -11,7 +11,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ExtentManager;
 
-public class WAT83 extends TestBase {
+public class WAT65 extends TestBase {
 
 	static int status = 1;
 
@@ -74,21 +74,19 @@ public class WAT83 extends TestBase {
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters("lastName")
-	public void authorRecordPageAlternativeNameTab(String lastName) throws Exception {
+	public void authorRecordPageOrganisationTab(String lastName) throws Exception {
 
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, test);
-			pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
-			pf.getAuthorRecordPage(ob).checkForAlternativeNames();
-			pf.getAuthorRecordPage(ob).clickAlternativeNamesTab();
-			pf.getAuthorRecordPage(ob).checkAltNamesOrOrgNamesCount(test,"Alternative names");
-			test.log(LogStatus.PASS, "Below five Alternative names are displyed");
+			//pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
+			pf.getAuthorRecordPage(ob).checkOrganizationsTab();
+			test.log(LogStatus.PASS, "Organizations tab displayed in author record page");
 			pf.getWatPageInstance(ob).logoutWAT();
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Below five Alternative names are displyed",
-					"alternative_names_five_users");
+			logFailureDetails(test, t, "Organizations tab not displaying in author record page",
+					"Organizations_names_tab_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

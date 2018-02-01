@@ -25,6 +25,7 @@ public class AuthorRecordPage extends TestBase {
 	String metaTitle;
 	String metaOrg;
 	boolean hilightedTab=false;
+	boolean isTabDisabled=false;
 	List<WebElement> namesCount;
 
 	public AuthorRecordPage(WebDriver ob) {
@@ -112,26 +113,53 @@ public class AuthorRecordPage extends TestBase {
 		//test.log(LogStatus.PASS, "Alternative names tab displayed in author record page");
 
 	}
+	
+	/**
+	 * Method for check Organization Tab displayed in Author Record page
+	 * @throws Exception
+	 */
+	public void checkOrganizationsTab() throws Exception {
+		String orgName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ORGANISATION_NAME_XPATH)
+				.getText();
+		logger.info("Actual Value : "+orgName);
+		if(!orgName.equals("Organizations")){
+			throw new Exception("Organizations tab Not displayed in author record page");
+		}
+	}
 
+	/**
+	 * Method for click Organizations Tab
+	 * @throws Exception
+	 */
+	public void clickOrganizationsTab() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ORGANISATION_NAME_XPATH);
+		waitForAjax(ob);
+		hilightedTab = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_HILIGHTED_CSS).isDisplayed();
+		if (!hilightedTab) {
+			throw new Exception("Organizations tab is not hilighted");
+		}
+	}
+	
 	public void clickAlternativeNamesTab() throws Exception {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS);
 		waitForAjax(ob);
 		hilightedTab = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_HILIGHTED_CSS).isDisplayed();
 		if (!hilightedTab) {
-			throw new Exception("Alternative tab is not hilighted");
+			throw new Exception("Alternative names tab is not hilighted");
 		}
 		
 		
 	}
 
-	public void checkAlternativeNamesCount(ExtentTest test) throws Exception {
+	public void checkAltNamesOrOrgNamesCount(ExtentTest test,String tabName) throws Exception {
 		namesCount=pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS);
 		if(namesCount.size()<=5){
-			test.log(LogStatus.INFO, "Below five Alternative names are displyed");
+			test.log(LogStatus.INFO, "5 or <5 "+tabName+" are displayed");
 		}else{
-			throw new Exception("Below five Alternative names are not displyed");
+			throw new Exception("No "+tabName+"are displayed" );
 		}
 	}
 
@@ -143,7 +171,39 @@ public class AuthorRecordPage extends TestBase {
 			if(name.contains(names[0])||name.contains(names[1])){
 				test.log(LogStatus.INFO, "Alternative names matching with last name");
 			}
+		 }
 		}
+	}
+	
+	/**
+	 * Method for check Organizations Tab status active or inactive
+	 * @throws Exception
+	 */
+	public void checkOrganizationsTabStatus() throws Exception {
+		String orgName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ORGANISATION_TAB_STATUS_XPATH)
+				.getText();
+		String tabStatus=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ORGANISATION_TAB_STATUS_XPATH).getAttribute("class");
+	    isTabDisabled=	tabStatus.contains("disabled");
+		logger.info("Org Tab Status : "+isTabDisabled);
+		logger.info("Actual Value : "+orgName);
+		if(!(orgName.equals("Organizations")&& isTabDisabled)){
+			throw new Exception("Organizations names tab displayed in active mode");
+		}
+	}
+	
+	/**
+	 * Method for check Alternativenames Tab status active or inactive
+	 * @throws Exception
+	 */
+	public void checkAlternativenamesTabStatus() throws Exception {
+		String orgName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS)
+				.getText();
+		String tabStatus=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS).getAttribute("class");
+	    isTabDisabled=	tabStatus.contains("disabled");
+		logger.info("Alternative names Tab Status : "+isTabDisabled);
+		logger.info("Actual Value : "+orgName);
+		if(!(orgName.equals("Organizations")&& isTabDisabled)){
+			throw new Exception("Alternative names tab displayed in active mode");
 		}
 	}
 

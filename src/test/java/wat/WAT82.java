@@ -91,6 +91,7 @@ public class WAT82 extends TestBase {
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 
+
 	}
 
 	/**

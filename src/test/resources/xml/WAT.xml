@@ -16,7 +16,7 @@
 	<parameter name="CountryName2" value="USA" ></parameter>
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
-    	<test name="WAT_Login" preserve-order="true">
+	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -33,7 +33,7 @@
 		<classes>
 			<class name="wat.WAT03"></class>
 		</classes>
-	</test> 
+	</test>
 
 	<test name="WAT_Author_Search_Only_Lastname" preserve-order="true">
 		<classes>
@@ -41,7 +41,7 @@
 		</classes>
 	</test>
 
- <test name="WAT_Author_Search_Only_firstname" preserve-order="true">
+	<test name="WAT_Author_Search_Only_firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT05"></class>
 		</classes>
@@ -63,19 +63,19 @@
 		<classes>
 			<class name="wat.WAT08"></class>
 		</classes>
-	</test> 
+	</test>
 
- 	<test name="WAT_Author_Search_spcl_char_lastname" preserve-order="true">
+	<test name="WAT_Author_Search_spcl_char_lastname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT09"></class>
 		</classes>
-	</test> 
+	</test>
 
 	<test name="WAT_Author_Search_number_lastnamee" preserve-order="true">
 		<classes>
 			<class name="wat.WAT10"></class>
 		</classes>
-	</test> 
+	</test>
 
 	<test name="WAT_Author_Search_alphanum_lastname" preserve-order="true">
 		<classes>
@@ -93,7 +93,7 @@
 		<classes>
 			<class name="wat.WAT13"></class>
 		</classes>
-	</test> 
+	</test>
 
 	<test name="WAT_Author_Search_number_firstname" preserve-order="true">
 		<classes>
@@ -107,7 +107,7 @@
 		</classes>
 	</test>
 
-<test name="WAT_Multiple_alt_name_typeahead_Lastname"
+	<test name="WAT_Multiple_alt_name_typeahead_Lastname"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT16"></class>
@@ -466,26 +466,26 @@
 		<classes>
 			<class name="wat.WAT74"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Author_Select_Deselect" preserve-order="true">
 		<classes>
 			<class name="wat.WAT75"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Author_Select_All_Functionality" preserve-order="true">
 		<classes>
 			<class name="wat.WAT76"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Author_Select_All_DeSelect_All" preserve-order="true">
 		<classes>
 			<class name="wat.WAT77"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Author_DeSelect_All_Functionality" preserve-order="true">
 		<classes>
 			<class name="wat.WAT78"></class>
@@ -518,8 +518,35 @@
 		<classes>
 			<class name="wat.WAT84"></class>
 		</classes>
-	</test> 
+	</test>
 	
+	
+	<test name="author_record_page_organizations" preserve-order="true">
+		<parameter name="lastName" value="JOHN (ZIZIOULAS) OF PERGAMON" />
+		<classes>
+			<class name="wat.WAT65"></class>
+		</classes>
+	</test>
+	<test name="author_record_page_organizations_tab" preserve-order="true">
+		<parameter name="lastName" value="JOHN (ZIZIOULAS) OF PERGAMON" />
+		<classes>
+			<class name="wat.WAT66"></class>
+		</classes>
+	</test>
+	<test name="author_record_page_organizations_count" preserve-order="true">
+		<parameter name="lastName" value="JOHN (ZIZIOULAS) OF PERGAMON" />
+		<classes>
+			<class name="wat.WAT67"></class>
+		</classes>
+	</test>
+	
+	<test name="author_record_page_organizations_tab_inactiive" preserve-order="true">
+		<parameter name="lastName" value="JOHN BALAZS" />
+		<classes>
+			<class name="wat.WAT68"></class>
+		</classes>
+	</test>	
+
 	<test name="WAT_Curation_mode_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT79"></class>
@@ -660,4 +687,5 @@
 			<class name="wat.WAT105"></class>
 		</classes>
 	</test>
+	
 </suite>
