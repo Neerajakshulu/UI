@@ -1220,6 +1220,7 @@ public enum OnePObjectMap {
 	WAT_COUNTRY_CHECKBOX_XPATH("//div[@class='wat-select-box__option ng-scope']/descendant::input[@id='Country']/following-sibling::span[1]"),
 	
 	WAT_AUTHOR_ORG_DROPDOWN_XPATH("//wat-select-box[@data-wat-select-box-options='vm.affiliationOptions']"),
+	WAT_AUTHOR_ORG_DROPDOWN_INNER_XPATH("//wat-select-box[@class='ng-isolate-scope' and @data-wat-select-box-options='vm.affiliationOptions']/descendant::div[1]/div"),
 	WAT_AUTHOR_ORG_OPTION_XPATH("//wat-select-box[@data-wat-select-box-options='vm.affiliationOptions']/descendant::span[@class='wui-checkbox__label']"),	
 	WAT_ORG_CHECKBOX_XPATH("//wat-select-box[@data-wat-select-box-options='vm.affiliationOptions']/descendant::input[@id='OrgName']/following-sibling::span[1]"),
 	
@@ -1344,6 +1345,7 @@ public enum OnePObjectMap {
 	WAT_SEARCH_RESULTS_FILTER_1st_SUBCAT_XPATH("//div[button[contains(text(),'Subject categories')]]/descendant::span[2]"),
 	
 	WAT_SEARCH_RESULTS_COUNT_XPATH("//h2[contains(text(),'result')]")
+	
 	;
 
 	private String locator;

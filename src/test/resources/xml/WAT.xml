@@ -686,6 +686,12 @@
 		<classes>
 			<class name="wat.WAT105"></class>
 		</classes>
+	</test> 
+	
+	<test name="WAT_Org_Name_Order" preserve-order="true">
+		<classes>
+			<class name="wat.WAT106"></class>
+		</classes>
 	</test>
 	
 </suite>

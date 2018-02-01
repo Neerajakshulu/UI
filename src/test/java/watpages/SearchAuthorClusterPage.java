@@ -1,6 +1,9 @@
 package watpages;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,6 +33,9 @@ public class SearchAuthorClusterPage extends TestBase {
 	static String orcid_Welcome_text = "Enter the author's name or ORCiD to begin your search against Web of Science article groups.";
 	static String ORCid = "0000-0002-6423-7213";
 
+	List<String> unSortedOrgname = new ArrayList<String>();
+	List<String> SortedOrgname = new ArrayList<String>();
+	
 	public SearchAuthorClusterPage(WebDriver ob) {
 		this.ob = ob;
 		pf = new PageFactory();
@@ -115,7 +121,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		}
 	}
 
-	private void cliclFindBtn(ExtentTest test) throws Exception, InterruptedException {
+	public void cliclFindBtn(ExtentTest test) throws Exception, InterruptedException {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
 		test.log(LogStatus.INFO, "Clicking find button... ");
@@ -456,6 +462,53 @@ public class SearchAuthorClusterPage extends TestBase {
 		}
 	}
 	
+
+	/**
+	 * @param LastName
+	 * @param CountryName1
+	 * @throws Exception
+	 * @throws InterruptedException
+	 */
+	public void orgOrderTest(ExtentTest test, String LastName, String CountryName1) throws Exception, InterruptedException {
+		try {
+			// Verify whether control is in Author Search page
+			Assert.assertEquals(
+					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
+					wos_title, "Control is not in WOS Author Search page");
+			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+			// Search for an author cluster with only Last name
+			test.log(LogStatus.INFO, "Entering author name... ");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+			pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
+			List<WebElement> ele = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+			if (ele.size() != 0) {
+				pf.getSearchAuthClusterPage(ob).selectCountryofAuthor(test,CountryName1);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
+				List<WebElement> OrgList = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_INNER_XPATH);
+				ListIterator<WebElement> litr = OrgList.listIterator();
+				while(litr.hasNext())
+				{
+					String temp = litr.next().getText();
+					unSortedOrgname.add(temp);
+					SortedOrgname.add(temp);
+				}
+				Collections.sort(SortedOrgname);
+				for(int i=0;i<unSortedOrgname.size();i++)
+				{
+					Assert.assertEquals(SortedOrgname.get(i), unSortedOrgname.get(i),"Org Names are not sorted as expected");
+				}
+				test.log(LogStatus.PASS, "Org Names are sorted as expected");
+		    pf.getBrowserActionInstance(ob).closeBrowser();
+			}
+		} catch (AssertionError e) {
+				test.log(LogStatus.FAIL, "Org Names are not sorted as expected");
+				logFailureDetails(test, e, "Org Names are not sorted as expected", "Org_sorting_fail");
+				pf.getBrowserActionInstance(ob).closeBrowser();
+			}
+	}
 	
 	/**
 	 * Method to select Country value for further filtering of author cluster.
