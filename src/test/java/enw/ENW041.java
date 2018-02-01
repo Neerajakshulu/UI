@@ -64,10 +64,10 @@ public class ENW041 extends TestBase {
 				closeBrowser();
 			}
 			VerifyTheCheckList("SUTILITYCUSTOMER");
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			// Test();
 			Test1(LOGIN.getProperty("SUTILITYCUSTOMER"));
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			LoginToENW();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		} catch (Throwable t) {
@@ -90,7 +90,7 @@ public class ENW041 extends TestBase {
 		ob.get("https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote");
 		pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("SUTILITYCUSTOMER"),
 				(LOGIN.getProperty("SUPPORTUTILITYPWD")));
-		BrowserWaits.waitTime(9);
+		//BrowserWaits.waitTime(9);
 		// pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters",
 		// "EndNote", "Downloads", "Options");
 //		String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();
@@ -108,16 +108,18 @@ public class ENW041 extends TestBase {
 //			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 //					this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
 //		}
-		BrowserWaits.waitTime(3);
+		//BrowserWaits.waitTime(3);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-		BrowserWaits.waitTime(3);
+		//BrowserWaits.waitTime(3);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH);
 		ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 		closeBrowser();
 	}
 
 	private void Test1(String CnameForSearch) throws Exception {
 		String str = ob.findElement(By.xpath("//form[@name='removeForm']//h2")).getText();
-		BrowserWaits.waitTime(4);
+		//BrowserWaits.waitTime(4);
 		try {
 			if (str.contains(CnameForSearch)) {
 				logger.info("Support Utility Home page as displayed as:" + str);

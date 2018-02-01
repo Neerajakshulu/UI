@@ -74,12 +74,12 @@ public class ENW033 extends TestBase {
 	ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_BUTTON_XPATH.toString())).click();
 
 	waitForElementTobeVisible(ob, By.name(OnePObjectMap.LINK_LOGIN_NAME.toString()), 120);
-	BrowserWaits.waitTime(3);
+	//BrowserWaits.waitTime(3);
 	ob.findElement(By.name("email")).sendKeys(LOGIN.getProperty("steamuserenw033"));
 	ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty("steampwdenw033"));
 
 	ob.findElement(By.xpath(OnePObjectMap.DONE_BUTTON_CLICK_XPATH.toString())).click();
-	BrowserWaits.waitTime(8);
+	//BrowserWaits.waitTime(8);
 	try {
 		
 		pf.getBrowserWaitsInstance(ob)

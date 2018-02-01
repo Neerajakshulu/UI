@@ -57,18 +57,20 @@ public class ENW011 extends TestBase {
 			String user_Last_Name = "";
 			String user_Full_name = "";
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("ENW011USERNAME"),(LOGIN.getProperty("ENW011PASSWORD")));
-			BrowserWaits.waitTime(6);
+			//BrowserWaits.waitTime(6);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_OPTIONS_TAB_XPATH,10);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_OPTIONS_TAB_XPATH.toString())));
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_PROFILE_TAB_XPATH,4);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_TAB_XPATH.toString())));
-			BrowserWaits.waitTime(1);
+			//BrowserWaits.waitTime(1);
 			user_First_Name = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_FIRST_NAME_XPATH.toString()))
 					.getAttribute("value");
 			user_Last_Name = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_LAST_NAME_XPATH.toString()))
 					.getAttribute("value");
 
 			logger.info("User name Saved as:" + user_Full_name);
-			BrowserWaits.waitTime(1);
+			//BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
 			actual_result = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_NAME_XPATH.toString())).getText();
 			if (ob.findElement(By.className("inactiveLink")) == null) {

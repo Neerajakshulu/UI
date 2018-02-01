@@ -76,7 +76,8 @@ public class ENW010 extends TestBase {
 				e.printStackTrace();
 			}
 			//pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH,10);
 			ValidateAlternativeHeadr();
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 

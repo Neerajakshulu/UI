@@ -67,7 +67,7 @@ public class ENW003 extends TestBase {
 			ob.get(host);
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("STEAMUSEREMAIL"),
 					LOGIN.getProperty("STEAMUSERPASSWORD"));
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
 			pf.getSearchResultsPageInstance(ob).searchArticle(CONFIG.getProperty("article"));
 
@@ -75,8 +75,8 @@ public class ENW003 extends TestBase {
 
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS.toString()))
 					.click();
-			BrowserWaits.waitTime(5);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS,10);
 			BrowserWaits.waitTime(8);
 			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 
@@ -84,6 +84,7 @@ public class ENW003 extends TestBase {
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_STEAMLINKING_WHILE_SENDTOENW_BUTTON_CSS.toString()))
 					.sendKeys("asdfg");
 			BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS,5);
 			ob.findElement(By
 					.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString()))
 					.click();

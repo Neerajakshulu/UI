@@ -51,7 +51,7 @@ public class ENW021 extends TestBase {
 			ob.navigate().to("https://rid-qa.researcherid.com/");
 			logger.info(Inet4Address.getLocalHost().getHostAddress());
 			loginToRID("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			try {
 				if (!Inet4Address.getLocalHost().getHostAddress().startsWith("10.29")) {
 					CessarNotEntiteledWithIP();
@@ -82,10 +82,10 @@ public class ENW021 extends TestBase {
 		EndNoteSeesion(ob);
 		pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("MARKETUSEREMAIL"),
 				(LOGIN.getProperty("MARKETUSERPASSWORD")));
-		BrowserWaits.waitTime(4);
+		//BrowserWaits.waitTime(4);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
-		BrowserWaits.waitTime(8);
+		//BrowserWaits.waitTime(8);
 		if (ob.getCurrentUrl().contains(expectedUrl)) {
 			if (!ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).isDisplayed()) {
 				test.log(LogStatus.FAIL, "Expected page is not displayed");
@@ -105,7 +105,7 @@ public class ENW021 extends TestBase {
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.RID_ENDNOTE_LINK_XPATH.toString())));
 		EndNoteSeesion(ob);
 		// EndNoteSeesion(ob);
-		BrowserWaits.waitTime(8);
+		//BrowserWaits.waitTime(8);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
 		try {
@@ -114,7 +114,7 @@ public class ENW021 extends TestBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		BrowserWaits.waitTime(8);
+		//BrowserWaits.waitTime(8);
 		if (ob.getCurrentUrl().contains(expectedUrl)) {
 			if (!ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).isDisplayed()) {
 				test.log(LogStatus.FAIL, "Expected page is not displayed");

@@ -54,10 +54,11 @@ public class ENW012 extends TestBase {
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("NONMARKETUSEREMAIL"),(LOGIN.getProperty( "NONMARKETUSERPASSWORD")));
-			BrowserWaits.waitTime(6);
+			//BrowserWaits.waitTime(6);
 		    pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_PRIVACY_LINK_XPATH);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PRIVACY_LINK_XPATH.toString())));
 			// ob.findElement(By.xpath(OR.getProperty("ENW_termsof_use"))).click();
 			String newWindow = switchToNewWindow(ob);

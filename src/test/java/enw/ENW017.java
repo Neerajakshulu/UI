@@ -51,7 +51,7 @@ public class ENW017 extends TestBase {
 			//String expected_URL = "Thank You";
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MARKETUSEREMAIL"),(LOGIN.getProperty("MARKETUSERPASSWORD")));
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			//pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
 
 //			String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();
@@ -69,11 +69,13 @@ public class ENW017 extends TestBase {
 //				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 //						this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
 //			}
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_FEEDBACK_XPATH);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_FEEDBACK_XPATH.toString())));
 			//ob.findElement(By.partialLinkText("Send feedback")).click();
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			Set<String> st =ob.getWindowHandles();
 			Iterator<String> I1= st.iterator();
 			while(I1.hasNext())
@@ -104,7 +106,8 @@ public class ENW017 extends TestBase {
 				}
 	            ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH_ENDNOTE.toString()))
 				.sendKeys("Feedback sending");
-		        BrowserWaits.waitTime(2);
+		       // BrowserWaits.waitTime(2);
+	            pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH_ENDNOTE);
 		        jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH_ENDNOTE.toString())));
 		        BrowserWaits.waitTime(8);
 				if (!ob.findElement(By.xpath("//div[contains(text(),'Thank')]")).isDisplayed()) {
@@ -114,7 +117,7 @@ public class ENW017 extends TestBase {
 				} else {
 					test.log(LogStatus.PASS, "Feedback has been sent successfully.");
 					ob.close();
-					Thread.sleep(2000);
+					//Thread.sleep(2000);
 				}
 		        ob.switchTo().window(parentWindow_Id);
 			}

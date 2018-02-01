@@ -58,7 +58,7 @@ public class ENW030 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CSS.toString()), 180);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CSS.toString())));
 			waitForPageLoad(ob);
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			String firstName= ob.findElement(By.cssSelector("[name='firstName']")).getAttribute("placeholder");
 			try {
 				Assert.assertEquals(expected_URL, firstName);	

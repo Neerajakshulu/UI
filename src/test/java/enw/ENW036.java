@@ -67,18 +67,18 @@ public class ENW036 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).searchArticle("Dissipation and emission of p-mode in the quiet sun from acoustic imaging with TON data");
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			pf.getSearchResultsPageInstance(ob).chooseArticle();
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			
 			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 			
 			//pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			logout();
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			ob.navigate().refresh();
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("grpAuthUserenw036"),(LOGIN.getProperty("grpAuthPwdenw036")));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			
 			try {
 				if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
@@ -135,20 +135,24 @@ public class ENW036 extends TestBase {
 		// ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 		 try {
 			//pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL037"),(LOGIN.getProperty("USERPASSWORD037")));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			waitForElementTobeVisible(ob, By.xpath(".//*[@id='idCheckAllRef']"), 60);
 			if ( !ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).isSelected() )
 			{
 				ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).click();
 			}			
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
+			waitForElementTobeVisible(ob, By.xpath(".//*[@id='idDeleteTrash']"), 60);
 			ob.findElement(By.xpath(".//*[@id='idDeleteTrash']")).click();
 			HandleAlert();
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 		
 		} catch (Exception e) {

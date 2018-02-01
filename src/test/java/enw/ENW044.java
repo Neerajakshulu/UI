@@ -48,7 +48,7 @@ public class ENW044 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			//NavigatingToENW();
-			BrowserWaits.waitTime(8);
+			//BrowserWaits.waitTime(8);
 			ob.get(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL044"),
 					LOGIN.getProperty("USERPASSWORD044"));
@@ -58,7 +58,7 @@ public class ENW044 extends TestBase {
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
 			// Navigating to record view page
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage();
 			HashMap<String, String> neonValues = new HashMap<String, String>();
 			neonValues.put("expectedName",
@@ -66,13 +66,13 @@ public class ENW044 extends TestBase {
 			neonValues.put("expectedAbstract",
 					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_POST_ABSTRACT_XPATH.toString())).getText());
 			logout();
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			ob.navigate().refresh();
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL044"),(LOGIN.getProperty("USERPASSWORD044")));
-			BrowserWaits.waitTime(8);
+			//BrowserWaits.waitTime(8);
 			test.log(LogStatus.PASS, "User navigate to End note");
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			try {
 				if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
 					ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
@@ -80,7 +80,7 @@ public class ENW044 extends TestBase {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
@@ -98,14 +98,14 @@ public class ENW044 extends TestBase {
 			
 				e.printStackTrace();
 			}
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 	 		//pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
 			HashMap<String, String> endNoteDetails = new HashMap<String, String>();
 						endNoteDetails.put("TitleofEntry",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_ENTRY_XPATH.toString())).getText());
 						endNoteDetails.put("Abstract",
 								ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_ABSTRACT_VALUE_CSS.toString())).getText());
-						BrowserWaits.waitTime(4);
+						//BrowserWaits.waitTime(4);
 						
 			if (!(endNoteDetails.get("TitleofEntry").equals(neonValues.get("expectedName")))) {
 				//Assert.assertEquals(true, false);
@@ -141,20 +141,24 @@ public class ENW044 extends TestBase {
 	 private void NavigatingToENW() {
 		 try {
 				//pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL037"),(LOGIN.getProperty("USERPASSWORD037")));
-				BrowserWaits.waitTime(3);
+				//BrowserWaits.waitTime(3);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
-				BrowserWaits.waitTime(5);
+				//BrowserWaits.waitTime(5);
+				waitForElementTobeVisible(ob, By.xpath(".//*[@id='idCheckAllRef']"), 60);
 				if ( !ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).isSelected() )
 				{
 					ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).click();
 				}			
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
+				waitForElementTobeVisible(ob, By.xpath(".//*[@id='idDeleteTrash']"), 60);
 				ob.findElement(By.xpath(".//*[@id='idDeleteTrash']")).click();
 				HandleAlert();
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
 				jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-				BrowserWaits.waitTime(3);
+				//BrowserWaits.waitTime(3);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH);
 				ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 			
 			} catch (Exception e) {

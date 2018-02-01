@@ -54,18 +54,22 @@ public class ENW018 extends TestBase {
 			ob.navigate().to(host);			
 			loginAs("MarketUser42", "MarketUser42PWD");
 			pf.getHFPageInstance(ob).clickProfileImage();
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH.toString())));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_SEND_FEEDBACK_TO_NEONTEAM_XPATH);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_SEND_FEEDBACK_TO_NEONTEAM_XPATH.toString())));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH);
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString()))
 					.sendKeys("Feedback sending");
-			BrowserWaits.waitTime(9);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH);
+			BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH,10);
+			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
-			BrowserWaits.waitTime(20);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH);
+			//BrowserWaits.waitTime(20);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH,20);
 			String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH.toString())).getText();
 			try {
 				Assert.assertEquals(expected_URL, str);
@@ -78,10 +82,10 @@ public class ENW018 extends TestBase {
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 								+ "Feedback New window is not displayed and content is not matching")));// screenshot
 			}
-			
-			BrowserWaits.waitTime(8);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH,5);
+			//BrowserWaits.waitTime(8);
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
-			BrowserWaits.waitTime(8);
+			//BrowserWaits.waitTime(8);
 			ReportAproblem();
 			logout();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
@@ -102,18 +106,18 @@ public class ENW018 extends TestBase {
 	}
 
 	private void ReportAproblem() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_SEND_FEEDBACK_LINK_XPATH);
 		jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_SEND_FEEDBACK_LINK_XPATH.toString())));
-		BrowserWaits.waitTime(3);
+		//BrowserWaits.waitTime(3);
 		try {
 		if (ob.findElements(By.xpath(OnePObjectMap.SEND_FEEDBACK_COUNTRY_SELECTION_XPATH.toString())).size() > 0) {
 			Select Country = new Select(ob.findElement(By.xpath(OnePObjectMap.COUNTRY_SELECT_IN_NEON.toString())));
 			Country.selectByVisibleText("India");
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString())).sendKeys("Feedback has been sent");
-			BrowserWaits.waitTime(2);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH);
+			BrowserWaits.waitTime(5);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
-			BrowserWaits.waitTime(7);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH);
+			//BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH,10);
 			String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH.toString())).getText();
 			Assert.assertEquals(expected_URL, str);
 			test.log(LogStatus.PASS, " Market user Feedback has  been sent successfully.");
@@ -134,7 +138,8 @@ public class ENW018 extends TestBase {
 				e.printStackTrace();
 			}// screenshot
 		}
-		BrowserWaits.waitTime(8);
+		//BrowserWaits.waitTime(8);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH,5);
 		ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		

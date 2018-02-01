@@ -78,7 +78,7 @@ public class ENW004 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 
 		    pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage(LOGIN.getProperty("sfbpwrd004"));
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			
 			try {
 //				Assert.assertEquals(expectedSuccessMessage,

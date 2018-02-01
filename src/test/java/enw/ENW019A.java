@@ -48,15 +48,19 @@ public class ENW019A extends TestBase {
 			ob.navigate().to(host);
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
 			pf.getHFPageInstance(ob).clickProfileImage();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH.toString())));
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_SEND_FEEDBACK_TO_NEONTEAM_XPATH);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_SEND_FEEDBACK_TO_NEONTEAM_XPATH.toString())));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH);
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString()))
 					.sendKeys("Feedback sending");
 			BrowserWaits.waitTime(5);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
-			BrowserWaits.waitTime(12);
+			//BrowserWaits.waitTime(12);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH);
 			String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH.toString())).getText();
 			try {
 				Assert.assertEquals(expected_Str, str);
@@ -70,27 +74,28 @@ public class ENW019A extends TestBase {
 								+ "Feedback New window is not displayed and content is not matching")));// screenshot
 			}
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_SEND_FEEDBACK_LINK_XPATH);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_SEND_FEEDBACK_LINK_XPATH.toString())));
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			if (ob.findElements(By.xpath(OnePObjectMap.SEND_FEEDBACK_COUNTRY_SELECTION_XPATH.toString())).size() > 0) {
 				Select Country = new Select(ob.findElement(By.xpath(OnePObjectMap.COUNTRY_SELECT_IN_NEON.toString())));
 				Country.selectByVisibleText("India");
 				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString())).sendKeys("testing");
-				BrowserWaits.waitTime(2);
+				BrowserWaits.waitTime(5);
 				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
-				BrowserWaits.waitTime(8);
+				//BrowserWaits.waitTime(8);
 				str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH.toString())).getText();
 				Assert.assertEquals(expected_Str, str);
 				test.log(LogStatus.PASS, " Non market user support request has  been sent successfully.");
 				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
-				Thread.sleep(2000);
+				//Thread.sleep(2000);
 			} else {
 				test.log(LogStatus.FAIL, "Non market user support request has not been sent");
 			}
 			logout();
 			ob.navigate().refresh();
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			NavigateToENW();
 			logoutEnw();
 			closeBrowser();
@@ -117,7 +122,7 @@ public class ENW019A extends TestBase {
 		ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 		ob.navigate().refresh();
 		pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("NONMARKETUSEREMAIL"),(LOGIN.getProperty("NONMARKETUSERPASSWORD")));
-		BrowserWaits.waitTime(10);
+		//BrowserWaits.waitTime(10);
 		try {
 			if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
 				ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
