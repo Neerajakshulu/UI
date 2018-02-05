@@ -337,7 +337,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 						OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_TOP_JOURNALS_CSS
 								.toString()));
 				logger.info("Top journals size-->" + journals.size());
-				if (!(journals.size() <= 3 && journals.size() == 0)) {
+				if (!(journals.size() <= 3)) {
 					test.log(LogStatus.FAIL, "Top Journals section should contain max of 3 journal titles");
 					throw new Exception("Top Journals section should contain max of 3 journal titles");
 				}
