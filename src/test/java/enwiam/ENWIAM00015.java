@@ -79,8 +79,8 @@ public class ENWIAM00015 extends TestBase {
 		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty("sru_steampw11"));
 		ob.findElement(By.xpath("//span[contains(text(),'Sign in')]")).click();
 
-		BrowserWaits.waitTime(2);
-
+		//BrowserWaits.waitTime(2);
+        waitForElementTobeVisible(ob, By.xpath("//h2[contains(text(),'Your account has been evicted.')]"), 60);
 		String evict = ob.findElement(By.xpath("//h2[contains(text(),'Your account has been evicted.')]")).getText();
 		if (evict.equalsIgnoreCase(str)) {
 			test.log(LogStatus.PASS, "The evicted string is displayed, the account got evicted");
@@ -90,6 +90,7 @@ public class ENWIAM00015 extends TestBase {
 
 		}
 		BrowserWaits.waitTime(3);
+		waitForElementTobeVisible(ob, By.xpath("//button[contains(text(),'OK')]"), 60);
 		ob.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
 
 	}

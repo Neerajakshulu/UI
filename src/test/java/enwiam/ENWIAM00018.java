@@ -98,7 +98,8 @@ public class ENWIAM00018 extends TestBase {
 		pf.getLoginTRInstance(ob).closeOnBoardingModal();
 		//pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 		logout();
-		BrowserWaits.waitTime(2);
+		//BrowserWaits.waitTime(2);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 
 	}
 
@@ -134,7 +135,7 @@ public class ENWIAM00018 extends TestBase {
 
 		}
 
-		BrowserWaits.waitTime(2);
+		//BrowserWaits.waitTime(2);
 
 	}
 

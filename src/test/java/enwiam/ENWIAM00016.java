@@ -95,8 +95,8 @@ public class ENWIAM00016 extends TestBase {
 			validateAccounts(1, accountType);
 
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
-
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
@@ -118,8 +118,10 @@ public class ENWIAM00016 extends TestBase {
 				ob.findElement(By.xpath(OnePObjectMap.ENW_NOTNOW_XPATH.toString())).click();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-				BrowserWaits.waitTime(5);
+				//BrowserWaits.waitTime(5);
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString()), 60);
 				ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString()), 60);
 				ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 				
 //				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString()), 30);
@@ -131,13 +133,13 @@ public class ENWIAM00016 extends TestBase {
 //				BrowserWaits.waitTime(5);
 //				validateAccounts(1, accountType1);
 //				pf.getLoginTRInstance(ob).logoutEnw();
-				BrowserWaits.waitTime(5);
-
+				//BrowserWaits.waitTime(5);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 				//ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
 						LOGIN.getProperty("PWDUserFBENWIAM80"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 
 //				List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.ENW_NOTNOW_XPATH);
 //
@@ -147,7 +149,7 @@ public class ENWIAM00016 extends TestBase {
 //				} else {
 //					test.log(LogStatus.FAIL, "link account modal is displayed again on subsequent login.");
 //				}
-
+                waitForElementTobePresent(ob, By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString()), 60);
 				ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
 				ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 				

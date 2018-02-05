@@ -83,7 +83,8 @@ public class ENWIAM0004 extends TestBase {
 		ob.findElement(By.name("loginPassword")).sendKeys("Yogi@123");
 		ob.findElement(By.xpath("//span[contains(text(),'Sign in')]")).click();
 		test.log(LogStatus.PASS, "user has logged in with steam account");
-		BrowserWaits.waitTime(2);
+		//BrowserWaits.waitTime(2);
+		waitForElementTobePresent(ob, By.xpath("//h2[contains(text(),'Your account has been evicted.')]"), 60);
 		String evict = ob.findElement(By.xpath("//h2[contains(text(),'Your account has been evicted.')]")).getText();
 
 		if (evict.equalsIgnoreCase(str)) {
@@ -93,13 +94,15 @@ public class ENWIAM0004 extends TestBase {
 			test.log(LogStatus.FAIL, "The evicted string is not displayed");
 
 		}
-		BrowserWaits.waitTime(3);
+		//BrowserWaits.waitTime(3);
+		waitForElementTobeVisible(ob, By.xpath("//h2[contains(text(),'Your account has been evicted.')]"), 60);
 		ob.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
 	}
 
 	// LOGIN TO ENW AND CHECKING THE EVICTED ACCONT
 	private void steamEnw() throws Exception {
+		ob.navigate().refresh();
 		ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 		String str = "Your account has been evicted.";
 		ob.findElement(By.name("loginEmail")).sendKeys("enwyogesh@yahoo.com");
@@ -107,8 +110,8 @@ public class ENWIAM0004 extends TestBase {
 		ob.findElement(By.name("loginPassword")).sendKeys("Yogi@123");
 		ob.findElement(By.xpath("//span[contains(text(),'Sign in')]")).click();
 
-		BrowserWaits.waitTime(2);
-
+		//BrowserWaits.waitTime(2);
+        waitForElementTobeVisible(ob, By.xpath("//h2[contains(text(),'Your account has been evicted.')]"), 60);
 		String evict = ob.findElement(By.xpath("//h2[contains(text(),'Your account has been evicted.')]")).getText();
 		// String evict=ob.findElement(By.xpath("//h2[contains(text(),'Your
 		// account has been evicted on ENW.')]")).getText();
@@ -119,7 +122,8 @@ public class ENWIAM0004 extends TestBase {
 			test.log(LogStatus.FAIL, "The evicted string is not displayed");
 
 		}
-		BrowserWaits.waitTime(3);
+		//BrowserWaits.waitTime(3);
+		waitForElementTobeVisible(ob, By.xpath("//button[contains(text(),'OK')]"), 60);
 		ob.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
 
 	}

@@ -83,7 +83,7 @@ public class Customercare001 extends TestBase {
 
 			try {
 				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CALLUS_SECTION_CSS);
+						.waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 				WebElement callus_element = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.CUSTOMER_CARE_CALLUS_SECTION_CSS);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_REGION_CSS);

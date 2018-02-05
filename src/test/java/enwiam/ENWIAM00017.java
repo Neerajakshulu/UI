@@ -90,10 +90,10 @@ public class ENWIAM00017 extends TestBase {
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 			Thread.sleep(2000);
 		}
-		BrowserWaits.waitTime(3);
+		//BrowserWaits.waitTime(3);
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()), 30);
 		locked = ob.findElement(By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString())).getText();
-		BrowserWaits.waitTime(2);
+		//BrowserWaits.waitTime(2);
 		if (locked.equalsIgnoreCase(str)) {
 			test.log(LogStatus.PASS, "The locked string is displayed, the account got locked on ENW");
 		}
