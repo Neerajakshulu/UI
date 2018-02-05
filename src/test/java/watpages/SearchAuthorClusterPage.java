@@ -125,7 +125,7 @@ public class SearchAuthorClusterPage extends TestBase {
 
 	public void cliclFindBtn(ExtentTest test) throws Exception, InterruptedException {
 		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+				.waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH,10);
 		test.log(LogStatus.INFO, "Clicking find button... ");
 		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
 		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)

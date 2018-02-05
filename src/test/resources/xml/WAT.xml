@@ -28,7 +28,7 @@
 		</classes>
 	</test>
 
-	<test name="WAT_Author_Search_Page_static_text_Verify"
+	 <test name="WAT_Author_Search_Page_static_text_Verify"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT03"></class>
@@ -154,19 +154,19 @@
 
 	<test name="author_results_publication" preserve-order="true">
 		<parameter name="lastName" value="SMITH" />
-		<parameter name="countryName" value="TAIWAN" />
-		<parameter name="orgName" value="ACAD SINICA" />
+		<parameter name="countryName" value="AUSTRIA" />
+		<parameter name="orgName" value="AIT" />
 		<classes>
 			<class name="wat.WAT23"></class>
 		</classes>
 	</test>
 
-	<test name="author_results_count_publication_count"
+ 	<test name="author_results_count_publication_count"
 		preserve-order="true">
 		<parameter name="lastName" value="SMITH" />
 		<parameter name="firstName" value="JOHN" />
 		<parameter name="countryName" value="USA" />
-		<parameter name="orgName" value="IBM CORP" />
+		<parameter name="orgName" value="UNIV ALABAMA" />
 		<classes>
 			<class name="wat.WAT24"></class>
 		</classes>
@@ -183,8 +183,8 @@
 	<test name="author_search_results_publication_count_morethan1"
 		preserve-order="true">
 		<parameter name="lastName" value="SALMA" />
-		<parameter name="countryName" value="AUSTRALIA" />
-		<parameter name="orgName" value="DEAKIN UNIV" />
+		<parameter name="countryName" value="CANADA" />
+		<parameter name="orgName" value="UNIV ALBERTA" />
 		<classes>
 			<class name="wat.WAT26"></class>
 		</classes>
@@ -192,8 +192,8 @@
 
 	<test name="top_3_recent_publications" preserve-order="true">
 		<parameter name="lastName" value="SALMA" />
-		<parameter name="countryName" value="AUSTRALIA" />
-		<parameter name="orgName" value="DEAKIN UNIV" />
+		<parameter name="countryName" value="CANADA" />
+		<parameter name="orgName" value="UNIV ALBERTA" />
 		<classes>
 			<class name="wat.WAT27"></class>
 		</classes>
@@ -201,14 +201,14 @@
 
 	<test name="author_search_results_with_fields" preserve-order="true">
 		<parameter name="lastName" value="SALMA" />
-		<parameter name="countryName" value="AUSTRALIA" />
-		<parameter name="orgName" value="DEAKIN UNIV" />
+		<parameter name="countryName" value="CANADA" />
+		<parameter name="orgName" value="UNIV ALBERTA" />
 		<classes>
 			<class name="wat.WAT28"></class>
 		</classes>
 	</test>
 
-	<test name="author_search_results_Top_journals" preserve-order="true">
+	 <test name="author_search_results_Top_journals" preserve-order="true">
 		<parameter name="lastName" value="MURTHY" />
 		<parameter name="countryName" value="INDIA" />
 		<parameter name="orgName" value="ANDHRA UNIV" />
@@ -419,7 +419,7 @@
 	</test>
 
 
-	<test name="author_record_meta_org" preserve-order="true">
+	  <test name="author_record_meta_org" preserve-order="true">
 		<parameter name="lastName" value="JOHN B.F." />
 		<classes>
 			<class name="wat.WAT61"></class>

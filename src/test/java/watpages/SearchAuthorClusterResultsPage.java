@@ -56,7 +56,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 */
 	public void waitForauthorClusterSearchResults(ExtentTest test) throws Exception {
 		pf.getBrowserActionInstance(ob).waitForAjax(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Search terms", "results", " Sorted by ", "Relevance");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Search terms", "results", "Sorted by", "Relevance");
 		pf.getBrowserWaitsInstance(ob)
 				.waitForAllElementsToBePresent(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
 		test.log(LogStatus.INFO, "Author Cluster Search Results page is displayed");
@@ -221,7 +221,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 
 			logger.info("top publications-->" + topPubs.size());
 
-			if (!(topPubs.size() == 3 && StringUtils.isNotEmpty(topPubs.get(0).getText())
+			if (!(topPubs.size() <= 3 && StringUtils.isNotEmpty(topPubs.get(0).getText())
 					&& StringUtils.isNotEmpty(topPubs.get(1).getText())
 					&& StringUtils.isNotEmpty(topPubs.get(2).getText()))) {
 				test.log(LogStatus.FAIL, "Top 3 Recent Publications displayed");
