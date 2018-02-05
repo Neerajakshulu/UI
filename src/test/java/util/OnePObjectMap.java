@@ -869,6 +869,7 @@ public enum OnePObjectMap {
 	DRA_BGCOLOR_CLASS_CSS("div[class='flex-center-horizontally']"),
 	DRA_PROFILE_FLYOUT_IMAGE_CSS("div[class*='wui-profile-flyout'] a[aria-label='Profile Menu']"),
 	DRA_PROFILE_FLYOUT_INFO_CSS("div[class='wui-subtitle wui-profile-flyout__name ng-binding']"),
+	DRA_PROFILE_FLYOUT_INFO_METADATA_CSS("div[class='wui-descriptor wui-profile-flyout__metadata ng-binding']"),
 	DRA_PROFILE_FLYOUT_FOOTER_LINKS_CSS("div[class='wui-profile-flyout__footer']"),
 	DRA_PROFILE_FLYOUT_HEADER_IMAGE_CSS("img[class='wui-profile-flyout__image wui-circle']"),
 	DRA_PROFILE_UPDATE_CSS("button[class='wui-btn wui-btn--primary wui-btn--modal-footer']"),

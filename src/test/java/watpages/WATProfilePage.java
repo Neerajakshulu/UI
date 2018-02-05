@@ -150,7 +150,7 @@ public class WATProfilePage extends ProfilePage {
 		BrowserWaits.waitTime(3);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS);
 		String profileTitle=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS).getText();
-		String profileMetadata=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS).get(1).getText();
+		String profileMetadata=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_METADATA_CSS).getText();
 		
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_FOOTER_LINKS_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Account","Privacy","Terms of Use","Help","Feedback","Sign out");
