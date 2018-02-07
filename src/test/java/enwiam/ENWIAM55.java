@@ -101,7 +101,8 @@ public class ENWIAM55 extends TestBase {
 
 			validateNeonAccount(1, accountType);
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 
 			try {
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
@@ -120,8 +121,9 @@ public class ENWIAM55 extends TestBase {
 
 				validateAccounts(1, accountType);
 				pf.getLoginTRInstance(ob).logOutApp();
-				BrowserWaits.waitTime(5);
+				//BrowserWaits.waitTime(5);
 				// Trying to Link the accounts
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 				try {
 					pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
 							LOGIN.getProperty("PWDUserFBENWIAM80"));

@@ -109,8 +109,8 @@ public class ENWIAM54 extends TestBase {
 
 			test.log(LogStatus.INFO, "Steam account is made Neon active ");
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
-
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 			// Login to New social account and merge
 			try {
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
@@ -137,8 +137,8 @@ public class ENWIAM54 extends TestBase {
 					waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString()), 30);
 					ob.findElement(By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString())).click();
 
-					BrowserWaits.waitTime(4);
-
+					//BrowserWaits.waitTime(4);
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
 					pf.getBrowserActionInstance(ob)
 							.scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
 

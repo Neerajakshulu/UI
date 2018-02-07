@@ -75,7 +75,7 @@ public class LoginTR extends TestBase {
 	}
 
 	public void closeOnBoardingModal() throws Exception, InterruptedException {
-
+       // waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS.toString()), 200);
 		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
 		logger.info("onboarding status-->" + onboardingStatus.size());
@@ -123,7 +123,8 @@ public class LoginTR extends TestBase {
 	}
 
 	public void logOutApp() throws Exception {
-		BrowserWaits.waitTime(10);
+		//BrowserWaits.waitTime(10);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		browserWait.waitUntilText("Sign out");
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_XPATH.toString())));

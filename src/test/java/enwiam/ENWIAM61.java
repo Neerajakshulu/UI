@@ -107,7 +107,8 @@ public class ENWIAM61 extends TestBase {
 				test.log(LogStatus.FAIL, "Not able to make the account neon active");
 			}
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);	
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 
 			try {
 				ob.navigate().to(host);

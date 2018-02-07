@@ -2383,6 +2383,7 @@ public class ProfilePage extends TestBase {
 	 */
 	public void clickProfileTitleLink() throws Exception {
 		clickProfileFlyout();
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile", "Update", "Cancel");
 	}

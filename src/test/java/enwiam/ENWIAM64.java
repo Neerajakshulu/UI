@@ -13,6 +13,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class ENWIAM64 extends TestBase {
 
@@ -72,7 +73,8 @@ public class ENWIAM64 extends TestBase {
 			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.PASS, "User is able to log in with steam credentials");
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(6);
+			//BrowserWaits.waitTime(6);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
 					LOGIN.getProperty("PWDUserFBENWIAM80"));
 						pf.getLoginTRInstance(ob).socialLinking();

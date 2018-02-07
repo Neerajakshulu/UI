@@ -6,11 +6,11 @@
 	</listeners>
 	
 	
-	 <test name="DRAIAM001">
+	<!--  <test name="DRAIAM001">
 		<classes>
 			<class name="draiam.DRAIAM001"></class>
 		</classes>
-	</test>
+	</test> -->
 	
 	
 	<!-- <test name="DRAIAM002">
@@ -30,7 +30,7 @@
 			<class name="draiam.DRAIAM004"></class>
 		</classes>
 	</test> -->
-	
+	<!-- 
 	<test name="DRAIAM005">
 		<classes>
 			<class name="draiam.DRAIAM005"></class>
@@ -66,7 +66,7 @@
 			<class name="draiam.DRAIAM0013"></class>
 		</classes>
 	</test>
-	<!-- <test name="DRAIAM0014">
+	<test name="DRAIAM0014">
 		<classes>
 			<class name="draiam.DRAIAM0014"></class>
 		</classes>
@@ -75,12 +75,12 @@
 		<classes>
 			<class name="draiam.DRAIAM0015"></class>
 		</classes>
-	</test> -->
+	</test>
 	<test name="DRAIAM0016">
 		<classes>
 			<class name="draiam.DRAIAM0016"></class>
 		</classes>
-	</test>
+	</test> -->
 	
     <!-- <test name="DRAIAM0017">
 		<classes>
@@ -102,7 +102,7 @@
 			<class name="draiam.DRAIAM0020"></class>
 		</classes>
 	</test> -->
-	<test name="DRAIAM051">
+<!-- 	<test name="DRAIAM051">
 		<classes>
 			<class name="draiam.DRAIAM051"></class>
 		</classes>
@@ -122,7 +122,7 @@
 			<class name="draiam.DRAIAM103"></class>
 		</classes>
 	</test>
-	
+ -->	
 	<!--
 	
 	<test name="DRAIAM053">
@@ -138,14 +138,14 @@
 	</test> -->
 	
 	
-	<test name="DRA_Profile_Flyout_links_Validation">
+	<!-- <test name="DRA_Profile_Flyout_links_Validation">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
 		<parameter name="proflieFlyoutLinks" value="Privacy|Terms of Use|Help|Feedback"/>
 		<classes>
 			<class name="draiam.DRAIAM5"></class>
 		</classes>
-	</test> 
+	</test>  -->
 	
 	<test name="DRA_Profile_Flyout_Info_And_Profile_and_Account_Validation">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />

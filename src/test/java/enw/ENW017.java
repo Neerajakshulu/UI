@@ -107,9 +107,10 @@ public class ENW017 extends TestBase {
 	            ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH_ENDNOTE.toString()))
 				.sendKeys("Feedback sending");
 		       // BrowserWaits.waitTime(2);
-	            pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH_ENDNOTE);
+	           // pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH_ENDNOTE);
 		        jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH_ENDNOTE.toString())));
-		        BrowserWaits.waitTime(8);
+		        //BrowserWaits.waitTime(8);
+		        waitForElementTobeVisible(ob, By.xpath("//div[contains(text(),'Thank')]"), 60);
 				if (!ob.findElement(By.xpath("//div[contains(text(),'Thank')]")).isDisplayed()) {
 					test.log(LogStatus.FAIL, "Feedback not sent");
 					logger.info("Sorry, but we couldn't deliver your submission. Please fix these issues and try again:");

@@ -55,11 +55,11 @@
 			<class name="customercare.Customercare011"></class>
 		</classes>
 	</test>
-	<test name="Customercare012">
+<!--<test name="Customercare012">
 		<classes>
 			<class name="customercare.Customercare012"></class>
 		</classes>
-	</test>
+	</test>-->
    <test name="Customercare015">
 		<classes>
 			<class name="customercare.Customercare015"></class>

@@ -103,8 +103,8 @@ public class ENWIAM52 extends TestBase {
 
 			test.log(LogStatus.INFO, "Steam account is made Neon active ");
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(2);
-
+			//BrowserWaits.waitTime(2);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 			// Making the Social account Neon Active
 			try {
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
@@ -116,7 +116,7 @@ public class ENWIAM52 extends TestBase {
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 				pf.getLoginTRInstance(ob).closeOnBoardingModal();
 				pf.getHFPageInstance(ob).clickOnAccountLink();
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				accountType = "Facebook";
 
 				validateAccounts(1, accountType);
@@ -128,7 +128,8 @@ public class ENWIAM52 extends TestBase {
 
 				test.log(LogStatus.INFO, "Social account is made Neon active ");
 				pf.getLoginTRInstance(ob).logOutApp();
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+				//BrowserWaits.waitTime(2);
 				// Trying to Link the accounts
 				try {
 					pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
@@ -180,7 +181,7 @@ public class ENWIAM52 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 
 		}
-		BrowserWaits.waitTime(2);
+		//BrowserWaits.waitTime(2);
 		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}

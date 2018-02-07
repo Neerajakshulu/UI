@@ -81,29 +81,32 @@ public class ENWIAM091 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
 					LOGIN.getProperty("PWDUserFBENWIAM80"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			String firstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
 			test.log(LogStatus.INFO, "Steam account profile name: " + firstAccountProfileName);
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getHFPageInstance(ob).clickOnAccountLink();		
 			validateAccounts(1, accountType);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
 			jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
-			BrowserWaits.waitTime(10);
+			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 300);
+			//BrowserWaits.waitTime(10);
 		//	ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			try {
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
 						LOGIN.getProperty("PWDUserFBENWIAM80"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
-				BrowserWaits.waitTime(5);
+				//BrowserWaits.waitTime(5);
 				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("PWDUserFBENWIAM80"));
 				test.log(LogStatus.PASS, "user is able to link");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			String accountType1 = "Facebook";
 			try {

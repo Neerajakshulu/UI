@@ -100,13 +100,14 @@ public class ENWIAM57 extends TestBase {
 
 			validateAccounts(1, accountType);
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 
 			try {
 				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
 						LOGIN.getProperty("PWDUserFBENWIAM80"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-				BrowserWaits.waitTime(8);
+				//BrowserWaits.waitTime(8);
 				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 				BrowserWaits.waitTime(8);
 				pf.getLoginTRInstance(ob).closeOnBoardingModal();
@@ -139,10 +140,10 @@ public class ENWIAM57 extends TestBase {
 
 				}
 				pf.getLoginTRInstance(ob).logOutApp();
-				BrowserWaits.waitTime(5);
+				//BrowserWaits.waitTime(5);
 				// Trying to Link the accounts
 				try {
-
+                    
 					pf.getLinkingModalsInstance(ob).clickOnSignInWithFB();
 					pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("PWDUserFBENWIAM80"));
 
@@ -175,7 +176,7 @@ public class ENWIAM57 extends TestBase {
 						waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString()), 30);
 						ob.findElement(By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString())).click();
 
-						BrowserWaits.waitTime(4);
+						//BrowserWaits.waitTime(4);
 
 						pf.getBrowserActionInstance(ob)
 								.scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);

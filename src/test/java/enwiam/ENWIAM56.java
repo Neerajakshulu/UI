@@ -96,8 +96,8 @@ public class ENWIAM56 extends TestBase {
 
 			validateNeonAccount(1, accountType);
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
-
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 			try {
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
 						LOGIN.getProperty("PWDUserFBENWIAM80"));

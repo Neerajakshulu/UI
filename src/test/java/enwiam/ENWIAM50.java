@@ -139,7 +139,7 @@ public class ENWIAM50 extends TestBase {
 				arr.add(it.next());
 			}
 			ob.switchTo().window(arr.get(1));
-			BrowserWaits.waitTime(6);
+			//BrowserWaits.waitTime(6);
 			String ActualURL=ob.getCurrentUrl();
 			
 			try {
@@ -155,7 +155,7 @@ public class ENWIAM50 extends TestBase {
 			}
 
 			
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

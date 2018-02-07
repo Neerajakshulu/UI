@@ -224,7 +224,7 @@ public class ENWIAM51 extends TestBase {
 
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_SHIBB_LINK_CSS);
 				String expectedShibbLink = "http://error-qa.newisiknowledge.com";
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
 				String actualShibbLinkurl = ob.getCurrentUrl();
 				// Assert.assertEquals(actualShibbLinkurl, expectedShibbLink);
 				if (actualShibbLinkurl.contains(expectedShibbLink))
@@ -235,7 +235,7 @@ public class ENWIAM51 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
