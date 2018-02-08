@@ -720,4 +720,10 @@
 		</classes>
 	</test>
 	
+	<test name="WAT_remove_altName_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT109"></class>
+		</classes>
+	</test>
+	
 </suite>

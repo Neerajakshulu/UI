@@ -14,20 +14,18 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for Verifying that specific text is displayed when the author search results fetched are more than 50 clusters.
+ * Class for Verify that there is an option to remove alternate name in search page.
  * 
  * @author UC225218
  *
  */
 
-public class WAT108 extends TestBase {
+public class WAT109 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
 	static String sar_labs_text = "SaR Labs";
 	static String search_link_text = "Search";
-	static String Suggestion_text = "We've found a large number of records matching your search.\n"
-			+ "For the most relevant results, please select at least one location where this author has published, or select Find to view all results.";
 	
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
@@ -82,7 +80,7 @@ public class WAT108 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that specific text is displayed when the author search results fetched are more than 50 clusters.
+	 * Method to Verify that there is an option to remove alternate name in search page.
 	 * 
 	 * @throws Exception,
 	 *             When Something unexpected
@@ -98,19 +96,15 @@ public class WAT108 extends TestBase {
 		try {
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
 				pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
-				pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
-				pf.getBrowserWaitsInstance(ob).waitTime(4);
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH);
 				Assert.assertTrue(pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).isDisplayed(),
-						"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED");
-				Assert.assertEquals(pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).getText(), Suggestion_text,
-						"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS NOT MATCHING");
-				test.log(LogStatus.PASS, "AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED AND MATCHING");
+						.getElement(OnePObjectMap.WAT_REMOVE_ALT_NAME_BTN_TEXT_XPATH).isDisplayed(),
+						"Remove alternate button is not displayed");
+				test.log(LogStatus.PASS, "Remove alternate button is displayed");
 				pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Exception e) {
-				test.log(LogStatus.FAIL, "AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS NOT MATCHING in Author Search page");
-				logFailureDetails(test, e, "Drill down text not matching", "Static text_error");
+				test.log(LogStatus.FAIL, "Remove alternate button is not displayed");
+				logFailureDetails(test, e, "Remove alternate button is not displayed", "remove_alt_btn_error");
 				pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 	}
