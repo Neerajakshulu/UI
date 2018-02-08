@@ -1207,6 +1207,7 @@ public enum OnePObjectMap {
 	WAT_LOGIN_PAGE_CONTACT_EMAIL_ID_CSS("p[class*='ng-binding']"),
 		
 	WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH("//h2[text()='Web of Science: Author search']"),
+	WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH("//wat-too-many-records-message[@class='ng-isolate-scope']"),
 	WAT_AUTHOR_LASTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--last']/descendant::input"),
 	WAT_AUTHOR_LASTNAME2_XPATH("//div[@class='ng-scope'][2]/descendant::input[1]"),
 	WAT_AUTHOR_LASTNAME3_XPATH("//div[@class='ng-scope'][3]/descendant::input[1]"),
