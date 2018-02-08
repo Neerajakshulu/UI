@@ -432,6 +432,17 @@
 			<class name="wat.WAT62"></class>
 		</classes>
 	</test>
+	
+	<test name="author_record_metrics_tab_items" preserve-order="true">
+		<parameter name="lastName" value="JOHN BALAZS" />
+		<classes>
+			<class name="wat.WAT63"></class>
+		</classes>
+	</test>
+	
+	
+	
+	
 
 	<test name="WAT_Author_Combine_Selectall" preserve-order="true">
 		<classes>

@@ -231,9 +231,31 @@ public class AuthorRecordPage extends TestBase {
 				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_HILIGHTED_CSS).isDisplayed();
 		if (!hilightedTab) {
 			throw new Exception("Metrics tab is not getting highlighted");
-		
 		}
 	}
+	
+	/**
+	 * Method for check Metrics Tab Total Times cited and H-Index label text and count
+	 * @throws Exception
+	 */
+	public void checkMetricsTabItems(String totalTimesCited,String hIndex,ExtentTest test) throws Exception {
+		
+		List<WebElement> timesCited = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_TIMESCITED_XPATH);
+		logger.info("metrics tab 1"+timesCited.get(0).getText()+"-->"+timesCited.get(1).getText().isEmpty());
+		if (!(timesCited.get(0).getText().equalsIgnoreCase(totalTimesCited) && !(timesCited.get(1).getText().isEmpty()))) {
+			test.log(LogStatus.FAIL, "TOTAL TIMES CITED label and count not displayed in under Metrics Tab");
+		}
+
+		List<WebElement> index = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_HINDEX_XPATH);
+		logger.info("metrics tab 2"+index.get(0).getText()+"-->"+index.get(1).getText().isEmpty());
+		if (!(index.get(0).getText().equalsIgnoreCase(hIndex) && !(index.get(1).getText().isEmpty()))) {
+			test.log(LogStatus.FAIL, "H-INDEX label and count not displayed in under Metrics Tab");
+			throw new Exception("H-INDEX label and count not displayed in under Metrics Tab");
+		}
+	}
+	
 	
 	/**
 	 * Entering curation mode and verify

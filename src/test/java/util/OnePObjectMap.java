@@ -1321,7 +1321,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_ORGANISATION_TAB_STATUS_XPATH("//ul[@class='nav nav-tabs']/li[3]/a/ancestor::li"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_STATUS_XPATH("//ul[@class='nav nav-tabs']/li[2]/a/ancestor::li"),
 	WAT_AUTHOR_RECORD_PAGE_METRICS_XPATH("//ul[@class='nav nav-tabs']/li[1]/a"),
-	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_ITEMS_XPATH("//div[@class='wat-author-record__metrics-item-column'][$index]/div"),
+	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_TIMESCITED_XPATH("//div[@class='wat-author-record__metrics-item-column'][1]/child::div"),
+	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_HINDEX_XPATH("//div[@class='wat-author-record__metrics-item-column'][2]/child::div"),
 	
 	
 	WAT_SUGGEST_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Suggest updates')]"),

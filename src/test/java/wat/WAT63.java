@@ -13,10 +13,11 @@ import util.ExtentManager;
 
 /** 
  * Class for 
- * Verify that system must display a Metric's tab on author record
- * Verify that while click on Metric's tab, tab should be highlighted by highlight bar
+ * Verify that System must display the 'Total Times Cited' label with count in the metrics tab
+ * Verify that System must display the 'H-index' label with count in the metrics tab.
+ * @author UC202376
  */
-public class WAT62 extends TestBase {
+public class WAT63 extends TestBase {
 
 	static int status = 1;
 
@@ -72,28 +73,26 @@ public class WAT62 extends TestBase {
 	}
 
 	/**
-	 * Method for validate Metrics names tab in Author Record page
+	 * Method for validate alternative names tab in Author Record page
 	 * 
 	 * @param lastName
 	 * @throws Exception, When Something unexpected
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters("lastName")
-	public void authorRecordPageMetricsTab(String lastName) throws Exception {
+	public void authorRecordPageMetricTabItems(String lastName) throws Exception {
 
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, test);
 			//pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
-			pf.getAuthorRecordPage(ob).checkMetricsTab();
-			test.log(LogStatus.PASS, "Metrics tab displayed in author record page");
-			pf.getAuthorRecordPage(ob).checkMetricsTabStatus();
-			test.log(LogStatus.PASS, "Metrics tab highlighted by highlight bar when user clicked on Metrics tab");
+			pf.getAuthorRecordPage(ob).checkMetricsTabItems("Total Times Cited","H-index",test);
+			test.log(LogStatus.PASS, "TOTAL TIMES CITED and H-INDEX info displayed under Metrics tab");
 			pf.getWatPageInstance(ob).logoutWAT();
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Metrics tab not displaying/highlighted in author record page",
-					"Metrics_tab_fail");
+			logFailureDetails(test, t, "Metrics tab  info not displayed in author record page",
+					"metrics_tab_timescited_hindex_tab");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 
