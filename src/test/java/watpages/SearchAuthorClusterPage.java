@@ -1471,6 +1471,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH,orcid);
+		waitForAjax(ob);
 		boolean findButtonStatus=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH).isEnabled();
 		if (findButtonStatus) {
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH);
