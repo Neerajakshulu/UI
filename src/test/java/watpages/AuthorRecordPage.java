@@ -206,7 +206,35 @@ public class AuthorRecordPage extends TestBase {
 			throw new Exception("Alternative names tab displayed in active mode");
 		}
 	}
+	
+	/**
+	 * Method for check Metrics Tab displayed in Author Record page
+	 * @throws Exception
+	 */
+	public void checkMetricsTab() throws Exception {
+		String metrics=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_METRICS_XPATH)
+				.getText();
+		logger.info("Actual Value : "+metrics);
+		if(!metrics.equals("Metrics")){
+			throw new Exception("Metrics tab Not displayed in author record page");
+		}
+	}
 
+	/**
+	 * Method for check Metrics Tab status active or inactive
+	 * @throws Exception
+	 */
+	public void checkMetricsTabStatus() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_METRICS_XPATH);
+		waitForAjax(ob);
+		hilightedTab = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_HILIGHTED_CSS).isDisplayed();
+		if (!hilightedTab) {
+			throw new Exception("Metrics tab is not getting highlighted");
+		
+		}
+	}
+	
 	/**
 	 * Entering curation mode and verify
 	 * 
