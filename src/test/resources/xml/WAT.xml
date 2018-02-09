@@ -735,6 +735,12 @@
 		<classes>
 			<class name="wat.WAT109"></class>
 		</classes>
+	</test> 
+	
+	<test name="WAT_orcid_btn_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT110"></class>
+		</classes>
 	</test>
 	
 </suite>
