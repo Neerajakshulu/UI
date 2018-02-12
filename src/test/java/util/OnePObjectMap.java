@@ -1240,6 +1240,7 @@ public enum OnePObjectMap {
 	WAT_SEARCH_SUGGESTION_TEXT_XPATH("//p[contains(text(),'Enter the author')]"),
 	WAT_NAME_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='Name search']"),
 	WAT_NAME_SEARCH_BUTTON1_XPATH("//button[span[span[@class='wui-toggle__label ng-binding' and text()='Name search']]]"),
+	WAT_SEARCH_PAGE_SUB_TEXT_XPATH("//p[contains(text(),'Enter the author')]"),
 	WAT_ORCiD_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='ORCiD search']"),
 	WAT_ADD_ALT_NAME_BTN_TEXT_XPATH("//button[text()[normalize-space() = 'Include alternative name']]"),
 	WAT_REMOVE_ALT_NAME_BTN_TEXT_XPATH("//button[@class='wui-icon-only-btn wui-icon-only-btn--mini wat-search__button--add ng-scope' and @aria-label='Remove']"),

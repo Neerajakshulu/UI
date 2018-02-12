@@ -755,4 +755,10 @@
 		</classes>
 	</test>
 	
+	<test name="WAT_Sub_text_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT113"></class>
+		</classes>
+	</test>
+	
 </suite>
