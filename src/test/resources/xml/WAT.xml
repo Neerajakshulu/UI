@@ -16,7 +16,7 @@
 	<parameter name="CountryName2" value="USA" ></parameter>
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
-  	<test name="WAT_Login" preserve-order="true">
+   	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -746,6 +746,12 @@
 	<test name="WAT_add_alt_btn_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT111"></class>
+		</classes>
+	</test>
+	
+	<test name="WAT_nameSearch_default_tab" preserve-order="true">
+		<classes>
+			<class name="wat.WAT112"></class>
 		</classes>
 	</test>
 	
