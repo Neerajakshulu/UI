@@ -140,11 +140,9 @@ public class Authoring11 extends TestBase {
 							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS, tpassword);
 					jsClick(ob, ob.findElement(By.cssSelector(
 							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS.toString())));
-
-					BrowserWaits.waitTime(10);
-
+					//BrowserWaits.waitTime(10);
 					ob.switchTo().window(PARENT_WINDOW);
-					BrowserWaits.waitTime(10);
+					//BrowserWaits.waitTime(10);
 				}
 			}
 

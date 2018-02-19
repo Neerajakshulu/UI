@@ -132,7 +132,7 @@ public class Authoring46 extends TestBase {
 		try {
 			test.log(LogStatus.INFO, "Min and Max Length Comment Validation");
 			// System.out.println("MinCharCount-->"+(minCharCount.substring(0,1)));
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			//Commented by KR
 //			waitForElementTobeVisible(ob,
 //					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()), 180);
@@ -142,6 +142,7 @@ public class Authoring46 extends TestBase {
 //			exe.executeScript("arguments[0].click();", editCommentElement);
 			
 			//Added by KR
+			waitForElementTobePresent(ob, By.xpath("//button[@class='wui-mini-btn wui-mini-btn--secondary']"), 200);
 			WebElement editCommentElement = ob
 					.findElement(By.xpath("//button[@class='wui-mini-btn wui-mini-btn--secondary']"));
 			JavascriptExecutor exe = (JavascriptExecutor) ob;
@@ -158,7 +159,7 @@ public class Authoring46 extends TestBase {
 			//Added by KR to fix issue - Error was not displaying, so adding 1 number and deleting it.
 			commentArea.sendKeys(Keys.NUMPAD6, Keys.BACK_SPACE);
 			
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			//Added by KR
 			scrollingToElementofAPage();
 			
@@ -177,7 +178,7 @@ public class Authoring46 extends TestBase {
 			commentArea.sendKeys(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0, 4))));
 			Thread.sleep(2000);// after entering the comments wait for submit
 								// button to get enabled or disabled
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			//Added by KR
 			scrollingToElementofAPage();
 			

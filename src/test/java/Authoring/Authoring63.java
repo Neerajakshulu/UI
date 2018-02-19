@@ -68,7 +68,7 @@ public class Authoring63 extends TestBase {
 			loginAs("USERNAME3", "PASSWORD3");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			int postCountBefore = pf.getProfilePageInstance(ob).getDraftPostsCount();
@@ -128,7 +128,7 @@ public class Authoring63 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {

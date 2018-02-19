@@ -127,7 +127,7 @@ public class Authoring77 extends TestBase {
 			clearCookies();
 			ob.get(host + url);
 			loginAs("USERNAME4", "PASSWORD4");
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			waitForPageLoad(ob);
 
 			try {
@@ -136,7 +136,7 @@ public class Authoring77 extends TestBase {
 				test.log(LogStatus.PASS, "Deep linking url is matching after login for " + recordType);
 				Assert.assertEquals(pf.getpostRVPageInstance(ob).getRecordType(), recordType);
 				test.log(LogStatus.PASS, "Deep linking is redirecting to the appropriate page for " + recordType);
-				BrowserWaits.waitTime(10);
+				//BrowserWaits.waitTime(10);
 				pf.getLoginTRInstance(ob).logOutApp();
 
 			} catch (Throwable t) {

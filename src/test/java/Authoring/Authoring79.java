@@ -138,7 +138,7 @@ public class Authoring79 extends TestBase {
 
 			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, "test_dahbrrq_user@tfbnw.net",
 					"auth123*");
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			waitForPageLoad(driver);
 			// Temprorary solution for micro url
 			//String hosts = "https://apps.dev-stable.clarivate.com";
@@ -156,7 +156,7 @@ public class Authoring79 extends TestBase {
 				jsClick(driver, driver
 						.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
 
-				BrowserWaits.waitTime(3);
+				//BrowserWaits.waitTime(3);
 
 			} catch (Throwable t) {
 				t.printStackTrace();

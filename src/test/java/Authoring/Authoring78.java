@@ -132,7 +132,7 @@ public class Authoring78 extends TestBase {
 			ob.get(hosts+ url);
 			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("SOCIALLOGINEMAILLINKEDIN"),
 					LOGIN.getProperty("SOCIALLOGINPASSWORDLINKEDIN"));
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			waitForPageLoad(ob);
 
 			try {
@@ -140,7 +140,7 @@ public class Authoring78 extends TestBase {
 				test.log(LogStatus.PASS, "Deep linking url is matching after login for " + recordType);
 				Assert.assertEquals(pf.getpostRVPageInstance(ob).getRecordType(), recordType);
 				test.log(LogStatus.PASS, "Deep linking is redirecting to the appropriate page for " + recordType);
-				BrowserWaits.waitTime(10);
+				//BrowserWaits.waitTime(10);
 
 			} catch (Throwable t) {
 				t.printStackTrace();

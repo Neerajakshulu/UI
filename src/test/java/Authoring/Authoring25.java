@@ -117,11 +117,11 @@ public class Authoring25 extends TestBase {
 
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			pf.getPostCommentPageInstance(ob).updateComment(test, htmlTags);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 40);
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 200);
 			String unSupporteTagErrorMessage = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS).getText();
 			if (!unSupporteTagErrorMessage.equalsIgnoreCase(errorMessage)) {

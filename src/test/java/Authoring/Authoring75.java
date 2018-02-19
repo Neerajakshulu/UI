@@ -67,7 +67,7 @@ public class Authoring75 extends TestBase {
 			loginAs("LOGINUSERNAME2", "LOGINPASSWORD2");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			int postCountBefore = pf.getProfilePageInstance(ob).getDraftPostsCount();

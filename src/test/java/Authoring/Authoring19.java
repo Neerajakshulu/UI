@@ -82,7 +82,7 @@ public class Authoring19 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME3", "PASSWORD3");
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			//pf.getHFPageInstance(ob).searchForText(articleTitle);
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick("Micro Biology");
 			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()),
@@ -103,9 +103,9 @@ public class Authoring19 extends TestBase {
 							By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString()));
 					if (flagWe.getAttribute("class").contains("fa-flag-o")) {
 						scrollElementIntoView(ob, flagWe);
-						BrowserWaits.waitTime(10);
+						//BrowserWaits.waitTime(10);
 						jsClick(ob, flagWe);
-						BrowserWaits.waitTime(5);
+						//BrowserWaits.waitTime(5);
 						break;
 					}
 				}
@@ -122,9 +122,9 @@ public class Authoring19 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME5", "PASSWORD5");
-			BrowserWaits.waitTime(15);
+			//BrowserWaits.waitTime(15);
 			searchAnArticle(articleTitle);
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS.toString()),
 					180);
 			String commentCount = ob

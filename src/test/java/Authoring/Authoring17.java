@@ -74,7 +74,7 @@ public class Authoring17 extends TestBase {
 
 //			waitForElementTobeVisible(ob,
 //					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_XPATH.toString()), 180);
-			BrowserWaits.waitTime(3);
+//			BrowserWaits.waitTime(3);
 
 			try {
 				WebElement flagButton = ob.findElement(

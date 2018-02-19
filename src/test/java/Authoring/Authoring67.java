@@ -82,10 +82,10 @@ public class Authoring67 extends TestBase {
 			test.log(LogStatus.INFO, "Draft Post count:" + postCountBefore);
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			pf.getProfilePageInstance(ob).deleteDraftPostFromPostModal(postString);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			waitForPageLoad(ob);
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			int postCountAfter = 0;
 			if (postCountBefore == 1) {
 

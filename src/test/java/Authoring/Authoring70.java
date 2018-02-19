@@ -88,7 +88,7 @@ public class Authoring70 extends TestBase {
 			}
 			ob.navigate().back();
 			waitForPageLoad(ob);
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {

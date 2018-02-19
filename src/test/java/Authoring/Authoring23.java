@@ -120,7 +120,7 @@ public class Authoring23 extends TestBase {
 
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  Profanity Words execution starts for data set #" + (count + 1) + "--->");
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			waitForAjax(ob);
 			pf.getPostCommentPageInstance(ob).updateComment(test, profanityWord);
 			waitForElementTobeVisible(ob,
@@ -129,9 +129,10 @@ public class Authoring23 extends TestBase {
 					.getElement(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS).getText();
 			// System.out.println("Profanity Word Error
 			// Message--->"+profanityErrorMessage);
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(profanityErrorMessage);
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
+			waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_CANCEL_BUTTON_CSS.toString()), 200);
 			jsClick(ob, ob.findElement(
 					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_CANCEL_BUTTON_CSS.toString())));
 			Assert.assertEquals(profanityErrorMessage, errorMessage);

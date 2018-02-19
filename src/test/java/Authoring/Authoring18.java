@@ -66,15 +66,15 @@ public class Authoring18 extends TestBase {
 			loginAs("USERNAME16", "PASSWORD16");
 			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
 			pf.getHFPageInstance(ob).searchForText("Biology");
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getSearchResultsPageInstance(ob).chooseArticle();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			scrollingToElementofAPage();
 			pf.getpostRVPageInstance(ob).createComment("test flag in own comment");
 			// Commented by KR
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			waitForAllElementsToBePresent(ob,
-					By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
+					By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 200);
 			List<WebElement> commentsList = ob
 					.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 			String commentText;

@@ -1074,6 +1074,7 @@ public class TestBase {
 	}
 
 	public void scrollingToElementofAPage() throws InterruptedException {
+		BrowserWaits.waitTime(5);
 		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("scroll(0, 250);");
 		Thread.sleep(4000);

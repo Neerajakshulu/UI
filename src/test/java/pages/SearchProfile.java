@@ -28,7 +28,7 @@ public class SearchProfile extends TestBase {
 	}
 
 	public void enterSearchKeyAndClick(String searchKey) throws Exception {
-		
+		waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 200);
 		pf.getBrowserActionInstance(ob).clear(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS, searchKey);
 		BrowserWaits.waitTime(4);

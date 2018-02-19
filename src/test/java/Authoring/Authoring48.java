@@ -86,7 +86,7 @@ public class Authoring48 extends TestBase {
 				list.add("Likes Count");
 
 			try {
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
 				Assert.assertTrue(list.size() == 0);
 				test.log(LogStatus.PASS, "Comment count, likes count and Like button are displayed for own post");
 			} catch (Throwable t) {

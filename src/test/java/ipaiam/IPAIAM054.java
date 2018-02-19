@@ -95,7 +95,8 @@ public class IPAIAM054 extends TestBase {
 
 			validateAccounts(1, accountType);
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
@@ -114,7 +115,7 @@ public class IPAIAM054 extends TestBase {
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.IPA_PROFILE_FLYOUT_USERNAME_XPATH);
 				String secondAccountProfileName =pf.getIpaPage(ob).getProfileNameIPA();
 				test.log(LogStatus.INFO, "Steam account profile name: " + secondAccountProfileName);
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				pf.getIpaPage(ob).clickOnProfileImageIPA();
 				Assert.assertEquals(secondAccountProfileName, firstAccountProfileName);
 				test.log(LogStatus.PASS, "Forward Merge is happened");
@@ -133,7 +134,7 @@ public class IPAIAM054 extends TestBase {
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link")));
 
 			}
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		} catch (Throwable t) {

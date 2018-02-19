@@ -101,7 +101,8 @@ public class PostRecordViewPage extends TestBase {
 		// waitForElementTobeVisible(ob,
 		// By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString()),
 		// 180);
-		BrowserWaits.waitTime(5);
+		//BrowserWaits.waitTime(5);
+		waitForElementTobeClickable(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString()), 200);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString())));
 	}
 
