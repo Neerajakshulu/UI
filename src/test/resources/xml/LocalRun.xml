@@ -129,19 +129,9 @@
 
 	</test>
 
-	<!-- <test name="ENW042">
-		<classes>
-			<class name="enw.ENW042"></class>
-		</classes>
-
-	</test>
-
-	<test name="ENW043">
-		<classes>
-			<class name="enw.ENW043"></class>
-		</classes>
-
-	</test> -->
+	<!-- <test name="ENW042"> <classes> <class name="enw.ENW042"></class> </classes> 
+		</test> <test name="ENW043"> <classes> <class name="enw.ENW043"></class> 
+		</classes> </test> -->
 	<test name="ENW044">
 		<classes>
 			<class name="enw.ENW044"></class>
@@ -182,6 +172,48 @@
 	<test name="Forgot_password_in_neon_landing_page">
 		<classes>
 			<class name="iam.IAM016"></class>
+		</classes>
+	</test>
+
+	<test name="Neon_registraiton_and_reset_password1" preserve-order="true">
+		<classes>
+			<class name="iam.IAM001"></class>
+		</classes>
+	</test>
+
+	<test name="Neon_registraiton_and_reset_password3" preserve-order="true">
+		<classes>
+			<class name="iam.IAM017"></class>
+		</classes>
+	</test>
+	
+	<test name="Neon_registraiton_and_reset_password4" preserve-order="true">
+		<classes>
+			<class name="iam.IAM023"></class>
+		</classes>
+	</test>
+
+	<test name="Neon_registraiton_and_reset_password5" preserve-order="true">
+		<classes>
+			<class name="iam.IAM024"></class>
+		</classes>
+	</test>
+
+	<test name="Neon_registraiton_and_reset_password6" preserve-order="true">
+		<classes>
+			<class name="iam.IAM028"></class>
+		</classes>
+	</test>
+
+	<test name="Neon_registraiton_and_reset_password7" preserve-order="true">
+		<classes>
+			<class name="iam.IAM034"></class>
+		</classes>
+	</test>
+
+	<test name="Neon_registraiton_and_reset_password8" preserve-order="true">
+		<classes>
+			<class name="iam.IAM035"></class>
 		</classes>
 	</test>
 
@@ -273,12 +305,10 @@
 			<class name="enwiam.ENWIAM54"></class>
 			<class name="enwiam.ENWIAM53"></class>
 			<class name="enwiam.ENWIAM55"></class>
-	<!--  	<class name="enwiam.ENWIAM59"></class>
-			<class name="enwiam.ENWIAM62"></class> -->
+			<!-- <class name="enwiam.ENWIAM59"></class> <class name="enwiam.ENWIAM62"></class> -->
 			<class name="enwiam.ENWIAM61"></class>
-	<!--  	<class name="enwiam.ENWIAM080"></class>
-			<class name="enwiam.ENWIAM081"></class>
-			<class name="enwiam.ENWIAM90"></class> -->	
+			<!-- <class name="enwiam.ENWIAM080"></class> <class name="enwiam.ENWIAM081"></class> 
+				<class name="enwiam.ENWIAM90"></class> -->
 			<class name="enwiam.ENWIAM00016"></class>
 			<!-- <class name="enwiam.ENWIAM41"></class> -->
 			<class name="enwiam.ENWIAM0005"></class>
@@ -418,15 +448,34 @@
 
 	<!-- Commenting as suggested by Stephanie (Email bounce back issue) -->
 	<!-- RCC Testcases -->
-<test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group"> 
-		<classes> <class name="rcc.RCC021"></class> <class name="rcc.RCC023"></class> 
-		</classes> </test> <test name="Validate_adding_GD_doc_action_for_article_and_to_the_group"> 
-		<classes> <class name="rcc.RCC022"></class> <class name="rcc.RCC024"></class> 
-		</classes> </test> <test name="Adding_Cover_Photo_to_Group_and_verifying_cover_photo_displayed"> 
-		<classes> <class name="rcc.RCC090"></class> </classes> </test> <test name="modify_the_cover 
-		photo"> <classes> <class name="rcc.RCC091"></class> </classes> </test> <test 
-		name="option_to_add_image_ from_group_details_page"> <classes> <class name="rcc.RCC092"></class> 
-		</classes> </test> 
+	<test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group">
+		<classes>
+			<class name="rcc.RCC021"></class>
+			<class name="rcc.RCC023"></class>
+		</classes>
+	</test>
+	<test name="Validate_adding_GD_doc_action_for_article_and_to_the_group">
+		<classes>
+			<class name="rcc.RCC022"></class>
+			<class name="rcc.RCC024"></class>
+		</classes>
+	</test>
+	<test name="Adding_Cover_Photo_to_Group_and_verifying_cover_photo_displayed">
+		<classes>
+			<class name="rcc.RCC090"></class>
+		</classes>
+	</test>
+	<test name="modify_the_cover 
+		photo">
+		<classes>
+			<class name="rcc.RCC091"></class>
+		</classes>
+	</test>
+	<test name="option_to_add_image_ from_group_details_page">
+		<classes>
+			<class name="rcc.RCC092"></class>
+		</classes>
+	</test>
 	<!-- Authoring START -->
 
 	<test name="Authoring80">

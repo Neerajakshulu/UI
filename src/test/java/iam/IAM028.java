@@ -82,6 +82,7 @@ public class IAM028 extends TestBase {
 
 			ob.findElement(By.cssSelector(OR.getProperty("resend_activation"))).click();
 			waitUntilText("Thank You");
+			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 			waitUntilText("Sign in");
 			

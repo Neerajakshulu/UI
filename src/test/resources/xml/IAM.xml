@@ -5,19 +5,19 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<test name="Neon_registraiton_and_reset_password1" preserve-order="true">
+	<!-- <test name="Neon_registraiton_and_reset_password1" preserve-order="true">
 		<classes>
 			<class name="iam.IAM001"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="Neon_registraiton_and_reset_password3" preserve-order="true">
+	<!-- <test name="Neon_registraiton_and_reset_password3" preserve-order="true">
 		<classes>
 			<class name="iam.IAM017"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="Neon_registraiton_and_reset_password4" preserve-order="true">
+	<!-- <test name="Neon_registraiton_and_reset_password4" preserve-order="true">
 		<classes>
 			<class name="iam.IAM023"></class>
 		</classes>
@@ -45,7 +45,7 @@
 		<classes>
 			<class name="iam.IAM035"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Login_and_logout_neon_application_using_existing_neon_account">
 		<classes>
