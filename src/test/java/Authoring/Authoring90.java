@@ -64,21 +64,22 @@ public class Authoring90 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 
 			int postCountBeforeDeleting = pf.getProfilePageInstance(ob).getPostsCount();
 			test.log(LogStatus.INFO, "Post count before deleting a video post:" + postCountBeforeDeleting);
 
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			WebElement deleteCommentButton = ob
 					.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON1_XPATH.toString()));
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
 			executor.executeScript("arguments[0].click();", deleteCommentButton);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			waitForElementTobeClickable(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON1_XPATH.toString()), 200);
 			jsClick(ob, ob.findElement(
 					By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON1_XPATH.toString())));
 			waitForAjax(ob);
@@ -86,9 +87,9 @@ public class Authoring90 extends TestBase {
 					.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_DELETE_POST_CONFIRMATION_XPATH.toString()))
 					.getText();
 			Assert.assertEquals(Delete_Text, "This post has been removed by the member.");
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 
 			int postCountAfterDeleting = pf.getProfilePageInstance(ob).getPostsCount();

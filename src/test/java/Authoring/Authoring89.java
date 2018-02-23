@@ -61,7 +61,7 @@ public class Authoring89 extends TestBase {
 			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			
 			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
@@ -73,9 +73,9 @@ public class Authoring89 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			waitForAjax(ob);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			String VideoUrl = ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIDEO_BOX_XPATH.toString())).getAttribute("src");
 			String TrimmedVideoUrl = VideoUrl.substring(2, VideoUrl.indexOf("?"));
 			

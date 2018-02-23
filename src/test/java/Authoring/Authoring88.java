@@ -70,7 +70,7 @@ public class Authoring88 extends TestBase {
 			loginAs("USERNAME16", "PASSWORD16");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			int postCountBefore = pf.getProfilePageInstance(ob).getDraftPostsCount();
@@ -83,7 +83,7 @@ public class Authoring88 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
 			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
 			test.log(LogStatus.INFO, "Saved the Post as a draft");
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			//ob.navigate().refresh();
 			waitForPageLoad(ob);
 			
@@ -108,10 +108,11 @@ public class Authoring88 extends TestBase {
 
 			}
 
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
+			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()), 200);
 			jsClick(ob, ob.findElement(
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString())));
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			//Added by KR
 			ob.navigate().back();

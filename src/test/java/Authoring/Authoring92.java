@@ -60,7 +60,7 @@ public class Authoring92 extends TestBase {
 			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
 			pf.getProfilePageInstance(ob).AddVideoAndPublishAPost(url);

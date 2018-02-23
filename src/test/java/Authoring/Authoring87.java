@@ -77,7 +77,7 @@ public class Authoring87 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
 			//Added by KR
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			ob.navigate().back();
 			ob.navigate().back();
 			
