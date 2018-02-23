@@ -95,7 +95,7 @@ public class Profile11 extends TestBase {
 			test.log(LogStatus.INFO, "go to user profile page");
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getProfilePageInstance(ob).clickProfileLink();
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			test.log(LogStatus.INFO, "Remove old topics and Add new Topics");
 			pf.getProfilePageInstance(ob).addTopicForInterestAndSkills(topics);
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Test execution ends ");

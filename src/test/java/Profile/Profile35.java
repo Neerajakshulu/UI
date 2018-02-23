@@ -131,7 +131,7 @@ public class Profile35 extends TestBase {
 			pf.getpostRVPageInstance(ob).clickPostLike();
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getProfilePageInstance(ob).clickProfileLink();
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			int profilePostRVcount = pf.getProfilePageInstance(ob).getPostLikeCount();
 			logger.info("before count-->" + profilePostcount);
 			logger.info("after count-->" + profilePostRVcount);

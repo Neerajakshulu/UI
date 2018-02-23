@@ -96,7 +96,7 @@ public class Profile20 extends TestBase {
 
 			test.log(LogStatus.INFO, " Click Publish A Post and Post your article");
 			pf.getProfilePageInstance(ob).clickPublishAPost();
-			BrowserWaits.waitTime(6);
+			//BrowserWaits.waitTime(6);
 			String postTitle = myPost + RandomStringUtils.randomAlphanumeric(6);
 			pf.getProfilePageInstance(ob).enterPostTitle(postTitle);
 			test.log(LogStatus.INFO, "Entered Post Title");

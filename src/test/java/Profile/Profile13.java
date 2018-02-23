@@ -93,16 +93,16 @@ public class Profile13 extends TestBase {
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css"))).clear();
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
 
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
+				waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_profile_add_summary_css")), 60);
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_add_summary_css"))).click();
 			}
 
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css"))).sendKeys(str);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SUMMARY_CSS.toString()), 30);
+			//BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SUMMARY_CSS.toString()), 90);
 			String str3 = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SUMMARY_CSS.toString()))
 					.getText();
 			try {

@@ -127,9 +127,9 @@ public class Profile39 extends TestBase {
 			// int postCommentcount = pf.getProfilePageInstance(ob).getPostCommentCount();
 			int postCommentcount = 0;
 			pf.getProfilePageInstance(ob).clickFirstPostTitle();
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			ob.navigate().refresh();
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			pf.getpostRVPageInstance(ob).validatePostTitleAndProfileMetadata(postTitle, profileDetails);
 
 			pf.getPostCommentPageInstance(ob).enterArticleComment("test comments added on post");

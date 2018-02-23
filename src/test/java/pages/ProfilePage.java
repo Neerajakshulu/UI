@@ -289,7 +289,8 @@ public class ProfilePage extends TestBase {
 	 *             When user not able to follow
 	 */
 	public void followOtherProfileFromProfilePage() throws Exception {
-		BrowserWaits.waitTime(2);
+		BrowserWaits.waitTime(10);
+		waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS.toString()), 200);
 		WebElement followUnFollowCheck = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS);
 		followUnfollowLableBefore = pf.getBrowserActionInstance(ob)
