@@ -95,6 +95,7 @@ public class IAM012 extends TestBase {
 
 			if (listOfTags.size() == tm_list.size()) {
 				if (validity.equalsIgnoreCase("YES")) {
+					ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
 					ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 					ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
 					ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
