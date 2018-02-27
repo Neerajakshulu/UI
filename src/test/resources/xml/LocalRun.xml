@@ -186,7 +186,7 @@
 			<class name="iam.IAM017"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Neon_registraiton_and_reset_password4" preserve-order="true">
 		<classes>
 			<class name="iam.IAM023"></class>
@@ -227,7 +227,11 @@
 			<class name="enwiam.ENWIAM012"></class>
 		</classes>
 	</test>
-
+	<test name="Validate_change_password_account_page">
+		<classes>
+			<class name="iam.IAM038"></class>
+		</classes>
+	</test>
 	<!-- <test name="ENW_Linking_from_NEON" preserve-order="true"> <classes> 
 		<class name="enwiam.ENWIAM100"></class> <class name="enwiam.ENWIAM101"></class> 
 		<class name="enwiam.ENWIAM102"></class> <class name="enwiam.ENWIAM103"></class> 
