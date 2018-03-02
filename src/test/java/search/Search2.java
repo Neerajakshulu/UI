@@ -100,6 +100,7 @@ public class Search2 extends TestBase {
 				Thread.sleep(5000);
 				// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("details_link")), 30);
 				WebElement myE = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS.toString()));
+				pf.getBrowserActionInstance(ob).scrollElementIntoView(ob, myE);
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
 				Thread.sleep(5000);

@@ -96,6 +96,7 @@ public class Search3 extends TestBase {
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
 				WebElement myE = ob.findElement((By.cssSelector(OnePObjectMap.SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS.toString())));
+				pf.getBrowserActionInstance(ob).scrollElementIntoView(ob, myE);
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
 

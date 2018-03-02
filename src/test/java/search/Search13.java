@@ -96,6 +96,7 @@ public class Search13 extends TestBase {
 				// String link55=ob.findElement(By.xpath(OR.getProperty("details_link"))).getAttribute("href");
 				// ob.get(link55);
 				WebElement myE = ob.findElement(By.xpath(OR.getProperty("details_link")));
+				pf.getBrowserActionInstance(ob).scrollElementIntoView(ob, myE);
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
 				waitForNumberOfWindowsToEqual(ob, 2);
