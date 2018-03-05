@@ -65,7 +65,6 @@ public class IPAIAM0002 extends TestBase {
 
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAUserNameValid"));
-
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");

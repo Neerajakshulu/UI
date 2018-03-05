@@ -80,23 +80,21 @@ public class Customercare001 extends TestBase {
 				al.add(myIT.next());
 			}
 			ob.switchTo().window(al.get(1));
-			try {
-				WebElement callus_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_CALLUS_SECTION_CSS);
+		try {
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CALLUS_SECTION_CSS);
+				WebElement callus_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_CALLUS_SECTION_CSS);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_REGION_CSS);
-				WebElement region_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_REGION_CSS);
+				WebElement region_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_REGION_CSS);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_HRS_XPATH);
-				WebElement hrs_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_HRS_XPATH);
+				WebElement hrs_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_HRS_XPATH);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_LANGUAGE_XPATH);
-				WebElement language_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_LANGUAGE_XPATH);
+				WebElement language_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_LANGUAGE_XPATH);
                
 				
 				String hours_of_operation = hrs_element.getText();
-
+               
 				String lang = language_element.getText();
+			
 
 				if (callus_element.isDisplayed() && region_element.isDisplayed() && hrs_element.isDisplayed()
 						&& language_element.isDisplayed())
