@@ -130,7 +130,10 @@ public class ENWIAM014 extends TestBase {
 								"Verify that,the system should send an email verification to the correct email address after clicking the button 'Resend Activation' on resend email verification page.")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				BrowserWaits.waitTime(2);
+				waitUntilText("Please activate your account"," Resend activation");
 				ob.findElement(By.cssSelector(OR.getProperty("resend_activation"))).click();
+				waitUntilText("Thank You","OK");
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 				test.log(LogStatus.PASS,
 						"System send an email verification to the correct email address after clicking the 'Resend Activation' button on resend email verification page.");
