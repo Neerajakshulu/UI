@@ -1352,7 +1352,11 @@ public enum OnePObjectMap {
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_SUBCAT_XPATH("//button[contains(text(),'Subject categories')]/following-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_1st_SUBCAT_XPATH("//div[button[contains(text(),'Subject categories')]]/descendant::span[2]"),
 	
-	WAT_SEARCH_RESULTS_COUNT_XPATH("//h2[contains(text(),'result')]")
+	WAT_SEARCH_RESULTS_COUNT_XPATH("//h2[contains(text(),'result')]"),
+	
+	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
+	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),
+	DRA_SSO_LOGIN_PAGE_LOGIN_BUTTON_CSS("input[class='btn btn-primary btn-lg']"),
 	
 	;
 

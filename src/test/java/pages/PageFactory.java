@@ -37,6 +37,7 @@ public class PageFactory {
 	private Utility utility = null;
 	private NewsfeedPage newsfeedPage = null;
 	private DRAPage draPage = null;
+	private DRASSOPage draSSOPage=null;
 	private IPASearch searchPage = null;
 	private IPApage ipapage = null;
 	private IAMPage iamPage = null;
@@ -278,6 +279,15 @@ public class PageFactory {
 		}
 		return draPage;
 	}
+	
+	public DRASSOPage getDraSSOPageInstance(WebDriver ob) {
+
+		if (draSSOPage == null) {
+			draSSOPage = new DRASSOPage(ob);
+		}
+		return draSSOPage;
+	}
+	
 
 	public IPApage getIpaPage(WebDriver ob) {
 		if (ipapage == null) {

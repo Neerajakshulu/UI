@@ -530,6 +530,12 @@
 		</classes>
 	</test>
 
+
+<test name="DRA_SSO_Login" preserve-order="true">
+		<classes>
+			<class name="draiam.DRAIAM111"></class>
+		</classes>
+	</test>
 	<!-- <test name="DRA_Forgot_Password"> <classes> <class name="draiam.DRAIAM100"></class> 
 		</classes> </test> -->
 	<!-- IPAIAM Test cases START -->
