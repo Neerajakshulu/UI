@@ -70,7 +70,6 @@ public class DRAIAM111 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			pf.getDraSSOPageInstance(ob).openDRASSOUrl(CONFIG.getProperty("dra_sso_url"));
-			//waitUntilText("PLATFORM-IAM");
 			pf.getDraSSOPageInstance(ob).loginDRAApp(LOGIN.getProperty("DRASSOUSERNAME"),LOGIN.getProperty("DRASSOPASSWORD"));
 			pf.getDraPageInstance(ob).logoutDRA();
 			waitUntilText("Drug Research Advisor","Sign in");
