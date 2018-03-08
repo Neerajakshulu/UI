@@ -24,4 +24,5 @@ public class DRASSOPage extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_SSO_LOGIN_PAGE_LOGIN_BUTTON_CSS);
 		
 	}
+	
 }
