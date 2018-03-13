@@ -537,6 +537,55 @@ public class IAMPage extends TestBase {
 		Assert.assertEquals(footerContactEmail, contactEmail);
 		
 	}
+
+	public void enterEmailFieldToDisUser(String email,
+			String climeTicket) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_MAIL_NAME);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_MAIL_NAME, email);
+		ob.findElements(By.name(OnePObjectMap.CUSTOMER_FIND_USER_NAME.toString())).get(0).click();
+		BrowserWaits.waitTime(4);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_ENTER_CLIME_TICKET_NAME, climeTicket);
+		ob.findElements(By.name(OnePObjectMap.CUSTOMER_FIND_USER_NAME.toString())).get(1).click();
+		BrowserWaits.waitTime(4);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_CLICK_DISASSOCIATE_BUTTON_NAME);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("successfully disassociated from the claimticket");
+	}
+
+	public void clickFindUser() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_FINDUSER_LINK_CSS);
+	}
+
+	public void findUser(String email) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilText("REGULAR USER");
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_FINDUSER_PAGE_EMAIL_CSS, email);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_FINDUSER_PAGE_FIND_BUTTON_CSS);
+			
+	}
+
+	public void clickEditButton() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Primary Role");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_FINDUSER_PAGE_BUTTON_BUTTON_CSS);
+	}
+	
+	public void checkClaimTickets() throws Exception{
+		pf.getBrowserWaitsInstance(ob).waitUntilText("EDIT USER");
+		List<WebElement> list=ob.findElements(By.cssSelector(OnePObjectMap.CUSTOMER_EDITUSER_PAGE_CSS.toString()));
+		if(list.size()==0){
+			logger.info("No Claim ticket associated");
+		}else{
+			logger.info("Claim ticket associated to the user");
+		}
+	}
+	
+	public String getUserId(){
+		String userId=ob.findElement(By.cssSelector(OnePObjectMap.CUSTOMER_GET_USER_ID_CSS.toString())).getText();
+		return userId;
+		
+	}
+
+	public void checkErrorMessage(){
+		pf.getBrowserWaitsInstance(ob).waitUntilText("No Matching Records Found");
+	}
 	
 	
 	

@@ -14,7 +14,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class DRAIAM111 extends TestBase {
+public class DRAIAM112 extends TestBase {
 
 	static int count = -1;
 
@@ -63,9 +63,8 @@ public class DRAIAM111 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			pf.getDraSSOPageInstance(ob).openDRASSOUrl(CONFIG.getProperty("dra_sso_url"));
-			pf.getDraSSOPageInstance(ob).loginDRAApp(LOGIN.getProperty("DRASSOUSERNAME"),LOGIN.getProperty("DRASSOPASSWORD"));
-			pf.getDraPageInstance(ob).logoutDRA();
-			waitUntilText("Drug Research Advisor","Sign in");
+			pf.getDraSSOPageInstance(ob).loginDRAApp(LOGIN.getProperty("DRASUSPENDUSER"),LOGIN.getProperty("DRASUSPENDUSERPASSWORD"));
+			pf.getDraSSOPageInstance(ob).checkSuspendUserErrorMessage();
 			closeBrowser();
 
 		} catch (Throwable t) {

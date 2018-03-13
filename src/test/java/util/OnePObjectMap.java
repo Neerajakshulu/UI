@@ -1152,6 +1152,14 @@ public enum OnePObjectMap {
 	CUSTOMER_FIND_USER_NAME("finduser"),
 	CUSTOMER_ENTER_CLIME_TICKET_NAME("claimTicket"),
 	CUSTOMER_CLICK_ASSOCIATE_BUTTON_NAME("associate"),
+	CUSTOMER_CLICK_DISASSOCIATE_BUTTON_NAME("disassociate"),
+	CUSTOMER_FINDUSER_LINK_CSS("label[id='childHeader_2']"),
+	CUSTOMER_FINDUSER_PAGE_EMAIL_CSS("input[name='mailId']"),
+	CUSTOMER_FINDUSER_PAGE_FIND_BUTTON_CSS("input[name='Register2']"),
+	CUSTOMER_FINDUSER_PAGE_BUTTON_BUTTON_CSS("img[title='Edit User']"),
+	CUSTOMER_EDITUSER_PAGE_CSS("table[bgcolor='#F2F2F2']"),
+	CUSTOMER_SELECT_CLAIMTICKETS_EDITUSER_PAGE_CSS("//tr[@class='tableHeaderRow']//following::tr//following::tr"),
+	CUSTOMER_GET_USER_ID_CSS("label[class='tabledatatext']"),
 	GURILLA_MAIL_TEXT_ID("email-widget"),
 	CUSTOMER_CARE_LOGIN_PAGE_NAME("loginform"), 
 	CUSTOMER_CARE_CALLUS_DROPDOWN_CSS("select[ng-model='vm.region']"),
@@ -1357,6 +1365,8 @@ public enum OnePObjectMap {
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
 	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),
 	DRA_SSO_LOGIN_PAGE_LOGIN_BUTTON_CSS("input[class='btn btn-primary btn-lg']"),
+	DRA_SSO_SUSPEND_PAGE_ERROR_MESSAGE_XPATH("//p[@class='ng-binding']"),
+	DRA_SSO_SUSPEND_PAGE_ERROR_MESSAGE_TEXT_XPATH("//p[@class='ng-binding']//following::p"),
 	
 	;
 

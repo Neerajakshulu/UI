@@ -14,7 +14,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class DRAIAM111 extends TestBase {
+public class DRAIAM113 extends TestBase {
 
 	static int count = -1;
 
@@ -66,6 +66,30 @@ public class DRAIAM111 extends TestBase {
 			pf.getDraSSOPageInstance(ob).loginDRAApp(LOGIN.getProperty("DRASSOUSERNAME"),LOGIN.getProperty("DRASSOPASSWORD"));
 			pf.getDraPageInstance(ob).logoutDRA();
 			waitUntilText("Drug Research Advisor","Sign in");
+			
+			pf.getIamPage(ob).openCCURL("http://10.205.147.235:7270/steam-admin-app/");
+			pf.getIamPage(ob).loginCustomerCare("mahesh.morsu@thomsonreuters.com", "Neon@123");
+			pf.getIamPage(ob).openMenuPanel();
+			pf.getIamPage(ob).clickAssociateAndDisassociate();
+			pf.getIamPage(ob).clickUserToClimeTicket();
+			pf.getIamPage(ob).closeMenuPanel();
+			pf.getIamPage(ob).openMainPanel();
+			pf.getIamPage(ob).enterEmailFieldToDisUser(LOGIN.getProperty("DRASSOEXITUSER"), "239212Y6Oa");
+			pf.getIamPage(ob).enterEmailFieldToDisUser(LOGIN.getProperty("DRASSOEXITUSER"), "241301G5nO");
+			pf.getIamPage(ob).closeMainPanel();
+			pf.getIamPage(ob).openMenuPanel();
+			pf.getIamPage(ob).clickUserManagement();
+			pf.getIamPage(ob).clickFindUser();
+			pf.getIamPage(ob).closeMenuPanel();
+			pf.getIamPage(ob).openMainPanel();
+			pf.getIamPage(ob).findUser(LOGIN.getProperty("DRASSOEXITUSER"));
+			pf.getIamPage(ob).clickEditButton();
+			pf.getIamPage(ob).checkClaimTickets();
+			pf.getIamPage(ob).checkClaimTickets();
+			pf.getIamPage(ob).closeMainPanel();
+			pf.getIamPage(ob).logoutCustomerCare();
+			pf.getIamPage(ob).closeHeaderPanel();
+			pf.getIamPage(ob).checkCCLoginPage();
 			closeBrowser();
 
 		} catch (Throwable t) {
