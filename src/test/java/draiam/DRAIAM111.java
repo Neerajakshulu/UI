@@ -2,16 +2,13 @@ package draiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-<<<<<<< HEAD
 
-=======
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
->>>>>>> refs/remotes/origin/Parallel_Run
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;

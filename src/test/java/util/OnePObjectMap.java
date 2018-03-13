@@ -1365,14 +1365,12 @@ public enum OnePObjectMap {
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
 	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),
 	DRA_SSO_LOGIN_PAGE_LOGIN_BUTTON_CSS("input[class='btn btn-primary btn-lg']"),
-<<<<<<< HEAD
+
 	DRA_SSO_SUSPEND_PAGE_ERROR_MESSAGE_XPATH("//p[@class='ng-binding']"),
 	DRA_SSO_SUSPEND_PAGE_ERROR_MESSAGE_TEXT_XPATH("//p[@class='ng-binding']//following::p"),
-=======
 	DRA_SSO_LOGIN_PAGE_SUBFLOW3_ERRORMESSAGE("//p[@class='ng-binding']"),
 	DRA_SSO_LOGIN_PAGE_QUESTIONCONTACT("//p[text()='Questions? Contact ']"),
 	DRA_SSO_LOGIN_PAGE_EXPIRED_SUBSCRIPTION("//div[@class='col-md-12']")
->>>>>>> refs/remotes/origin/Parallel_Run
 	
 	;
 

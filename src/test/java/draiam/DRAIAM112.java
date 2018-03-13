@@ -62,7 +62,7 @@ public class DRAIAM112 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			pf.getDraSSOPageInstance(ob).openDRASSOUrl(CONFIG.getProperty("dra_sso_url"));
+			ob.navigate().to(host + CONFIG.getProperty("dra_sso_url"));
 			pf.getDraSSOPageInstance(ob).loginDRAApp(LOGIN.getProperty("DRASUSPENDUSER"),LOGIN.getProperty("DRASUSPENDUSERPASSWORD"));
 			pf.getDraSSOPageInstance(ob).checkSuspendUserErrorMessage();
 			closeBrowser();
