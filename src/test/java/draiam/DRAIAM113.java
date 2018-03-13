@@ -85,8 +85,8 @@ public class DRAIAM113 extends TestBase {
 			pf.getIamPage(ob).findUser(LOGIN.getProperty("DRASSOEXITUSER"));
 			pf.getIamPage(ob).clickEditButton();
 			pf.getIamPage(ob).checkClaimTickets();
-			pf.getIamPage(ob).checkClaimTickets();
 			pf.getIamPage(ob).closeMainPanel();
+			pf.getIamPage(ob).openHeaderPanel();
 			pf.getIamPage(ob).logoutCustomerCare();
 			pf.getIamPage(ob).closeHeaderPanel();
 			pf.getIamPage(ob).checkCCLoginPage();

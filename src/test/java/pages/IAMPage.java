@@ -553,6 +553,7 @@ public class IAMPage extends TestBase {
 
 	public void clickFindUser() throws Exception {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_FINDUSER_LINK_CSS);
+		ob.findElement(By.linkText("Regular User")).click();
 	}
 
 	public void findUser(String email) throws Exception {
@@ -574,6 +575,7 @@ public class IAMPage extends TestBase {
 			logger.info("No Claim ticket associated");
 		}else{
 			logger.info("Claim ticket associated to the user");
+			throw new Exception("Claim tickets assiciated to the user");
 		}
 	}
 	
