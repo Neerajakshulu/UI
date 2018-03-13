@@ -1370,7 +1370,8 @@ public enum OnePObjectMap {
 	DRA_SSO_SUSPEND_PAGE_ERROR_MESSAGE_TEXT_XPATH("//p[@class='ng-binding']//following::p"),
 	DRA_SSO_LOGIN_PAGE_SUBFLOW3_ERRORMESSAGE("//p[@class='ng-binding']"),
 	DRA_SSO_LOGIN_PAGE_QUESTIONCONTACT("//p[text()='Questions? Contact ']"),
-	DRA_SSO_LOGIN_PAGE_EXPIRED_SUBSCRIPTION("//div[@class='col-md-12']")
+	DRA_SSO_LOGIN_PAGE_EXPIRED_SUBSCRIPTION("//div[@class='col-md-12']"),
+	DRA_SSO_LOGIN_PAGE_WITH_SUBSCRIPTION("//p[@class='ng-binding']"),
 	
 	;
 
