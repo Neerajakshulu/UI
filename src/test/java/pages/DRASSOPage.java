@@ -25,9 +25,7 @@ public class DRASSOPage extends TestBase {
 		pf = new PageFactory();
 	}
 
-	public void openDRASSOUrl(String draSsoUrl) {
-		ob.navigate().to(draSsoUrl);
-	}
+	
 
 	public void loginDRAApp(String email,
 			String pass) throws Exception {

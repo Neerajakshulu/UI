@@ -2,14 +2,21 @@ package draiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+<<<<<<< HEAD
 
+=======
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+>>>>>>> refs/remotes/origin/Parallel_Run
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import com.relevantcodes.extentreports.LogStatus;
-
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
@@ -62,7 +69,7 @@ public class DRAIAM111 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			pf.getDraSSOPageInstance(ob).openDRASSOUrl(CONFIG.getProperty("dra_sso_url"));
+			ob.navigate().to(host + CONFIG.getProperty("dra_sso_url"));
 			pf.getDraSSOPageInstance(ob).loginDRAApp(LOGIN.getProperty("DRASSOUSERNAME"),LOGIN.getProperty("DRASSOPASSWORD"));
 			pf.getDraPageInstance(ob).logoutDRA();
 			waitUntilText("Drug Research Advisor","Sign in");
