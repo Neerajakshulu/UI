@@ -47,9 +47,9 @@ public class DRASSOPage extends TestBase {
 
 	}
 
-	public void deleteUserUsingXRPC() throws Exception{
+	public void deleteUserUsingXRPC(String userId) throws Exception{
 		String sid = getSessionId();
-		deleteUser(sid, "489244");
+		deleteUser(sid, userId);
 	}
 
 	
