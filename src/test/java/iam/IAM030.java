@@ -143,7 +143,7 @@ public class IAM030 extends TestBase {
 	private void facebookLogin() throws Exception {
 
 		WebDriver driver = null;
-		String email = "test_vmfprss_user@tfbnw.net";
+		String email = "test_apvhlfj_user@tfbnw.net";
 		String password = "auth123*";
 		try {
 
