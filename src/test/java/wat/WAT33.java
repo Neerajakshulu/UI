@@ -87,6 +87,7 @@ public class WAT33 extends TestBase {
 			pf.getSearchAuthClusterPage(ob).ORCIDSearch(orcid, test);
 			pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
 			test.log(LogStatus.PASS, "user is successfully navigated to Author record page from Search/Search Results page");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Navigation is fail from Search/Search Results page Author Record page","author_record_navigation_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();

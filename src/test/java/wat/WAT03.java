@@ -29,7 +29,7 @@ public class WAT03 extends TestBase {
 	static String welcome_text = "Welcome to SaR Labs, a place where you can try new functionality in development by the Scientific and Scholarly Research group of Clarivate Analytics.\n"
 			+ "\n"
 			+ "We are currently working on an improved author search tool for Web of Science. We welcome your feedback.";
-	static String search_suggestion_text = "Enter the author's name or ORCiD to begin your search against Web of Science article groups.";
+	static String search_suggestion_text = "Enter the author's name, ORCiD or RID to begin your search against Web of Science article groups.";
 	static String name_search_button_text = "Name search";
 	static String orcid_search_button_text = "ORCiD search";
 	static String last_name_inner_text = "Last name";
