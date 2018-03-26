@@ -700,7 +700,7 @@ public void verifylinkDiffSteamAcctText(ExtentTest test) throws Exception {
 	
 	//************************** Authoring Methods *************************************
 	
-	public void selectArtcleWithComments() {
+	public void selectArtcleWithComments() throws InterruptedException {
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
 		List<WebElement> itemList;
 
@@ -743,6 +743,7 @@ public void verifylinkDiffSteamAcctText(ExtentTest test) throws Exception {
 		waitForPageLoad(ob);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).clear();
 		waitForPageLoad(ob);
+		Thread.sleep(3000);
 	}
 
 	public void chooseArticle() throws InterruptedException {
