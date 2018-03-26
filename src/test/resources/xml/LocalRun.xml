@@ -355,7 +355,7 @@
 		<parameter name="password" value="Neon@123" />
 		<parameter name="truid" value="16c824e0-78e8-11e6-8fe8-05c6039ea6ae" />
 		<parameter name="placeholderValues"
-			value="+ First Name|+ Last Name|+ Title or Role|+ Institution|+ Country" />
+			value="+ First Name|+ Last Name|+ Title or Role|+ Institution|+ Country/Region" />
 		<parameter name="profileMetaData" value="Jawaharlal Nehru University|India" />
 		<parameter name="topics" value="tes|aut|dru" />
 		<classes>
