@@ -116,12 +116,13 @@ public class Search127 extends TestBase {
 		try {
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
-			String Beforeurl = System.getProperty("host") + url;
-			// System.out.println(Beforeurl);
+			String Beforeurl = "https://apps.dev-stable.clarivate.com"+ url;
+		   System.out.println(Beforeurl);
 			ob.navigate().to(Beforeurl);
 			login();
 
 			try {
+				System.out.println(ob.getCurrentUrl());
 				Assert.assertEquals(ob.getCurrentUrl(), Beforeurl);
 				test.log(LogStatus.PASS, "Deep linking url is matching after login " + recordtype);
 				Assert.assertTrue(pf.getSearchResultsPageInstance(ob).isSearchPageDisplayed());
