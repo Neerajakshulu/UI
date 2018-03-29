@@ -856,6 +856,7 @@ public enum OnePObjectMap {
 	DRA_STEPUPAUTHMODAL_FORGOTPW_LINK_CSS("a[class='forgot-password__link']"),
 	DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS("div[class='forgot-password-header']"),
 	DRA_STEPUPAUTHMODAL_LEARNMORE_CSS("a[event-action='learn-more-dra']"),
+	DRA_STEPUPAUTHMODAL_PAGE_CSS("span[class='wui-large-text ng-binding']"),
 	
 	// DRA_PROFILE_FLYOUT_NAME_CSS("div[class='wui-profile-flyout__info'] div[class*='wui-subtitle
 	// wui-profile-flyout__name ng-binding']"),
