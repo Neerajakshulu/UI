@@ -67,19 +67,19 @@ public class RCC011 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
+			loginAs("RCCTESTUSER044", "RCCTESTUSERPWD044");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.PASS, "Group is created by the owner ");
 			BrowserWaits.waitTime(30);
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE9"));
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE43"));
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user");
 			else
 				test.log(LogStatus.FAIL, "Sending Invitation is failed due to user does not exist");
 			BrowserWaits.waitTime(20);
-			result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE23"));
+			result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE45"));
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the another Neon user");
 			else
@@ -91,7 +91,7 @@ public class RCC011 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
+			loginAs("RCCTESTUSER043", "RCCTESTUSERPWD043");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToInvitationTab();
@@ -111,7 +111,7 @@ public class RCC011 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
+			loginAs("RCCTESTUSER045", "RCCTESTUSERPWD045");
 			test.log(LogStatus.PASS, "User2 has login with valid credentials");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
@@ -130,8 +130,8 @@ public class RCC011 extends TestBase {
 				ErrorUtil.addVerificationFailure(e);
 			}
 			pf.getGroupDetailsPage(ob).clickMembersTab();
-			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE9")));
-			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE23")));
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE43")));
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE45")));
 			test.log(LogStatus.PASS, "2 members are present in the group");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
@@ -140,17 +140,17 @@ public class RCC011 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
+			loginAs("RCCTESTUSER044", "RCCTESTUSERPWD044");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			test.log(LogStatus.PASS, "Owner navigate to groups details page");
 			pf.getGroupDetailsPage(ob).clickMembersTab();
 			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_REMOVE_BUTTON_CSS);
-			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE9")));
-			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE23")));
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE43")));
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE45")));
 			test.log(LogStatus.PASS, "Same  members are present in the group owner page");
-			pf.getGroupDetailsPage(ob).removeMembers(LOGIN.getProperty("RCCPROFILE23"));
+			pf.getGroupDetailsPage(ob).removeMembers(LOGIN.getProperty("RCCPROFILE45"));
 			BrowserWaits.waitTime(3);
 			test.log(LogStatus.PASS, "Remove button is clicked for a memeber");
 
@@ -169,7 +169,7 @@ public class RCC011 extends TestBase {
 				test.log(LogStatus.PASS, "Members count in notdisplaying correctly ");
 
 			// Checking Cross button is working for Cancel Invitation Modal
-			pf.getGroupDetailsPage(ob).removeMembers(LOGIN.getProperty("RCCPROFILE23"));
+			pf.getGroupDetailsPage(ob).removeMembers(LOGIN.getProperty("RCCPROFILE45"));
 			BrowserWaits.waitTime(3);
 			pf.getGroupDetailsPage(ob).clickOnCloseButtonINConfirmationModal();
 			test.log(LogStatus.PASS, "X button is working fine for closing model");
@@ -181,7 +181,7 @@ public class RCC011 extends TestBase {
 				test.log(LogStatus.PASS, "Members count in notdisplaying correctly ");
 
 			// Verify thet submitt button is working for Cancel Invitation Modal
-			pf.getGroupDetailsPage(ob).removeMembers(LOGIN.getProperty("RCCPROFILE23"));
+			pf.getGroupDetailsPage(ob).removeMembers(LOGIN.getProperty("RCCPROFILE45"));
 			BrowserWaits.waitTime(3);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			pf.getGroupDetailsPage(ob).clickMembersTab();
@@ -200,7 +200,7 @@ public class RCC011 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
+			loginAs("RCCTESTUSER043", "RCCTESTUSERPWD043");
 			test.log(LogStatus.PASS, "User has login with valid credentials");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
@@ -223,7 +223,7 @@ public class RCC011 extends TestBase {
 			else
 				test.log(LogStatus.PASS,
 						"Members count in not displaying correctly after removing the member from group ");
-			Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE23")));
+			Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE45")));
 			test.log(LogStatus.PASS, "Member is removed from the group in members group details page");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
@@ -232,7 +232,7 @@ public class RCC011 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
+			loginAs("RCCTESTUSER045", "RCCTESTUSERPWD045");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
 			try {
@@ -252,7 +252,7 @@ public class RCC011 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
+			loginAs("RCCTESTUSER044", "RCCTESTUSERPWD044");
 			pf.getUtility(ob).deleteGroup(title);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

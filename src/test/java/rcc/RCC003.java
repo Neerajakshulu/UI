@@ -66,13 +66,13 @@ public class RCC003 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
+			loginAs("RCCTESTUSER030", "RCCTESTUSERPWD030");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(groupTitle, desc);
 			pf.getGroupDetailsPage(ob).typeCustomMessage(msg);
 			BrowserWaits.waitTime(10);
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE18"));
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE31"));
 			
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 
@@ -82,6 +82,7 @@ public class RCC003 extends TestBase {
 				test.log(LogStatus.FAIL, "Sending Invitation is failed due to user does not exist");
 				throw new Exception("Sending Invitation is failed due to user does not exist");
 			}
+			Thread.sleep(5000);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -96,7 +97,7 @@ public class RCC003 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER018", "RCCTESTUSERPWD018");
+			loginAs("RCCTESTUSER031", "RCCTESTUSERPWD031");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			if (pf.getGroupInvitationPage(ob).verifyCustomMessage(groupTitle, msg)) {
 				test.log(LogStatus.PASS, "Logstatus has been verified successfully");
@@ -116,6 +117,7 @@ public class RCC003 extends TestBase {
 				test.log(LogStatus.FAIL, "Grouplink verification failed");
 				throw new Exception("Grouplink verification failed");
 			}
+			 
 
 			/**
 			 * 
@@ -142,7 +144,7 @@ public class RCC003 extends TestBase {
 			String actProfileData=pf.getProfilePageInstance(ob).getProfileTitleAndMetadata().toString();
 			actProfileData=actProfileData.substring(1,actProfileData.length()-1);
 			try{
-			Assert.assertEquals(actProfileData, expectedStr);
+			Assert.assertEquals(actProfileData.trim(), expectedStr.trim());
 			test.log(LogStatus.PASS, "Group owner profile details are displayed correctly in Invitation page");
 			}catch(Throwable t){
 				test.log(LogStatus.FAIL, "Group owner profile details mismatch");
@@ -165,7 +167,7 @@ public class RCC003 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
+			loginAs("RCCTESTUSER030", "RCCTESTUSERPWD030");
 			pf.getUtility(ob).deleteGroup(groupTitle);
 			test.log(LogStatus.PASS, "Created groups have been deleted successfully");
 			closeBrowser();

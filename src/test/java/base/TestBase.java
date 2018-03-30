@@ -1461,6 +1461,8 @@ public class TestBase {
 		waitForElementTobeClickable(ob, By.name("loginEmail"), 180);
 		ob.findElement(By.name("loginEmail")).clear();
 		ob.findElement(By.name("loginEmail")).sendKeys(LOGIN.getProperty(usernameKey));
+		waitForElementTobeClickable(ob, By.name("loginPassword"), 180);
+		ob.findElement(By.name("loginPassword")).clear();
 		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty(pwdKey));
 		// jsClick(ob, ob.findElement(By.cssSelector("button[class*='login-button']")));
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);

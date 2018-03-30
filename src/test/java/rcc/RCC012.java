@@ -58,13 +58,13 @@ public class RCC012 extends TestBase{
 			maximizeWindow();
 			ob.navigate().to(host);
 			
-			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
+			loginAs("RCCTESTUSER037", "RCCTESTUSERPWD037");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnInvitationTab();
 			pf.getGroupsPage(ob).listOfPendingInvitaions();
 			pf.getLoginTRInstance(ob).logOutApp();
 			
-			loginAs("RCCTESTUSER016", "RCCTESTUSERPWD016");
+			loginAs("RCCTESTUSER036", "RCCTESTUSERPWD036");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
@@ -79,7 +79,7 @@ public class RCC012 extends TestBase{
 						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE20"));
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE37"));
 			if (result) {
 				test.log(LogStatus.PASS, "User Invited sucessfully");
 			} else {
@@ -87,7 +87,7 @@ public class RCC012 extends TestBase{
 			}
 			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
-			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
+			loginAs("RCCTESTUSER037", "RCCTESTUSERPWD037");
 			
 			int countGroupsTabOverlay = pf.getGroupsPage(ob).countGroupsTabOverlay();
 			logger.info("Count Groups Tab Overlay : "+countGroupsTabOverlay);
@@ -142,7 +142,7 @@ public class RCC012 extends TestBase{
 				test.log(LogStatus.FAIL, "All tabs are not working");
 			}
 			
-			boolean status=pf.getGroupsListPage(ob).checkAddedUserDetails(title,LOGIN.getProperty("RCCPROFILE16"));
+			boolean status=pf.getGroupsListPage(ob).checkAddedUserDetails(title,LOGIN.getProperty("RCCPROFILE36"));
 			if(status){
 				test.log(LogStatus.PASS, "User added successfylly in Group list page");
 			}else{
@@ -151,7 +151,7 @@ public class RCC012 extends TestBase{
 			//pf.getGroupInvitationPage(ob).verifyInvitationTabDefaultMessage(test);
 			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
-			loginAs("RCCTESTUSER016", "RCCTESTUSERPWD016");
+			loginAs("RCCTESTUSER036", "RCCTESTUSERPWD036");
 			pf.getUtility(ob).deleteGroup(title);
 			closeBrowser();
 		} catch (Throwable t) {

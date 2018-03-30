@@ -69,7 +69,7 @@ public class RCC019 extends TestBase {
 
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER011", "RCCTESTUSERPWD011");
+			loginAs("RCCTESTUSER058", "RCCTESTUSERPWD058");
 			test.log(LogStatus.INFO, "Login as Group owner");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
@@ -85,7 +85,7 @@ public class RCC019 extends TestBase {
 			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE24"));
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE59"));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -94,7 +94,7 @@ public class RCC019 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER024", "RCCTESTUSERPWD024");
+			loginAs("RCCTESTUSER059", "RCCTESTUSERPWD059");
 			test.log(LogStatus.INFO, "Login as Group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
@@ -178,7 +178,7 @@ public class RCC019 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER011", "RCCTESTUSERPWD011");
+			loginAs("RCCTESTUSER058", "RCCTESTUSERPWD058");
 			test.log(LogStatus.INFO, "Login as group owner");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
@@ -230,7 +230,7 @@ public class RCC019 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER024", "RCCTESTUSERPWD024");
+			loginAs("RCCTESTUSER059", "RCCTESTUSERPWD059");
 			BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Login as group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
@@ -252,7 +252,7 @@ public class RCC019 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER011", "RCCTESTUSERPWD011");
+			loginAs("RCCTESTUSER058", "RCCTESTUSERPWD058");
 			test.log(LogStatus.INFO, "Login as Group owner");
 			pf.getUtility(ob).deleteGroup(title);
 			test.log(LogStatus.INFO, "Deleted the group");

@@ -166,6 +166,7 @@ public class GroupDetailsPage extends TestBase {
 
 	private WebElement getRecordCard(String recordTitle, String type) throws Exception {
 		String recordCSS = null;
+		Thread.sleep(5000);
 		if (type.equalsIgnoreCase("post"))
 			recordCSS = OnePObjectMap.RCC_GROUPDETAILS_POST_RECORD_CARD_CSS.toString();
 		else if (type.equalsIgnoreCase("patent"))
@@ -174,7 +175,7 @@ public class GroupDetailsPage extends TestBase {
 			recordCSS = OnePObjectMap.RCC_GROUPDETAILS_ARTICLE_RECORD_CARD_CSS.toString();
 
 		waitForAllElementsToBePresent(ob, By.cssSelector(recordCSS), 60);
-
+		Thread.sleep(5000);
 		List<WebElement> invitationList = ob.findElements(By.cssSelector(recordCSS));
 		String actTitle;
 		for (WebElement we : invitationList) {
@@ -254,7 +255,9 @@ public class GroupDetailsPage extends TestBase {
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString())).click();
 		isFound = selectUserFromList(membersName);
+		Thread.sleep(5000);
 		clickOnSendInvitation();
+		Thread.sleep(3000);
 		return isFound;
 	}
 
@@ -685,8 +688,9 @@ public class GroupDetailsPage extends TestBase {
 
 		WebElement record = getRecordCard(recordTitle, recordType);
 		BrowserWaits.waitTime(5);
-		scrollElementIntoView(ob, record
-				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString())));
+//		scrollElementIntoView(ob, record
+//				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString())));
+		scrollingToElementofAPage();
 		jsClick(ob, record
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString())));
 

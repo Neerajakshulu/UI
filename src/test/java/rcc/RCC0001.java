@@ -82,7 +82,7 @@ public class RCC0001 extends TestBase {
 			}
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			String title50 = RandomStringUtils.randomAlphanumeric(50);
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title50);
@@ -102,7 +102,7 @@ public class RCC0001 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			String title2 = RandomStringUtils.randomAlphanumeric(1);
 
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
@@ -139,7 +139,7 @@ public class RCC0001 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			String Desc500 = RandomStringUtils.randomAlphanumeric(510);
 			String title500 = RandomStringUtils.randomAlphanumeric(10);
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();

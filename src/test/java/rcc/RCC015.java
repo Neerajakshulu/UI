@@ -66,7 +66,7 @@ public class RCC015 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
+			loginAs("RCCTESTUSER048", "RCCTESTUSERPWD048");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
@@ -152,7 +152,7 @@ public class RCC015 extends TestBase {
 
 			ob.navigate().back();
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE19"));
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE49"));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -161,7 +161,7 @@ public class RCC015 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER019", "RCCTESTUSERPWD019");
+			loginAs("RCCTESTUSER049", "RCCTESTUSERPWD049");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 
@@ -233,7 +233,7 @@ public class RCC015 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
+			loginAs("RCCTESTUSER048", "RCCTESTUSERPWD048");
 			test.log(LogStatus.INFO, "Login as Owner");
 			pf.getUtility(ob).deleteGroup(title);
 			test.log(LogStatus.INFO, "Deleted the group");

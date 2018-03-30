@@ -59,13 +59,13 @@ public class RCC008 extends TestBase{
 			maximizeWindow();
 			ob.navigate().to(host);
 			
-			loginAs("RCCTESTUSER015", "RCCTESTUSERPWD015");
+			loginAs("RCCTESTUSER034", "RCCTESTUSERPWD034");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnInvitationTab();
 			pf.getGroupsPage(ob).listOfPendingInvitaions();
 			pf.getLoginTRInstance(ob).logOutApp();
 			
-			loginAs("RCCTESTUSER016", "RCCTESTUSERPWD016");
+			loginAs("RCCTESTUSER035", "RCCTESTUSERPWD035");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
@@ -80,7 +80,7 @@ public class RCC008 extends TestBase{
 				ErrorUtil.addVerificationFailure(t);
 			}
 			BrowserWaits.waitTime(30);
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE15"));
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE34"));
 			if (result) {
 				test.log(LogStatus.PASS, "User Invited sucessfully");
 			} else {
@@ -88,7 +88,7 @@ public class RCC008 extends TestBase{
 			}
 			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
-			loginAs("RCCTESTUSER015", "RCCTESTUSERPWD015");
+			loginAs("RCCTESTUSER034", "RCCTESTUSERPWD034");
 			
 			int countGroupsTabOverlay = pf.getGroupsPage(ob).countGroupsTabOverlay();
 			logger.info("Count Groups Tab Overlay : "+countGroupsTabOverlay);
@@ -134,7 +134,7 @@ public class RCC008 extends TestBase{
 			pf.getGroupInvitationPage(ob).verifyInvitationTabDefaultMessage(test);
 			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
-			loginAs("RCCTESTUSER016", "RCCTESTUSERPWD016");
+			loginAs("RCCTESTUSER035", "RCCTESTUSERPWD035");
 			pf.getUtility(ob).deleteGroup(title);
 			closeBrowser();
 		} catch (Throwable t) {

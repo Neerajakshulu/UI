@@ -59,7 +59,7 @@ public class RCC0002 extends TestBase {
 
 		try {
 			String groupTitle = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
-			String desc = RandomStringUtils.randomAlphanumeric(100);
+			//String desc = RandomStringUtils.randomAlphanumeric(100);
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -76,7 +76,7 @@ public class RCC0002 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnSaveButton();
 			// OPQA-1576
 			try{
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).checkIfEditGroupTitleFieldIsDisplayed());
 			test.log(LogStatus.PASS, "Edit mode is closed");
 			Assert.assertEquals(titleUpdate, pf.getGroupDetailsPage(ob).getGroupTitle());
