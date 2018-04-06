@@ -1364,6 +1364,11 @@ public enum OnePObjectMap {
 	
 	WAT_SEARCH_RESULTS_COUNT_XPATH("//h2[contains(text(),'result')]"),
 	
+	WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS("div[class*='fa fa-info-circle wat-search__']"),
+	WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS("div[class*='popover ng-scope ng-isolate-scope top wui-popover--large fade in top-left']"),
+	WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS("div[class='wui-popover__close-btn ng-scope'][title='Close']"),
+	
+	
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
 	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),
 	DRA_SSO_LOGIN_PAGE_LOGIN_BUTTON_CSS("input[class='btn btn-primary btn-lg']"),

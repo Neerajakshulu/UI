@@ -1479,5 +1479,71 @@ public class SearchAuthorClusterPage extends TestBase {
 			throw new Exception("FIND button is disabled for valid ORCID");
 		}
 	}
+	
+	
+	
+	/**
+	 * Method for Baloon Popover display and close using double click on popover link
+	 * @param test
+	 * @throws Exception
+	 */
+	public void ballonPopoverOpenAndClose() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
+		
+	}
+	
+	
+	/**
+	 * Method for Baloon Popover display using close(x) button
+	 * @param test
+	 * @throws Exception
+	 */
+	public void ballonPopoverClose() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
+		
+	}
+	
+	/**
+	 * Method for Baloon Popover display using outside click
+	 * @param test
+	 * @throws Exception
+	 */
+	public void ballonPopoverOutsideClose() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
+		
+	}
+	
+	/**
+	 * Method for Baloon Popover content validation
+	 * @param test
+	 * @throws Exception
+	 */
+	public void ballonPopoverContent(String header,String content) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
+		String popover_Header= pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS).getAttribute("wui-popover-header");
+		String popover_Content= pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS).getAttribute("wui-popover-content");
+		if(!popover_Header.equals(header)&&popover_Content.equals(popover_Content)){
+			throw new Exception("Popover Header and Content is not expected");
+		}
+		
+	}
+	
 
 }
