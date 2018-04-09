@@ -65,9 +65,9 @@ public class RCC025 extends TestBase {
 			test.log(LogStatus.PASS, "Group is created by the USER1 ");
 
 			// Inviting user2
-			BrowserWaits.waitTime(25);
+			//BrowserWaits.waitTime(25);
 			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE1"));
-			BrowserWaits.waitTime(25);
+			//BrowserWaits.waitTime(25);
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user1");
@@ -141,7 +141,7 @@ public class RCC025 extends TestBase {
 			try {
 				ob.navigate().refresh();
 				pf.getGroupDetailsPage(ob).clickOnDeleteButton();
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				pf.getGroupDetailsPage(ob).clickOnDeleteGroupButtoninPopUp();
 
 				Assert.assertFalse(pf.getGroupsListPage(ob).checkForGroup(groupTitle));
@@ -172,7 +172,7 @@ public class RCC025 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
 			int afterusergroupcount = pf.getGroupsPage(ob).getGroupsCount();
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			Assert.assertEquals(beforeusergroupcount, afterusergroupcount + 1, "Verifird the group count wit user2 ");
 			test.log(LogStatus.PASS, "verified the groups count with user after deleting");
 

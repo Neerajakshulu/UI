@@ -74,7 +74,7 @@ public class RCC014 extends TestBase {
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.INFO, "Group is created successfully: " + title);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getHFPageInstance(ob).clickOnHomeLink();
 			waitForPageLoad(ob);
 			pf.getHFPageInstance(ob).searchForText("test");

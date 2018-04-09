@@ -140,7 +140,8 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickPatentstab() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_TAB_CSS);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_TAB_CSS);
+		fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_TAB_CSS.toString()), 300);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_TAB_CSS);
 		waitForAjax(ob);
 	}
@@ -251,6 +252,7 @@ public class GroupDetailsPage extends TestBase {
 
 	public boolean inviteMembers(String membersName) throws InterruptedException {
 		boolean isFound = false;
+		fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()), 500);
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString())).click();
@@ -262,6 +264,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickOnSendInvitation() {
+		fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_SEND_BUTTON_CSS.toString()), 500);
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_SEND_BUTTON_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_SEND_BUTTON_CSS.toString()))

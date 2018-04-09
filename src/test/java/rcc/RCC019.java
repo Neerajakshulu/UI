@@ -231,7 +231,7 @@ public class RCC019 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER059", "RCCTESTUSERPWD059");
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Login as group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
@@ -256,7 +256,7 @@ public class RCC019 extends TestBase {
 			test.log(LogStatus.INFO, "Login as Group owner");
 			pf.getUtility(ob).deleteGroup(title);
 			test.log(LogStatus.INFO, "Deleted the group");
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			pf.getLoginTRInstance(ob).logOutApp();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");

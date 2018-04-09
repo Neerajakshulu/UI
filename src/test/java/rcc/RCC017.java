@@ -72,7 +72,7 @@ public class RCC017 extends TestBase {
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.INFO, "Group is created successfully: " + title);
-			BrowserWaits.waitTime(8);
+			//BrowserWaits.waitTime(8);
 			pf.getGroupDetailsPage(ob).clickPatentstab();
 
 			try {
@@ -115,7 +115,7 @@ public class RCC017 extends TestBase {
 			}
 
 			pf.getGroupDetailsPage(ob).clickPatentstab();
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			String recordDetals = pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, recordType);
 			List<String> metrics = pf.getGroupDetailsPage(ob).getRecordMetrics(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, recordType);

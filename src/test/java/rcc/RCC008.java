@@ -79,14 +79,14 @@ public class RCC008 extends TestBase{
 						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			BrowserWaits.waitTime(30);
+			//BrowserWaits.waitTime(30);
 			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE34"));
 			if (result) {
 				test.log(LogStatus.PASS, "User Invited sucessfully");
 			} else {
 				test.log(LogStatus.FAIL, "User not Invited");
 			}
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
 			loginAs("RCCTESTUSER034", "RCCTESTUSERPWD034");
 			
@@ -117,7 +117,7 @@ public class RCC008 extends TestBase{
 			}
 			pf.getGroupsPage(ob).declineInvitation();
 			
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			//pf.getGroupsPage(ob).clickOnGroupsTab();
 			int countGroupsTabOverlay1 = pf.getGroupsPage(ob).countGroupsTabOverlay();
 			logger.info("Count Groups Tab Overlay : "+countGroupsTabOverlay1);
@@ -132,7 +132,7 @@ public class RCC008 extends TestBase{
 				test.log(LogStatus.FAIL, "All tabs are not working");
 			}
 			pf.getGroupInvitationPage(ob).verifyInvitationTabDefaultMessage(test);
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
 			loginAs("RCCTESTUSER035", "RCCTESTUSERPWD035");
 			pf.getUtility(ob).deleteGroup(title);

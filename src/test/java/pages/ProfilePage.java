@@ -317,7 +317,8 @@ public class ProfilePage extends TestBase {
 	 *             When user not able to follow
 	 */
 	public void followOtherUserFromProfilePage() throws Exception {
-		BrowserWaits.waitTime(2);
+//		BrowserWaits.waitTime(2);
+		fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS.toString()), 100);
 		WebElement followUnFollowCheck = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS);
 		followUnfollowLableBefore = pf.getBrowserActionInstance(ob)
@@ -326,7 +327,8 @@ public class ProfilePage extends TestBase {
 		logger.info("Follow/Unfollow Label Before-->" + followUnfollowLableBefore);
 		if (followUnfollowLableBefore.contains("Follow")) {
 			pf.getBrowserActionInstance(ob).jsClick(followUnFollowCheck);
-			BrowserWaits.waitTime(2);
+//			BrowserWaits.waitTime(2);
+			fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS.toString()), 100);
 			followUnfollowLableAfter = pf.getBrowserActionInstance(ob)
 					.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1)
 					.getAttribute("data-uib-tooltip");

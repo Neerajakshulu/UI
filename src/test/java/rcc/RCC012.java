@@ -69,7 +69,7 @@ public class RCC012 extends TestBase{
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.INFO, "Group is created successfully: " + title);
-			BrowserWaits.waitTime(22);
+			//BrowserWaits.waitTime(22);
 			try {
 				Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupTitle(), title);
 				test.log(LogStatus.PASS, "Group title displayed in Group details page correctly");
@@ -85,7 +85,7 @@ public class RCC012 extends TestBase{
 			} else {
 				test.log(LogStatus.FAIL, "User not Invited");
 			}
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
 			loginAs("RCCTESTUSER037", "RCCTESTUSERPWD037");
 			
@@ -116,7 +116,7 @@ public class RCC012 extends TestBase{
 			}
 			pf.getGroupsPage(ob).acceptInvitation();
 			
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			
 			str = pf.getGroupsPage(ob).defaultselectedTab();
@@ -149,7 +149,7 @@ public class RCC012 extends TestBase{
 				test.log(LogStatus.FAIL, "User not added successfylly in Group list page");
 			}
 			//pf.getGroupInvitationPage(ob).verifyInvitationTabDefaultMessage(test);
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
 			loginAs("RCCTESTUSER036", "RCCTESTUSERPWD036");
 			pf.getUtility(ob).deleteGroup(title);

@@ -72,13 +72,13 @@ public class RCC011 extends TestBase {
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.PASS, "Group is created by the owner ");
-			BrowserWaits.waitTime(30);
+			//BrowserWaits.waitTime(30);
 			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE43"));
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user");
 			else
 				test.log(LogStatus.FAIL, "Sending Invitation is failed due to user does not exist");
-			BrowserWaits.waitTime(20);
+			//BrowserWaits.waitTime(20);
 			result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE45"));
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the another Neon user");
@@ -116,7 +116,7 @@ public class RCC011 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToInvitationTab();
-			BrowserWaits.waitTime(30);
+			//BrowserWaits.waitTime(30);
 			try {
 				pf.getGroupInvitationPage(ob).acceptInvitation(title);
 				test.log(LogStatus.PASS, "User2 has accepted the invitation");
@@ -151,7 +151,7 @@ public class RCC011 extends TestBase {
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE45")));
 			test.log(LogStatus.PASS, "Same  members are present in the group owner page");
 			pf.getGroupDetailsPage(ob).removeMembers(LOGIN.getProperty("RCCPROFILE45"));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			test.log(LogStatus.PASS, "Remove button is clicked for a memeber");
 
 			// Verify Custom Messages and cancel button for Cancel Invitation
@@ -170,7 +170,7 @@ public class RCC011 extends TestBase {
 
 			// Checking Cross button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).removeMembers(LOGIN.getProperty("RCCPROFILE45"));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			pf.getGroupDetailsPage(ob).clickOnCloseButtonINConfirmationModal();
 			test.log(LogStatus.PASS, "X button is working fine for closing model");
 			pf.getGroupDetailsPage(ob).clickMembersTab();
@@ -182,7 +182,7 @@ public class RCC011 extends TestBase {
 
 			// Verify thet submitt button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).removeMembers(LOGIN.getProperty("RCCPROFILE45"));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			pf.getGroupDetailsPage(ob).clickMembersTab();
 			int aftercount = pf.getGroupDetailsPage(ob).getMembersCounts();

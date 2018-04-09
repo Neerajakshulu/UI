@@ -72,7 +72,7 @@ public class RCC010 extends TestBase {
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.PASS, "Group is created by the owner ");
-			BrowserWaits.waitTime(30);
+			//BrowserWaits.waitTime(30);
 			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE42"));
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user");
@@ -117,7 +117,7 @@ public class RCC010 extends TestBase {
 					.scrollToElement(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS);
 
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations(LOGIN.getProperty("RCCPROFILE42"));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			test.log(LogStatus.PASS, "Cancelation Invitation  button is clicked");
 
 			// Verify Custom Messages and cancel button for Cancel Invitation
@@ -137,7 +137,7 @@ public class RCC010 extends TestBase {
 			// Verify thet submitt button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations(LOGIN.getProperty("RCCPROFILE42"));
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
-			BrowserWaits.waitTime(25);
+			//BrowserWaits.waitTime(25);
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyUserInPendingInvitationList(LOGIN.getProperty("RCCPROFILE42")),
 					"Invitation is canceled by the owner of the group");
 

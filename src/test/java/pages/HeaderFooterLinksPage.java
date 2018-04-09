@@ -116,6 +116,7 @@ public class HeaderFooterLinksPage extends TestBase {
 	 * Method to click on Home link in header
 	 */
 	public void clickOnHomeLink() {
+		fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS.toString()), 300);
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS.toString()), 180);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS.toString())).click();
 	}

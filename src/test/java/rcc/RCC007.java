@@ -71,14 +71,14 @@ public class RCC007 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE33"));
 			if (result) {
 				test.log(LogStatus.PASS, "User Invited sucessfully");
 			} else {
 				test.log(LogStatus.FAIL, "User not Invited");
 			}
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
 			loginAs("RCCTESTUSER033", "RCCTESTUSERPWD033");
 
@@ -108,7 +108,7 @@ public class RCC007 extends TestBase {
 			} else {
 				test.log(LogStatus.FAIL, "GroupTab overlay count and invitation tab count not same");
 			}
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			int countGroupsTabOverlay1 = pf.getGroupsPage(ob).countGroupsTabOverlay();
 			logger.info("Count Groups Tab Overlay : "+countGroupsTabOverlay1);
@@ -122,7 +122,7 @@ public class RCC007 extends TestBase {
 			} else {
 				test.log(LogStatus.FAIL, "All tabs are not working");
 			}
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
 			
 			loginAs("RCCTESTUSER032", "RCCTESTUSERPWD032");
