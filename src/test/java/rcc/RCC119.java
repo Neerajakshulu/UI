@@ -99,7 +99,7 @@ public class RCC119 extends TestBase {
 			pf.getGmailLoginPage(ob).gmailLogin(Uname, password);
 			pf.getGmailLoginPage(ob).mailProtectclick();
 			pf.getGmailLoginPage(ob).clickonMail();
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			try {
 				Assert.assertTrue(pf.getGmailLoginPage(ob).verifyEmailSubject());
 				test.log(LogStatus.PASS, "Email Subject Verification Success");
@@ -117,9 +117,9 @@ public class RCC119 extends TestBase {
 			// Login with main user and accept the invitation.
 			test.log(LogStatus.INFO, "logging in with user and verifying the Invitation");
 			loginAs("RCCGMAILUSER", "RCCGMAILPASSWORD");
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getGroupInvitationPage(ob).verifyingInvitations(title);
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			test.log(LogStatus.INFO, "Invitation Accepted");
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 			test.log(LogStatus.INFO, "verify the group desc");

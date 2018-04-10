@@ -55,7 +55,7 @@ public class RCC020 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER007", "RCCTESTUSERPWD007");
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsListPage(ob).deleteAllGroups();
 			int beforecreation = pf.getGroupsPage(ob).getGroupsCount();

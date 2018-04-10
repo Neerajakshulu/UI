@@ -222,7 +222,7 @@ public class GroupInvitationPage extends TestBase {
 		System.out.println("");
 		String name=groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_GROUP_OWNER_NAME_CSS.toString())).getText();
 		String role=groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_GROUP_OWNER_ROLE_CSS.toString())).getText();
-		return name.trim()+", "+role.trim();
+		return name.trim()+" "+role.trim();
 	}
 	
 	public void clickOnGroupOwnerName(String grouptitle) throws Exception{

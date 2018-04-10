@@ -58,18 +58,18 @@ public class RCC012 extends TestBase{
 			maximizeWindow();
 			ob.navigate().to(host);
 			
-			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
+			loginAs("RCCTESTUSER037", "RCCTESTUSERPWD037");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnInvitationTab();
 			pf.getGroupsPage(ob).listOfPendingInvitaions();
 			pf.getLoginTRInstance(ob).logOutApp();
 			
-			loginAs("RCCTESTUSER016", "RCCTESTUSERPWD016");
+			loginAs("RCCTESTUSER036", "RCCTESTUSERPWD036");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.INFO, "Group is created successfully: " + title);
-			BrowserWaits.waitTime(22);
+			//BrowserWaits.waitTime(22);
 			try {
 				Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupTitle(), title);
 				test.log(LogStatus.PASS, "Group title displayed in Group details page correctly");
@@ -79,15 +79,15 @@ public class RCC012 extends TestBase{
 						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE20"));
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE37"));
 			if (result) {
 				test.log(LogStatus.PASS, "User Invited sucessfully");
 			} else {
 				test.log(LogStatus.FAIL, "User not Invited");
 			}
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
-			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
+			loginAs("RCCTESTUSER037", "RCCTESTUSERPWD037");
 			
 			int countGroupsTabOverlay = pf.getGroupsPage(ob).countGroupsTabOverlay();
 			logger.info("Count Groups Tab Overlay : "+countGroupsTabOverlay);
@@ -116,7 +116,7 @@ public class RCC012 extends TestBase{
 			}
 			pf.getGroupsPage(ob).acceptInvitation();
 			
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			
 			str = pf.getGroupsPage(ob).defaultselectedTab();
@@ -142,16 +142,16 @@ public class RCC012 extends TestBase{
 				test.log(LogStatus.FAIL, "All tabs are not working");
 			}
 			
-			boolean status=pf.getGroupsListPage(ob).checkAddedUserDetails(title,LOGIN.getProperty("RCCPROFILE16"));
+			boolean status=pf.getGroupsListPage(ob).checkAddedUserDetails(title,LOGIN.getProperty("RCCPROFILE36"));
 			if(status){
 				test.log(LogStatus.PASS, "User added successfylly in Group list page");
 			}else{
 				test.log(LogStatus.FAIL, "User not added successfylly in Group list page");
 			}
 			//pf.getGroupInvitationPage(ob).verifyInvitationTabDefaultMessage(test);
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
-			loginAs("RCCTESTUSER016", "RCCTESTUSERPWD016");
+			loginAs("RCCTESTUSER036", "RCCTESTUSERPWD036");
 			pf.getUtility(ob).deleteGroup(title);
 			closeBrowser();
 		} catch (Throwable t) {

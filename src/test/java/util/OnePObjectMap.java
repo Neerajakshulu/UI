@@ -856,6 +856,7 @@ public enum OnePObjectMap {
 	DRA_STEPUPAUTHMODAL_FORGOTPW_LINK_CSS("a[class='forgot-password__link']"),
 	DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS("div[class='forgot-password-header']"),
 	DRA_STEPUPAUTHMODAL_LEARNMORE_CSS("a[event-action='learn-more-dra']"),
+	DRA_STEPUPAUTHMODAL_PAGE_CSS("span[class='wui-large-text ng-binding']"),
 	
 	// DRA_PROFILE_FLYOUT_NAME_CSS("div[class='wui-profile-flyout__info'] div[class*='wui-subtitle
 	// wui-profile-flyout__name ng-binding']"),
@@ -1362,6 +1363,11 @@ public enum OnePObjectMap {
 	WAT_SEARCH_RESULTS_FILTER_1st_SUBCAT_XPATH("//div[button[contains(text(),'Subject categories')]]/descendant::span[2]"),
 	
 	WAT_SEARCH_RESULTS_COUNT_XPATH("//h2[contains(text(),'result')]"),
+	
+	WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS("div[class*='fa fa-info-circle wat-search__']"),
+	WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS("div[class*='popover ng-scope ng-isolate-scope top wui-popover--large fade in top-left']"),
+	WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS("div[class='wui-popover__close-btn ng-scope'][title='Close']"),
+	
 	
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
 	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),

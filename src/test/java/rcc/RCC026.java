@@ -55,7 +55,7 @@ public class RCC026 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
-			BrowserWaits.waitTime(10);
+			//BrowserWaits.waitTime(10);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 		//	pf.getGroupsListPage(ob).deleteAllGroups();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
@@ -109,7 +109,7 @@ public class RCC026 extends TestBase {
 			}
 			
 			pf.getHFPageInstance(ob).searchForText(patentTitle);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			pf.getSearchResultsPageInstance(ob).clickAddToGroupForRecord(patentTitle,"patent");
 			
@@ -120,7 +120,7 @@ public class RCC026 extends TestBase {
 				logFailureDetails(test, t, "Group name is selected in drop down when the patent is removed from the group", "Addtogroup_validation_failed");
 			}
 			pf.getHFPageInstance(ob).searchForText(postTitle);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).clickAddToGroupForRecord(postTitle, "post");
 			

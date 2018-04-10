@@ -57,7 +57,7 @@ public class RCC002 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER015", "RCCTESTUSERPWD015");
+			loginAs("RCCTESTUSER028", "RCCTESTUSERPWD028");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
@@ -72,7 +72,7 @@ public class RCC002 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE16"));
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE29"));
 			if (result) {
 				test.log(LogStatus.PASS, "User Invited sucessfully");
 			} else {
@@ -80,7 +80,7 @@ public class RCC002 extends TestBase {
 			}
 			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
-			loginAs("RCCTESTUSER016", "RCCTESTUSERPWD016");
+			loginAs("RCCTESTUSER029", "RCCTESTUSERPWD029");
 
 			int countGroupsTabOverlay = pf.getGroupsPage(ob).countGroupsTabOverlay();
 			logger.info("Count Groups Tab Overlay : "+countGroupsTabOverlay);
@@ -125,7 +125,7 @@ public class RCC002 extends TestBase {
 			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
 			
-			loginAs("RCCTESTUSER015", "RCCTESTUSERPWD015");
+			loginAs("RCCTESTUSER028", "RCCTESTUSERPWD028");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnGroupsLink();
 			try{

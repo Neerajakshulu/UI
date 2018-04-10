@@ -184,7 +184,7 @@ public class RCC115 extends TestBase {
 			
 			
 			test.log(LogStatus.INFO, "Go to Second Group Record Details Page");
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnGroupsLink();
 			

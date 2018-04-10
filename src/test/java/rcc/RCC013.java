@@ -63,13 +63,13 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
+			loginAs("RCCTESTUSER047", "RCCTESTUSERPWD047");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.PASS, "Group is created by the USER1 ");
-			BrowserWaits.waitTime(30);
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE9"));
+			//BrowserWaits.waitTime(30);
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE46"));
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the USER2");
 			else
@@ -82,7 +82,7 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
+			loginAs("RCCTESTUSER046", "RCCTESTUSERPWD046");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToInvitationTab();
@@ -102,7 +102,7 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
+			loginAs("RCCTESTUSER047", "RCCTESTUSERPWD047");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToGroupTab();
@@ -137,7 +137,7 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
+			loginAs("RCCTESTUSER046", "RCCTESTUSERPWD046");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
 			waitForAjax(ob);
@@ -167,7 +167,7 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
+			loginAs("RCCTESTUSER047", "RCCTESTUSERPWD047");
 			pf.getUtility(ob).deleteGroup(newtitle);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

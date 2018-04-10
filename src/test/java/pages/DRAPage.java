@@ -624,6 +624,9 @@ public class DRAPage extends TestBase {
 
 	}
 
-	
+	public void clickModalLink() throws Exception{
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_STEPUPAUTHMODAL_PAGE_CSS);
+	}
+
 	
 }

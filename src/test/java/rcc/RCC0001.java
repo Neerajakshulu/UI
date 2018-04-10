@@ -2,18 +2,14 @@ package rcc;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import com.relevantcodes.extentreports.LogStatus;
-
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -82,7 +78,7 @@ public class RCC0001 extends TestBase {
 			}
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			String title50 = RandomStringUtils.randomAlphanumeric(50);
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title50);
@@ -102,7 +98,7 @@ public class RCC0001 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			String title2 = RandomStringUtils.randomAlphanumeric(1);
 
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
@@ -139,7 +135,7 @@ public class RCC0001 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			String Desc500 = RandomStringUtils.randomAlphanumeric(510);
 			String title500 = RandomStringUtils.randomAlphanumeric(10);
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();

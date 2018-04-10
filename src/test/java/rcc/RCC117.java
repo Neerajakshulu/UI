@@ -159,7 +159,7 @@ public class RCC117 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			
 			test.log(LogStatus.INFO, "Go to Group2 Record Details Page");
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnGroupsLink();
 			pf.getGroupsListPage(ob).navigateToGroupRecordPage(groupTitle2);

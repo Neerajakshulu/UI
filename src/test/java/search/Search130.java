@@ -127,10 +127,10 @@ public class Search130 extends TestBase {
 			driver = LoginTR.launchBrowser();
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
-			driver.get(host + url);
+			driver.get(host1+url);
 
-			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, LOGIN.getProperty("SOCIALLOGINEMAIL"),
-					LOGIN.getProperty("SOCIALLOGINPASSWORD"));
+			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, LOGIN.getProperty("SEARCHFBSOCIALLOGINEMAIL"),
+					LOGIN.getProperty("SEARCHFBSOCIALLOGINPWD"));
 
 			try {
 				System.out.println("current host "+driver.getCurrentUrl());

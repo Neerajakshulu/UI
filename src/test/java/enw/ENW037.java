@@ -53,17 +53,17 @@ public class ENW037 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			//NavigatingToENW();
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			ob.get(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL037"),
 					LOGIN.getProperty("USERPASSWORD037"));
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getSearchResultsPageInstance(ob).searchArticle("Baseball technologies");
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-			BrowserWaits.waitTime(8);
+			//BrowserWaits.waitTime(8);
 			pf.getSearchResultsPageInstance(ob).chooseArticle();
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage();
 			HashMap<String, String> neonValues = new HashMap<String, String>();
 			neonValues.put("expectedAbstract",
@@ -74,11 +74,11 @@ public class ENW037 extends TestBase {
 					ob.findElement(By.cssSelector(OnePObjectMap.NEON_RECORDVIEW_PATENT_IPC_CURRENT_CSS.toString())).getText());
 			//pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			logout();
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			ob.navigate().refresh();
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL037"),(LOGIN.getProperty("USERPASSWORD037")));
-			BrowserWaits.waitTime(8);
+			//BrowserWaits.waitTime(8);
 				try {
 				if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
 						ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
@@ -88,7 +88,7 @@ public class ENW037 extends TestBase {
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				BrowserWaits.waitTime(4);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
 			} catch (Exception e) {
 
 				e.printStackTrace();
@@ -161,20 +161,24 @@ public class ENW037 extends TestBase {
 		// ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 		 try {
 			//pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL037"),(LOGIN.getProperty("USERPASSWORD037")));
-			BrowserWaits.waitTime(3);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
+//			BrowserWaits.waitTime(3);
+//			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
+			fluentwaitforElement(ob, By.xpath(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH.toString()), 200);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 			BrowserWaits.waitTime(5);
+			fluentwaitforElement(ob, By.xpath(".//*[@id='idCheckAllRef']"), 200);
 			if ( !ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).isSelected() )
 			{
 				ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).click();
 			}			
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(".//*[@id='idDeleteTrash']")).click();
 			HandleAlert();
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
+			fluentwaitforElement(ob, By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString()), 200);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
+			fluentwaitforElement(ob, By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString()), 200);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 		
 		} catch (Exception e) {

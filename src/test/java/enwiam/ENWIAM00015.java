@@ -89,7 +89,7 @@ public class ENWIAM00015 extends TestBase {
 			test.log(LogStatus.FAIL, "The evicted string is not displayed");
 
 		}
-		BrowserWaits.waitTime(3);
+		//BrowserWaits.waitTime(3);
 		waitForElementTobeVisible(ob, By.xpath("//button[contains(text(),'OK')]"), 60);
 		ob.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
 

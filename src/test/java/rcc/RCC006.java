@@ -196,11 +196,11 @@ public class RCC006 extends TestBase{
 				test.log(LogStatus.FAIL, "Owner name not same");
 			}*/
 
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
 			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020"); 
 
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).acceptInvitation();
 
@@ -331,7 +331,7 @@ public class RCC006 extends TestBase{
 				test.log(LogStatus.FAIL, "Owner name not same");
 			}*/
 
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
 			loginAs("RCCTESTUSER025", "RCCTESTUSERPWD025");
 			pf.getUtility(ob).deleteGroup(title);

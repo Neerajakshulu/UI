@@ -101,11 +101,11 @@ public class RCC114 extends TestBase {
 			String desc = this.getClass().getSimpleName() + "_Group_" + RandomStringUtils.randomAlphanumeric(100);
 			groupTitle2 = this.getClass().getSimpleName() + "_Group_2" + "_" + getCurrentTimeStamp();
 			
-			BrowserWaits.waitTime(21);
+			//BrowserWaits.waitTime(21);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(groupTitle, desc);
-			BrowserWaits.waitTime(21);
+			//BrowserWaits.waitTime(21);
 			test.log(LogStatus.INFO, "Group one Created");
 			
 			
@@ -181,7 +181,7 @@ public class RCC114 extends TestBase {
 			
 			
 			test.log(LogStatus.INFO, "Go to Second Group Record Details Page");
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnGroupsLink();
 			

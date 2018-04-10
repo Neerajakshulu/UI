@@ -27,7 +27,7 @@ public class RCC015 extends TestBase {
 	 * Reports
 	 * 
 	 * @throws Exception,
-	 *             When Something unexpected
+	 * When Something unexpected
 	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -66,12 +66,12 @@ public class RCC015 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
+			loginAs("RCCTESTUSER048", "RCCTESTUSERPWD048");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.INFO, "Group is created successfully: " + title);
-			BrowserWaits.waitTime(20);
+			//BrowserWaits.waitTime(20);
 			waitForAjax(ob);
 			pf.getGroupDetailsPage(ob).clickPostsTab();
 
@@ -120,10 +120,10 @@ public class RCC015 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, recordType);
 
 			try {
-				BrowserWaits.waitTime(10);
+				//BrowserWaits.waitTime(10);
 				Assert.assertEquals(recordTitle, pf.getpostRVPageInstance(ob).getPostTitle().trim());
 				test.log(LogStatus.PASS, "Post title in groups deails page is matching with record view page");
-				BrowserWaits.waitTime(10);
+				//BrowserWaits.waitTime(10);
 				Assert.assertTrue(
 						pf.getpostRVPageInstance(ob).getPostContent().contains(recordDetals.substring(0, 30)));
 				test.log(LogStatus.PASS, "Post content in groups deails page is matching with record view page");
@@ -152,7 +152,7 @@ public class RCC015 extends TestBase {
 
 			ob.navigate().back();
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE19"));
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE49"));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -161,7 +161,7 @@ public class RCC015 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER019", "RCCTESTUSERPWD019");
+			loginAs("RCCTESTUSER049", "RCCTESTUSERPWD049");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 
@@ -182,10 +182,10 @@ public class RCC015 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, recordType);
 
 			try {
-				BrowserWaits.waitTime(5);
+				//BrowserWaits.waitTime(5);
 				Assert.assertEquals(recordTitle, pf.getpostRVPageInstance(ob).getPostTitle().trim());
 				test.log(LogStatus.PASS, "Post title in groups deails page is matching with record view page");
-				BrowserWaits.waitTime(5);
+				//BrowserWaits.waitTime(5);
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).getPostContent().contains(recordDetals));
 				test.log(LogStatus.PASS, "Post content in groups deails page is matching with record view page");
 			} catch (Throwable t) {
@@ -212,7 +212,7 @@ public class RCC015 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_Group_post_author_details_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			pf.getGroupsPage(ob).clickOnGroupsLink();
 
 			try {
@@ -233,7 +233,7 @@ public class RCC015 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
+			loginAs("RCCTESTUSER048", "RCCTESTUSERPWD048");
 			test.log(LogStatus.INFO, "Login as Owner");
 			pf.getUtility(ob).deleteGroup(title);
 			test.log(LogStatus.INFO, "Deleted the group");

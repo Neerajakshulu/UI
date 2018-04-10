@@ -747,8 +747,7 @@ public void verifylinkDiffSteamAcctText(ExtentTest test) throws Exception {
 	}
 
 	public void chooseArticle() throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob,
-				By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 180);
+		fluentwaitforElement(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 300);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())));
 		waitForPageLoad(ob);
 	}

@@ -85,6 +85,7 @@ public class NewsfeedPage extends TestBase {
 
 	public void clickNewsfeedLink() throws Exception {
 		// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS);
+		fluentwaitforElement(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_XPATH.toString()), 100);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_XPATH);
 		// pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on
 		// Neon","Posts");
