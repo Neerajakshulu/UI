@@ -109,11 +109,12 @@
 		</classes>
 	</test>
 
+	<!-- Moving this script to local hence gurilla mail not opening in sauce labs
 	<test name="Watchlist017">
 		<classes>
 			<class name="watchlist.Watchlist017"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Watchlist018">
 		<classes>
