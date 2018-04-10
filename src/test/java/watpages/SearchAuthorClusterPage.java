@@ -1493,7 +1493,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS);
 		
 	}
 	
@@ -1509,7 +1509,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS);
 		
 	}
 	
@@ -1524,7 +1524,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS);
 		
 	}
 	
@@ -1538,8 +1538,10 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS);
 		String popover_Header= pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS).getAttribute("wui-popover-header");
+		logger.info("Popover_Header-->" + popover_Header);
 		String popover_Content= pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS).getAttribute("wui-popover-content");
-		if(!popover_Header.equals(header)&&popover_Content.equals(popover_Content)){
+		logger.info("Popover_Content-->" + popover_Content);
+		if(!(popover_Header.equals(header)&&popover_Content.equals(popover_Content))){
 			throw new Exception("Popover Header and Content is not expected");
 		}
 		

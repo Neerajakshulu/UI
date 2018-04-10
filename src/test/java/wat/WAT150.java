@@ -75,7 +75,7 @@ public class WAT150 extends TestBase {
 	 * @throws Exception, When Something unexpected
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
-	public void validateBallonPopover(String lastName) throws Exception {
+	public void validateBallonPopover() throws Exception {
 
 		try {
 			test.log(LogStatus.INFO, "Validate Ballon Popover Open and Close Behaviour ");
