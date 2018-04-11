@@ -125,6 +125,44 @@ public class SearchAuthorClusterPage extends TestBase {
 		}
 	}
 
+	/**
+	 * @param LastName
+	 * @throws Exception
+	 * @throws InterruptedException
+	 */
+	@SuppressWarnings("static-access")
+	public void testFindButtonFunctionality2(String LastName) throws Exception, InterruptedException {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
+		pf.getBrowserWaitsInstance(ob).waitTime(4);
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).isDisplayed(),
+				"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED");
+		Assert.assertEquals(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).getText(), Suggestion_text,
+				"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS NOT MATCHING");
+		test.log(LogStatus.INFO, "AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED AND MATCHING");
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+		if (ele.size() != 0) 
+		{
+			test.log(LogStatus.INFO, "Country Dropdown is disaplayed when search results are more than 50 clusters");
+			Assert.assertTrue(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled(),
+					"Find button is not enabled when country dropdown is diaplayed");
+			test.log(LogStatus.INFO, "Find button is enabled when country dropdown is diaplayed");
+			pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
+			Assert.assertEquals(
+					(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).getText()),
+					"Search Results", "Unable to search for an author and land in Author search result page.");
+			test.log(LogStatus.PASS, "Able to click Find button when no country option is clicked and successfully land in Author search result page");
+			pf.getBrowserActionInstance(ob).closeBrowser();
+		}
+		else throw new Exception("Unable to click Find button when no country option is clicked");
+	}
+	
 	public void cliclFindBtn(ExtentTest test) throws Exception, InterruptedException {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH,10);
