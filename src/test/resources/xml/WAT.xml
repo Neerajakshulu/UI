@@ -795,4 +795,10 @@
 		</classes>
 	</test>
 	
+	<test name="WAT_Find_btn_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT115"></class>
+		</classes>
+	</test>
+	
 </suite>
