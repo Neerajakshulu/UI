@@ -450,9 +450,8 @@
 		</classes>
 	</test>
 
-	<!-- Commenting as suggested by Stephanie (Email bounce back issue) -->
 	<!-- RCC Testcases -->
-	<!-- <test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group">
+	 <test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group">
 		<classes>
 			<class name="rcc.RCC021"></class>
 			<class name="rcc.RCC023"></class>
@@ -479,7 +478,161 @@
 		<classes>
 			<class name="rcc.RCC092"></class>
 		</classes>
-	</test> -->
+	</test> 
+	
+	<parameter name="addedToGroupLabel" value="Added to group"/>
+	
+ 		
+	<test name="RCC004">
+		<classes>
+			<class name="rcc.RCC004"></class>
+		</classes>
+	</test>
+	
+	<test name="RCC005">
+		<classes>
+			<class name="rcc.RCC005"></class>
+		</classes>
+	
+	</test>
+	<test name="RCC0001">
+		<classes>
+			<class name="rcc.RCC0001"></class>
+			<class name="rcc.RCC0002"></class>
+			<class name="rcc.RCC0003"></class>
+			<class name="rcc.RCC0004"></class>
+		</classes>
+	</test>
+	
+	<test name="RCC100">
+		<classes>
+			<class name="rcc.RCC100"></class>
+		</classes>
+	</test>
+	<test name="RCC101">
+		<classes>
+			<class name="rcc.RCC101"></class>
+		</classes>
+	</test>
+	
+	<test name="document_Add_to_Group_Search_Results_page">
+		<parameter name="username" value="chinnareddy.putha@gmail.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="documentTitle" value="test"/>
+		<classes>
+			<class name="rcc.RCC111"></class>
+		</classes>
+	</test>
+	
+	<test name="document_Add_to_Group_from_Record_view_page">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="documentTitle" value="network biology"/>
+		<classes>
+			<class name="rcc.RCC112"></class>
+		</classes> 
+	</test>
+	<test name="document_Add_to_Single_And_Multiple_Groups_from_Watchlist_page" parallel="false">
+		<parameter name="username" value="RccTestUser1@tr.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="watchlistTitle" value="New Watchlist for RCC testing"/>
+		<classes>
+			<class name="rcc.RCC113"></class>
+			<class name="rcc.RCC116"></class>
+		</classes>
+	</test> 
+	
+	<test name="document_Add_to_multiple_Groups_Search_Results_page_And_RecordViewPage" parallel="false">
+		<parameter name="username" value="RccTestUser2@tr.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="documentTitle" value="sample"/>
+		<parameter name="docTitle" value="testing"/>
+		<classes>
+			<class name="rcc.RCC114"></class>
+			<class name="rcc.RCC115"></class>
+		</classes>
+	</test>
+	
+	<test name="document_Add_to_multiple_Groups_Newsfeedpage">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<classes>
+			<class name="rcc.RCC117"></class>
+		</classes>
+	</test>
+	
+	<test name="Add_patent_to_multiple_Groups_Newsfeedpage">
+		<parameter name="username" value="test.special@ca.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="otherUsername" value="chinnareddy.putha@gmail.com" />
+		<parameter name="otherPassword" value="Neon@123" />
+		<parameter name="documentTitle" value="Process for restoring patency to body vessels" />
+		<parameter name="userTrueId" value="/#/profile/e55fc3bf-c458-4d9d-ae39-571f1c5713d2"></parameter>
+		<classes>
+			<class name="rcc.RCC118"></class>
+		</classes>
+	</test>
+	
+	 <test name="test2">
+		<classes>
+			<class name="rcc.RCC002"></class>
+			<class name="rcc.RCC007"></class>
+			<class name="rcc.RCC008"></class>
+			<class name="rcc.RCC012"></class>
+			<class name="rcc.RCC104"></class>
+		</classes>
+	</test>
+	
+	 <test name="test3">
+		<classes>
+			<class name="rcc.RCC003"></class>
+			<class name="rcc.RCC009"></class>
+			<class name="rcc.RCC010"></class>
+			<class name="rcc.RCC011"></class>
+			
+		</classes>
+	</test>
+	
+	 <test name="Edit group test">
+		<classes>
+			<class name="rcc.RCC013"></class>
+			<class name="rcc.RCC026"></class>
+			<class name="rcc.RCC025"></class>
+		</classes>
+	</test>
+	
+	<test name="Validate_details_the_group_details_in_group_list_and_group_details_page">
+		<classes>
+			<class name="rcc.RCC001"></class>
+			<class name="rcc.RCC006"></class>
+		</classes>
+	</test>
+	
+	 <test name="Validate_details_of_post_article_patent_added_to_the_group">
+		<classes>
+			<class name="rcc.RCC015"></class>
+			<class name="rcc.RCC016"></class>
+			<class name="rcc.RCC017"></class>
+		</classes>
+	</test>
+	
+	 <test name="rcc.RCC020">
+		<classes>
+			<class name="rcc.RCC020"></class>
+		</classes>
+	</test>
+	
+	<test name="Validate_removing_action_for_post_article_patent_added_to_the_group">
+		<classes>
+			<class name="rcc.RCC018"></class>
+			<class name="rcc.RCC019"></class>
+			<class name="rcc.RCC014"></class>
+		</classes>
+	</test>
+	
+	<!-- RCC ENDS -->
+	
+	
 	<!-- Authoring START -->
 
 	<test name="Authoring80">
