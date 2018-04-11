@@ -130,6 +130,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * @throws Exception
 	 * @throws InterruptedException
 	 */
+	
 	@SuppressWarnings("static-access")
 	public void testFindButtonFunctionality2(String LastName) throws Exception, InterruptedException {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
@@ -1681,5 +1682,47 @@ public class SearchAuthorClusterPage extends TestBase {
 		
 	}
 	
+	/**
+	 * Method for ORCID Search
+	 * @param test
+	 * @throws Exception
+	 */
+	public void RIDSearch(String rid,ExtentTest test) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_RID_SEARCH_BTN_XPATH);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RID_SEARCH_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_RID_TEXTBOC_XPATH);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_RID_TEXTBOC_XPATH,rid);
+		waitForAjax(ob);
+		boolean findButtonStatus=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_RID_FIND_BTN_XPATH).isEnabled();
+		if (findButtonStatus) {
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_RID_FIND_BTN_XPATH);
+		} else {
+			throw new Exception("FIND button is disabled for valid RID Search");
+		}
+	}
+	
+	/**
+	 * Method for Invalid RID Pattern  Search Error Messages
+	 * @param test
+	 * @throws Exception
+	 */
+	public void InvaidRIDSearchErrorMsgVaidation(String invalidRID,String errMsg,ExtentTest test) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_RID_SEARCH_BTN_XPATH);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RID_SEARCH_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_RID_TEXTBOC_XPATH);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.WAT_RID_TEXTBOC_XPATH);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_RID_TEXTBOC_XPATH,invalidRID);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH);
+		String ridErrMsg=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH).getText();
+		logger.info("RID Error Message-->"+ridErrMsg);
+		waitForAjax(ob);
+		if(!ridErrMsg.equals(errMsg)){
+			throw new Exception("Invalid RID Search Error Message");
+		}
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_LINK_XPATH);
+		waitForAjax(ob);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Name search","ORCiD search","ResearcherID search");
+	}
 
 }
