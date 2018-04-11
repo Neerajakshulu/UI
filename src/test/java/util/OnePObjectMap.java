@@ -1298,6 +1298,10 @@ public enum OnePObjectMap {
 	WAT_ORCID_SEARCH_ERROR_TEXT_XPATH("//span[@class='ng-scope']"),
 	WAT_ORCID_TO_NAME_SEARCH_LINK_XPATH("//button[text()='Name search']"),
 	
+	WAT_RID_SEARCH_BTN_XPATH("//span[text()='ResearcherID search']"),
+	WAT_RID_TEXTBOC_XPATH("(//input[@class='wui-material-input__input-field ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required ng-valid-pattern'])[2]"),
+	WAT_AUTHOR_SEARCH_BY_RID_FIND_BTN_XPATH("//div[@class='col-xs-offset-2 col-xs-8']/descendant::button[@ng-disabled='vm.disableFindButton[vm.SEARCH.VIEW.RID]']"),
+	
 	
 	
 	GURILLA_LIST_EMAIL_WAT_PROJECT_TITLE_CSS("span[style*='color:#45749B;']"),
@@ -1380,6 +1384,8 @@ public enum OnePObjectMap {
 	DRA_SSO_LOGIN_PAGE_EXPIRED_SUBSCRIPTION("//div[@class='col-md-12']"),
 	DRA_SSO_LOGIN_PAGE_WITH_SUBSCRIPTION("//p[@class='ng-binding']"),
 	
+	
+
 	;
 
 	private String locator;

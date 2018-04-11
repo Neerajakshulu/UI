@@ -761,6 +761,23 @@
 		</classes>
 	</test>
 	
+	<test name="WAT_Drill_down_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT114"></class>
+		</classes>
+	</test>
+	
+	<test name="WAT_Find_btn_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT115"></class>
+		</classes>
+	</test>
+	
+	<test name="WAT_Find_btn_2_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT116"></class>
+		</classes>
+	</test>
 	
 	<test name="WAT_author_search_ballon_popover" preserve-order="true">
 		<classes>
@@ -789,21 +806,24 @@
 		</classes>
 	</test>
 	
-	<test name="WAT_Drill_down_test" preserve-order="true">
+	<test name="RID_Search" preserve-order="true">
+		<parameter name="rid" value="A-9832-2009" />
 		<classes>
-			<class name="wat.WAT114"></class>
+			<class name="wat.WAT154"></class>
 		</classes>
 	</test>
 	
-	<test name="WAT_Find_btn_test" preserve-order="true">
+	<test name="Invalid_RID_Search_Error_Msgs" preserve-order="true">
+		<parameter name="rid1" value="Invalid RID" />
+		<parameter name="errMsg1" value="Please enter a valid RID, or try searching by ORCiD or Name." />
+		<parameter name="rid2" value="B-1234-2007" />
+		<parameter name="errMsg2" value="We couldn't find a match. Please enter a valid RID, or try searching by ORCiD or Name." />
+		<parameter name="rid3" value="A-9832-2006" />
+		
 		<classes>
-			<class name="wat.WAT115"></class>
+			<class name="wat.WAT155"></class>
 		</classes>
 	</test>
 	
-	<test name="WAT_Find_btn_2_test" preserve-order="true">
-		<classes>
-			<class name="wat.WAT116"></class>
-		</classes>
-	</test>
+	
 </suite>

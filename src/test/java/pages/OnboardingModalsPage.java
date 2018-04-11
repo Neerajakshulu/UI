@@ -838,7 +838,7 @@ public class OnboardingModalsPage extends TestBase {
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
 		logger.info("onboarding status-->" + onboardingStatus.size());
 
-		try {
+		/*try {*/
 			profileOnboardingModal();
 			//Profile image modal
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_EDIT_CSS);
@@ -856,9 +856,9 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Add a Topic","You can always complete your profile later from  your Profile page.");
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Note:", "Your name and any additional information you add will", "be visible to others.");
 			
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			throw new Exception("Profile Image upload not done in Profile modal");
-		}
+		}*/
 
 	}
 	
