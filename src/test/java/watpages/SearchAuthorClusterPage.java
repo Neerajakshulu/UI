@@ -32,6 +32,8 @@ public class SearchAuthorClusterPage extends TestBase {
 	static String Country_drpdwn_text = "Select a country/territory where this author has published.";
 	static String orcid_Welcome_text = "Enter the author's name or ORCiD to begin your search against Web of Science article groups.";
 	static String ORCid = "0000-0002-6423-7213";
+	static String Suggestion_text = "We've found a large number of records matching your search.\n"
+			+ "For the most relevant results, please select at least one location where this author has published, or select Find to view all results.";
 
 	List<String> unSortedOrgname = new ArrayList<String>();
 	List<String> SortedOrgname = new ArrayList<String>();
@@ -421,6 +423,46 @@ public class SearchAuthorClusterPage extends TestBase {
 			}
 		}
 	}
+	
+	/**
+	 * @param LastName
+	 * @param CountryName1
+	 * @param CountryName2
+	 * @throws Exception
+	 * @throws InterruptedException
+	 */
+	public void testFindButtonFunctionality(String LastName, String CountryName1, String CountryName2)
+			throws Exception, InterruptedException {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
+		pf.getBrowserWaitsInstance(ob).waitTime(4);
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).isDisplayed(),
+				"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED");
+		Assert.assertEquals(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).getText(), Suggestion_text,
+				"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS NOT MATCHING");
+		test.log(LogStatus.INFO, "AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED AND MATCHING");
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+		if (ele.size() != 0) 
+		{
+			test.log(LogStatus.INFO, "Country Dropdown is disaplayed when search results are more than 50 clusters");
+			Assert.assertTrue(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled(),
+					"Find button is not enabled when country dropdown is diaplayed");
+			test.log(LogStatus.INFO, "Find button is enabled when country dropdown is diaplayed");
+			pf.getSearchAuthClusterPage(ob).selectCountryofAuthor(test,CountryName1, CountryName2);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+			Assert.assertTrue(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled(),
+					"Find button is not enabled when country option is clicked");
+			test.log(LogStatus.PASS, "Find button is enabled when country option is clicked");
+			pf.getBrowserActionInstance(ob).closeBrowser();
+		}
+		else throw new Exception("Find button is not enabled when country option is clicked");
+	}
 
 	/**
 	 * Method to select Country value for further filtering of author cluster.
@@ -437,6 +479,37 @@ public class SearchAuthorClusterPage extends TestBase {
 		
 	}
 	
+	/**
+	 * @param LastName
+	 * @throws Exception
+	 * @throws InterruptedException
+	 */
+	@SuppressWarnings("static-access")
+	public void testFindButtonFunctionality(String LastName) throws Exception, InterruptedException {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
+		pf.getBrowserWaitsInstance(ob).waitTime(4);
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).isDisplayed(),
+				"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED");
+		Assert.assertEquals(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).getText(), Suggestion_text,
+				"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS NOT MATCHING");
+		test.log(LogStatus.INFO, "AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED AND MATCHING");
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+		if (ele.size() != 0) 
+		{
+			test.log(LogStatus.INFO, "Country Dropdown is disaplayed when search results are more than 50 clusters");
+			Assert.assertTrue(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled(),
+					"Find button is not enabled when country dropdown is diaplayed");
+			test.log(LogStatus.PASS, "Find button is enabled when country dropdown is diaplayed");
+			pf.getBrowserActionInstance(ob).closeBrowser();
+		}
+		else throw new Exception("Find button is not enabled when country dropdown is diaplayed");
+	}
 	
 	public void selectCountryofAuthor(ExtentTest test,String country) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
@@ -464,7 +537,30 @@ public class SearchAuthorClusterPage extends TestBase {
 		}
 	}
 	
-
+	
+	@SuppressWarnings("static-access")
+	public void testCountryDropdownFunctionality(String LastName) throws Exception, InterruptedException {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+		pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
+		pf.getBrowserWaitsInstance(ob).waitTime(4);
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).isDisplayed(),
+				"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED");
+		Assert.assertEquals(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).getText(), Suggestion_text,
+				"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS NOT MATCHING");
+		test.log(LogStatus.INFO, "AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED AND MATCHING");
+		List<WebElement> ele = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+		if (ele.size() != 0) 
+		{
+			test.log(LogStatus.PASS, "Country Dropdown is disaplayed when search results are more than 50 clusters");
+			pf.getBrowserActionInstance(ob).closeBrowser();
+		}
+		else throw new Exception("Country Dropdown is not disaplayed when search results are more than 50 clusters");
+	}
+	
 	/**
 	 * @param LastName
 	 * @param CountryName1

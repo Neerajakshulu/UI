@@ -90,41 +90,20 @@ public class WAT115 extends TestBase {
 	 *             When Something unexpected
 	 * 
 	 */
-	@SuppressWarnings("static-access")
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1","OrgName2" })
 	public void testFindButtonFunctionality(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
 			throws Exception {
 			try {
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
-				pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
-				pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
-				pf.getBrowserWaitsInstance(ob).waitTime(4);
-				Assert.assertTrue(pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).isDisplayed(),
-						"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED");
-				Assert.assertEquals(pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).getText(), Suggestion_text,
-						"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS NOT MATCHING");
-				test.log(LogStatus.INFO, "AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED AND MATCHING");
-				List<WebElement> ele = pf.getBrowserActionInstance(ob)
-						.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
-				if (ele.size() != 0) 
-				{
-					test.log(LogStatus.INFO, "Country Dropdown is disaplayed when search results are more than 50 clusters");
-					Assert.assertTrue(pf.getBrowserActionInstance(ob)
-							.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled(),
-							"Find button is not enabled when country dropdown is diaplayed");
-					test.log(LogStatus.PASS, "Find button is enabled when country dropdown is diaplayed");
-					pf.getBrowserActionInstance(ob).closeBrowser();
-				}
-				else throw new Exception("Country Dropdown is not disaplayed when search results are more than 50 clusters");
+				pf.getSearchAuthClusterPage(ob).testFindButtonFunctionality(LastName);
 			} catch (Throwable t) {
-				logFailureDetails(test, t, "Authorcluster search with only last name failed", "search_fail");
+				logFailureDetails(test, t, "Find button is not enabled when country dropdown is diaplayed", "Find_Button_Issue");
 				pf.getBrowserActionInstance(ob).closeBrowser();
 			}
 
 		}
+
+	
 
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL

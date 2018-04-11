@@ -801,4 +801,9 @@
 		</classes>
 	</test>
 	
+	<test name="WAT_Find_btn_2_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT116"></class>
+		</classes>
+	</test>
 </suite>

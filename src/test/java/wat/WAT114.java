@@ -28,9 +28,7 @@ public class WAT114 extends TestBase {
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
 	static String sar_labs_text = "SaR Labs";
-	static String Suggestion_text = "We've found a large number of records matching your search.\n"
-			+ "For the most relevant results, please select at least one location where this author has published, or select Find to view all results.";
-		
+			
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
 	 * Reports
@@ -90,37 +88,20 @@ public class WAT114 extends TestBase {
 	 *             When Something unexpected
 	 * 
 	 */
-	@SuppressWarnings("static-access")
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1","OrgName2" })
 	public void testCountryDropdownFunctionality(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
 			throws Exception {
 			try {
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
-				pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
-				pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
-				pf.getBrowserWaitsInstance(ob).waitTime(4);
-				Assert.assertTrue(pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).isDisplayed(),
-						"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED");
-				Assert.assertEquals(pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH).getText(), Suggestion_text,
-						"AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS NOT MATCHING");
-				test.log(LogStatus.INFO, "AUTHOR SEARCH DRILL DOWN SUGGESTION TEXT IS DISPLAYED AND MATCHING");
-				List<WebElement> ele = pf.getBrowserActionInstance(ob)
-						.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
-				if (ele.size() != 0) 
-				{
-					test.log(LogStatus.PASS, "Country Dropdown is disaplayed when search results are more than 50 clusters");
-					pf.getBrowserActionInstance(ob).closeBrowser();
-				}
-				else throw new Exception("Country Dropdown is not disaplayed when search results are more than 50 clusters");
+				pf.getSearchAuthClusterPage(ob).testCountryDropdownFunctionality(LastName);
 			} catch (Throwable t) {
-				logFailureDetails(test, t, "Authorcluster search with only last name failed", "search_fail");
+				logFailureDetails(test, t, "Country Dropdown is not disaplayed when search results are more than 50 clusters", "Country_Dropdown_fail");
 				pf.getBrowserActionInstance(ob).closeBrowser();
 			}
 
 		}
+
+	
 
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL
