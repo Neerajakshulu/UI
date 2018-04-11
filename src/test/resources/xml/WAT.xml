@@ -789,4 +789,10 @@
 		</classes>
 	</test>
 	
+	<test name="WAT_Drill_down_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT114"></class>
+		</classes>
+	</test>
+	
 </suite>
