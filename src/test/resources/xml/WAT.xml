@@ -825,9 +825,18 @@
 		<parameter name="rid2" value="B-1234-2007" />
 		<parameter name="errMsg2" value="We couldn't find a match. Please enter a valid RID, or try searching by ORCiD or Name." />
 		<parameter name="rid3" value="A-9832-2006" />
-		
 		<classes>
 			<class name="wat.WAT155"></class>
+		</classes>
+	</test>
+	
+	<test name="Invalid_ORCID_Search_Error_Msgs" preserve-order="true">
+		<parameter name="orcid1" value="Invalid ORCRID" />
+		<parameter name="errMsg1" value="Please enter a valid ORCiD, or try searching by RID or Name." />
+		<parameter name="orcid2" value="0000-0001-5727-2427" />
+		<parameter name="errMsg2" value="We couldn't find a match. Please enter a valid ORCiD, or try searching by RID or Name." />
+		<classes>
+			<class name="wat.WAT156"></class>
 		</classes>
 	</test>
 	

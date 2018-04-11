@@ -1683,7 +1683,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	}
 	
 	/**
-	 * Method for ORCID Search
+	 * Method for RID Search
 	 * @param test
 	 * @throws Exception
 	 */
@@ -1719,6 +1719,30 @@ public class SearchAuthorClusterPage extends TestBase {
 		waitForAjax(ob);
 		if(!ridErrMsg.equals(errMsg)){
 			throw new Exception("Invalid RID Search Error Message");
+		}
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_LINK_XPATH);
+		waitForAjax(ob);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Name search","ORCiD search","ResearcherID search");
+	}
+	
+	/**
+	 * Method for Invalid RID Pattern  Search Error Messages
+	 * @param test
+	 * @throws Exception
+	 */
+	public void InvaidORCiDSearchErrorMsgVaidation(String invalidORCiD,String errMsg,ExtentTest test) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH,invalidORCiD);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH);
+		String orcidErrMsg=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH).getText();
+		logger.info("ORCID Error Message-->"+orcidErrMsg);
+		waitForAjax(ob);
+		if(!orcidErrMsg.equals(errMsg)){
+			throw new Exception("Invalid ORCID Search Error Message");
 		}
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_LINK_XPATH);
 		waitForAjax(ob);
