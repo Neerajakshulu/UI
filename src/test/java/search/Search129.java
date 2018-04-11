@@ -29,6 +29,7 @@ public class Search129 extends TestBase {
 	static boolean master_condition;
 
 	static int time = 30;
+	public String host1="https://apps.dev-stable.clarivate.com";
 	PageFactory pf = new PageFactory();
 
 	@BeforeTest
@@ -117,11 +118,11 @@ public class Search129 extends TestBase {
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
 			clearCookies();
-			String Beforeurl = System.getProperty("host") + url;
+			String Beforeurl =host1+ url;
 			System.out.println(Beforeurl);
 			ob.navigate().to(Beforeurl);
-			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("SOCIALLOGINEMAIL"),
-					LOGIN.getProperty("SOCIALLOGINPASSWORD"));
+			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("SOCIALLOGINEMAILDL"),
+					LOGIN.getProperty("SOCIALLOGINPASSWORDDL"));
 
 			try {
 				Assert.assertEquals(ob.getCurrentUrl(), Beforeurl);
