@@ -12,20 +12,16 @@
 		on local due to saucelabs issue -->
 
 	<!-- ENW -->
-
-
 	<test name="ENW008">
 		<classes>
 			<class name="enw.ENW008"></class>
 		</classes>
 	</test>
-
 	<test name="ENW0008">
 		<classes>
 			<class name="enw.ENW0008"></class>
 		</classes>
 	</test>
-
 	<test name="ENW000012">
 		<classes>
 			<class name="enw.ENW000012"></class>
@@ -635,7 +631,7 @@
 	
 	<!-- Authoring START -->
 
-	<test name="Authoring80">
+	<!-- <test name="Authoring80">
 		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
 		<parameter name="gpassword" value="likhithreddy@123" />
 		<classes>
@@ -663,7 +659,7 @@
 		<classes>
 			<class name="Authoring.Authoring83"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<!-- Authoring END -->
 
