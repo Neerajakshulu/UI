@@ -717,12 +717,12 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		List<WebElement> selAll=
 				pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_SELECTALL_CSS);
 		logger.info("size is -->"+selAll.size());
-		if(selAll.size()==0){
-			test.log(LogStatus.INFO, "‘Select All’ option should not display when quantity of search results of an author morethan 50. and Search Results count is only one");
+		if(selAll.size()==1){
+			test.log(LogStatus.INFO, "Select All option should not display when quantity of search results of an author morethan 50. and Search Results count is only one");
 		} else {
 			logger.info("Select-->"+selAll.get(0).getText());
 			if(selAll.get(0).getText().equals("Select all")){
-				test.log(LogStatus.INFO, "‘Select All’ option shoulddisplay when quantity of search results of an author lessthan 50.");
+				test.log(LogStatus.INFO, "Select All option shoulddisplay when quantity of search results of an author lessthan 50.");
 			}
 		}
 			
