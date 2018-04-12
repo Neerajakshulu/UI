@@ -84,6 +84,38 @@ public class SearchAuthorClusterPage extends TestBase {
 			throw new Exception();
 		}
 	}
+	
+	/**
+	 * Method for Search an  author using last name and country
+	 * @param LastName
+	 * @param country
+	 * @param test
+	 * @throws Exception
+	 */
+	public void SearchAuthorClusterUsingLastnameAndCountry(String LastName,String country,ExtentTest test) throws Exception {
+		try {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+			enterAuthorLastName(LastName, test);
+			cliclFindBtn(test);
+			List<WebElement> ele = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+			if (ele.size() != 0) {
+				selectCountryofAuthor(test,country);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
+				cliclFindBtn(test);
+			} else {
+				test.log(LogStatus.INFO,
+						"Country name selection is not required as the searched user resulted in less than 50 clusters... ");
+			}
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
+			Assert.assertEquals(
+					(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).getText()),
+					"Search Results", "Unable to search for an author and land in Author search result page.");
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Unable to search for an author cluster and land in Author search result page.");
+			throw new Exception();
+		}
+	}
 
 	/**
 	 * Common method to search for an author cluster with only LastName
