@@ -706,4 +706,26 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			result_Count_old = Integer.parseInt(Search_result_Count_old[0]);
 		return result_Count_old;
 	}
+	
+	/**
+	 * Method for Select All option present or not in Search Results Page
+	 * 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void verifySelectAll(ExtentTest test) throws Exception {
+		List<WebElement> selAll=
+				pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_SELECTALL_CSS);
+		logger.info("size is -->"+selAll.size());
+		if(selAll.size()==1){
+			test.log(LogStatus.INFO, "Select All option should not display when quantity of search results of an author morethan 50. and Search Results count is only one");
+		} else {
+			logger.info("Select-->"+selAll.get(0).getText());
+			if(selAll.get(0).getText().equals("Select all")){
+				test.log(LogStatus.INFO, "Select All option shoulddisplay when quantity of search results of an author lessthan 50.");
+			}
+		}
+			
+	}
+	
 }

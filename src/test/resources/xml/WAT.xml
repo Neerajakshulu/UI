@@ -785,6 +785,12 @@
 		</classes>
 	</test>
 	
+	<test name="WAT_Ignore_Org_Filter_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT118"></class>
+		</classes>
+	</test>
+	
 	<test name="WAT_author_search_ballon_popover" preserve-order="true">
 		<classes>
 			<class name="wat.WAT150"></class>
@@ -837,6 +843,27 @@
 		<parameter name="errMsg2" value="We couldn't find a match. Please enter a valid ORCiD, or try searching by RID or Name." />
 		<classes>
 			<class name="wat.WAT156"></class>
+		</classes>
+	</test>
+	
+	<test name="Search_Resutls_Select_All_Morethan_50" preserve-order="true">
+		<parameter name="lastName" value="WANG" />
+		<parameter name="countryName" value="USA" />
+		<classes>
+			<class name="wat.WAT157"></class>
+		</classes>
+	</test>
+	<test name="Search_Resutls_Select_All_lessthan_50" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+			<class name="wat.WAT158"></class>
+		</classes>
+	</test>
+	
+	<test name="Search_Resutls_Select_All_only_1" preserve-order="true">
+		<parameter name="lastName" value="JOHN B. F." />
+		<classes>
+			<class name="wat.WAT159"></class>
 		</classes>
 	</test>
 	
