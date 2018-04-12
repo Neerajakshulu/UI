@@ -785,6 +785,12 @@
 		</classes>
 	</test>
 	
+	<test name="WAT_Ignore_Org_Filter_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT118"></class>
+		</classes>
+	</test>
+	
 	<test name="WAT_author_search_ballon_popover" preserve-order="true">
 		<classes>
 			<class name="wat.WAT150"></class>
