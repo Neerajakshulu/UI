@@ -446,8 +446,8 @@
 		</classes>
 	</test>
 
-	<!-- RCC Testcases -->
-	 <test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group">
+	 <!-- RCC Testcases -->
+	<!-- <test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group">
 		<classes>
 			<class name="rcc.RCC021"></class>
 			<class name="rcc.RCC023"></class>
@@ -625,7 +625,7 @@
 			<class name="rcc.RCC014"></class>
 		</classes>
 	</test>
-	
+	 -->
 	<!-- RCC ENDS -->
 	
 	
