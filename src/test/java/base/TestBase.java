@@ -349,6 +349,7 @@ public class TestBase {
 			loadModuleData(customercarexls.path);
 			loadModuleData(watxls.path);
 			loadModuleData(watiamxls.path);
+			loadModuleData(watchlistXls.path);
 		}
 
 		logger.info(suiteName + "---" + testcase.size());
