@@ -791,6 +791,12 @@
 		</classes>
 	</test>
 	
+	<test name="WAT_Alt_Name_Link_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT119"></class>
+		</classes>
+	</test>
+	
 	<test name="WAT_author_search_ballon_popover" preserve-order="true">
 		<classes>
 			<class name="wat.WAT150"></class>
