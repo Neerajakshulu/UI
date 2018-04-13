@@ -744,11 +744,11 @@
 	<!-- IPAIAM Test cases END -->
 	
 	<!--  Watchlist Test cases START-->
-	<test name="Watchlist017">
+	<!-- <test name="Watchlist017">
 		<classes>
 			<class name="watchlist.Watchlist017"></class>
 		</classes>
-	</test>
+	</test> -->
 	<!--  Watchlist Test cases END-->
 </suite>
 
