@@ -797,6 +797,18 @@
 		</classes>
 	</test>
 	
+	<test name="WAT_Sort_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT120"></class>
+		</classes>
+	</test> 
+	
+	<test name="WAT_Sort_Default_test" preserve-order="true">
+		<classes>
+			<class name="wat.WAT121"></class>
+		</classes>
+	</test>
+	
 	<test name="WAT_author_search_ballon_popover" preserve-order="true">
 		<classes>
 			<class name="wat.WAT150"></class>
@@ -873,15 +885,11 @@
 		</classes>
 	</test> 
 	
-	<test name="WAT_Sort_test" preserve-order="true">
+	<test name="Search_Results_dept_in_each_author_cluster" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
-			<class name="wat.WAT120"></class>
-		</classes>
-	</test> 
-	
-	<test name="WAT_Sort_Default_test" preserve-order="true">
-		<classes>
-			<class name="wat.WAT121"></class>
+			<class name="wat.WAT160"></class>
 		</classes>
 	</test>
+	
 </suite>

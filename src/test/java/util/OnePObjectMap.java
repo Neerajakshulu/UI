@@ -1372,7 +1372,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS("div[class*='popover ng-scope ng-isolate-scope top wui-popover--large fade in top-left']"),
 	WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS("div[class='wui-popover__close-btn ng-scope'][title='Close']"),
 	WAT_AUTHOR_SEARCH_RESULTS_SELECTALL_CSS("button[data-event-category='wat-selectAll-records']"),
-	
+	WAT_AUTHOR_SEARCH_RESULTS_DEPT_CSS("div[class='wui-card__body-content'] div[class='wat-search-results-meta-affiliation ng-binding']"),
+	WAT_AUTHOR_SEARCH_RESULTS_ORG_CSS("div[class='wui-card__body-content'] div[class='wat-search-results-meta-contact ng-binding']"),
 	
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
 	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),

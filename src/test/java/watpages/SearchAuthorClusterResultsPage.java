@@ -728,4 +728,28 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			
 	}
 	
+	/**
+	 * Method for validate Dept and Organization in Each author cluster search result
+	 * 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void deptAndOrgInSearchResults(ExtentTest test) throws Exception {
+		List<WebElement> depts=
+				pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_DEPT_CSS);
+		
+		List<WebElement> orgs=
+				pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_ORG_CSS);
+		
+		for(int i=0;i<depts.size();i++){
+			logger.info("dept and org-->"+depts.get(i).getText()+"-->"+orgs.get(i).getText());
+			if (!(StringUtils.isEmpty(depts.get(i).getText()) || StringUtils.isNotEmpty(depts.get(i).getText()))
+					&& (StringUtils.isEmpty(orgs.get(i).getText()) || StringUtils.isNotEmpty(orgs.get(i).getText()))) {
+				throw new Exception("department name (sub-organization) Not displayed in addition to the institution/org name");
+			}
+			
+		}
+		
+	}
+	
 }
