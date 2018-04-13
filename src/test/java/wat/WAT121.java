@@ -17,13 +17,13 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for Verify that System displays "Sorted by Relevance" as a label in author search result page.
+ * Class for Verify that by default  "Sorted by Relevance" is the sorting order in author search result page.
  * 
  * @author UC225218
  *
  */
 
-public class WAT120 extends TestBase {
+public class WAT121 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -82,7 +82,7 @@ public class WAT120 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that System displays "Sorted by Relevance" as a label in author search result page.
+	 * Method to Verify that by default  "Sorted by Relevance" is the sorting order in author search result page.
 	 * 
 	 * @throws Exception,
 	 *             When Something unexpected
@@ -91,7 +91,7 @@ public class WAT120 extends TestBase {
 	
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2","OrgName1","OrgName2" })
-	public void testSortingInAuthorSearchResultPage(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
+	public void testSortingInAuthorSearchResultPageDefaultOption(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
 			throws Exception {
 
 		try {
@@ -100,12 +100,13 @@ public class WAT120 extends TestBase {
 			Assert.assertEquals(pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.WAT_SORT_BY_RELEVANCE_XPATH).getText(),"Relevance",
 					"Sort by Relevance is not dispalyed in Author Search result page");
-			test.log(LogStatus.PASS, "Sort by Relevance is dispalyed in Author Search result page");
+			test.log(LogStatus.PASS, "Sort by Relevance is the default option in Author Search result page");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Sort by Relevance is not dispalyed in Author Search result page", "search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
+
 	}
 
 	/**

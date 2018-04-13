@@ -1340,7 +1340,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_METRICS_XPATH("//ul[@class='nav nav-tabs']/li[1]/a"),
 	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_TIMESCITED_XPATH("//div[@class='wat-author-record__metrics-item-column'][1]/child::div"),
 	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_HINDEX_XPATH("//div[@class='wat-author-record__metrics-item-column'][2]/child::div"),
-	WAT_SORT_BY_RELEVANCE_XPATH("//button[@id='wui-dropdown__toggle-704']/descendant::b"),
+	WAT_SORT_BY_RELEVANCE_XPATH("//span[@class='wui-dropdown__toggle-label ng-binding']/b"),
 	
 	WAT_SUGGEST_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Suggest updates')]"),
 	WAT_SUBMIT_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Submit updates')]"),
