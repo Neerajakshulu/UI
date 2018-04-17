@@ -1341,6 +1341,9 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_TIMESCITED_XPATH("//div[@class='wat-author-record__metrics-item-column'][1]/child::div"),
 	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_HINDEX_XPATH("//div[@class='wat-author-record__metrics-item-column'][2]/child::div"),
 	WAT_SORT_BY_RELEVANCE_XPATH("//span[@class='wui-dropdown__toggle-label ng-binding']/b"),
+	WAT_AUTHOR_ORG_DETAILS_XPATH("//div[@class='wat-search-results-meta-affiliation ng-binding']"),
+	WAT_AUTHOR_SUB_ORG_DETAILS_XPATH("//div[@class='wat-search-results-meta-contact ng-binding']"),
+	WAT_AUTHOR_ADDRESS_DETAILS_XPATH("//div[@class='wat-search-results-meta-location ng-binding']"),
 	
 	WAT_SUGGEST_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Suggest updates')]"),
 	WAT_SUBMIT_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Submit updates')]"),

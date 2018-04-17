@@ -892,4 +892,10 @@
 		</classes>
 	</test>
 	
+	<test name="Test_Org_name_in_Author_card" preserve-order="true">
+		<classes>
+			<class name="wat.WAT122"></class>
+		</classes>
+	</test>
+	
 </suite>
