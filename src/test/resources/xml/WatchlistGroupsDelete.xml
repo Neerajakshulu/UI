@@ -7,14 +7,16 @@
 
 
 	<test name="delete_all_watchlist">
-		<parameter name="truid"
-			value="59ddd666-fc1c-4e22-a26b-952bfe11bb96|be9a57e8-45e4-4c2d-9f2b-c96304ccb9e7|5a6a60d0-ec62-11e6-ad6d-c740a04d36bd" />
+		<parameter name="truid"  
+		value="59ddd666-fc1c-4e22-a26b-952bfe11bb96|be9a57e8-45e4-4c2d-9f2b-c96304ccb9e7|5a6a60d0-ec62-11e6-ad6d-c740a04d36bd|c413cee0-e6f4-11e6-898b-a3d991a06c94|1ee2abd0-74d0-11e6-be2c-7129e85cb017|409dfa35-1dd0-49e5-b6c1-b5be42bf49e7|1ee2abd0-74d0-11e6-be2c-7129e85cb017|409dfa35-1dd0-49e5-b6c1-b5be42bf49e7" />
 		<parameter name="containerType" value="watchlist" />
 		<!-- <parameter name="containerType" value="project"/> -->
 		<classes>
 			<class name="util.DeleteAllWatchlistGroupsTest"></class>
 		</classes>
 	</test>
+	
+	
 
 
 	<test name="delete_all_groups">
