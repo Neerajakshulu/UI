@@ -65,7 +65,7 @@ public class Authoring18 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("USERNAME16", "PASSWORD16");
 			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
-			pf.getHFPageInstance(ob).searchForText("Biology");
+			pf.getHFPageInstance(ob).searchForText("Physics");
 			//BrowserWaits.waitTime(5);
 			pf.getSearchResultsPageInstance(ob).chooseArticle();
 			//BrowserWaits.waitTime(5);

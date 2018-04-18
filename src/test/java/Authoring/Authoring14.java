@@ -66,7 +66,7 @@ public class Authoring14 extends TestBase {
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME16", "PASSWORD16");
 			waitForAjax(ob);
-			pf.getHFPageInstance(ob).searchForText("Biology");
+			pf.getHFPageInstance(ob).searchForText("Physics");
 			pf.getSearchResultsPageInstance(ob).searchForArticleWithComments();
 			pf.getpostRVPageInstance(ob).loadComments();
 
