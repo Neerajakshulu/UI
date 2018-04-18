@@ -484,6 +484,7 @@ public class TestBase {
 			} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("IE")) {
 				DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 				capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+				capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 				System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
 				ob = new InternetExplorerDriver(capabilities);
 			} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")) {
