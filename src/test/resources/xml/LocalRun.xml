@@ -445,38 +445,19 @@
 			<class name="search.Search129"></class>
 		</classes>
 	</test>
-	
+
 	<!-- Authoring START -->
 
-	<!-- <test name="Authoring80">
-		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
-		<parameter name="gpassword" value="likhithreddy@123" />
-		<classes>
-			<class name="Authoring.Authoring80"></class>
-		</classes>
-	</test>
-
-	<test name="Authoring81">
-		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
-		<parameter name="gpassword" value="likhithreddy@123" />
-		<classes>
-			<class name="Authoring.Authoring81"></class>
-		</classes>
-	</test>
-
-	<test name="Authoring82">
-		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
-		<parameter name="gpassword" value="likhithreddy@123" />
-		<classes>
-			<class name="Authoring.Authoring82"></class>
-		</classes>
-	</test>
-
-	<test name="Authoring83">
-		<classes>
-			<class name="Authoring.Authoring83"></class>
-		</classes>
-	</test> -->
+	<!-- <test name="Authoring80"> <parameter name="gusername" value="testing.prasadreddy@gmail.com" 
+		/> <parameter name="gpassword" value="likhithreddy@123" /> <classes> <class 
+		name="Authoring.Authoring80"></class> </classes> </test> <test name="Authoring81"> 
+		<parameter name="gusername" value="testing.prasadreddy@gmail.com" /> <parameter 
+		name="gpassword" value="likhithreddy@123" /> <classes> <class name="Authoring.Authoring81"></class> 
+		</classes> </test> <test name="Authoring82"> <parameter name="gusername" 
+		value="testing.prasadreddy@gmail.com" /> <parameter name="gpassword" value="likhithreddy@123" 
+		/> <classes> <class name="Authoring.Authoring82"></class> </classes> </test> 
+		<test name="Authoring83"> <classes> <class name="Authoring.Authoring83"></class> 
+		</classes> </test> -->
 
 	<!-- Authoring END -->
 
@@ -502,13 +483,13 @@
 			<class name="draiam.DRAIAM111"></class>
 		</classes>
 	</test>
-	
+
 	<test name="DRA_SSO_Suspend_Error_Message" preserve-order="true">
 		<classes>
 			<class name="draiam.DRAIAM112"></class>
 		</classes>
 	</test>
-	
+
 	<test name="DRA_SSO_Evicted_User_Error_Message" preserve-order="true">
 		<classes>
 			<class name="draiam.DRAIAM113"></class>
@@ -519,13 +500,13 @@
 			<class name="draiam.DRAIAMSSO003"></class>
 		</classes>
 	</test>
-	
+
 	<test name="User_account_Expired_Error_Message" preserve-order="true">
 		<classes>
 			<class name="draiam.DRAIAMSSO004"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Invalid_SAML_Response_Error_Message" preserve-order="true">
 		<classes>
 			<class name="draiam.DRAIAMSSO008"></class>
@@ -559,22 +540,18 @@
 		</classes>
 	</test>
 	<!-- IPAIAM Test cases END -->
-	
-	<!--  Watchlist Test cases START-->
+
+	<!-- Watchlist Test cases START -->
 	<test name="Watchlist017">
 		<classes>
 			<class name="watchlist.Watchlist017"></class>
 		</classes>
 	</test>
-	<!--  Watchlist Test cases END-->
-	
-	<!-- RCC START -->
+	<!-- Watchlist Test cases END -->
+	<suite-files>
+		<suite-file path="./Notifications.xml" />
 		<suite-file path="./RCC.xml" />
-	<!-- RCC ENDS -->
-	
-	<!-- Notifications START -->
-	<suite-file path="./Notifications.xml" />
-	<!-- Notifications END -->
-	
+	</suite-files>
+
 </suite>
 
