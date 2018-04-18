@@ -187,7 +187,7 @@ public class Notifications0008 extends TestBase {
 					if(conversationStatu){
 						test.log(LogStatus.INFO, "User Starts Conversation from home page.");
 					}else{
-						test.log(LogStatus.INFO, "User not Starts Conversation from home page.");
+						test.log(LogStatus.FAIL, "User not Starts Conversation from home page.");
 					}
 					
 				}catch (Exception e) {
@@ -199,7 +199,7 @@ public class Notifications0008 extends TestBase {
 
 				
 				
-				closeBrowser();
+				//closeBrowser();
 			} else {
 				test.log(LogStatus.INFO, "User creation problem hence Failing this test case");
 				throw new Exception("User creation problem hence throwing exception");
@@ -298,14 +298,14 @@ public class Notifications0008 extends TestBase {
 
 				test.log(LogStatus.FAIL, "User receivied notification with incorrect content");// extent
 				// reports
-				test.log(LogStatus.INFO, "Error--->" + t.getMessage());
+				test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: "
 						+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_OPQA-215")));// screenshot
 			}
 		} catch (Exception t) {
-			test.log(LogStatus.INFO, "Error--->" + t.getMessage());
+			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
 			test.log(LogStatus.INFO, "Snapshot below: "
