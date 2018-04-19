@@ -152,13 +152,13 @@ public class Authoring27 extends TestBase {
 	}
 
 	private void selectAnArticle() throws Exception {
-		pf.getHFPageInstance(ob).searchForText("Physics");
+		pf.getHFPageInstance(ob).searchForText("Biology");
 		pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 80);
 		List<WebElement> itemList;
 		itemList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
-
-		while (true) {
+/*		scrollElementIntoView(ob, pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS));
+*/		while (true) {
 			itemList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int commentsCount, itr = 1;
 			String strCmntCt;
