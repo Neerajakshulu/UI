@@ -960,7 +960,7 @@ public class TestBase {
 		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(
-					LogStatus.INFO,
+					LogStatus.FAIL,
 					"Snapshot below: "
 							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 									+ "_user_not_registered")));// screenshot
@@ -992,7 +992,7 @@ public class TestBase {
 		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(
-					LogStatus.INFO,
+					LogStatus.FAIL,
 					"Snapshot below: "
 							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 									+ "_user_not_registered")));// screenshot
@@ -2130,7 +2130,7 @@ public class TestBase {
 		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(
-					LogStatus.INFO,
+					LogStatus.FAIL,
 					"Snapshot below: "
 							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 									+ "_user_not_registered")));// screenshot
