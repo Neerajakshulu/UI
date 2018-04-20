@@ -70,7 +70,7 @@ public class IAM004 extends TestBase {
 			waitForElementTobeClickable(ob, By.name(OR.getProperty("FB_password_textBox")), 60);
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
-			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
+			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
 			pf.getLoginTRInstance(ob).clickNotnowLink();
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
 			waitUntilText("Newsfeed", "Watchlists", "Groups");

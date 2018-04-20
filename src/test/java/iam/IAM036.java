@@ -79,7 +79,7 @@ public class IAM036 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(LOGIN.getProperty("LINKINGANDMERGINGNAME"));
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox")))
 					.sendKeys(LOGIN.getProperty("LINKINGANDMERGINGPASS"));
-			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
+			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
 			waitUntilText("Already have an account?");
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SINGIN_USING_LINKEDIN_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.SINGIN_USING_LINKEDIN_CSS.toString())).click();
