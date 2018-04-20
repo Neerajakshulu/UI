@@ -809,6 +809,12 @@
 		</classes>
 	</test>
 	
+	<test name="Test_Org_name_in_Author_card" preserve-order="true">
+		<classes>
+			<class name="wat.WAT122"></class>
+		</classes>
+	</test>
+	
 	<test name="WAT_author_search_ballon_popover" preserve-order="true">
 		<classes>
 			<class name="wat.WAT150"></class>
@@ -891,10 +897,18 @@
 			<class name="wat.WAT160"></class>
 		</classes>
 	</test>
-	
-	<test name="Test_Org_name_in_Author_card" preserve-order="true">
+
+	<test name="combined_author_default_avatar_and_fullname" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
-			<class name="wat.WAT122"></class>
+			<class name="wat.WAT161"></class>
+		</classes>
+	</test>
+	
+	<test name="combined_author_org_and_sub-org" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+			<class name="wat.WAT162"></class>
 		</classes>
 	</test>
 	
