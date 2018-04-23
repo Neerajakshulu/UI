@@ -348,7 +348,7 @@
 
 <!-- Notifications Test Cases -->
 
-	<test name="Test F11">
+	<!-- <test name="Test F11">
 		<classes>
 			<class name="notifications.Notifications0011"></class>
 		</classes>
@@ -383,7 +383,7 @@
 		<classes>
 			<class name="notifications.Notifications0013"></class>
 		</classes>
-	</test>
+	</test> -->
 	
 	<!-- Authoring Test cases -->
 	<test name="Authoring43">
