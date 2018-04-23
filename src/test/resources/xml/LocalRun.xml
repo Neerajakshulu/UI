@@ -549,7 +549,7 @@
 	</test>
 	<!-- Watchlist Test cases END -->
 	<suite-files>
-		<suite-file path="./Notifications.xml" />
+		<!-- <suite-file path="./Notifications.xml" /> -->
 		<suite-file path="./RCC.xml" />
 	</suite-files>
 
