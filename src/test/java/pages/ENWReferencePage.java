@@ -54,11 +54,11 @@ public class ENWReferencePage extends TestBase {
 		closeOnBoardingModal();
 	}
 	public void signInToFacebook(String username, String pwd) throws InterruptedException {
-		waitForElementTobeVisible(ob, By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString()), 30);
+		waitForElementTobeVisible(ob, By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME.toString()), 30);
 
 		// Verify that existing LI user credentials are working fine
-		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString())).sendKeys(username);
-		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID.toString())).sendKeys(pwd);
+		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME.toString())).sendKeys(username);
+		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_NAME.toString())).sendKeys(pwd);
 		BrowserWaits.waitTime(2);
 		   //ob.findElement(By.xpath(OR.getProperty("ENW_FB_LOGIN_BUTTON"))).click();
 		ob.findElement(By.xpath(OnePObjectMap.ENW_FB_LOGIN_BUTTON_XPATH.toString())).click();

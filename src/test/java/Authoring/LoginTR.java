@@ -190,10 +190,10 @@ public class LoginTR extends TestBase {
 	 *             not able to login FB account
 	 */
 	public void signInToFacebook(String username, String pwd) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID, username);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID, pwd);
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_ID);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME, username);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_NAME, pwd);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_NAME);
 		BrowserWaits.waitTime(4);
 	}
 
@@ -203,13 +203,13 @@ public class LoginTR extends TestBase {
 				30);
 		driver.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
 
-		waitForElementTobeVisible(driver, By.id(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString()), 30);
+		waitForElementTobeVisible(driver, By.id(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME.toString()), 30);
 
 		// Verify that existing LI user credentials are working fine
-		driver.findElement(By.id(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString())).sendKeys(username);
-		driver.findElement(By.id(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID.toString())).sendKeys(pwd);
+		driver.findElement(By.id(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME.toString())).sendKeys(username);
+		driver.findElement(By.id(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_NAME.toString())).sendKeys(pwd);
 		// BrowserWaits.waitTime(2);
-		driver.findElement(By.id(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_ID.toString())).click();
+		driver.findElement(By.id(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_NAME.toString())).click();
 	}
 
 	public static WebDriver launchBrowser() throws Exception {
