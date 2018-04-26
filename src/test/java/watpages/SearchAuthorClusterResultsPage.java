@@ -485,6 +485,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			} else {
 				throw new Exception("Combine button not enabled");
 			}
+			waitForAjax(ob);
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_AUTHOR_PROFILE_ICON_XPATH, 5);
 			Assert.assertTrue(pf.getBrowserActionInstance(ob)

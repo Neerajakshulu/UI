@@ -73,25 +73,29 @@ public class WAT162 extends TestBase {
 	}
 
 	/**
-	 * Method for Verify Department name present in each author cluster search results page
+	 * Method for Verify Combined Author Org and Sub-Org
 	 * 
 	 * @param lastName
 	 * @throws Exception, When Something unexpected
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters({"lastName"})
-	public void validateDeptInSearchResultsPage(String lastName) throws Exception {
+	public void validateCombinedAuthorOrgAndSubOrg(String lastName) throws Exception {
 
 		try {
 			test.log(LogStatus.INFO, "Search an Author using last name");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName,test);
 			pf.getSearchAuthClusterResultsPage(ob).waitForauthorClusterSearchResults(test);
-			test.log(LogStatus.INFO, "Verify department name and organization should display in addition to the institution/org name");
-			pf.getSearchAuthClusterResultsPage(ob).deptAndOrgInSearchResults(test);
-			test.log(LogStatus.PASS, "Department name and organization should displayed in addition to the institution/org name");
+			test.log(LogStatus.INFO, "Combine two Authors");
+			pf.getSearchAuthClusterResultsPage(ob).combineAuthorCard(test);
+			test.log(LogStatus.INFO, "Verify System must display Authors organization for comnbine author");
+			pf.getAuthorRecordPage(ob).authorRecordMetaOrganization();
+			test.log(LogStatus.INFO, "Verify System displays Authors sub-organization for comnbine author");
+			pf.getAuthorRecordPage(ob).authorRecordDept();
+			test.log(LogStatus.PASS, "Combined Author displayed Authors organization and sub-organization");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Department name and Organization not displayed in additon to institution/org","Dept_and_Org_not_displayed_addition_to_intitution_and_org");
+			logFailureDetails(test, t, "Combined Author Orgnization name and sub-organization not displayed","Org_and_Sub_Org_not_displayed_Combined_Author");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

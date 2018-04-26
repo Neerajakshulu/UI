@@ -1316,6 +1316,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS("i[class='wui-icon wui-icon--profile wat-author-record-icon--profile']"),
 	WAT_AUTHOR_RECORD_META_TITLE_CSS("div[class*='wui-title wat-author-record-meta-title']"),
 	WAT_AUTHOR_RECORD_META_AFFILIATION_CSS("div[class*='wat-author-record-meta-affiliation']"),
+	WAT_AUTHOR_RECORD_META_DEPT_CSS("div[class*='wat-author-record-meta-department']"),
 	
 	WAT_AUTHOR_SEARCH_RESULT_CARD1_XPATH("//div[@class='wui-card'][1]/descendant::i[@class='fa fa-check']"),
 	WAT_AUTHOR_SEARCH_RESULT_CARD2_XPATH("//div[@class='wui-card'][2]/descendant::i[@class='fa fa-check']"),

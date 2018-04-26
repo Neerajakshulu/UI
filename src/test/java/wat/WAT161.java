@@ -73,25 +73,29 @@ public class WAT161 extends TestBase {
 	}
 
 	/**
-	 * Method for Verify Department name present in each author cluster search results page
+	 * Method for Verify default avatar and author full name
 	 * 
 	 * @param lastName
 	 * @throws Exception, When Something unexpected
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters({"lastName"})
-	public void validateDeptInSearchResultsPage(String lastName) throws Exception {
+	public void validateCombinedAuthorAvatarAndFullname(String lastName) throws Exception {
 
 		try {
 			test.log(LogStatus.INFO, "Search an Author using last name");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName,test);
 			pf.getSearchAuthClusterResultsPage(ob).waitForauthorClusterSearchResults(test);
-			test.log(LogStatus.INFO, "Verify department name and organization should display in addition to the institution/org name");
-			pf.getSearchAuthClusterResultsPage(ob).deptAndOrgInSearchResults(test);
-			test.log(LogStatus.PASS, "Department name and organization should displayed in addition to the institution/org name");
+			test.log(LogStatus.INFO, "Combine two Authors");
+			pf.getSearchAuthClusterResultsPage(ob).combineAuthorCard(test);
+			test.log(LogStatus.INFO, "Verify System must display default avatar for combined Author");
+			pf.getAuthorRecordPage(ob).defaultAvatar();
+			test.log(LogStatus.INFO, "Verify System displays the author's full name for combined Author");
+			pf.getAuthorRecordPage(ob).authorRecordMetaTitle();
+			test.log(LogStatus.PASS, "Combined Author Default Avatar and Full name displayed");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Department name and Organization not displayed in additon to institution/org","Dept_and_Org_not_displayed_addition_to_intitution_and_org");
+			logFailureDetails(test, t, "combined Author Default Avatar and Full name not displayed","Combined_author_default_avatar_full_name_not_displayed");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

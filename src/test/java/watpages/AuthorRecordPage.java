@@ -24,6 +24,7 @@ public class AuthorRecordPage extends TestBase {
 	boolean isDefaultAvatarPresent=false;
 	String metaTitle;
 	String metaOrg;
+	String metaDept;
 	boolean hilightedTab=false;
 	boolean isTabDisabled=false;
 	List<WebElement> namesCount;
@@ -92,6 +93,19 @@ public class AuthorRecordPage extends TestBase {
 		}
     }
 	
+	/**
+	 * Method for author record meta title 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void authorRecordDept() throws Exception{
+		metaDept=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_DEPT_CSS).getText();
+		logger.info("Sub-Orgnization-->"+metaDept);
+		if(!StringUtils.isNotEmpty(metaOrg)){
+			throw new Exception("Profile metadata doesn't have any Sub-Organization/Dept");
+		}
+    }
+	
 	
 	/**
 	 * Method for author record meta affiliation/organization 
@@ -100,7 +114,8 @@ public class AuthorRecordPage extends TestBase {
 	 */
 	public void authorRecordMetaOrganization() throws Exception{
 		metaOrg=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_AFFILIATION_CSS).getText();
-		if(!StringUtils.isEmpty(metaOrg)){
+		logger.info("Orgnization-->"+metaOrg);
+		if(!StringUtils.isNotEmpty(metaOrg)){
 			throw new Exception("Profile metadata doesn't have any Organization");
 		}
     }
