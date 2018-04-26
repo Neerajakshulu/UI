@@ -912,4 +912,10 @@
 		</classes>
 	</test>
 	
+	<test name="Test_WelcomeNote" preserve-order="true">
+		<classes>
+			<class name="wat.WAT123"></class>
+		</classes>
+	</test>
+	
 </suite>
