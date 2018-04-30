@@ -81,12 +81,15 @@ public class CreatePostAndCommentPage extends TestBase {
 			test.log(LogStatus.PASS, "Comment count validation passed");
 		}
 	}
-
-	public void cancelComment() {
-		waitForElementTobeClickable(ob,
-				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS.toString()), 60);
-		ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS.toString()))
-				.click();
+	
+	/**
+	 * Method for click Cancel button for comment
+	 * @throws Exception
+	 */
+	public void cancelComment() throws Exception {
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS,60);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS);
 	}
 
 	public void clickAddCommentButton() throws InterruptedException {

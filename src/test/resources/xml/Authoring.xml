@@ -5,11 +5,11 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="username" value="user1testautomation@gmail.com"></parameter>
-	<parameter name="password" value="Neon@123"></parameter>
-	<parameter name="article" value="Biology"></parameter>
-	<parameter name="completeArticle" value="Schizophrenia and drug delivery systems"></parameter>
-	<parameter name="addComments" value="Testing Comments"></parameter>
+	<parameter name="username" value="user1testautomation@gmail.com"/>
+	<parameter name="password" value="Neon@123"/>
+	<parameter name="article" value="COPD"/>
+	<parameter name="completeArticle" value="Differential diagnosis between asthma and COPD"/>
+	<parameter name="addComments" value="Testing Comments"/>
 
 	
 	<test name="Authoring1">

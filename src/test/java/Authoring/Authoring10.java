@@ -73,7 +73,8 @@ public class Authoring10 extends TestBase {
 			}
 
 			// selenium code
-			openBrowser();
+			//openBrowser();
+			runOnSauceLabsFromLocal("Windows", "Chrome");
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(System.getProperty("host"));
@@ -114,7 +115,7 @@ public class Authoring10 extends TestBase {
 			status = 2;// excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_Article_Search_not_happening")));
-			// closeBrowser();
+			//closeBrowser();
 		}
 	}
 
@@ -125,7 +126,6 @@ public class Authoring10 extends TestBase {
 
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
-
 			pf.getPostCommentPageInstance(ob).enterArticleComments(htmlTags);
 			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 60);
@@ -133,6 +133,7 @@ public class Authoring10 extends TestBase {
 					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			// System.out.println("Profanity Word Error
 			// Message--->"+profanityErrorMessage);
+			logger.info("unsupported tags err msg-->"+unSupporteTagErrorMessage);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(unSupporteTagErrorMessage);
 			
 			// Assert.assertEquals(unSupporteTagErrorMessage, errorMessage);
