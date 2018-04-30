@@ -73,8 +73,8 @@ public class Authoring10 extends TestBase {
 			}
 
 			// selenium code
-			//openBrowser();
-			runOnSauceLabsFromLocal("Windows", "Chrome");
+			openBrowser();
+			//runOnSauceLabsFromLocal("Windows", "Chrome");
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(System.getProperty("host"));
