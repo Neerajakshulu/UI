@@ -532,11 +532,11 @@
 	<test name="IPAIAM100" preserve-order="true">
 		<classes>
 			<class name="draiam.DRAIAM100"></class>
-			<class name="ipaiam.IPAIAM100"></class>
+			<!-- <class name="ipaiam.IPAIAM100"></class> -->
 		</classes>
 	</test>
 
-	<test name="IPA053">
+	<!-- <test name="IPA053">
 		<classes>
 			<class name="ipaiam.IPAIAM053"></class>
 		</classes>
@@ -545,7 +545,7 @@
 		<classes>
 			<class name="ipaiam.IPAIAM054"></class>
 		</classes>
-	</test>
+	</test> -->
 	<!-- IPAIAM Test cases END -->
 
 	<!-- Watchlist Test cases START -->

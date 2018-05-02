@@ -15,7 +15,7 @@
 <!-- 		<suite-file path="./RCC.xml" />  -->  <!-- Running RCC in Local -->
 		<suite-file path="./DRAIAM.xml" />
 		<!-- <suite-file path="./IPA.xml" /> --> <!--  Commenting Dev and QA Activites has been stopped -->
-		<suite-file path="./IPAIAM.xml" />
+		<!-- <suite-file path="./IPAIAM.xml" /> -->
 		<suite-file path="./customercare.xml" />
 	</suite-files>
 </suite>
