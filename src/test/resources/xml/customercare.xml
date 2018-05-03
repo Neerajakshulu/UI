@@ -45,7 +45,7 @@
 		</classes>
 	</test>
 
-	<test name="Customercare010">
+	<!-- <test name="Customercare010">
 		<classes>
 			<class name="customercare.Customercare010"></class>
 		</classes>
@@ -54,7 +54,7 @@
 		<classes>
 			<class name="customercare.Customercare011"></class>
 		</classes>
-	</test>
+	</test> -->
 <!--<test name="Customercare012">
 		<classes>
 			<class name="customercare.Customercare012"></class>
