@@ -318,7 +318,7 @@
 			<class name="enw.ENW00029"></class>
 			<class name="enw.ENW003"></class>
 			<class name="enw.ENW023"></class>
-			<class name="ipaiam.IPAIAM052"></class>
+			<!-- <class name="ipaiam.IPAIAM052"></class> -->
 		</classes>
 	</test>
 
@@ -477,10 +477,10 @@
 			<class name="draiam.DRAIAM0015"></class>
 			<class name="draiam.DRAIAM053"></class>
 			<class name="draiam.DRAIAM053"></class>
-			<class name="ipaiam.IPAIAM0002"></class>
+			<!-- <class name="ipaiam.IPAIAM0002"></class>
 			<class name="ipaiam.IPAIAM0003"></class>
 			<class name="ipaiam.IPAIAM0055"></class>
-			<class name="ipaiam.IPAIAM0056"></class>
+			<class name="ipaiam.IPAIAM0056"></class> -->
 		</classes>
 	</test>
 
