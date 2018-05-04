@@ -25,6 +25,7 @@ public class AuthorRecordPage extends TestBase {
 	String metaTitle;
 	String metaOrg;
 	String metaDept;
+	String location;
 	boolean hilightedTab=false;
 	boolean isTabDisabled=false;
 	List<WebElement> namesCount;
@@ -117,6 +118,19 @@ public class AuthorRecordPage extends TestBase {
 		logger.info("Orgnization-->"+metaOrg);
 		if(!StringUtils.isNotEmpty(metaOrg)){
 			throw new Exception("Profile metadata doesn't have any Organization");
+		}
+    }
+	
+	/**
+	 * Method for author record meta city/state/country
+	 * @param test
+	 * @throws Exception
+	 */
+	public void authorRecordMetaLocation() throws Exception{
+		location=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_LOCATION_CSS).getText();
+		logger.info("Location-->"+location);
+		if(!StringUtils.isNotEmpty(location)){
+			throw new Exception("Profile metadata doesn't have any city/state/country ");
 		}
     }
 	
@@ -300,7 +314,7 @@ public class AuthorRecordPage extends TestBase {
 		}
 	}
 	
-	/**
+	/**Method for to check ORCiD Functionality
 	 * @throws Exception
 	 * @throws InterruptedException
 	 */
@@ -315,7 +329,7 @@ public class AuthorRecordPage extends TestBase {
 		test.log(LogStatus.PASS, "User is taken to the ORCID page of the Author successfully");
 	}
 	
-	/**
+	/**Method for to check RID Functionality
 	 * @throws Exception
 	 * @throws InterruptedException
 	 */
@@ -325,6 +339,35 @@ public class AuthorRecordPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitTime(3);
 		String RESEARCHERID =pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RESEARCHERID_LINK_XPATH).getText();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RESEARCHERID_LINK_XPATH);
+		pf.getBrowserActionInstance(ob).switchToNewWindow(ob);
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RESEARCHER_XPATH).getText().contains(RESEARCHERID), "User not taken to the RESEARCHER ID page of the Author");
+		test.log(LogStatus.PASS, "User is taken to the RESEARCHER ID page of the Author successfully");
+	}
+	
+	
+	/**Method for to check ORCiD Functionality
+	 * @throws Exception
+	 * @throws InterruptedException
+	 */
+	@SuppressWarnings("static-access")
+	public void orcid(ExtentTest test) throws Exception, InterruptedException {
+		String ORCID =pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LINK_XPATH).getText();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_LINK_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitTime(3);
+		pf.getBrowserActionInstance(ob).switchToNewWindow(ob);
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_ID).getText().contains(ORCID), "User not taken to the ORCID page of the Author");
+		test.log(LogStatus.PASS, "User is taken to the ORCID page of the Author successfully");
+	}
+	
+	/**Method for to check RID Functionality
+	 * @throws Exception
+	 * @throws InterruptedException
+	 */
+	@SuppressWarnings("static-access")
+	public void rid(ExtentTest test) throws Exception{
+		String RESEARCHERID =pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RESEARCHERID_LINK_XPATH).getText();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RESEARCHERID_LINK_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitTime(3);
 		pf.getBrowserActionInstance(ob).switchToNewWindow(ob);
 		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RESEARCHER_XPATH).getText().contains(RESEARCHERID), "User not taken to the RESEARCHER ID page of the Author");
 		test.log(LogStatus.PASS, "User is taken to the RESEARCHER ID page of the Author successfully");
