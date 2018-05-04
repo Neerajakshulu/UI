@@ -91,7 +91,7 @@ public class WAT124 extends TestBase {
 			pf.getSearchAuthClusterResultsPage(ob).combineAuthorCard(test);
 			test.log(LogStatus.INFO, "Verify whether publications are available");
 			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MAIN_CARD_XPATH).isDisplayed(), "No Publications available for the user");
-			
+			test.log(LogStatus.PASS, "publications are displayed in Author Record page");
 			test.log(LogStatus.INFO, "Verify whether publications Names are available");
 			pf.getSearchAuthClusterResultsPage(ob).publicationName(test);
 			test.log(LogStatus.INFO, "Verify whether Publication Author Names are available");

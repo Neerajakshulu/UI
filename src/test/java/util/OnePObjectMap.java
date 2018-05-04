@@ -1350,7 +1350,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MORE_LINK_XPATH("//div[@ng-repeat='publication in vm.watAuthorRecordPublicationsData track by $index'][1]/descendant::a"),
 	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_LESS_LINK_XPATH("//div[@ng-repeat='publication in vm.watAuthorRecordPublicationsData track by $index'][1]/descendant::a"),
 
-	
+	WAT_AUTHOR_SEARCH_RESULT_SORT_XPATH("//div[@class='pull-right wat-author-record-publications-sort']"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS("ul[class='nav nav-tabs'] li+li a"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_HILIGHTED_CSS("li[class='uib-tab nav-item ng-isolate-scope active']"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS("div[class='tab-pane ng-scope active'] div div"),
