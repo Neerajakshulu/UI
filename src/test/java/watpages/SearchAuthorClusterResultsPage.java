@@ -3,6 +3,7 @@ package watpages;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
@@ -25,7 +26,16 @@ import util.OnePObjectMap;
  *
  */
 public class SearchAuthorClusterResultsPage extends TestBase {
-
+	
+	boolean ispublicationNamePresent=false;
+	boolean isPublicationAuthorPresent=false;
+	boolean isPublicationCategoryPresent=false;
+	boolean isPublicationVolumePresent=false;
+	boolean isPublicationIssuePresent=false;
+	boolean isPublicationPublishedYearPresent=false;
+	boolean isPublicationTimesCitedPresent=false;
+	boolean isPublicationTimesCitedCountPresent=false;
+	
 	List<WebElement> pubDetailsList;
 	List<WebElement> morePublications;
 	List<WebElement> recentPublications;
@@ -752,5 +762,134 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		}
 		
 	}
+
+	/**
+	 * Method for publication Name
+	 * @param test
+	 * @throws Exception
+	 */
+	public void publicationName(ExtentTest test) throws Exception{
+		ispublicationNamePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_NAME_XPATH).isDisplayed();
+		if(!ispublicationNamePresent){
+			throw new Exception("No publication Name is displayed in Author Record page");
+		}
+		test.log(LogStatus.PASS, "publication Name is displayed in Author Record page");
+    }
 	
+	/**
+	 * Method for Publication Author 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void PublicationAuthor(ExtentTest test) throws Exception{
+		isPublicationAuthorPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_AUTHORS_XPATH).isDisplayed();
+		if(!isPublicationAuthorPresent){
+			throw new Exception("No Publication Author is displayed in Author Record page");
+		}
+		test.log(LogStatus.PASS, "Publication Author is displayed in Author Record page");
+    }
+	
+	/**
+	 * Method for Publication Category 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void PublicationCategory(ExtentTest test) throws Exception{
+		isPublicationCategoryPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_CATEGORY_XPATH).isDisplayed();
+		if(!isPublicationCategoryPresent){
+			throw new Exception("No Publication Category is displayed in Author Record page");
+		}
+		test.log(LogStatus.PASS, "Publication Category is displayed in Author Record page");
+    }
+	
+	/**
+	 * Method for Publication Volume 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void PublicationVolume(ExtentTest test) throws Exception{
+		isPublicationVolumePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_VOLUME_XPATH).isDisplayed();
+		if(!isPublicationVolumePresent){
+			throw new Exception("No Publication Volume is displayed in Author Record page");
+		}
+		test.log(LogStatus.PASS, "Publication Volume is displayed in Author Record page");
+    }
+	
+	/**
+	 * Method for Publication Issue 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void PublicationIssue(ExtentTest test) throws Exception{
+		isPublicationIssuePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_ISSUE_XPATH).isDisplayed();
+		if(!isPublicationIssuePresent){
+			throw new Exception("No Publication Issue is displayed in Author Record page");
+		}
+		test.log(LogStatus.PASS, "Publication Issue is displayed in Author Record page");
+    }
+	
+	/**
+	 * Method for Publication Published Year 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void PublicationPublishedYear(ExtentTest test) throws Exception{
+		isPublicationPublishedYearPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_PUBLISHED_XPATH).isDisplayed();
+		if(!isPublicationPublishedYearPresent){
+			throw new Exception("No Publication Published Year is displayed in Author Record page");
+		}
+		test.log(LogStatus.PASS, "Publication Published Year is displayed in Author Record page");
+    }
+	
+	/**
+	 * Method for Publication Times Cited 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void PublicationTimesCited(ExtentTest test) throws Exception{
+		isPublicationTimesCitedPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_TIMES_CITED_TEXT_XPATH).isDisplayed();
+		if(!isPublicationTimesCitedPresent){
+			throw new Exception("No Publication Times Cited is displayed in Author Record page");
+		}
+		test.log(LogStatus.PASS, "Publication Times Cited is displayed in Author Record page");
+    }
+	
+	/**
+	 * Method for Publication Times Cited Count 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void PublicationTimesCitedCount(ExtentTest test) throws Exception{
+		isPublicationTimesCitedCountPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_TIMES_CITED_COUNT_XPATH).isDisplayed();
+		if(!isPublicationTimesCitedCountPresent){
+			throw new Exception("No Publication Times Cited Count is displayed in Author Record page");
+		}
+		test.log(LogStatus.PASS, "Publication Times Cited Count is displayed in Author Record page");
+    }
+	
+	/**
+	 * Method for Publication Author Count test
+	 * @param test
+	 * @throws Exception
+	 */
+	public void PublicationAuthorCount(ExtentTest test) throws Exception{
+		String[] PublicationAuthorCount = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_AUTHORS_XPATH).getText().split(";");
+		test.log(LogStatus.INFO, "Author count = "+ PublicationAuthorCount.length);
+		if (PublicationAuthorCount.length >= 3)
+		{
+			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MORE_LINK_XPATH).isDisplayed(), 
+					"More link not displayed even though the count of authors for this publication is more than 3");
+			test.log(LogStatus.INFO, "More link displayed");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MORE_LINK_XPATH);
+			test.log(LogStatus.INFO, "More Link clicked");
+			String[] PublicationAuthorCountAfterMoreLinkClick = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_AUTHORS_XPATH).getText().split(";");
+			test.log(LogStatus.INFO, "Author count after clicking More link = "+ PublicationAuthorCountAfterMoreLinkClick.length);
+			if (PublicationAuthorCountAfterMoreLinkClick.length > 3)
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_LESS_LINK_XPATH);
+			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MORE_LINK_XPATH).isDisplayed(), 
+					"More link not displayed after LESS link is clicked");
+		}
+		else
+			test.log(LogStatus.INFO, "Author count is less than 3");
+		}
 }

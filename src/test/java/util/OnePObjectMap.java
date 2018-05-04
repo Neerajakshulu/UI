@@ -1338,6 +1338,18 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_CARD_AFTER_SELECTION_XPATH("//div[@class='wui-card__content wat-card-content-selected']"),
 	WAT_AUTHOR_CARD_CHECKBOX_AFTER_SELECT_ALL_XPATH("//div[@class='wui-card']/descendant::button[@class='pull-right wui-icon-only-btn wui-icon-only-btn--mini wat-results-selector wat-icon-only-btn--check-selected']"),
 	
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MAIN_CARD_XPATH("//div[@ng-repeat='publication in vm.watAuthorRecordPublicationsData track by $index'][1]"),
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_NAME_XPATH("//div[@class='wui-card__body-content ng-isolate-scope']/descendant::div[@class='wui-emphasis wat-search-results-publications-title wat-author-record-publications-title ng-binding'][1]"),
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_AUTHORS_XPATH("//div[@class='wui-card__body-content ng-isolate-scope']/descendant::div[@class='wui-descriptor wat-search-results-publications-authors wat-author-record-publications-authors'][1]"),
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_CATEGORY_XPATH("//div[@class='wui-card__body-content ng-isolate-scope']/descendant::div[@class='wat-search-results-publications-source__item wat-search-results-publications-source ng-binding ng-scope'][1]"),
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_VOLUME_XPATH("//div[@class='wui-card__body-content ng-isolate-scope']/descendant::div[@class='wat-search-results-publications-source__item ng-binding ng-scope'][1]"),
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_ISSUE_XPATH("//div[@ng-repeat='publication in vm.watAuthorRecordPublicationsData track by $index'][1]"),
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_PUBLISHED_XPATH("//div[@class='wui-card__body-content ng-isolate-scope']/descendant::div[@ng-if='vm.watAuthorRecordPublicationData.published'][1]"),
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_TIMES_CITED_TEXT_XPATH("//div[@class='wui-card__body-content ng-isolate-scope']/descendant::div[@class='wui-descriptor wui-descriptor--uppercase'][1]"),
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_TIMES_CITED_COUNT_XPATH("//div[@class='wui-card__body-content ng-isolate-scope']/descendant::div[@class='wui-title ng-binding'][1]"),
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MORE_LINK_XPATH("//div[@ng-repeat='publication in vm.watAuthorRecordPublicationsData track by $index'][1]/descendant::a"),
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_LESS_LINK_XPATH("//div[@ng-repeat='publication in vm.watAuthorRecordPublicationsData track by $index'][1]/descendant::a"),
+
 	
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS("ul[class='nav nav-tabs'] li+li a"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_HILIGHTED_CSS("li[class='uib-tab nav-item ng-isolate-scope active']"),
