@@ -668,6 +668,7 @@ public class ProfilePage extends TestBase {
 		boolean result = false;
 		// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 		// OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS,60);
 		String actErrorMessage = ob
 				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS.toString()))
 				.getText();
@@ -737,17 +738,19 @@ public class ProfilePage extends TestBase {
 
 	/**
 	 * Method to click on cancel button in post creation modal
-	 * 
-	 * @throws InterruptedException
+	 * @throws Exception 
 	 */
-	public void clickOnPostCancelButton() throws InterruptedException {
+	public void clickOnPostCancelButton() throws Exception {
 		BrowserWaits.waitTime(6);
 		// Commented by KR
 		// waitForElementTobeVisible(ob,
 		// By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()),
 		// 120);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()))
-				.click();
+		pf.getBrowserWaitsInstance(ob)
+		.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString())));
+//		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()))
+//				.click();
 	}
 
 	/**
@@ -1504,15 +1507,20 @@ public class ProfilePage extends TestBase {
 						.replaceAll("TITLE", postString)),
 				90);
 
-		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
-				.replaceAll("TITLE", postString))).click();
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
+				.replaceAll("TITLE", postString))));
+		
+//		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
+//				.replaceAll("TITLE", postString))).click();
 
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.cssSelector(
 				OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_CONFIRMATION_CSS.toString()), 30);
 
-		ob.findElement(By
+		jsClick(ob, ob.findElement(By
+				.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_CONFIRMATION_CSS.toString())));
+		/*ob.findElement(By
 				.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_CONFIRMATION_CSS.toString()))
-				.click();
+				.click();*/
 	}
 
 	public List<String> getAllDraftPostTitle() {
@@ -1577,9 +1585,10 @@ public class ProfilePage extends TestBase {
 		waitForAjax(ob);
 		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH
 				.toString().replaceAll("TITLE", postString)), 60);
-
-		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH.toString()
-				.replaceAll("TITLE", postString))).click();
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH.toString()
+		.replaceAll("TITLE", postString))));
+//		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH.toString()
+//				.replaceAll("TITLE", postString))).click();
 
 		clickOnPostCancelButton();
 		clickOnPostCancelDiscardButton();

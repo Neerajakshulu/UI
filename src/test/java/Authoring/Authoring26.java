@@ -137,20 +137,27 @@ public class Authoring26 extends TestBase {
 			int commentsCount, itr = 1;
 			String strCmntCt;
 			boolean isFound = false;
-			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
+			for (int i = (itr - 1); i < itemList.size(); i++) {
+				List<WebElement> results=itemList.get(i).findElements(
+						By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()));
+				logger.info("comments count in each section-->"+results.size());
+				pf.getBrowserActionInstance(ob).scrollToElement(itemList.get(i));
+				if(results.size()!=0){
 				strCmntCt = itemList.get(i)
 						.findElement(
 								By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
 						.getText().replaceAll(",", "").trim();
 				commentsCount = Integer.parseInt(strCmntCt);
-				if (commentsCount < 5) {
+				
+				if (commentsCount < 10) {
 					jsClick(ob, itemList.get(i)
 							.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
 
 					isFound = true;
 					break;
 				}
-
+				
+				}
 			}
 
 			if (isFound)

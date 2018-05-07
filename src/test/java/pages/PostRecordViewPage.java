@@ -595,9 +595,9 @@ public class PostRecordViewPage extends TestBase {
 			if (!child_window_handle.equals(PARENT_WINDOW)) {
 				ob.switchTo().window(child_window_handle);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_ID);
+						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_NAME);
 				pf.getBrowserActionInstance(ob).enterFieldValue(
-						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_ID, fbusername);
+						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_NAME, fbusername);
 				pf.getBrowserActionInstance(ob).enterFieldValue(
 						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_PASSWORD_XPATH, fbpassword);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_LOGIN_CSS);

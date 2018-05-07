@@ -123,7 +123,7 @@ public class Authoring40 extends TestBase {
 			}
 
 			try {
-				Assert.assertEquals(postStringEdited, pf.getpostRVPageInstance(ob).getPostContent());
+				Assert.assertEquals(postStringEdited, pf.getpostRVPageInstance(ob).getPostContent().trim());
 				test.log(LogStatus.PASS, "Actual post content matches expected post content");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Actual post content does not match expected post content");
