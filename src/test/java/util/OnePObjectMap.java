@@ -1268,6 +1268,9 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PRIMARY_NAME_CSS("h3 a"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_CSS("div[class='wat-search-terms-topic-tags']"),
 	
+	WAT_AUTHOR_NAME_DIVIDER_XPATH("//div[button[contains(text(), 'Author name')]]/descendant::div[@class='wui-divider']"),
+	WAT_ORGANIZATION_DIVIDER_XPATH("//div[button[contains(text(), 'Organizations')]]/descendant::div[@class='wui-divider']"),
+	WAT_SUBJECT_CATEGORY_DIVIDER_XPATH("//div[button[contains(text(), 'Subject categories')]]/descendant::div[@class='wui-divider']"),
 	
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_ALTERNATIVE_NAME_CSS("div[class*='wat-search-results-meta-names']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_AFFILIATION_CSS("div[class*='wat-search-results-meta-affiliation']"),
@@ -1331,6 +1334,7 @@ public enum OnePObjectMap {
 	WAT_RESEARCHER_XPATH("//table[@class='profileTable']/descendant::td[2]"),
 	WAT_RESEARCHERID_LINK_XPATH("//a[@class='wat-author-record__rid ng-binding']"),
 
+	
 	WAT_SELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
 	WAT_DESELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
 	WAT_COMBINE_BTN_PRECEDING_TEXT_XPATH("//div[button[@class='wui-btn wui-btn--primary']]/preceding-sibling::div"),
@@ -1380,14 +1384,17 @@ public enum OnePObjectMap {
 	WAT_SEARCH_RESULTS_FILTER_ORG_XPATH("//button[contains(text(),'Organizations')]"),
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_ORG_XPATH("//button[contains(text(),'Organizations')]/following-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_1st_ORG_XPATH("//div[button[contains(text(),'Organizations')]]/descendant::span[2]"),
+	WAT_SEARCH_RESULTS_FILTER_2nd_ORG_XPATH("//div[button[contains(text(),'Organizations')]]/descendant::span[5]"),
 	
 	WAT_SEARCH_RESULTS_FILTER_NAME_XPATH("//button[contains(text(),'Author name')]"),
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_NAME_XPATH("//button[contains(text(),'Author name')]/following-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_1st_NAME_XPATH("//div[button[contains(text(),'Author name')]]/descendant::span[2]"),
+	WAT_SEARCH_RESULTS_FILTER_2nd_NAME_XPATH("//div[button[contains(text(),'Author name')]]/descendant::span[5]"),
 	
 	WAT_SEARCH_RESULTS_FILTER_SUBCAT_XPATH("//button[contains(text(),'Subject categories')]"),
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_SUBCAT_XPATH("//button[contains(text(),'Subject categories')]/following-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_1st_SUBCAT_XPATH("//div[button[contains(text(),'Subject categories')]]/descendant::span[2]"),
+	WAT_SEARCH_RESULTS_FILTER_2nd_SUBCAT_XPATH("//div[button[contains(text(),'Subject categories')]]/descendant::span[5]"),
 	
 	WAT_SEARCH_RESULTS_COUNT_XPATH("//h2[contains(text(),'result')]"),
 	
