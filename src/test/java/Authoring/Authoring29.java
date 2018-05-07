@@ -75,9 +75,37 @@ public class Authoring29 extends TestBase {
 			test.log(LogStatus.INFO, "Entered Post Content");
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
-			ob.navigate().back();
-			//BrowserWaits.waitTime(2);
-			ob.navigate().back();
+			
+			
+			//pf.getHFPageInstance(ob).clickOnProfileLink();
+			//test.log(LogStatus.INFO, "Navigated to Profile Page");
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+			pf.getProfilePageInstance(ob).enterPostTitle(postString);
+			test.log(LogStatus.INFO, "Entered Post Title");
+			pf.getProfilePageInstance(ob).enterPostContent(postString);
+			test.log(LogStatus.INFO, "Entered Post Content");
+			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
+			test.log(LogStatus.INFO, "Published the post");
+			String errorMessage = "We are still processing your previous post. Please try again.";
+			try {
+				Assert.assertTrue(pf.getProfilePageInstance(ob).validatePostErrorMessage(errorMessage));
+				test.log(LogStatus.PASS, "Proper error message for preventing bot is displayed for posts");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Proper error message for preventing bot is not displayed for posts");
+				test.log(LogStatus.INFO, "Error--->" + t);
+				ErrorUtil.addVerificationFailure(t);
+				status = 2;
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
+
+			}
+			
+//			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
+//			pf.getProfilePageInstance(ob).clickOnPostCancelDiscardButton();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
+//			ob.navigate().back();
+//			BrowserWaits.waitTime(6);
+//			ob.navigate().back();
 			//BrowserWaits.waitTime(2);
 			int postCountAfter = pf.getProfilePageInstance(ob).getPostsCount();
 			test.log(LogStatus.INFO, "Post count:" + postCountAfter);
@@ -107,30 +135,7 @@ public class Authoring29 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "Post_creation_validation_failed")));// screenshot
 
 			}
-			pf.getHFPageInstance(ob).clickOnProfileLink();
-			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
-			pf.getProfilePageInstance(ob).enterPostTitle(postString);
-			test.log(LogStatus.INFO, "Entered Post Title");
-			pf.getProfilePageInstance(ob).enterPostContent(postString);
-			test.log(LogStatus.INFO, "Entered Post Content");
-			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
-			test.log(LogStatus.INFO, "Published the post");
-			String errorMessage = "We are still processing your previous post. Please try again.";
-			try {
-				Assert.assertTrue(pf.getProfilePageInstance(ob).validatePostErrorMessage(errorMessage));
-				test.log(LogStatus.PASS, "Proper error message for preventing bot is displayed for posts");
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Proper error message for preventing bot is not displayed for posts");
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
-
-			}
-			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
-			pf.getProfilePageInstance(ob).clickOnPostCancelDiscardButton();
+			
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
