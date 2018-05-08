@@ -15,12 +15,12 @@ import util.OnePObjectMap;
 
 /**
  * Class for Verify that user is able to see the selections they made in the
- * Journal filter in Author search results page
+ * Subject Category filter in Author search results page
  * 
  * @author UC225218
  *
  */
-public class WAT127 extends TestBase {
+public class WAT128 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -79,7 +79,7 @@ public class WAT127 extends TestBase {
 
 	/**
 	 * Method to Verify that user is able to see the selections they made in the
-	 * Journal filter in Author search results page
+	 * Subject Category filter in Author search results page
 	 * 
 	 * @param LastName,
 	 *            FirstName, CountryName, OrgName
@@ -88,38 +88,38 @@ public class WAT127 extends TestBase {
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2", "OrgName1", "OrgName2" })
-	public void testJournalFilter(String LastName, String CountryName1, String CountryName2,
-			String OrgName1, String OrgName2) throws Exception {
+	public void tesSubjectCategoryFilter(String LastName, String CountryName1, String CountryName2, String OrgName1,
+			String OrgName2) throws Exception {
 
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1, CountryName2,
 					OrgName1, OrgName2, test);
-			test.log(LogStatus.INFO, "Verifying whether Journal filter exists and options also exists");
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_ORG_XPATH)
+			test.log(LogStatus.INFO, "Verifying whether Subject Category filter exists and options also exists");
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_SUBCAT_XPATH)
 					.isDisplayed()
 					&& pf.getBrowserActionInstance(ob)
-							.getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_ORG_XPATH).isDisplayed()) {
-				test.log(LogStatus.INFO, "Clicking first option in Journal filter");
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_ORG_XPATH);
+							.getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_SUBCAT_XPATH).isDisplayed()) {
+				test.log(LogStatus.INFO, "Clicking first option in Subject Category filter");
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_SUBCAT_XPATH);
 				test.log(LogStatus.INFO, "Waiting for divider line to appear");
 				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORGANIZATION_DIVIDER_XPATH);
-				test.log(LogStatus.INFO, "Clicking second option in Journal filter");
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_2nd_ORG_XPATH);
+						.waitUntilElementIsDisplayed(OnePObjectMap.WAT_SUBJECT_CATEGORY_DIVIDER_XPATH);
+				test.log(LogStatus.INFO, "Clicking second option in Subject Category filter");
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_2nd_SUBCAT_XPATH);
 				Assert.assertTrue(
-						pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORGANIZATION_DIVIDER_XPATH)
+						pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SUBJECT_CATEGORY_DIVIDER_XPATH)
 								.isDisplayed(),
-						"Divider line for Journal seperating filtered and unfiltered names is not displayed");
+						"Divider line for Subject Category seperating filtered and unfiltered names is not displayed");
 				test.log(LogStatus.PASS,
-						"Divider line displayed and successfully seperates filtered and unfiltered Journal in the Journal filter in Author search results page");
+						"Divider line displayed and successfully seperates filtered and unfiltered Subject Category in the Subject Category filter in Author search results page");
 				pf.getBrowserActionInstance(ob).closeBrowser();
 			} else {
 				throw new Exception(
-						"Divider line for Journal seperating filtered and unfiltered names is not displayed");
+						"Divider line for Subject Category seperating filtered and unfiltered names is not displayed");
 			}
 
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Divider line for Journal is not displayed", "Filter_line_issue");
+			logFailureDetails(test, t, "Divider line for Subject Category is not displayed", "Filter_line_issue");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

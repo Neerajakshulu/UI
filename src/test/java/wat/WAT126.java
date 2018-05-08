@@ -88,7 +88,7 @@ public class WAT126 extends TestBase {
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2", "OrgName1", "OrgName2" })
-	public void testSearchAuthorClusterOnlyLastName(String LastName, String CountryName1, String CountryName2,
+	public void testAuthorNameFilter(String LastName, String CountryName1, String CountryName2,
 			String OrgName1, String OrgName2) throws Exception {
 
 		try {

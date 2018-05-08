@@ -985,4 +985,11 @@
 			<class name="wat.WAT127"></class>
 		</classes>
 	</test>
+
+	<test name="Test_Filtered_unfiltered_seperation_line_for_Subject_Category"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT128"></class>
+		</classes>
+	</test>
 </suite>
