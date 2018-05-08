@@ -15,12 +15,12 @@ import util.OnePObjectMap;
 
 /**
  * Class for Verify that user is able to see the selections they made in the
- * Author filter in Author search results page
+ * Journal filter in Author search results page
  * 
  * @author UC225218
  *
  */
-public class WAT126 extends TestBase {
+public class WAT127 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -79,7 +79,7 @@ public class WAT126 extends TestBase {
 
 	/**
 	 * Method to Verify that user is able to see the selections they made in the
-	 * Author filter in Author search results page
+	 * Journal filter in Author search results page
 	 * 
 	 * @param LastName,
 	 *            FirstName, CountryName, OrgName
@@ -94,31 +94,32 @@ public class WAT126 extends TestBase {
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1, CountryName2,
 					OrgName1, OrgName2, test);
-			test.log(LogStatus.INFO, "Verifying whether Author name filter exists and options also exists");
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_NAME_XPATH)
+			test.log(LogStatus.INFO, "Verifying whether Journal name filter exists and options also exists");
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_ORG_XPATH)
 					.isDisplayed()
 					&& pf.getBrowserActionInstance(ob)
-							.getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_NAME_XPATH).isDisplayed()) {
-				test.log(LogStatus.INFO, "Clicking first option in author name filter");
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_NAME_XPATH);
+							.getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_ORG_XPATH).isDisplayed()) {
+				test.log(LogStatus.INFO, "Clicking first option in Journal filter");
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_ORG_XPATH);
 				test.log(LogStatus.INFO, "Waiting for divider line to appear");
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_NAME_DIVIDER_XPATH);
-				test.log(LogStatus.INFO, "Clicking second option in author name filter");
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_2nd_NAME_XPATH);
+				pf.getBrowserWaitsInstance(ob)
+						.waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORGANIZATION_DIVIDER_XPATH);
+				test.log(LogStatus.INFO, "Clicking second option in Journal filter");
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_2nd_ORG_XPATH);
 				Assert.assertTrue(
-						pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_NAME_DIVIDER_XPATH)
+						pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORGANIZATION_DIVIDER_XPATH)
 								.isDisplayed(),
-						"Divider line for Author name seperating filtered and unfiltered names is not displayed");
+						"Divider line for Journal seperating filtered and unfiltered names is not displayed");
 				test.log(LogStatus.PASS,
-						"Divider line displayed and successfully seperates filtered and unfiltered author names in the author filter in Author search results page");
+						"Divider line displayed and successfully seperates filtered and unfiltered Journal in the Journal filter in Author search results page");
 				pf.getBrowserActionInstance(ob).closeBrowser();
 			} else {
 				throw new Exception(
-						"Divider line for Author name seperating filtered and unfiltered names is not displayed");
+						"Divider line for Journal seperating filtered and unfiltered names is not displayed");
 			}
 
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Divider line for Author name is not displayed", "Filter_line_issue");
+			logFailureDetails(test, t, "Divider line for Journal is not displayed", "Filter_line_issue");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

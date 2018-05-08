@@ -13,10 +13,10 @@
 	<parameter name="FirstName" value="KRISHNARAJ" />
 	<parameter name="CountryName1" value="INDIA" />
 	<parameter name="OrgName1" value="AMITY UNIV" />
-	<parameter name="CountryName2" value="USA" ></parameter>
+	<parameter name="CountryName2" value="USA"></parameter>
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
- 
-  	<test name="WAT_Login" preserve-order="true">
+
+	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -28,7 +28,7 @@
 		</classes>
 	</test>
 
-	 <test name="WAT_Author_Search_Page_static_text_Verify"
+	<test name="WAT_Author_Search_Page_static_text_Verify"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT03"></class>
@@ -161,7 +161,7 @@
 		</classes>
 	</test>
 
- 	<test name="author_results_count_publication_count"
+	<test name="author_results_count_publication_count"
 		preserve-order="true">
 		<parameter name="lastName" value="SMITH" />
 		<parameter name="firstName" value="JOHN" />
@@ -208,7 +208,7 @@
 		</classes>
 	</test>
 
-	 <test name="author_search_results_Top_journals" preserve-order="true">
+	<test name="author_search_results_Top_journals" preserve-order="true">
 		<parameter name="lastName" value="MURTHY" />
 		<parameter name="countryName" value="INDIA" />
 		<parameter name="orgName" value="ANDHRA UNIV" />
@@ -419,30 +419,30 @@
 	</test>
 
 
-	  <test name="author_record_meta_org" preserve-order="true">
+	<test name="author_record_meta_org" preserve-order="true">
 		<parameter name="lastName" value="JOHN B.F." />
 		<classes>
 			<class name="wat.WAT61"></class>
 		</classes>
 	</test>
-	
-	 <test name="author_record_metrics_tab_status" preserve-order="true">
+
+	<test name="author_record_metrics_tab_status" preserve-order="true">
 		<parameter name="lastName" value="JOHN BALAZS" />
 		<classes>
 			<class name="wat.WAT62"></class>
 		</classes>
 	</test>
-	
+
 	<test name="author_record_metrics_tab_items" preserve-order="true">
 		<parameter name="lastName" value="JOHN BALAZS" />
 		<classes>
 			<class name="wat.WAT63"></class>
 		</classes>
 	</test>
-	
-	
-	
-	
+
+
+
+
 
 	<test name="WAT_Author_Combine_Selectall" preserve-order="true">
 		<classes>
@@ -537,8 +537,8 @@
 			<class name="wat.WAT84"></class>
 		</classes>
 	</test>
-	
-	
+
+
 	<test name="author_record_page_organizations" preserve-order="true">
 		<parameter name="lastName" value="JOHN (ZIZIOULAS) OF PERGAMON" />
 		<classes>
@@ -551,74 +551,78 @@
 			<class name="wat.WAT66"></class>
 		</classes>
 	</test>
-	<test name="author_record_page_organizations_count" preserve-order="true">
+	<test name="author_record_page_organizations_count"
+		preserve-order="true">
 		<parameter name="lastName" value="JOHN (ZIZIOULAS) OF PERGAMON" />
 		<classes>
 			<class name="wat.WAT67"></class>
 		</classes>
 	</test>
-	
-	<test name="author_record_page_organizations_tab_inactiive" preserve-order="true">
+
+	<test name="author_record_page_organizations_tab_inactiive"
+		preserve-order="true">
 		<parameter name="lastName" value="JOHN BALAZS" />
 		<classes>
 			<class name="wat.WAT68"></class>
 		</classes>
 	</test>
-	
-	<test name="author_record_page_alternatives_tab_inactiive" preserve-order="true">
+
+	<test name="author_record_page_alternatives_tab_inactiive"
+		preserve-order="true">
 		<parameter name="lastName" value="JOHN BALAZS" />
 		<classes>
 			<class name="wat.WAT69"></class>
 		</classes>
-	</test>	
+	</test>
 
 	<test name="WAT_Curation_mode_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT79"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Delete_Alt_Name_test_LN" preserve-order="true">
 		<classes>
 			<class name="wat.WAT85"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Delete_Alt_Name_test_LN_FN" preserve-order="true">
 		<classes>
 			<class name="wat.WAT86"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Delete_Alt_Name_btn_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT87"></class>
 		</classes>
 	</test>
-		<test name="WAT_Delete_Alt_Name_btn_functionality" preserve-order="true">
+	<test name="WAT_Delete_Alt_Name_btn_functionality" preserve-order="true">
 		<classes>
 			<class name="wat.WAT88"></class>
 		</classes>
 	</test>
-	
- 	<test name="WAT_Feedback_Link_Authorsearch_page" preserve-order="true">
+
+	<test name="WAT_Feedback_Link_Authorsearch_page" preserve-order="true">
 		<classes>
 			<class name="wat.WAT89"></class>
 		</classes>
 	</test>
-	
- 	<test name="WAT_Feedback_Link_Authorsearchresult_page" preserve-order="true">
+
+	<test name="WAT_Feedback_Link_Authorsearchresult_page"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT90"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Feedback_Link_AuthorRecord_page" preserve-order="true">
 		<classes>
 			<class name="wat.WAT91"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Navigation_back" preserve-order="true">
 		<classes>
 			<class name="wat.WAT92"></class>
@@ -629,247 +633,260 @@
 		<classes>
 			<class name="wat.WAT93"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Search_Link" preserve-order="true">
 		<classes>
 			<class name="wat.WAT94"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Search_Link_navigate" preserve-order="true">
 		<classes>
 			<class name="wat.WAT95"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Static_text" preserve-order="true">
 		<classes>
 			<class name="wat.WAT80"></class>
 		</classes>
 	</test>
-	
-	<test name="WAT_Filter_Author_search_result_page_org" preserve-order="true">
+
+	<test name="WAT_Filter_Author_search_result_page_org"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT96"></class>
 		</classes>
 	</test>
-	
-	<test name="WAT_Filter_Author_search_result_page_name" preserve-order="true">
+
+	<test name="WAT_Filter_Author_search_result_page_name"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT97"></class>
 		</classes>
-	</test> 
-	
-	<test name="WAT_Filter_Author_search_result_page_ALL_FILTERS" preserve-order="true">
+	</test>
+
+	<test name="WAT_Filter_Author_search_result_page_ALL_FILTERS"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT98"></class>
 		</classes>
-	</test> 
-		
-	<test name="WAT_Filter_Author_search_result_page_SUB_CAT" preserve-order="true">
+	</test>
+
+	<test name="WAT_Filter_Author_search_result_page_SUB_CAT"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT99"></class>
 		</classes>
 	</test>
-	
-	<test name="WAT_Filter_Author_search_result_page_ORG" preserve-order="true">
+
+	<test name="WAT_Filter_Author_search_result_page_ORG"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT100"></class>
 		</classes>
 	</test>
-	
-	<test name="WAT_Filter_Author_search_result_page_NAME" preserve-order="true">
+
+	<test name="WAT_Filter_Author_search_result_page_NAME"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT101"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="WAT_ORCID_Functionality" preserve-order="true">
 		<parameter name="lastName" value="BENZ-SCOTT" />
 		<classes>
 			<class name="wat.WAT102"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_RESEARCHER_ID_Functionality" preserve-order="true">
 		<parameter name="lastName" value="BENZ-SCOTT" />
 		<classes>
 			<class name="wat.WAT103"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_RESEARCHER_ID_Format" preserve-order="true">
 		<parameter name="lastName" value="BENZ-SCOTT" />
 		<classes>
 			<class name="wat.WAT104"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_ORCID_Format" preserve-order="true">
 		<parameter name="lastName" value="BENZ-SCOTT" />
 		<classes>
 			<class name="wat.WAT105"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Org_Name_Order" preserve-order="true">
 		<classes>
 			<class name="wat.WAT106"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Country_Name_Order" preserve-order="true">
 		<classes>
 			<class name="wat.WAT107"></class>
 		</classes>
 	</test>
-		
+
 	<test name="WAT_Static_text_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT108"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_remove_altName_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT109"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_orcid_btn_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT110"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_add_alt_btn_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT111"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_nameSearch_default_tab" preserve-order="true">
 		<classes>
 			<class name="wat.WAT112"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Sub_text_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT113"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Drill_down_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT114"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Find_btn_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT115"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Find_btn_2_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT116"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Find_btn_3_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT117"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Ignore_Org_Filter_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT118"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Alt_Name_Link_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT119"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Sort_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT120"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Sort_Default_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT121"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test_Org_name_in_Author_card" preserve-order="true">
 		<classes>
 			<class name="wat.WAT122"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_author_search_ballon_popover" preserve-order="true">
 		<classes>
 			<class name="wat.WAT150"></class>
 		</classes>
 	</test>
-	
-	<test name="WAT_author_search_ballon_popover_close" preserve-order="true">
+
+	<test name="WAT_author_search_ballon_popover_close"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT151"></class>
 		</classes>
 	</test>
-	
-	<test name="WAT_author_search_ballon_popover_close_outside_click" preserve-order="true">
+
+	<test name="WAT_author_search_ballon_popover_close_outside_click"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT152"></class>
 		</classes>
 	</test>
-	
-	<test name="WAT_author_search_ballon_popover_header_contet" preserve-order="true">
-		<parameter name="header" value="Web of Science article groups"/>
+
+	<test name="WAT_author_search_ballon_popover_header_contet"
+		preserve-order="true">
+		<parameter name="header" value="Web of Science article groups" />
 		<parameter name="content"
-	value="An article group is a set of articles authored by the same person. Article groups are generated by a proprietary algorithm that identifies and weighs shared data elements such as author names, and citing and cited author relationships." />
+			value="An article group is a set of articles authored by the same person. Article groups are generated by a proprietary algorithm that identifies and weighs shared data elements such as author names, and citing and cited author relationships." />
 		<classes>
 			<class name="wat.WAT153"></class>
 		</classes>
 	</test>
-	
+
 	<test name="RID_Search" preserve-order="true">
 		<parameter name="rid" value="A-9832-2009" />
 		<classes>
 			<class name="wat.WAT154"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Invalid_RID_Search_Error_Msgs" preserve-order="true">
 		<parameter name="rid1" value="Invalid RID" />
-		<parameter name="errMsg1" value="Please enter a valid RID, or try searching by ORCiD or Name." />
+		<parameter name="errMsg1"
+			value="Please enter a valid RID, or try searching by ORCiD or Name." />
 		<parameter name="rid2" value="B-1234-2007" />
-		<parameter name="errMsg2" value="We couldn't find a match. Please enter a valid RID, or try searching by ORCiD or Name." />
+		<parameter name="errMsg2"
+			value="We couldn't find a match. Please enter a valid RID, or try searching by ORCiD or Name." />
 		<parameter name="rid3" value="A-9832-2006" />
 		<classes>
 			<class name="wat.WAT155"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Invalid_ORCID_Search_Error_Msgs" preserve-order="true">
 		<parameter name="orcid1" value="Invalid ORCRID" />
-		<parameter name="errMsg1" value="Please enter a valid ORCiD, or try searching by RID or Name." />
+		<parameter name="errMsg1"
+			value="Please enter a valid ORCiD, or try searching by RID or Name." />
 		<parameter name="orcid2" value="0000-0001-5727-2427" />
-		<parameter name="errMsg2" value="We couldn't find a match. Please enter a valid ORCiD, or try searching by RID or Name." />
+		<parameter name="errMsg2"
+			value="We couldn't find a match. Please enter a valid ORCiD, or try searching by RID or Name." />
 		<classes>
 			<class name="wat.WAT156"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Search_Resutls_Select_All_Morethan_50" preserve-order="true">
 		<parameter name="lastName" value="WANG" />
 		<parameter name="countryName" value="USA" />
@@ -883,80 +900,89 @@
 			<class name="wat.WAT158"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Search_Resutls_Select_All_only_1" preserve-order="true">
 		<parameter name="lastName" value="JOHN B. F." />
 		<classes>
 			<class name="wat.WAT159"></class>
 		</classes>
-	</test> 
-	
-	<test name="Search_Results_dept_in_each_author_cluster" preserve-order="true">
+	</test>
+
+	<test name="Search_Results_dept_in_each_author_cluster"
+		preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
 			<class name="wat.WAT160"></class>
 		</classes>
 	</test>
 
-	<test name="combined_author_default_avatar_and_fullname" preserve-order="true">
+	<test name="combined_author_default_avatar_and_fullname"
+		preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
 			<class name="wat.WAT161"></class>
 		</classes>
 	</test>
-	
+
 	<test name="combined_author_org_and_sub-org" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
 			<class name="wat.WAT162"></class>
 		</classes>
 	</test>
-	
+
 	<test name="combined_author_location" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
 			<class name="wat.WAT163"></class>
 		</classes>
 	</test>
-	
-	 <test name="combined_author_orcid_functionality" preserve-order="true">
+
+	<test name="combined_author_orcid_functionality" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
 			<class name="wat.WAT164"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="combined_author_rid_functionality" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
 			<class name="wat.WAT165"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test_WelcomeNote" preserve-order="true">
 		<classes>
 			<class name="wat.WAT123"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="Test_Static_Publication_metadata" preserve-order="true">
-	<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
 			<class name="wat.WAT124"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test_Default_sort" preserve-order="true">
-	<parameter name="lastName" value="TRANQUADA" />
-	<classes>
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
 			<class name="wat.WAT125"></class>
 		</classes>
-	</test> 
-	
-	<test name="Test_Filtered_unfiltered_seperation_line_for_author_name" preserve-order="true">
-	<classes>
-			<class name="wat.WAT126"></class>
-	</classes>
 	</test>
-	
+
+	<test name="Test_Filtered_unfiltered_seperation_line_for_author_name"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT126"></class>
+		</classes>
+	</test>
+
+	<test name="Test_Filtered_unfiltered_seperation_line_for_Journal"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT127"></class>
+		</classes>
+	</test>
 </suite>
