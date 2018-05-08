@@ -1385,16 +1385,20 @@ public enum OnePObjectMap {
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_ORG_XPATH("//button[contains(text(),'Organizations')]/following-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_1st_ORG_XPATH("//div[button[contains(text(),'Organizations')]]/descendant::span[2]"),
 	WAT_SEARCH_RESULTS_FILTER_2nd_ORG_XPATH("//div[button[contains(text(),'Organizations')]]/descendant::span[5]"),
+	WAT_SEARCH_RESULTS_FILTER_1st_ORG_TEXT_XPATH("//div[button[contains(text(),'Organizations')]]/descendant::span[2]/preceding-sibling::input"),
 	
 	WAT_SEARCH_RESULTS_FILTER_NAME_XPATH("//button[contains(text(),'Author name')]"),
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_NAME_XPATH("//button[contains(text(),'Author name')]/following-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_1st_NAME_XPATH("//div[button[contains(text(),'Author name')]]/descendant::span[2]"),
 	WAT_SEARCH_RESULTS_FILTER_2nd_NAME_XPATH("//div[button[contains(text(),'Author name')]]/descendant::span[5]"),
+	WAT_SEARCH_RESULTS_FILTER_1st_NAME_TEXT_XPATH("//div[button[contains(text(),'Author name')]]/descendant::span[2]/following-sibling::span"),
+	WAT_SEARCH_RESULTS_FILTER_SELECTED_AUTHOR_NAME_XPATH("//div[button[contains(text(), 'Author name')]]/descendant::div[@class='wui-divider']/preceding-sibling::div"),
 	
 	WAT_SEARCH_RESULTS_FILTER_SUBCAT_XPATH("//button[contains(text(),'Subject categories')]"),
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_SUBCAT_XPATH("//button[contains(text(),'Subject categories')]/following-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_1st_SUBCAT_XPATH("//div[button[contains(text(),'Subject categories')]]/descendant::span[2]"),
 	WAT_SEARCH_RESULTS_FILTER_2nd_SUBCAT_XPATH("//div[button[contains(text(),'Subject categories')]]/descendant::span[5]"),
+	WAT_SEARCH_RESULTS_FILTER_1st_NAME_SUBCAT_XPATH("//div[button[contains(text(),'Subject categories')]]/descendant::span[2]/preceding-sibling::input"),
 	
 	WAT_SEARCH_RESULTS_COUNT_XPATH("//h2[contains(text(),'result')]"),
 	
