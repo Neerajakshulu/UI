@@ -999,4 +999,11 @@
 			<class name="wat.WAT129"></class>
 		</classes>
 	</test>
+	
+	<test name="Author_Name_Filtered_Unfiltered_Order"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT130"></class>
+		</classes>
+	</test>
 </suite>
