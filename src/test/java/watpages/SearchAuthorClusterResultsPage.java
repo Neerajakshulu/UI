@@ -3,7 +3,6 @@ package watpages;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
@@ -16,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 
@@ -380,6 +380,38 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			}
 		}
 	}
+	
+	/**
+	 * Method for Verify SortedBy Dropdown operations 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void sortedByDropddown(String dropDownName,ExtentTest test) throws Exception {
+		waitForauthorClusterSearchResults(test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_RELAVANCE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_DROPDOWN_MENU_CSS);
+		List<WebElement> ddValues = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_DROPDOWN_MENU_CSS)
+				.findElements(By.tagName("li"));
+		for(WebElement value:ddValues){
+			logger.info("Dropdown name-->"+value.getText());
+			if(value.getText().equals(dropDownName)){
+				value.click();
+				BrowserWaits.waitTime(3);
+				break;
+			}
+		}
+		
+		String ddHeader = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_RELAVANCE_CSS).getText();
+		logger.info("Dropdown Header Name-->"+ddHeader);
+		if(!(ddHeader.contains(dropDownName) || ddHeader.contains("Relevance"))){
+			test.log(LogStatus.FAIL, "Sorted by Dropdown not updated with selected dropdown option value");
+			throw new Exception("Sorted by Dropdown not updated with selected dropdown option value");
+		}
+
+	}
+
 
 	/**
 	 * Method for Verify sorted by relevance count
@@ -408,7 +440,87 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			val2 = sortByRelevance.get(i);
 		}
 	}
+	
+	
+	/**
+	 * Method for Verify sorted by Publication Years Newest First
+	 * 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void sortedByPublicationYearsNewestFirst(ExtentTest test) throws Exception {
+		List<WebElement> searchResults = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_PUBLICATION_YEARS_NEWEST_FIRST_CSS);
+		logger.info("Before scrolling search results count-->" + searchResults.size());
+		pf.getBrowserActionInstance(ob).scrollingToElement(searchResults.get(searchResults.size() - 1));
+		waitForAjax(ob);
+		searchResults = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_PUBLICATION_YEARS_NEWEST_FIRST_CSS);
 
+		logger.info("After scrolling search results count-->" + searchResults.size());
+		int nextYear = 0;
+		int year1 = getYear(searchResults.get(0).getText());
+		int year2 = getYear(searchResults.get(1).getText());
+		logger.info("Year 1-->" + year1);
+		logger.info("Year 2-->" + year2);
+
+		for (int i = 2; i < searchResults.size(); i++) {
+			if (!(year1 >= year2)) {
+				test.log(LogStatus.FAIL, "Publicaiton Years Newest First not displayed");
+				throw new Exception("Publicaiton Years Newest First not displayed");
+			 }//if
+			nextYear = getYear(searchResults.get(i).getText());
+			year1 = year2;
+			year2 = nextYear;
+			logger.info("nextYear-->" + nextYear);
+		} //for
+	}
+	
+	
+	/**
+	 * Method for Verify sorted by Publication Years Newest First
+	 * 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void sortedByPublicationYearsOldestFirst(ExtentTest test) throws Exception {
+		List<WebElement> searchResults = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_PUBLICATION_YEARS_NEWEST_FIRST_CSS);
+		logger.info("Before scrolling search results count-->" + searchResults.size());
+		pf.getBrowserActionInstance(ob).scrollingToElement(searchResults.get(searchResults.size() - 1));
+		waitForAjax(ob);
+		searchResults = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_PUBLICATION_YEARS_NEWEST_FIRST_CSS);
+
+		logger.info("After scrolling search results count-->" + searchResults.size());
+		int nextYear = 0;
+		int year1 = getYear(searchResults.get(0).getText());
+		int year2 = getYear(searchResults.get(1).getText());
+		logger.info("Year 1-->" + year1);
+		logger.info("Year 2-->" + year2);
+
+		for (int i = 2; i < searchResults.size(); i++) {
+			if (!(year1 <= year2)) {
+				test.log(LogStatus.FAIL, "Publicaiton Years Oldest First not displayed");
+				throw new Exception("Publicaiton Years Oldest First not displayed");
+			 }//if
+			nextYear = getYear(searchResults.get(i).getText());
+			year1 = year2;
+			year2 = nextYear;
+			logger.info("nextYear-->" + nextYear);
+		} //for
+	}
+	
+	public int getYear(String yearValue){
+		int year=0;
+		if(yearValue.contains("-")){
+			String years[]=yearValue.split("\\-");
+			 year=Integer.parseInt(years[1].trim());
+		} else {
+			year=Integer.parseInt(yearValue.trim());
+		}
+		return year;
+	}
 	/**
 	 * Method for Verify Sub-org field displayed in search results page
 	 * 

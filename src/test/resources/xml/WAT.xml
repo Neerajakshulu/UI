@@ -953,6 +953,37 @@
 		</classes>
 	</test>
 
+	<test name="author_search_results_sort_by_relevance_from_other_sort"
+		preserve-order="true">
+		<parameter name="lastName" value="MURTHY" />
+		<parameter name="countryName" value="INDIA" />
+		<parameter name="orgName" value="ANDHRA UNIV" />
+		<classes>
+			<class name="wat.WAT166"></class>
+		</classes>
+	</test>
+
+	<test name="author_search_results_sort_by_publication_years_newest_first"
+		preserve-order="true">
+		<parameter name="lastName" value="MURTHY" />
+		<parameter name="countryName" value="INDIA" />
+		<parameter name="orgName" value="ANDHRA UNIV" />
+		<classes>
+			<class name="wat.WAT167"></class>
+		</classes>
+	</test>
+
+	<test name="author_search_results_sort_by_publication_years_oldest_first"
+		preserve-order="true">
+		<parameter name="lastName" value="MURTHY" />
+		<parameter name="countryName" value="INDIA" />
+		<parameter name="orgName" value="ANDHRA UNIV" />
+		<classes>
+			<class name="wat.WAT168"></class>
+		</classes>
+	</test>
+	
+
 	<test name="Test_WelcomeNote" preserve-order="true">
 		<classes>
 			<class name="wat.WAT123"></class>
