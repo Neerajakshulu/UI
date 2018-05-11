@@ -521,6 +521,29 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		}
 		return year;
 	}
+	
+	/**
+	 * Method for Verify sorted by Publication Years Newest First
+	 * 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void sortedByDropdownOptions(String ddOptions,ExtentTest test) throws Exception {
+		String dropdownOptions[]=ddOptions.split("\\|");
+		waitForauthorClusterSearchResults(test);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_RELAVANCE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_DROPDOWN_MENU_CSS);
+		List<WebElement> ddValues = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_DROPDOWN_MENU_CSS)
+				.findElements(By.tagName("li"));
+		for(int i=0;i<ddValues.size();i++){
+			logger.info("Dropdown option-->"+ddValues.get(i).getText());
+			if(!ddValues.get(i).getText().equals(dropdownOptions[i])){
+				throw new Exception("Sorted By dropdown having unsupported options ");
+			}
+		}
+	}
+	
 	/**
 	 * Method for Verify Sub-org field displayed in search results page
 	 * 

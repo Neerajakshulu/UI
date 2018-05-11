@@ -983,6 +983,15 @@
 		</classes>
 	</test>
 	
+	<test name="author_search_results_sort_by_dropdown_options" preserve-order="true">
+		<parameter name="lastName" value="MURTHY" />
+		<parameter name="countryName" value="INDIA" />
+		<parameter name="orgName" value="ANDHRA UNIV" />
+		<parameter name="dropdownOptions"
+	value="Relevance (Top hits, aggregated by count)|Publication years (newest first)|Publication years (oldest first)/"></parameter>
+		<classes>
+		</classes>
+	</test>
 
 	<test name="Test_WelcomeNote" preserve-order="true">
 		<classes>
