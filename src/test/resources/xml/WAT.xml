@@ -16,7 +16,8 @@
 	<parameter name="CountryName2" value="USA"></parameter>
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
- 	<test name="WAT_Login" preserve-order="true">
+
+  	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -1000,10 +1001,17 @@
 		</classes>
 	</test>
 	
-	<test name="Author_Name_Filtered_Unfiltered_Order"
+	<test name="Test_Author_Name_Filtered_Unfiltered_Order"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT130"></class>
+		</classes>
+	</test> 
+	
+	<test name="Test_Author_Name_Filter_DeSelection_Location"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT131"></class>
 		</classes>
 	</test>
 </suite>

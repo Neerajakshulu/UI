@@ -1395,7 +1395,7 @@ public enum OnePObjectMap {
 	WAT_SEARCH_RESULTS_FILTER_2nd_NAME_XPATH("//div[button[contains(text(),'Author name')]]/descendant::span[5]"),
 	WAT_SEARCH_RESULTS_FILTER_1st_NAME_TEXT_XPATH("//div[button[contains(text(),'Author name')]]/descendant::span[2]/following-sibling::span"),
 	WAT_SEARCH_RESULTS_FILTER_SELECTED_AUTHOR_NAME_XPATH("//div[button[contains(text(), 'Author name')]]/descendant::div[@class='wui-divider']/preceding-sibling::div"),
-	WAT_SEARCH_RESULTS_FILTER_UNSELECTED_AUTHOR_NAME_XPATH("//div[button[contains(text(),'Author name')]]/descendant::div[@class='wat-refine-filter-option-container']"),
+	WAT_SEARCH_RESULTS_FILTER_UNSELECTED_AUTHOR_NAME_XPATH("//div[button[contains(text(),'Author name')]]/descendant::div[@class='wat-refine-filter-option-container']/descendant::ng-transclude/span"),
 	
 	WAT_SEARCH_RESULTS_FILTER_SUBCAT_XPATH("//button[contains(text(),'Subject categories')]"),
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_SUBCAT_XPATH("//button[contains(text(),'Subject categories')]/following-sibling::div"),
