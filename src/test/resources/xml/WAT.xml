@@ -17,7 +17,7 @@
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
 
-  	<test name="WAT_Login" preserve-order="true">
+   	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -1012,6 +1012,13 @@
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT131"></class>
+		</classes>
+	</test>
+	
+	<test name="Test_Divider_Between_Selections"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT132"></class>
 		</classes>
 	</test>
 </suite>
