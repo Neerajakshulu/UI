@@ -209,7 +209,7 @@ public class LoginTR extends TestBase {
 		driver.findElement(By.id(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME.toString())).sendKeys(username);
 		driver.findElement(By.id(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_NAME.toString())).sendKeys(pwd);
 		// BrowserWaits.waitTime(2);
-		driver.findElement(By.id(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_NAME.toString())).click();
+		driver.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_NAME.toString())).click();
 	}
 
 	public static WebDriver launchBrowser() throws Exception {

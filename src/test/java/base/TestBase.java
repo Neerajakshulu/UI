@@ -893,8 +893,8 @@ public class TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+			//ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
+			//.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(
@@ -1967,8 +1967,8 @@ public class TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+//			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
+//			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(
@@ -2057,8 +2057,8 @@ public class TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+//			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
+//			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(
@@ -2112,8 +2112,8 @@ public class TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+//			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
+//			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(

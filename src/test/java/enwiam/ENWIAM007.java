@@ -68,8 +68,8 @@ public class ENWIAM007 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitUntilText("Sign up");
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+//			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
+//			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys("ramesh.lalam21@gmail.com");
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
 			waitUntilText("Already have an account?");

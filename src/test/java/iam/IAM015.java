@@ -60,8 +60,8 @@ public class IAM015 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+//			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
+//			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys("trloginid@gmail.com");
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
 			waitUntilText("Already");
