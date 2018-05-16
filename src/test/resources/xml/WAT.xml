@@ -267,7 +267,7 @@
 		<parameter name="lastName" value="VENUGOPALACHAR" />
 		<classes>
 			<class name="wat.WAT35"></class>
-		</classes>
+		</classes>     
 	</test>
 
 	<test name="search_results_tab_highlight" preserve-order="true">
