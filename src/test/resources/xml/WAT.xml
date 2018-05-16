@@ -261,7 +261,6 @@
 		</classes>
 	</test>
 
-
 	<test name="navigate_to_name_search_results_from_record_page"
 		preserve-order="true">
 		<parameter name="lastName" value="VENUGOPALACHAR" />
