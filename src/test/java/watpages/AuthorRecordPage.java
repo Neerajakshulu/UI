@@ -372,19 +372,4 @@ public class AuthorRecordPage extends TestBase {
 		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RESEARCHER_XPATH).getText().contains(RESEARCHERID), "User not taken to the RESEARCHER ID page of the Author");
 		test.log(LogStatus.PASS, "User is taken to the RESEARCHER ID page of the Author successfully");
 	}
-	
-	/**Method for to check ORCiD Functionality
-	 * @throws Exception
-	 * @throws InterruptedException
-	 *//*
-	@SuppressWarnings("static-access")
-	public void orcid(ExtentTest test) throws Exception, InterruptedException {
-		String ORCID =pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LINK_XPATH).getText();
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_LINK_XPATH);
-		pf.getBrowserWaitsInstance(ob).waitTime(3);
-		pf.getBrowserActionInstance(ob).switchToNewWindow(ob);
-		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_ID).getText().contains(ORCID), "User not taken to the ORCID page of the Author");
-		test.log(LogStatus.PASS, "User is taken to the ORCID page of the Author successfully");
-	}*/
-	
 }
