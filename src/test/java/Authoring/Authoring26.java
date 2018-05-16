@@ -48,8 +48,8 @@ public class Authoring26 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -63,8 +63,8 @@ public class Authoring26 extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			// ob.navigate().to(host);
-			ob.get(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME16", "PASSWORD16");
 			selectAnArticle();
 			/*
@@ -73,8 +73,8 @@ public class Authoring26 extends TestBase {
 			 */
 			waitForAllElementsToBePresent(ob,
 					By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
-			List<WebElement> commentsList = ob
-					.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
+			List<WebElement> commentsList = ob.findElements(By
+					.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 			try {
 
 				Assert.assertTrue(commentsList.size() < 10);
@@ -86,19 +86,25 @@ public class Authoring26 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Cancel_Flag_validation_for_comments_failed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Cancel_Flag_validation_for_comments_failed")));// screenshot
 			}
 
 			try {
 				ob.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-				WebElement more = ob.findElement(
-						By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS.toString()));
+				WebElement more = ob.findElement(By
+						.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS.toString()));
 				Assert.assertTrue(more.isDisplayed());
 				test.log(LogStatus.FAIL, "More button is displayed for comments less than 10");
 				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Cancel_Flag_validation_for_comments_failed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Cancel_Flag_validation_for_comments_failed")));// screenshot
 
 			} catch (Throwable t) {
 				test.log(LogStatus.PASS, "More button is not displayed for comments less than 10");
@@ -118,8 +124,11 @@ public class Authoring26 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
@@ -138,25 +147,27 @@ public class Authoring26 extends TestBase {
 			String strCmntCt;
 			boolean isFound = false;
 			for (int i = (itr - 1); i < itemList.size(); i++) {
-				List<WebElement> results=itemList.get(i).findElements(
+				List<WebElement> results = itemList.get(i).findElements(
 						By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()));
-				logger.info("comments count in each section-->"+results.size());
+				logger.info("comments count in each section-->" + results.size());
 				pf.getBrowserActionInstance(ob).scrollToElement(itemList.get(i));
-				if(results.size()!=0){
-				strCmntCt = itemList.get(i)
-						.findElement(
-								By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
-						.getText().replaceAll(",", "").trim();
-				commentsCount = Integer.parseInt(strCmntCt);
-				
-				if (commentsCount < 10) {
-					jsClick(ob, itemList.get(i)
-							.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
+				if (results.size() != 0) {
+					strCmntCt = itemList
+							.get(i)
+							.findElement(
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
+							.getText().replaceAll(",", "").trim();
+					commentsCount = Integer.parseInt(strCmntCt);
 
-					isFound = true;
-					break;
-				}
-				
+					if (commentsCount < 10) {
+						jsClick(ob,
+								itemList.get(i).findElement(
+										By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
+
+						isFound = true;
+						break;
+					}
+
 				}
 			}
 
