@@ -35,6 +35,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 // import util.ExtentManager;
@@ -455,6 +456,8 @@ public class TestBase {
 			desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
 			desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); //
 			desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
+			if (System.getenv("SELENIUM_BROWSER").trim().equalsIgnoreCase("internet explorer"))  //to overcome delete cookies producing error in IEBrowser
+				desiredCapabilities.setCapability("ie.ensureCleanSession", true);
 			desiredCapabilities.setCapability("name", this.getClass().getSimpleName());
 
 			if (StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")) {
@@ -786,8 +789,13 @@ public class TestBase {
 
 	// Clearing all cookies
 	public void clearCookies() {
-
+	    if(!getBrowserNameonVM().trim().equalsIgnoreCase("internet explorer"))
 		ob.manage().deleteAllCookies();
+	}
+	
+	public String getBrowserNameonVM() {
+		Capabilities cap = ((RemoteWebDriver) ob).getCapabilities();
+	    return cap.getBrowserName().toLowerCase();
 	}
 
 	// logging in
