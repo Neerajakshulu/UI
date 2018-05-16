@@ -2149,7 +2149,7 @@ public class TestBase {
 				if (i > 0) {
 					jiraid += TOKENIZER_DOUBLE_PIPE;
 				}
-				jiraid += "<a href=\"http://ent.jira.int.thomsonreuters.com/browse/" + ids[i] + "\" target=\"_blank\">"
+				jiraid += "<a href=\"https://jira.clarivate.io/browse/" + ids[i] + "\" target=\"_blank\">"
 						+ ids[i] + "</a>";
 			}
 		}
