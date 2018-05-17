@@ -1416,6 +1416,20 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_DEPT_CSS("div[class='wui-card__body-content'] div[class='wat-search-results-meta-affiliation ng-binding']"),
 	WAT_AUTHOR_SEARCH_RESULTS_ORG_CSS("div[class='wui-card__body-content'] div[class='wat-search-results-meta-contact ng-binding']"),
 	
+	WAT_AUTHOR_RECORD_PAGE_SUGGEST_UPDATE_BTN_XPATH("//button[contains(text(),'Suggest updates')]"),
+	WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH("//button[contains(text(),'Submit updates')]"),
+	WAT_AUTHOR_RECORD_PAGE_CANCEL_UPDATE_BTN_XPATH("//button[contains(text(),'Cancel')]"),
+	WAT_AUTHOR_RECORD_PAGE_ACCEPT_FIRST_RECOMMENDATION_XPATH("(//button[@aria-label='Accept'])[1]"),
+	WAT_AUTHOR_RECORD_PAGE_REJECT_FIRST_RECOMMENDATION_XPATH("(//button[@aria-label='Reject')[1]"),
+	WAT_AUTHOR_RECORD_PAGE_RECOMMENDATION_PUBLICATION_ADDED_COUNT_XPATH("(//div[@class='wui-subtitle wat-author-record-recommended-publications-added-count ng-binding ng-scope'])[2]"),
+	WAT_AUTHOR_RECORD_PAGE_RECOMMENDATION_BOX_PUBLICATION_ADDED_TEXT_XPATH("//div[contains(text(),'Publications Added')]"),
+	WAT_AUTHOR_RECORD_PAGE_FIRST_RECOMMENDATION_PUBLICATION_NAME_XPATH("(//div[div[button[@aria-label='Accept']]])[1]/following-sibling::wat-author-record-publication/div/div[1]"),
+	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_RESET_LINK_XPATH("//button[contains(text(),'Reset')]"),
+	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_AUTHOR_NAME_XPATH("//button[contains(text(),'Author name')]"),
+	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_JOURNAL_NAME_XPATH("//button[contains(text(),'Journals')]"),
+	WAT_AUTHOR_RECORD_PAGE_RECOMMENDATION_BOX_TEXT_XPATH("//div[contains(text(),'Do some of these records belong to the same author?')]"),
+	
+	
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
 	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),
 	DRA_SSO_LOGIN_PAGE_LOGIN_BUTTON_CSS("input[class='btn btn-primary btn-lg']"),
