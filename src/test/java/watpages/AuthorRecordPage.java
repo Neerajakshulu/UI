@@ -2,7 +2,6 @@ package watpages;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
@@ -407,5 +406,118 @@ public class AuthorRecordPage extends TestBase {
 		}
 		
     }
+	
+	/**
+	 * Method for check Suggest update button is displayed in Author Record page
+	 * 
+	 * @throws Exception
+	 */
+	public void checkSuggestUpdateBtn() throws Exception {
+		String BtnName = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUGGEST_UPDATE_BTN_XPATH).getText();
+		logger.info("Actual Value : " + BtnName);
+		if (!BtnName.equals("Suggest updates")) {
+			throw new Exception("Suggest updates button is not displayed in author record page");
+		}
+	}
+
+	/**
+	 * Method to verify elements to be present in curation mode
+	 * 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void verifyInCurationModeElements(ExtentTest test) throws Exception {
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_PUBLICATION_REMOVE_CHKBOX_XPATH)
+				.isDisplayed(), "Remove Publication button is not displayed");
+		test.log(LogStatus.INFO, "Remove Publication button is displayed for each publication");
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH).isDisplayed(),
+				"Submit Update button is not displayed");
+		test.log(LogStatus.INFO, "Submit Update button is displayed");
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_CANCEL_UPDATE_BTN_XPATH).isDisplayed(),
+				"Cancel button is not displayed");
+		test.log(LogStatus.INFO, "Cancel button is displayed");
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_RESET_LINK_XPATH).isDisplayed(),
+				"Reset link is not displayed");
+		test.log(LogStatus.INFO, "Reset link is displayed");
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_AUTHOR_NAME_XPATH).isDisplayed(),
+				"Author Nmae filter is not displayed");
+		test.log(LogStatus.INFO, "Author Name filter is displayed");
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_JOURNAL_NAME_XPATH).isDisplayed(),
+				"Journal Filter is not displayed");
+		test.log(LogStatus.INFO, "Journal Filter is displayed");
+	}
+
+	/**
+	 * Method to enter curation mode through Suggest Update button
+	 * 
+	 * @throws Exception
+	 *
+	 */
+	public void getIntoCurationThruSuggestUpdateBtn(ExtentTest test) throws Exception {
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUGGEST_UPDATE_BTN_XPATH)
+				.click();
+		verifyInCurationModeElements(test);
+		test.log(LogStatus.PASS, "Entered Curation mode through the Suggest Update button");
+	}
+
+	/**
+	 * Method to enter curation mode through accept recommendations button
+	 * 
+	 * @throws Exception
+	 * 
+	 */
+	public void getIntoCurationThruAcceptRecommendation(ExtentTest test) throws Exception {
+		pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ACCEPT_FIRST_RECOMMENDATION_XPATH).click();
+		verifyInCurationModeElements(test);
+		test.log(LogStatus.PASS, "Entered Curation mode through accept Recommendation");
+	}
+
+	/**
+	 * Method to enter curation mode through reject recommendations button
+	 * 
+	 * @throws Exception
+	 * 
+	 */
+	public void getIntoCurationThruRejectRecommendation(ExtentTest test) throws Exception {
+		pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_REJECT_FIRST_RECOMMENDATION_XPATH).click();
+		verifyInCurationModeElements(test);
+		test.log(LogStatus.PASS, "Entered Curation mode through reject Recommendation");
+	}
+
+	/**
+	 * Method to enter curation mode for single author
+	 * 
+	 * @throws Exception
+	 * @throws InterruptedException
+	 */
+	public void getintoCuration(ExtentTest test, String CurarionVia) throws Exception {
+		checkSuggestUpdateBtn();
+		test.log(LogStatus.PASS, "Suggest updates button is displayed in author record page");
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_PUBLICATION_REMOVE_CHKBOX_XPATH)
+				.isDisplayed()) {
+			throw new Exception("Remove Publication button displayed even before getting into curation mode");
+		}
+		switch (CurarionVia) {
+		case "SuggestUpdate":
+			getIntoCurationThruSuggestUpdateBtn(test);
+			break;
+		case "AcceptRecommendation":
+			getIntoCurationThruAcceptRecommendation(test);
+			break;
+		case "RejectRecommendation":
+			getIntoCurationThruRejectRecommendation(test);
+			break;
+		 default : 
+			 test.log(LogStatus.WARNING, "None of the curation mode executed");
+		}
+	}
 	
 }
