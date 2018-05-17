@@ -1,5 +1,6 @@
 package wat;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -13,13 +14,13 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class to Verify that system must display a "Suggest updates" button, which
- * when clicked will enter into curation mode.
+ * Class to Verify that when User clicks the Suggest updates button -System must
+ * display the “Submit updates” button (gray version)
  * 
  * @author UC225218
  *
  */
-public class WAT133 extends TestBase {
+public class WAT134 extends TestBase {
 
 	static int status = 1;
 
@@ -100,8 +101,8 @@ public class WAT133 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that system must display a "Suggest updates" button,
-	 * which when clicked will enter into curation mode.
+	 * Method to Verify that when User clicks the Suggest updates button -System
+	 * must display the “Submit updates” button (gray version)
 	 * 
 	 * @param LastName,
 	 *            FirstName, CountryName, OrgName
@@ -116,10 +117,16 @@ public class WAT133 extends TestBase {
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 			test.log(LogStatus.INFO, "Getting into curation mode by clicking Suggest Updates button");
-			pf.getAuthorRecordPage(ob).getintoCuration(test, "SuggestUpdate");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUGGEST_UPDATE_BTN_XPATH)
+					.click();
+			Assert.assertTrue(!
+					pf.getBrowserActionInstance(ob)
+							.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH).isEnabled(),
+					"Submit Updates button is enabled even before any changes are done in Curation mode");
+			test.log(LogStatus.PASS, "Submit Updates button is not enabled(Greyed out) before any changes are done in Curation mode");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Unable to get into Curation mode", "Curation_issue");
+			logFailureDetails(test, t, "Submit Updates button is not enabled(Greyed out) before any changes are done in Curation mode", "Curation_issue");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

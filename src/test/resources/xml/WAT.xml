@@ -1067,4 +1067,11 @@
 			<class name="wat.WAT133"></class>
 		</classes>
 	</test>
+	
+		<test name="Test_Suggest_Update_btn_functionality"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT134"></class>
+		</classes>
+	</test>
 </suite>
