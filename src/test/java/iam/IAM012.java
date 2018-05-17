@@ -90,7 +90,7 @@ public class IAM012 extends TestBase {
 					.findElements(By.xpath(OR.getProperty("reg_passwordStrength_tickMark_labels")));
 			logger.info("TickMark Size : " + tm_list.size());
 			List<WebElement> listOfTags = ob
-					.findElements(By.xpath("(//div[@class='col-xs-12 password-validator__container'])[2]/div"));
+					.findElements(By.xpath("(//div[@class='col-xs-12 password-validator__container ng-scope'])[2]/div"));
 			logger.info("Total Tags : " + listOfTags.size());
 
 			if (listOfTags.size() == tm_list.size()) {
@@ -105,7 +105,11 @@ public class IAM012 extends TestBase {
 					ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 					ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("behl");
 					ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
+				}else{
+					test.log(LogStatus.FAIL, "Locator issue");
 				}
+			}else{
+				test.log(LogStatus.PASS, "Total TickMarks : "+tm_list.size());
 			}
 			closeBrowser();
 

@@ -186,7 +186,7 @@ public class IAM013 extends TestBase {
 	private void termofUserAndPrivacyStatement() throws Exception {
 
 		try {
-			clearCookies();
+			//clearCookies();
 
 			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("reg_TermsOfUse_link")), 30);
 
