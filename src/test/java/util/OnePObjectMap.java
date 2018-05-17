@@ -1428,7 +1428,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_AUTHOR_NAME_XPATH("//button[contains(text(),'Author name')]"),
 	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_JOURNAL_NAME_XPATH("//button[contains(text(),'Journals')]"),
 	WAT_AUTHOR_RECORD_PAGE_RECOMMENDATION_BOX_TEXT_XPATH("//div[contains(text(),'Do some of these records belong to the same author?')]"),
-	
+	WAT_AUTHOR_RECORD_RECOMMEND_PAPER_AUTHORS_XPATH("(//div[@class='wui-card__body-content'])[2]/descendant::div[@class='wui-descriptor wat-search-results-publications-authors wat-author-record-publications-authors']"),
 	
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
 	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),

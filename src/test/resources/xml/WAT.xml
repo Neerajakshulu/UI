@@ -989,6 +989,15 @@
 		<parameter name="dropdownOptions"
 	value="Relevance (Top hits, aggregated by count)|Publication years (newest first)|Publication years (oldest first)/"></parameter>
 		<classes>
+		<class name="wat.WAT169"></class>
+		</classes>
+	</test>
+	
+	<test name="author_record_last_name_match_recommend_paper_last_name" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, ROBERT E." />
+		<classes>
+		<class name="wat.WAT170"></class>
 		</classes>
 	</test>
 
