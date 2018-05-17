@@ -455,7 +455,7 @@ public class AuthorRecordPage extends TestBase {
 		Assert.assertTrue(pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_AUTHOR_NAME_XPATH).isDisplayed(),
 				"Author Nmae filter is not displayed");
-		test.log(LogStatus.INFO, "Author Nmae filter is displayed");
+		test.log(LogStatus.INFO, "Author Name filter is displayed");
 		Assert.assertTrue(pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_JOURNAL_NAME_XPATH).isDisplayed(),
 				"Journal Filter is not displayed");
@@ -509,7 +509,7 @@ public class AuthorRecordPage extends TestBase {
 	 */
 	public void getintoCuration(ExtentTest test, String CurarionVia) throws Exception {
 		checkSuggestUpdateBtn();
-		test.log(LogStatus.INFO, "Suggest updates button is displayed in author record page");
+		test.log(LogStatus.PASS, "Suggest updates button is displayed in author record page");
 		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_PUBLICATION_REMOVE_CHKBOX_XPATH)
 				.isDisplayed()) {
 			throw new Exception("Remove Publication button displayed even before getting into curation mode");

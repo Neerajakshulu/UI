@@ -1060,4 +1060,11 @@
 			<class name="wat.WAT132"></class>
 		</classes>
 	</test>
+	
+	<test name="Test_Curation_mode_functionality"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT133"></class>
+		</classes>
+	</test>
 </suite>
