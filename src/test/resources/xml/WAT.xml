@@ -1000,6 +1000,22 @@
 		<class name="wat.WAT170"></class>
 		</classes>
 	</test>
+	
+	<test name="author_record_first_name_not_match_recommend_paper_last_name" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, ROBERT E." />
+		<classes>
+		<class name="wat.WAT171"></class>
+		</classes>
+	</test>
+	
+	<test name="recommend_paper_last_names_match_atleast_one_author_lastname" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, ROBERT E." />
+		<classes>
+		<class name="wat.WAT172"></class>
+		</classes>
+	</test>
 
 	<test name="Test_WelcomeNote" preserve-order="true">
 		<classes>

@@ -408,6 +408,71 @@ public class AuthorRecordPage extends TestBase {
     }
 	
 	/**
+	 * Method for recommend papers authors name should not match author record first name or intials
+	 * @param test
+	 * @throws Exception
+	 */
+	public void recommendPapersAuthorName() throws Exception{
+		
+		metaTitle=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_TITLE_CSS).getText();
+		String[] title=metaTitle.split(" ");
+		logger.info("title 1-->"+title[0]);
+		logger.info("title 11-->"+title[1]);
+		List<WebElement> recommendPapers = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_AUTHORS_XPATH);
+		
+		for(WebElement paper:recommendPapers){
+			if(!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")){
+				paper.findElement(By.tagName("a")).click();
+				waitForAjax(ob);}
+				List<WebElement> authors=paper.findElements(By.tagName("div"));
+				for(WebElement author:authors){
+					logger.info("recommend paper Author Name-->"+author.getText());
+					if(StringUtils.contains(author.getText(), title[1])){
+						throw new Exception("recommend paper author name should not have author record author first name or initilas");
+					}
+				}
+		}
+		
+		
+    }
+	
+	/**
+	 * Method for recommend papers authors name should not match author record first name or intials
+	 * @param test
+	 * @throws Exception
+	 */
+	public void recommendPapersLastnameCount() throws Exception{
+		
+		metaTitle=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_TITLE_CSS).getText();
+		String[] title=metaTitle.split(" ");
+		logger.info("title 1-->"+title[0]);
+		logger.info("title 11-->"+title[1]);
+		List<WebElement> recommendPapers = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_AUTHORS_XPATH);
+		
+		for(WebElement paper:recommendPapers){
+			int count=0;
+			if(!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")){
+				paper.findElement(By.tagName("a")).click();
+				waitForAjax(ob);}
+				List<WebElement> authors=paper.findElements(By.tagName("div"));
+				for(WebElement author:authors){
+					logger.info("recommend paper Author Name-->"+author.getText());
+					if(StringUtils.contains(author.getText(), title[0])){
+						++count;
+					}
+				}
+				logger.info("count match-->"+count);
+				if(count==0){
+					throw new Exception("Recommended papers atleast one last name not matched with author record last name variants");
+				}
+		}
+		
+		
+    }
+	
+	/**
 	 * Method for check Suggest update button is displayed in Author Record page
 	 * 
 	 * @throws Exception

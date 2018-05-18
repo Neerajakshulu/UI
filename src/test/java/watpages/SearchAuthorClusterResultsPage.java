@@ -1050,6 +1050,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 						OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PRIMARY_NAME_CSS.toString()));
 				pf.getBrowserActionInstance(ob).jsClick(ele);		
 				pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
+				break;
 			}
 		}
 	}
