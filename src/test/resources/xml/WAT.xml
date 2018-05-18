@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="WAT" parallel="tests" thread-count="1">
+<suite name="WAT" parallel="tests" thread-count="10">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -15,7 +15,6 @@
 	<parameter name="OrgName1" value="AMITY UNIV" />
 	<parameter name="CountryName2" value="USA"></parameter>
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
-
 
    	<test name="WAT_Login" preserve-order="true">
 		<classes>
@@ -1093,10 +1092,24 @@
 		</classes>
 	</test>
 	
-		<test name="Test_Suggest_Update_btn_functionality"
+	<test name="Test_Suggest_Update_btn_functionality"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT134"></class>
+		</classes>
+	</test>
+	
+	<test name="Test_Curation_Accept_Recommendation"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT135"></class>
+		</classes>
+	</test>
+	
+	<test name="Test_Curation_Reject_Recommendation"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT136"></class>
 		</classes>
 	</test>
 </suite>
