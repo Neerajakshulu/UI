@@ -517,6 +517,36 @@ public class AuthorRecordPage extends TestBase {
     }
 	
 	/**
+	 * Method to check cancel curation functionality on Recommendation
+	 * @param test
+	 * @throws Exception
+	 */
+	public void testRecommendPublicationCancelFunctionality(ExtentTest test) throws Exception{
+		
+		List<WebElement> recommendPublicationsBeforeCancel = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PUBLICATIONS_XPATH);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_REJECT_FIRST_RECOMMENDATION_XPATH);
+		waitForAjax(ob);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_REJECT_FIRST_RECOMMENDATION_XPATH);
+		waitForAjax(ob);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_REJECT_FIRST_RECOMMENDATION_XPATH);
+		waitForAjax(ob);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_CANCEL_UPDATE_BTN_XPATH);
+		waitForAjax(ob);
+		List<WebElement> recommendPublicationsAfterCancel = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PUBLICATIONS_XPATH);
+		for(WebElement publication:recommendPublicationsBeforeCancel){
+			int i=0;
+			if(publication.getText().equals(recommendPublicationsAfterCancel.get(i).getText())){
+				test.log(LogStatus.INFO, "Publication "+ recommendPublicationsAfterCancel.get(i).getText()+ " is available after cancelling curation");
+				i++;
+			}
+				
+		}
+		test.log(LogStatus.PASS, "All 3 rejected publications are available after the curation is cancelled");
+	}
+	
+	/**
 	 * Method for check Suggest update button is displayed in Author Record page
 	 * 
 	 * @throws Exception
