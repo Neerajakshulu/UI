@@ -1430,6 +1430,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_RECOMMENDATION_BOX_TEXT_XPATH("//div[contains(text(),'Do some of these records belong to the same author?')]"),
 	WAT_AUTHOR_RECORD_RECOMMEND_PAPER_AUTHORS_XPATH("(//div[@class='wui-card__body-content'])[2]/descendant::div[@class='wui-descriptor wat-search-results-publications-authors wat-author-record-publications-authors']"),
 	WAT_AUTHOR_RECORD_RECOMMEND_PUBLICATIONS_XPATH("(//div[@class='wui-card__body-content'])[2]/descendant::div[@class='wui-emphasis wat-search-results-publications-title wat-author-record-publications-title ng-binding']"),
+	//WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH("(//button[@class='wui-icon-only-btn wui-icon-only-btn'])[1]"),
+	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH("(//button[@aria-label='Remove'])[1]"),
 	
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
 	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),
