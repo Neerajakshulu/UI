@@ -1015,7 +1015,14 @@
 		<class name="wat.WAT172"></class>
 		</classes>
 	</test>
-
+	
+	<test name="recommend_paper_last_names_match_atleast_one_author_lastname" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+		<class name="wat.WAT173"></class>
+		</classes>
+	</test>
+	
 	<test name="Test_WelcomeNote" preserve-order="true">
 		<classes>
 			<class name="wat.WAT123"></class>

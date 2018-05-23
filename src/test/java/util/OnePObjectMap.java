@@ -202,7 +202,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CSS("div[class*='ne-profile-flyout__menu'] a[href^='#/profile']"),
 	HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK("Sign out"),
 	HOME_PROJECT_NEON_PROFILE_SIGNOUT_XPATH("//a[@class='ne-profile-flyout__link ne-profile-flyout__link--icon'][2]"),
-	//HOME_PROJECT_NEON_PROFILE_SIGNOUT_XPATH("//a[contains(text(), 'Sign out')]"),
+	// HOME_PROJECT_NEON_PROFILE_SIGNOUT_XPATH("//a[contains(text(), 'Sign out')]"),
 	HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK("Account"),
 	HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK_CSS("a[href='#/account']"),
 	HOME_PROJECT_NEON_PROFILE_HELP_LINK("Help & Feedback"),
@@ -294,9 +294,11 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_POST_WATCH_CSS("button[class='pull-left btn webui-icon-btn watchlist-toggle-button']"),
 	HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS("button[ng-click='WatchlistModal.close()']"),
 	HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS("ul[ng-show='isOpen() && !moveInProgress']"),
-	//HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel' and contains(.,'Discard')]"),
+	// HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel'
+	// and contains(.,'Discard')]"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH("//button[@class='wui-btn wui-btn--secondary ng-binding']"),
-	//HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel' and contains(.,'Keep draft')]"),
+	// HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel'
+	// and contains(.,'Keep draft')]"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH("//button[@class='wui-btn wui-btn--secondary ng-binding ng-scope']"),
 	HOME_PROJECT_NEON_PROFILE_COUNTRY_METADATA_CSS("span[ng-if*='location']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH("//div[contains(@class,'wui-icon-metric') and contains(.,'Comments')]/descendant::span[@class='wui-icon-metric__value ng-binding']"),
@@ -322,7 +324,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class*='ne-user-profile-object-name']"),
 	HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS("button[class*='wui-icon-only-btn ne-action-dropdown__add-button']"),
 
-	//KR
+	// KR
 	HOME_PROJECT_NEON_ADD_VIDEO_BUTTON_XPATH("//i[@class='fa fa-video-camera']"),
 	HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH("//input[contains(@id,'fr-video-by-url-layer-text-')]"),
 	HOME_PROJECT_NEON_INSERT_URL_XPATH("//button[@class='fr-command fr-submit' and @data-cmd='videoInsertByURL']"),
@@ -332,8 +334,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_IMAGE_IN_POST_XPATH("//img[contains(@class,'fr-fic fr-dii')]"),
 
 	HOME_PROJECT_NEON_DELETE_POST_CONFIRMATION_XPATH("//span[text()='This post has been removed by the member.']"),
-	
-	
+
 	HOME_PROJECT_SECTION_HEADING_LABEL("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"),
 	HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH("//div[@class='input-group-btn open']//ul[@class='dropdown-menu']//li[4]//a"),
 	HOME_PROJECT_SEARCH_TEXTBOX_XPATH("//input[@placeholder='Search Articles, Patents, People and Posts']"),
@@ -347,7 +348,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_SEARCH_RESULTS_POSTS_LINK("//ne-post-results//a[@class='ng-binding']"),
 	HOME_PROJECT_COMMENTS_INSERT_LINK_CSS("button[data-cmd='insertLink'] i"),
 	HOME_PROJECT_RECORD_COMMENTS_DIV_CSS("div[class='ne-comment-list__comment-content'] div[class^='ne-comment-list__comment-text'] a"),
-	RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS("button[ng-click='vm.cancelCreate()']"), 
+	RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS("button[ng-click='vm.cancelCreate()']"),
 	// HOME PAGE
 	NEWSFEED_SHAREANIDEA_LINK_XPATH("(//button[@id='posting'])[2]"),
 	NEWSFEED_MOST_VIEWED_ARTICLES_XPATH("//div[@class='wui-card--most-viewed-articles wui-card']"),
@@ -373,7 +374,7 @@ public enum OnePObjectMap {
 	NEWSFEED_NOTIFICATION_LIKE_POST_XPATH("//ne-notification-like[@class='ng-scope']"),
 	NEWSFEED_NOTIFICATION_COMMENT_ON_OWN_POST_XPATH("//ne-notification-document-comment-event[@class='ng-scope']"),
 
-	NEWSFEED_POST_CARD_SECTION_CSS("div[class*='post wui-card']"), 
+	NEWSFEED_POST_CARD_SECTION_CSS("div[class*='post wui-card']"),
 	NEWSFEED_POST_CARD_SECTION_TITLE_CSS("div[class*='wui-card__'] h2[class*='wui-card__heading']"),
 	NEWSFEED_POST_CARD_POST_TITLE_CSS("h3[class*='wui-content-title']"),
 	NEWSFEED_POST_CARD_POST_TITLE_ADD_TO_WATCHLIST_CSS("button[ng-click='WatchButton.openWatchlistSelector()']"),
@@ -420,25 +421,25 @@ public enum OnePObjectMap {
 	SEARCH_RESULT_PAGE_FILTER_LIST_CSS("div[class='panel-heading']"),
 	SEARCH_RESULT_PAGE_FILTER_VALUES_CSS("span[class='wui-checkbox__visible']"),
 	SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS("div[class='col-xs-12'] a"),
-    SEARCH_RESULT_PAGE_LINKS_CSS("div[class='wui-content-title wui-content-title--medium'] a"),
-    SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS("a[data-event-category='searchresult-ck-sort']"),
-    PEOPLE_SEARCH_RESULT_PAGE_COMMENTS_LABEL_CSS("div[class='wui-icon-metric ng-scope']"),
-    PEOPLE_SEARCH_RESULT_PAGE_POST_LABEL_CSS("div[class='wui-metric ng-scope']"),
-  //Added by Ashwini
-  	SEARCH_RESULT_PAGE_FILTER_CHECKBOXES_CSS("span[class='wui-checkbox__visible']"),
-  	SEARCH_RESULT_PAGE_SEARCH_TEXTBOX_CSS("input[type='text']"),
-  	SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH("//a[contains(text(),'Times Cited')]"),
-  	SEARCH_RESULT_PAGE_FILTER_PANELHEADING_CSS("div[class=panel-heading]"),
-  	SEARCH_RESULT_PAGE_FILTERPANEL_CHECKBOXES_XPATH("//span[@class='wui-checkbox__visible']"),
-  	SEARCH_RESULT_PAGE_DETAIL_LINK_XPATH("//div[@class='col-xs-12']/a"),
-  	SEARCH_RESULT_PAGE_ALL_LINK_XPATH("//li[@class='wui-side-menu__list-item ng-scope wui-side-menu__list-item--active']"),
-  	
+	SEARCH_RESULT_PAGE_LINKS_CSS("div[class='wui-content-title wui-content-title--medium'] a"),
+	SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS("a[data-event-category='searchresult-ck-sort']"),
+	PEOPLE_SEARCH_RESULT_PAGE_COMMENTS_LABEL_CSS("div[class='wui-icon-metric ng-scope']"),
+	PEOPLE_SEARCH_RESULT_PAGE_POST_LABEL_CSS("div[class='wui-metric ng-scope']"),
+	// Added by Ashwini
+	SEARCH_RESULT_PAGE_FILTER_CHECKBOXES_CSS("span[class='wui-checkbox__visible']"),
+	SEARCH_RESULT_PAGE_SEARCH_TEXTBOX_CSS("input[type='text']"),
+	SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH("//a[contains(text(),'Times Cited')]"),
+	SEARCH_RESULT_PAGE_FILTER_PANELHEADING_CSS("div[class=panel-heading]"),
+	SEARCH_RESULT_PAGE_FILTERPANEL_CHECKBOXES_XPATH("//span[@class='wui-checkbox__visible']"),
+	SEARCH_RESULT_PAGE_DETAIL_LINK_XPATH("//div[@class='col-xs-12']/a"),
+	SEARCH_RESULT_PAGE_ALL_LINK_XPATH("//li[@class='wui-side-menu__list-item ng-scope wui-side-menu__list-item--active']"),
+
 	// record view page
-    RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
+	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON1_XPATH("//button[@id='deleting']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON1_XPATH("//button[@class='wui-btn wui-btn--primary' and text()='Delete']"),
-	//RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS("div[class='modal-dialog']"),
+	// RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS("div[class='modal-dialog']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_XPATH("//div[@class='modal-body wui-modal__body clearfix ng-scope']/div[1]/descendant::label/span[1]"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS("span[class='wui-checkbox__visible']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.cancel()']"),
@@ -462,10 +463,11 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_LI_SHARE_MODAL_CANCEL_BUTTON_CSS("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_CANCEL_BUTTON_CSS("button[ng-click^='cancelEdit']"),
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS("div[class=ne-comment-list__comment-content] div[class='wui-textarea__error']"),
-	//Commented by KR
-	//RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_CSS("div[class='ne-comment-list__comment-content'] div[id^='taTextElement']"),
+	// Commented by KR
+	// RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_CSS("div[class='ne-comment-list__comment-content']
+	// div[id^='taTextElement']"),
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_XPATH("div[@class='fr-box fr-basic fr-bottom']/descendant::div[@class='fr-element fr-view']"),
-	
+
 	RECORD_VIEW_PAGE_SENDTOENDNOTE_BUTTON_CSS("div[class='ne-publication-sidebar__actions'] div button[class='wui-icon-btn ng-isolate-scope']"),
 	RECORD_VIEW_PAGE_SENDTOENDNOTE_TOASTNOTIFICATION_XPATH("//div[@class='message ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_PUBLICATION_CSS("div[class='ne-publication__header'] div[class='wui-descriptor']"),
@@ -476,7 +478,6 @@ public enum OnePObjectMap {
 	TRENDING_SECTION_POST_FROM_NEWSFEED_CSS("a[data-ui-sref='postsView({id:post.id})']"),
 	// login page elements
 
-	
 	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),
 	PASSWORD_RESET_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='password']"),
@@ -522,7 +523,7 @@ public enum OnePObjectMap {
 	FUTUREPOST_POST_NAME_CSS("h3[class='wui-content-title wui-content-title--medium wui-content-title--card-heading ng-binding']"),
 	FUTUREPOST_WATCHLIST_STATUS_CSS("div[class='wui-card--featured-post wui-card'] button[class='wui-icon-btn wui-icon-btn--horizontal-spacing dropdown-toggle']"),
 	FUTUREPOST_WATCHLIST_WATCHING_CSS("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
-	//HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_PUBLISH_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='publish']"),
+	// HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_PUBLISH_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='publish']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_PUBLISH_XPATH("//button[@class='wui-btn wui-btn--primary ng-binding']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS("div[class^='modal-dialog'] button[title='Close']"),
 	HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS("div[class='modal-content']"),
@@ -576,7 +577,6 @@ public enum OnePObjectMap {
 	LOCKED_MSG_XPATH("//h2[contains(text(),'Your account has been locked.')]"),
 	LOCKED_OK_BUTTON_XPATH("//button[@class='wui-btn wui-btn--secondary button-color-secondary']"),
 
-	
 	// Navigation and Landing page
 	NEON_ENW_INTEGRATION_TEXT_CSS("p[class='sign-in-options-text text-center']"),
 	NEON_ENW_COMPANY_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
@@ -813,22 +813,22 @@ public enum OnePObjectMap {
 	RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_SPINNER_CSS("div[class^='wui-spinner'] div[class='wui-spinner__circle wui-spinner__circle--delayed']"),
 
 	RCC_GMAIL_LOGIN_USERNAME_ID("Email"),
-    RCC_GMAIL_LOGIN_NEXT_BUTTON_XPATH("//input[@id='next']"),
-    RCC_GMAIL_LOGIN_SUBMIT_XPATH("//input[@id='signIn']"),
-    RCC_GMAIL_LOGIN_PASSWORD_XPATH("//input[@id='Passwd']"),
-    RCC_GMAIL_CLICK_EMAIL_XPATH("//span[@class='y2']"),
+	RCC_GMAIL_LOGIN_NEXT_BUTTON_XPATH("//input[@id='next']"),
+	RCC_GMAIL_LOGIN_SUBMIT_XPATH("//input[@id='signIn']"),
+	RCC_GMAIL_LOGIN_PASSWORD_XPATH("//input[@id='Passwd']"),
+	RCC_GMAIL_CLICK_EMAIL_XPATH("//span[@class='y2']"),
 
-    RCC_CLICK_ON_GMAIL_SECURITY_LINK_XPATH("//a[@class='WaidBe']"),
-    RCC_GMAIL_SUBJECT_CONTENT_XPATH("//h2[@class='hP']"),
-    RCC_GMAIL_WHOLE_CONTENT_CSS("table[class*='container']"),
-    RCC_GMAIL_WHOLE_CONTENT2_CSS("div[class='nH aHU']"),
-    RCC_GMAIL_PROFILE_CLICK_CSS("span[class='gb_9a gbii']"),
-    RCC_GMAIL_LOGOUT_BUTTON_CSS("a[id='gb_71']"),
-    RCC_GMAIL_SWITCH_TO_ACCOUNT_GOOGLE_XPATH("//button[@class='jfk-button jfk-button-standard']"),
-    RCC_GMAIL_CLICK_CONTINUE_XPATH("//input[@type='submit']"),   
+	RCC_CLICK_ON_GMAIL_SECURITY_LINK_XPATH("//a[@class='WaidBe']"),
+	RCC_GMAIL_SUBJECT_CONTENT_XPATH("//h2[@class='hP']"),
+	RCC_GMAIL_WHOLE_CONTENT_CSS("table[class*='container']"),
+	RCC_GMAIL_WHOLE_CONTENT2_CSS("div[class='nH aHU']"),
+	RCC_GMAIL_PROFILE_CLICK_CSS("span[class='gb_9a gbii']"),
+	RCC_GMAIL_LOGOUT_BUTTON_CSS("a[id='gb_71']"),
+	RCC_GMAIL_SWITCH_TO_ACCOUNT_GOOGLE_XPATH("//button[@class='jfk-button jfk-button-standard']"),
+	RCC_GMAIL_CLICK_CONTINUE_XPATH("//input[@type='submit']"),
 
 	// #################### DRA ##########################
-    DRA_LOGO_CSS("h2[class='wui-title wui-title--app-signin-primaryname']"),
+	DRA_LOGO_CSS("h2[class='wui-title wui-title--app-signin-primaryname']"),
 	DRA_BRANDING_NAME_CSS("h2[class='wui-title wui-title--app-signin-primaryname']"),
 	DRA_ONBOARDING_CSS("div[class='applications-buttons-container'] a"),
 	DRA_LANDINGPAGE_DESIGN_ICON_CSS("i[class='wui-icon wui-icon--design login-splash-icon']"),
@@ -836,7 +836,7 @@ public enum OnePObjectMap {
 	DRA_LANDINGPAGE_OPTIMIZE_ICON_CSS("i[class='wui-icon wui-icon--benchmark login-splash-icon']"),
 	DRA_LANDINGPAGE_TERMS_LINK_XPATH("//a[text()='Terms of Use']"),
 	DRA_LANDINGPAGE_PRIVACY_LINK_XPATH("//a[text()='Privacy Statement.']"),
-    DRA_LANDINGPAGE_HELP_MESSAGE_CSS("p[class='tos ng-scope']"), 
+	DRA_LANDINGPAGE_HELP_MESSAGE_CSS("p[class='tos ng-scope']"),
 	DRA_LANDINGPAGE_SUPPORT_MAILID_CSS("p[class='tos ng-scope'] >a[event-action='login-customer-care-dra']"),
 	DRA_LANDINGPAGE_LEARNMORE_LINK_XPATH("//span[text()='Learn more.']"),
 	DRA_LINKINGMODAL_FB_SIGN_IN_BUTTON_CSS("button[class^='wui-btn wui-btn--secondary']"),
@@ -862,7 +862,7 @@ public enum OnePObjectMap {
 	DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS("div[class='forgot-password-header']"),
 	DRA_STEPUPAUTHMODAL_LEARNMORE_CSS("a[event-action='learn-more-dra']"),
 	DRA_STEPUPAUTHMODAL_PAGE_CSS("span[class='wui-large-text ng-binding']"),
-	
+
 	// DRA_PROFILE_FLYOUT_NAME_CSS("div[class='wui-profile-flyout__info'] div[class*='wui-subtitle
 	// wui-profile-flyout__name ng-binding']"),
 	DRA_PROFILE_FLYOUT_NAME_CSS("img[class='wui-profile-flyout__image wui-circle']"),
@@ -957,7 +957,7 @@ public enum OnePObjectMap {
 	NEON_IPA_ACCOUNT_CSS("a[class='wui-profile-flyout__link wui-profile-flyout__link--icon']"),
 	NEON_IPA_ACCOUNTNAME_CSS("span[class='ng-binding']"),
 	NEON_IPA_TECH_SEARCHBOX_CSS("div[class='ipa-search-input-control__input-group'] input"),
-	
+
 	NEON_IPA_TECH_SEARCHSUGGESTIONS_XPATH("//div[starts-with(@ng-click,'vm.select')]"),
 	NEON_IPA_TECH_CLIPBOARD_CSS("ipa-search-term[class='ng-isolate-scope'] li[ng-repeat='item in vm.items track by $index']"),
 	NEON_IPA_TECH_NEWSEARCH_XPATH("//*[contains(text(),'Search')]"),
@@ -1100,7 +1100,7 @@ public enum OnePObjectMap {
 	NEON_IPA_RECORDVIEW_STRENGTH_CSS("[ng-hide*='patent.patentStrength']>span:nth-of-type(2)"),
 	NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS("[class*='ng-binding current-page']"),
 	NEON_IPA_RECORDVIEW_EXPIRYDATE_CSS("li[ng-hide*='patent.expiration'] span:nth-of-type(2)"),
-	NEON_IPA_DASH_TECH_COM_TAB_CSS("div[event-category*='competitors']") ,
+	NEON_IPA_DASH_TECH_COM_TAB_CSS("div[event-category*='competitors']"),
 	NEON_IPA_DASH_TECH_TEC_TAB_CSS("div[event-category*='trend']"),
 	NEON_IPA_DASH_TECH_PAN_TAB_CSS("div[event-category*='patents']"),
 	NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS("div.popover-content"),
@@ -1115,14 +1115,14 @@ public enum OnePObjectMap {
 	NEON_IPA_SAVED_SEARCH_PAGE_TILE_TITLE_CSS("div[class='wui-content-title wui-content-title--medium ng-binding'"),
 	NEON_IPA_SAVED_SEARCH_PAGE_LAST_VIEWED_CSS("span[class='wui-label wui-label--sse-item-last-viewed-date ng-scope'] wui-timestamp"),
 	NEON_IPA_SAVED_SEARCH_PAGE_SAVED_VALUE_CSS("span[class='wui-label ng-scope'] wui-timestamp"),
-	
+
 	NEON_IPA_VIEWBY_ALL_CSS("button[ng-class*='undefined']"),
 	NEON_IPA_VIEWBY_UTILITY_CSS("button[ng-class*='U']"),
 	NEON_IPA_VIEWBY_GRANT_CSS("button[ng-class*='G']"),
 	NEON_IPA_VIEWBY_APPLICATION_CSS("button[ng-class*='A']"),
 	NEON_IPA_VIEWBY_Familiy_CSS("button[ng-class*='Basic']"),
 	NEON_IPA_VIEWBY_Publication_CSS("button[ng-class*='grantStatus']"),
-	
+
 	NEON_IPA_DASH_LINK_SEARCHTERM_CSS("a[ng-click*='search']"),
 	NEON_IPA_DASH_SEARCHTERMS_CSS("[type='Dashboard.queryType'] button[id='split-button']"),
 	NEON_IPA_SEARCH_TAB_TEXT_CSS("input[ng-model='vm.searchParam']"),
@@ -1134,12 +1134,10 @@ public enum OnePObjectMap {
 	IPA_CC_PHONE_CSS("input[type='tel']"),
 	IPA_CC_COUNTRY_NAME("category"),
 	IPA_CC_HEADER_CSS("h2[class='cc-sub-nav__title cc-sub-nav__title--ipa']"),
-	
+
 	DRA_CC_HEADER_CSS("h2[class='cc-sub-nav__subtitle cc-sub-nav__subtitle--dra']"),
 	DRA_CC_HEADER_TD_CSS("h2[class='cc-sub-nav__title cc-sub-nav__title--dra']"),
-	
-	
-	
+
 	// #################### CUSTOMER CARE ##########################
 	CUSTOMER_CARE_USER_NAME_ID("login"),
 	CUSTOMER_CARE_PASSWORD_ID("userPassword"),
@@ -1167,26 +1165,25 @@ public enum OnePObjectMap {
 	CUSTOMER_SELECT_CLAIMTICKETS_EDITUSER_PAGE_CSS("//tr[@class='tableHeaderRow']//following::tr//following::tr"),
 	CUSTOMER_GET_USER_ID_CSS("label[class='tabledatatext']"),
 	GURILLA_MAIL_TEXT_ID("email-widget"),
-	CUSTOMER_CARE_LOGIN_PAGE_NAME("loginform"), 
+	CUSTOMER_CARE_LOGIN_PAGE_NAME("loginform"),
 	CUSTOMER_CARE_CALLUS_DROPDOWN_CSS("select[ng-model='vm.region']"),
 	CUSTOMER_CARE_CALLUS_CTRY1_CSS("div[class='ng-scope cc-call-us__info'] p"),
 	CUSTOMER_CARE_CALLUS_CTRY2_CSS("div[class='ng-scope cc-call-us__info-secondary'] p"),
 	DRA_FEEDBACKLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(4)"),
-    DRA_HELPLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(3)"),
-    CUSTOMER_CARE_LINK_LANDINGPAGE_CSS("a[href='/cmty/#/customer-care?app=dra']"),
+	DRA_HELPLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(3)"),
+	CUSTOMER_CARE_LINK_LANDINGPAGE_CSS("a[href='/cmty/#/customer-care?app=dra']"),
 	CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS("a[href*='thomsonreuters.com']"),
 	CUSTOMER_CARE_SUPPORTLINK_HELP_CSS("a[href='/cmty/#/customer-care?app=dra']"),
 	CUSTOMER_CARE_SUPPORTREQUEST_NAME_CSS("input[placeholder^='Name']"),
 	CUSTOMER_CARE_SUPPORTREQUEST_ORG_CSS("input[placeholder^='Organization']"),
 	CUSTOMER_CARE_SUPPORTREQUEST_EMAIL_CSS("input[placeholder^='Email address']"),
-    DRA_PROFILEDATA_CSS("div[class='wui-subtitle wui-profile-flyout__name ng-binding']"),
+	DRA_PROFILEDATA_CSS("div[class='wui-subtitle wui-profile-flyout__name ng-binding']"),
 	DRA_PROFILE_FNAME_CSS("input[placeholder='+ First Name']"),
 	DRA_PROFILE_LNAME_CSS("input[placeholder='+ Last Name']"),
 	DRA_PROFILE_ORG_CSS("input[placeholder='+ Institution']"),
 	DRA_PROFILE_COUNTRY_CSS("input[placeholder='+ Country']"),
 	CUSTOMER_CARE_CLEAR_CSS("button[type='reset']"),
 
-	
 	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h4"),
 	CUSTOMER_CARE_CALLUS_SECTION_PHONEICON_CSS("i[class^='fa fa-phone']"),
 	CUSTOMER_CARE_CALLUS_SECTION_CLOCKICON_CSS("i[class^='fa fa-clock-o']"),
@@ -1215,11 +1212,12 @@ public enum OnePObjectMap {
 	OTHERPRODUCTSLINK_IN_ERRORPAGE_CSS("a[href*='ip-science.thomsonreuters.com'] div[class^='cc-product-tile']"),
 	HOME_PROJECT_NEON_RVIEW_ARTICLE_COMMENTCOUNT_CSS("div[class='ne-publication-sidebar__metrics'] span[class='wui-icon-metric__value ng-binding']"),
 
-	//******************************************** WAT Locators ********************************************************
-	
+	// ******************************************** WAT Locators
+	// ********************************************************
+
 	WAT_PROFILE_FLYOUT_IMAGE_CSS("div[class*='wui-profile-flyout'] a[class*='wui-circle dropdown-toggle']"),
 	WAT_LOGIN_PAGE_CONTACT_EMAIL_ID_CSS("p[class*='ng-binding']"),
-		
+
 	WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH("//h2[text()='Web of Science: Author search']"),
 	WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH("//wat-too-many-records-message[@class='ng-isolate-scope']"),
 	WAT_AUTHOR_LASTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--last']/descendant::input"),
@@ -1230,20 +1228,20 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_FIRSTNAME2_XPATH("//div[@class='ng-scope'][2]/descendant::input[2]"),
 	WAT_AUTHOR_FIRSTNAME3_XPATH("//div[@class='ng-scope'][3]/descendant::input[2]"),
 	WAT_AUTHOR_FIRSTSTNAME_INNERTEXT_XPATH("//label[text()='First name and middle initial(s)']"),
-	
+
 	WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH("//wat-select-box[@data-wat-select-box-options='vm.countryOptions']"),
 	WAT_AUTHOR_COUNTRY_DROPDOWN_INNER_XPATH("//wat-select-box[@class='ng-isolate-scope' and @data-wat-select-box-options='vm.countryOptions']/descendant::div[1]/div"),
 	WAT_AUTHOR_COUNTRY_OPTION_XPATH("//div[@class='wat-select-box__option ng-scope']/descendant::span[2]"),
 	WAT_COUNTRY_CHECKBOX_XPATH("//div[@class='wat-select-box__option ng-scope']/descendant::input[@id='Country']/following-sibling::span[1]"),
-	
+
 	WAT_AUTHOR_ORG_DROPDOWN_XPATH("//wat-select-box[@data-wat-select-box-options='vm.affiliationOptions']"),
 	WAT_AUTHOR_ORG_DROPDOWN_INNER_XPATH("//wat-select-box[@class='ng-isolate-scope' and @data-wat-select-box-options='vm.affiliationOptions']/descendant::div[1]/div"),
-	WAT_AUTHOR_ORG_OPTION_XPATH("//wat-select-box[@data-wat-select-box-options='vm.affiliationOptions']/descendant::span[@class='wui-checkbox__label']"),	
+	WAT_AUTHOR_ORG_OPTION_XPATH("//wat-select-box[@data-wat-select-box-options='vm.affiliationOptions']/descendant::span[@class='wui-checkbox__label']"),
 	WAT_ORG_CHECKBOX_XPATH("//wat-select-box[@data-wat-select-box-options='vm.affiliationOptions']/descendant::input[@id='OrgName']/following-sibling::span[1]"),
-	
+
 	WAT_AUTHOR_LASTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
 	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
-	
+
 	WAT_SEARCH_LINK_XPATH("//span[text()='Search']"),
 	WAT_LASTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='U MAYER']"),
 	WAT_FIRSTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='JOHN']"),
@@ -1258,22 +1256,22 @@ public enum OnePObjectMap {
 	WAT_ORCiD_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='ORCiD search']"),
 	WAT_ADD_ALT_NAME_BTN_TEXT_XPATH("//button[text()[normalize-space() = 'Include alternative name']]"),
 	WAT_REMOVE_ALT_NAME_BTN_TEXT_XPATH("//button[@class='wui-icon-only-btn wui-icon-only-btn--mini wat-search__button--add ng-scope' and @aria-label='Remove']"),
-	
+
 	WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH("//span[@class='wat-material-input__error']"),
 	WAT_AUTHOR_LASTNAME_TYPEAHEAD_OPTION_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']/li"),
-	
+
 	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_OPTION_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']/li"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS("div.wui-card"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_NAME_CSS("div.wui-card h3 a"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PRIMARY_NAME_CSS("h3 a"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_CSS("div[class='wat-search-terms-topic-tags']"),
-	
+
 	WAT_AUTHOR_NAME_DIVIDER_XPATH("//div[button[contains(text(), 'Author name')]]/descendant::div[@class='wui-divider']"),
 	WAT_AUTHOR_NAME_ABOVE_DIVIDER_XPATH("//div[button[contains(text(), 'Author name')]]/descendant::div[@class='wui-divider']/preceding-sibling::div"),
 	WAT_AUTHOR_NAME_BELOW_DIVIDER_XPATH("//div[button[contains(text(), 'Author name')]]/descendant::div[@class='wui-divider']/following-sibling::div"),
 	WAT_ORGANIZATION_DIVIDER_XPATH("//div[button[contains(text(), 'Organizations')]]/descendant::div[@class='wui-divider']"),
 	WAT_SUBJECT_CATEGORY_DIVIDER_XPATH("//div[button[contains(text(), 'Subject categories')]]/descendant::div[@class='wui-divider']"),
-	
+
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_ALTERNATIVE_NAME_CSS("div[class*='wat-search-results-meta-names']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_AFFILIATION_CSS("div[class*='wat-search-results-meta-affiliation']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_LOCATION_CSS("div[class*='wat-search-results-meta-location']"),
@@ -1281,11 +1279,11 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_TOP_JOURNALS_CSS("div[class='wat-search-results-meta-journals__list'] span"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PUB_YEARS_JOURNALS_PUB_COUNT_CSS("div[class='wat-search-results-meta-publications-years-journals'] div[class*='wat-search-results-meta-publications-count__item']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_AFFILIATION_SUB_ORG_CSS("div[class*='wat-search-results-meta-affiliation']+div"),
-	
+
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_RELAVANCE_CSS("button[class='wui-dropdown__toggle dropdown-toggle']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_DROPDOWN_MENU_CSS("ul[class='wui-dropdown__menu dropdown-menu']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_PUBLICATION_YEARS_NEWEST_FIRST_CSS("div[class='wat-search-results-meta-years__item ng-binding']"),
-	
+
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_TITLE_CSS("div[class*='wui-emphasis wat-search-results-publications-title']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_SOURCE_CSS("div[class*='wui-descriptor-uppercase wat-search-results-publications-source-group']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_AUTHORS_CSS("div[class*='wui-descriptor wat-search-results-publications-authors']"),
@@ -1302,22 +1300,21 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_HIDE_PUBLICATIONS_CSS("button[event-category='wat-hide-publications']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_TOP_PUBLICATIONS_CSS("div[ng-repeat='publication in vm.publications track by $index']"),
 	WAT_SEARCH_RESULTS_TAB_HIGHLIGHT_XPATH("//span[text()='Search Results']/ancestor::li"),
-	
+
 	WAT_ORCID_SEARCH_BTN_XPATH("//span[text()='ORCiD search']"),
 	WAT_ORCID_LOGO_XPATH("//div[@class='wat-search__orcid-logo']"),
 	WAT_ORCID_TEXTBOC_XPATH("//input[@class='wui-material-input__input-field ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required ng-valid-pattern']"),
 	WAT_ORCID_SEARCH_WELCOME_TEXT_XPATH("//p[contains(text(),'Enter the author')]"),
-	//WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH("//button[@ng-click='vm.findOrcidClusters()' and text()[normalize-space() = 'Find']]"),
+	// WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH("//button[@ng-click='vm.findOrcidClusters()' and
+	// text()[normalize-space() = 'Find']]"),
 	WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH("//div[@class='col-xs-offset-2 col-xs-8']/descendant::button[@ng-disabled='vm.disableFindButton[vm.SEARCH.VIEW.ORCID]']"),
 	WAT_ORCID_SEARCH_ERROR_TEXT_XPATH("//span[@class='ng-scope']"),
 	WAT_ORCID_TO_NAME_SEARCH_LINK_XPATH("//button[text()='Name search']"),
-	
+
 	WAT_RID_SEARCH_BTN_XPATH("//span[text()='ResearcherID search']"),
 	WAT_RID_TEXTBOC_XPATH("(//input[@class='wui-material-input__input-field ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required ng-valid-pattern'])[2]"),
 	WAT_AUTHOR_SEARCH_BY_RID_FIND_BTN_XPATH("//div[@class='col-xs-offset-2 col-xs-8']/descendant::button[@ng-disabled='vm.disableFindButton[vm.SEARCH.VIEW.RID]']"),
-	
-	
-	
+
 	GURILLA_LIST_EMAIL_WAT_PROJECT_TITLE_CSS("span[style*='color:#45749B;']"),
 	WAT_BRANDING_NAME_CSS("h3[class='wui-title login-header__app-name ng-binding']"),
 	WAT_SUPPORT_CONTACT_EMAIL_CSS("td[bgcolor='#ffffff'] span a"),
@@ -1327,7 +1324,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_META_AFFILIATION_CSS("div[class*='wat-author-record-meta-affiliation']"),
 	WAT_AUTHOR_RECORD_META_DEPT_CSS("div[class*='wat-author-record-meta-department']"),
 	WAT_AUTHOR_RECORD_META_LOCATION_CSS("div[class*='wat-author-record-meta-location']"),
-	
+
 	WAT_AUTHOR_SEARCH_RESULT_CARD1_XPATH("//div[@class='wui-card'][1]/descendant::i[@class='fa fa-check']"),
 	WAT_AUTHOR_SEARCH_RESULT_CARD2_XPATH("//div[@class='wui-card'][2]/descendant::i[@class='fa fa-check']"),
 	WAT_AUTHOR_SEARCH_RESULT_CARDS_XPATH("//div[@class='wui-card']/descendant::i[@class='fa fa-check']"),
@@ -1340,14 +1337,13 @@ public enum OnePObjectMap {
 	WAT_RESEARCHER_XPATH("//table[@class='profileTable']/descendant::td[2]"),
 	WAT_RESEARCHERID_LINK_XPATH("//a[@class='wat-author-record__rid ng-binding']"),
 
-	
 	WAT_SELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
 	WAT_DESELECT_ALL_LINK_XPATH("//button[@class='pull-right wat-color-link']"),
 	WAT_COMBINE_BTN_PRECEDING_TEXT_XPATH("//div[button[@class='wui-btn wui-btn--primary']]/preceding-sibling::div"),
 	WAT_AUTHOR_CARD_BEFORE_SELECTION_XPATH("//div[@class='wui-card__content']"),
 	WAT_AUTHOR_CARD_AFTER_SELECTION_XPATH("//div[@class='wui-card__content wat-card-content-selected']"),
 	WAT_AUTHOR_CARD_CHECKBOX_AFTER_SELECT_ALL_XPATH("//div[@class='wui-card']/descendant::button[@class='pull-right wui-icon-only-btn wui-icon-only-btn--mini wat-results-selector wat-icon-only-btn--check-selected']"),
-	
+
 	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MAIN_CARD_XPATH("//div[@ng-repeat='publication in vm.watAuthorRecordPublicationsData track by $index'][1]"),
 	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_NAME_XPATH("//div[@class='wui-card__body-content ng-isolate-scope']/descendant::div[@class='wui-emphasis wat-search-results-publications-title wat-author-record-publications-title ng-binding'][1]"),
 	WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_AUTHORS_XPATH("//div[@class='wui-card__body-content ng-isolate-scope']/descendant::div[@class='wui-descriptor wat-search-results-publications-authors wat-author-record-publications-authors'][1]"),
@@ -1374,7 +1370,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_ORG_DETAILS_XPATH("//div[@class='wat-search-results-meta-affiliation ng-binding']"),
 	WAT_AUTHOR_SUB_ORG_DETAILS_XPATH("//div[@class='wat-search-results-meta-contact ng-binding']"),
 	WAT_AUTHOR_ADDRESS_DETAILS_XPATH("//div[@class='wat-search-results-meta-location ng-binding']"),
-	
+
 	WAT_SUGGEST_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Suggest updates')]"),
 	WAT_SUBMIT_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Submit updates')]"),
 	WAT_CANCEL_UPDATE_BTN_XPATH("//button[@class='wat-improve-author-message-cancel']"),
@@ -1385,13 +1381,13 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULT_PAGE_STATICTEXT_XPATH("//div[@class='wat-search-results__message']"),
 	WAT_FEEDBACK_AUTHOR_RECORD_PAGE_XPATH("//a[contains(text(),'Tell us what you think')]"),
 	WAT_FEEDBACK_PAGE_TITLE_XPATH("//span[contains(text(),'SaR Labs Feedback')]"),
-	
+
 	WAT_SEARCH_RESULTS_FILTER_ORG_XPATH("//button[contains(text(),'Organizations')]"),
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_ORG_XPATH("//button[contains(text(),'Organizations')]/following-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_1st_ORG_XPATH("//div[button[contains(text(),'Organizations')]]/descendant::span[2]"),
 	WAT_SEARCH_RESULTS_FILTER_2nd_ORG_XPATH("//div[button[contains(text(),'Organizations')]]/descendant::span[5]"),
 	WAT_SEARCH_RESULTS_FILTER_1st_ORG_TEXT_XPATH("//div[button[contains(text(),'Organizations')]]/descendant::span[2]/preceding-sibling::input"),
-	
+
 	WAT_SEARCH_RESULTS_FILTER_NAME_XPATH("//button[contains(text(),'Author name')]"),
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_NAME_XPATH("//button[contains(text(),'Author name')]/following-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_1st_NAME_XPATH("//div[button[contains(text(),'Author name')]]/descendant::span[2]"),
@@ -1399,22 +1395,22 @@ public enum OnePObjectMap {
 	WAT_SEARCH_RESULTS_FILTER_1st_NAME_TEXT_XPATH("//div[button[contains(text(),'Author name')]]/descendant::span[2]/following-sibling::span"),
 	WAT_SEARCH_RESULTS_FILTER_SELECTED_AUTHOR_NAME_XPATH("//div[button[contains(text(), 'Author name')]]/descendant::div[@class='wui-divider']/preceding-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_UNSELECTED_AUTHOR_NAME_XPATH("//div[button[contains(text(),'Author name')]]/descendant::div[@class='wat-refine-filter-option-container']/descendant::ng-transclude/span"),
-	
+
 	WAT_SEARCH_RESULTS_FILTER_SUBCAT_XPATH("//button[contains(text(),'Subject categories')]"),
 	WAT_SEARCH_RESULTS_FILTER_OPTIONS_SUBCAT_XPATH("//button[contains(text(),'Subject categories')]/following-sibling::div"),
 	WAT_SEARCH_RESULTS_FILTER_1st_SUBCAT_XPATH("//div[button[contains(text(),'Subject categories')]]/descendant::span[2]"),
 	WAT_SEARCH_RESULTS_FILTER_2nd_SUBCAT_XPATH("//div[button[contains(text(),'Subject categories')]]/descendant::span[5]"),
 	WAT_SEARCH_RESULTS_FILTER_1st_NAME_SUBCAT_XPATH("//div[button[contains(text(),'Subject categories')]]/descendant::span[2]/preceding-sibling::input"),
-	
+
 	WAT_SEARCH_RESULTS_COUNT_XPATH("//h2[contains(text(),'result')]"),
-	
+
 	WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS("div[class*='fa fa-info-circle wat-search__']"),
 	WAT_AUTHOR_SEARCH_POPOVER_POPUP_FADE_IN_CSS("div[class*='popover ng-scope ng-isolate-scope top wui-popover--large fade in top-left']"),
 	WAT_AUTHOR_SEARCH_POPOVER_POPUP_CLOSE_CSS("div[class='wui-popover__close-btn ng-scope'][title='Close']"),
 	WAT_AUTHOR_SEARCH_RESULTS_SELECTALL_CSS("button[data-event-category='wat-selectAll-records']"),
 	WAT_AUTHOR_SEARCH_RESULTS_DEPT_CSS("div[class='wui-card__body-content'] div[class='wat-search-results-meta-affiliation ng-binding']"),
 	WAT_AUTHOR_SEARCH_RESULTS_ORG_CSS("div[class='wui-card__body-content'] div[class='wat-search-results-meta-contact ng-binding']"),
-	
+
 	WAT_AUTHOR_RECORD_PAGE_SUGGEST_UPDATE_BTN_XPATH("//button[contains(text(),'Suggest updates')]"),
 	WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH("//button[contains(text(),'Submit updates')]"),
 	WAT_AUTHOR_RECORD_PAGE_CANCEL_UPDATE_BTN_XPATH("//button[contains(text(),'Cancel')]"),
@@ -1428,14 +1424,14 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_JOURNAL_NAME_XPATH("//button[contains(text(),'Journals')]"),
 	WAT_AUTHOR_RECORD_PAGE_RECOMMENDATION_BOX_TEXT_XPATH("//div[contains(text(),'Do some of these records belong to the same author?')]"),
 	WAT_AUTHOR_RECORD_RECOMMEND_PAPER_AUTHORS_XPATH("(//div[@class='wui-card__body-content'])[2]/descendant::div[@class='wui-descriptor wat-search-results-publications-authors wat-author-record-publications-authors']"),
+	WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH("descendant::*[contains(@class,'wat-author-record-publications-author ng-binding')]"),
 	WAT_AUTHOR_RECORD_RECOMMEND_PUBLICATIONS_XPATH("(//div[@class='wui-card__body-content'])[2]/descendant::div[@class='wui-emphasis wat-search-results-publications-title wat-author-record-publications-title ng-binding']"),
 	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH("(//button[@aria-label='Remove'])[1]"),
-	//WAT_PUBLICATION_REMOVE_CHKBOX_XPATH("//div[@class='wui-card__body']/descendant::button[2]"),
+	// WAT_PUBLICATION_REMOVE_CHKBOX_XPATH("//div[@class='wui-card__body']/descendant::button[2]"),
 	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_NAME_BEFORE_ANY_REMOVAL_XPATH("(//div[@class='wui-emphasis wat-search-results-publications-title wat-author-record-publications-title ng-binding'])[4]"),
 	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_AFTER_REMOVAL_GREY_XPATH("//div[@class='wui-emphasis wat-search-results-publications-title wat-author-record-publications-title ng-binding wat-author-record-publications-title__title-only']"),
 	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_AFTER_REMOVAL_REMOVED_LINK_XPATH("(//div[contains(text(),'removed')])[1]"),
-	
-	
+
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
 	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),
 	DRA_SSO_LOGIN_PAGE_LOGIN_BUTTON_CSS("input[class='btn btn-primary btn-lg']"),
@@ -1446,8 +1442,6 @@ public enum OnePObjectMap {
 	DRA_SSO_LOGIN_PAGE_QUESTIONCONTACT("//p[text()='Questions? Contact ']"),
 	DRA_SSO_LOGIN_PAGE_EXPIRED_SUBSCRIPTION("//div[@class='col-md-12']"),
 	DRA_SSO_LOGIN_PAGE_WITH_SUBSCRIPTION("//p[@class='ng-binding']"),
-	
-	
 
 	;
 

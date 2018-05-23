@@ -1,5 +1,6 @@
 package watpages;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -515,6 +516,57 @@ public class AuthorRecordPage extends TestBase {
 		
 		
     }
+	
+	/**
+	 * Method for combined author recommend papers authors last name should match author record set of last names
+	 * @param test
+	 * @throws Exception
+	 */
+	public void combinedRecommendPapersAuthorName() throws Exception{
+		List<String> alternativeNames=getAllAuthorLastNames();
+		logger.info("All alternative name-->"+alternativeNames);
+		List<WebElement> recommendPapers = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_AUTHORS_XPATH);
+		
+		for(WebElement paper:recommendPapers){
+			count=0;
+			if(!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")){
+				pf.getBrowserActionInstance(ob).scrollToElement(paper.findElement(By.tagName("a")));
+				paper.findElement(By.tagName("a")).click();
+				waitForAjax(ob);}
+				List<WebElement> authors=paper.findElements(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
+				for(WebElement author:authors){
+					logger.info("recommend paper Author Name-->"+(author.getText().split("\\,")[0]));
+					String authorLastName=author.getText().split("\\,")[0].contains(";")?author.getText().split("\\,")[0].replace(";", ""):author.getText().split("\\,")[0];
+					if(alternativeNames.contains(authorLastName.trim())){
+						++count;
+					}
+				}
+				logger.info("count match-->"+count);
+				if(count==0){
+					throw new Exception("Combined Author Recommended papers last name not matches Author record set of last names");
+				 }
+			}
+    }
+	
+
+	/**
+	 * Get Author last names only
+	 * @param test
+	 * @param tabName
+	 * @throws Exception
+	 */
+	public List<String> getAllAuthorLastNames() throws Exception {
+		List<String> alternativeNames= new ArrayList<String>();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS);
+		waitForAjax(ob);
+		namesCount = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS);
+		for(WebElement name:namesCount){
+			alternativeNames.add(name.getText().split("\\,")[0]);
+		}
+		return alternativeNames;
+	}
 	
 	/**
 	 * Method to check cancel curation functionality on Recommendation
