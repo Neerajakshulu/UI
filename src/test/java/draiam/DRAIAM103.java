@@ -59,9 +59,10 @@ public class DRAIAM103 extends TestBase {
 			jse.executeScript("window.scrollBy(0,250)", "");
 			//BrowserWaits.waitTime(5);
 			WebElement ImageFile = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.LOGIN_PAGE_LOGO_IMG_XPATH);
-			Boolean ImagePresent = (Boolean) ((JavascriptExecutor) ob).executeScript(
-					"return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",
-					ImageFile);
+//			Boolean ImagePresent = (Boolean) ((JavascriptExecutor) ob).executeScript(
+//					"return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",
+//					ImageFile);
+			Boolean ImagePresent =ImageFile.isDisplayed();
 			try {
 				Assert.assertTrue(ImagePresent);
 				if (!ImagePresent)
