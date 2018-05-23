@@ -1378,7 +1378,6 @@ public enum OnePObjectMap {
 	WAT_SUGGEST_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Suggest updates')]"),
 	WAT_SUBMIT_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Submit updates')]"),
 	WAT_CANCEL_UPDATE_BTN_XPATH("//button[@class='wat-improve-author-message-cancel']"),
-	WAT_PUBLICATION_REMOVE_CHKBOX_XPATH("//div[@class='wui-card__body']/descendant::button[2]"),
 	WAT_PUBLICATION_REMOVE_CHKBOX_DISABLED_XPATH("//div[@class='wui-card__body']/descendant::button[@class='wui-icon-only-btn wui-icon-only-btn ng-hide'][2]"),
 	WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH("//div[@class='wui-card'][1]/descendant::h3[@class='wui-content-title wui-content-title--medium wat-search-results-meta-title ng-scope']/a"),
 	WAT_FEEDBACK_AUTHOR_SEARCH_PAGE_XPATH("//a[contains(text(),'your feedback')]"),
@@ -1430,8 +1429,12 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_RECOMMENDATION_BOX_TEXT_XPATH("//div[contains(text(),'Do some of these records belong to the same author?')]"),
 	WAT_AUTHOR_RECORD_RECOMMEND_PAPER_AUTHORS_XPATH("(//div[@class='wui-card__body-content'])[2]/descendant::div[@class='wui-descriptor wat-search-results-publications-authors wat-author-record-publications-authors']"),
 	WAT_AUTHOR_RECORD_RECOMMEND_PUBLICATIONS_XPATH("(//div[@class='wui-card__body-content'])[2]/descendant::div[@class='wui-emphasis wat-search-results-publications-title wat-author-record-publications-title ng-binding']"),
-	//WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH("(//button[@class='wui-icon-only-btn wui-icon-only-btn'])[1]"),
 	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH("(//button[@aria-label='Remove'])[1]"),
+	//WAT_PUBLICATION_REMOVE_CHKBOX_XPATH("//div[@class='wui-card__body']/descendant::button[2]"),
+	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_NAME_BEFORE_ANY_REMOVAL_XPATH("(//div[@class='wui-emphasis wat-search-results-publications-title wat-author-record-publications-title ng-binding'])[4]"),
+	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_AFTER_REMOVAL_GREY_XPATH("//div[@class='wui-emphasis wat-search-results-publications-title wat-author-record-publications-title ng-binding wat-author-record-publications-title__title-only']"),
+	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_AFTER_REMOVAL_REMOVED_LINK_XPATH("(//div[contains(text(),'removed')])[1]"),
+	
 	
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
 	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),
