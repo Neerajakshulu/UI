@@ -1023,6 +1023,14 @@
 		</classes>
 	</test>
 	
+	<test name="publications_more_link" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, RB" />
+		<classes>
+		<class name="wat.WAT174"></class>
+		</classes>
+	</test>
+	
 	<test name="Test_WelcomeNote" preserve-order="true">
 		<classes>
 			<class name="wat.WAT123"></class>

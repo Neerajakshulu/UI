@@ -15,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.OnePObjectMap;
 
 /**
@@ -566,6 +567,45 @@ public class AuthorRecordPage extends TestBase {
 			alternativeNames.add(name.getText().split("\\,")[0]);
 		}
 		return alternativeNames;
+	}
+	
+	/**
+	 * Method for More link should present in each publication
+	 * @throws Exception
+	 */
+	public void publicationsAuthorsMoreLink() throws Exception{
+		List<WebElement> publications = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_XPATH);
+		List<String> authorBefore= new ArrayList<String>();
+		List<String> authorAfter= new ArrayList<String>();
+		for(WebElement paper:publications){
+			if(!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")){
+				List<WebElement> beforeClickMore=paper.findElements(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
+				for(WebElement before:beforeClickMore){
+					authorBefore.add(before.getText());
+				}//for
+				if(paper.findElement(By.tagName("a")).getText().trim().equals("…More")){
+					pf.getBrowserActionInstance(ob).scrollToElement(paper.findElement(By.tagName("a")));
+					BrowserWaits.waitTime(2);
+					pf.getBrowserActionInstance(ob).jsClick(paper.findElement(By.tagName("a")));
+					waitForAjax(ob);
+					List<WebElement> afterClickMore=paper.findElements(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
+					for(WebElement after:afterClickMore){
+						authorAfter.add(after.getText());
+					}//for
+				} //if
+				
+			}//if
+			//logger.info("Before click More-->"+authorBefore);
+			//logger.info("After click More-->"+authorAfter);
+			if((authorAfter.containsAll(authorBefore))){
+				throw new Exception("Publication MORE link not giving more authors list");
+			}
+			authorBefore.clear();
+			authorAfter.clear();
+			
+		}
+		
 	}
 	
 	/**
