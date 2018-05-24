@@ -1016,7 +1016,7 @@
 		</classes>
 	</test>
 	
-	<test name="recommend_paper_last_names_match_atleast_one_author_lastname" preserve-order="true">
+	<test name="combine_recommend_paper_last_names_match_atleast_one_author_lastname" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
 		<class name="wat.WAT173"></class>
