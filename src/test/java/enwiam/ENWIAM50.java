@@ -120,12 +120,13 @@ public class ENWIAM50 extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CLARIVATELOGO_HOMEPAGE_CSS);
 			String backcolor=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CLARIVATELOGO_HOMEPAGE_CSS).getCssValue("background-color");
 			try {
-				Assert.assertEquals(backcolor, "rgba(0, 0, 0, 0)");
+				Assert.assertTrue(backcolor.contains("rgba(0, 0, 0, 0")==true ||backcolor.contains("transparent")==true );
+				//Assert.assertEquals(backcolor, "rgba(0, 0, 0, 0)");
 				test.log(LogStatus.PASS, "Platform header background color is white");
 
 			} catch (Throwable t) {
 				t.printStackTrace();
-				test.log(LogStatus.FAIL, "Platform header background color is white");
+				test.log(LogStatus.FAIL, "Platform header background color is not white");
 				ErrorUtil.addVerificationFailure(t);
 
 			}

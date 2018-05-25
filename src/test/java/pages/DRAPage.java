@@ -290,7 +290,8 @@ public class DRAPage extends TestBase {
 	}
 
 	public void clickOnProfileImageDRA() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
+		fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS.toString()), 100);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 	}
 
