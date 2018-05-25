@@ -1031,7 +1031,23 @@
 		</classes>
 	</test>
 	
-	<test name="Test_WelcomeNote" preserve-order="true">
+	<test name="publications_less_link" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, RB" />
+		<classes>
+		<class name="wat.WAT175"></class>
+		</classes>
+	</test>
+	
+	<test name="publications_more_to_less_link" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, RB" />
+		<classes>
+		<class name="wat.WAT176"></class>
+		</classes>
+	</test>
+	
+	 <test name="Test_WelcomeNote" preserve-order="true">
 		<classes>
 			<class name="wat.WAT123"></class>
 		</classes>

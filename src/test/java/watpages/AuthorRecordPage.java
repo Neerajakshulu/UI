@@ -609,6 +609,70 @@ public class AuthorRecordPage extends TestBase {
 	}
 	
 	/**
+	 * Method for Less link should present in each publication after click on More link
+	 * @throws Exception
+	 */
+	public void publicationsAuthorsLessLink() throws Exception{
+		List<WebElement> publications = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_XPATH);
+		for(WebElement paper:publications){
+			if(!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")){
+				if(paper.findElement(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_MORE_LINK_XPATH.toString())).getText().trim().equals("…More")){
+					pf.getBrowserActionInstance(ob).scrollToElement(paper.findElement(By.tagName("a")));
+					BrowserWaits.waitTime(2);
+					pf.getBrowserActionInstance(ob).jsClick(paper.findElement(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_MORE_LINK_XPATH.toString())));
+					waitForAjax(ob);
+					BrowserWaits.waitTime(2);
+					String linkName=paper.findElement(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_MORE_LINK_XPATH.toString())).getText();
+					logger.info("Link Name-->"+linkName);
+				} //if
+				
+			}//if
+		}
+		
+	}
+	
+	
+	/**
+	 * Method for Less link turn to More
+	 * @throws Exception
+	 */
+	public void publicationsAuthorsLessToMore() throws Exception{
+		List<WebElement> publications = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_XPATH);
+		List<String> authorBefore= new ArrayList<String>();
+		List<String> authorAfter= new ArrayList<String>();
+		for(WebElement paper:publications){
+			if(!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")){
+				List<WebElement> beforeClickMore=paper.findElements(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
+				for(WebElement before:beforeClickMore){
+					authorBefore.add(before.getText());
+				}//for
+				if(paper.findElement(By.tagName("a")).getText().trim().equals("…More")){
+					pf.getBrowserActionInstance(ob).scrollToElement(paper.findElement(By.tagName("a")));
+					BrowserWaits.waitTime(2);
+					pf.getBrowserActionInstance(ob).jsClick(paper.findElement(By.tagName("a")));
+					waitForAjax(ob);
+					List<WebElement> afterClickMore=paper.findElements(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
+					for(WebElement after:afterClickMore){
+						authorAfter.add(after.getText());
+					}//for
+				} //if
+				
+			}//if
+			//logger.info("Before click More-->"+authorBefore);
+			//logger.info("After click More-->"+authorAfter);
+			if((authorAfter.containsAll(authorBefore))){
+				throw new Exception("Publication MORE link not giving more authors list");
+			}
+			authorBefore.clear();
+			authorAfter.clear();
+			
+		}
+		
+	}
+	
+	/**
 	 * Method to check cancel curation functionality on Recommendation
 	 * @param test
 	 * @throws Exception
