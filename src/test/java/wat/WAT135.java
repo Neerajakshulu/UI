@@ -95,7 +95,7 @@ public class WAT135 extends TestBase {
 					OrgName1, OrgName2, test);
 			test.log(LogStatus.INFO, "Author Search Results are displayed");
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Publications_count_morethan1_results_fail", "publication_count_morethan1");
+			logFailureDetails(test, t, "Author Search Results are not displayed", "Search_Fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

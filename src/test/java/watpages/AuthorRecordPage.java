@@ -34,6 +34,7 @@ public class AuthorRecordPage extends TestBase {
 	boolean isTabDisabled = false;
 	List<WebElement> namesCount;
 	boolean isAuthorFound = false;
+	int pubCountBeforeDeletion;
 
 	public AuthorRecordPage(WebDriver ob) {
 		this.ob = ob;
@@ -716,6 +717,19 @@ public class AuthorRecordPage extends TestBase {
 		}
 	}
 
+
+	/**
+	 * @throws Exception
+	 */
+	public int getPublicationCount() throws Exception {
+		String pubCountText = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATION_COUNT_XPATH).getText();
+		int count = pubCountText.indexOf("p");
+		if (count != -1)
+			pubCountBeforeDeletion = Integer.parseInt(pubCountText.substring(0, count - 1));
+		return pubCountBeforeDeletion;
+	}
+	
 	/**
 	 * Method to verify elements to be present in curation mode
 	 * 
