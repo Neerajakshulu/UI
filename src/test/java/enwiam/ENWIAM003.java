@@ -2,8 +2,10 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -73,6 +75,7 @@ public class ENWIAM003 extends TestBase {
 			String temp = checks.substring(0, 1);
 			int tickMarks = Integer.parseInt(temp);
 			logger.info("TickMarks : " + tickMarks);
+			String email = generateRandomName(5) + "@abc.com";
 			//String email = generateRandomName(5) + "@abc.com";
 
 			// selenium code
@@ -94,14 +97,44 @@ public class ENWIAM003 extends TestBase {
 			waitUntilText("Sign up");
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(password);
+			
+			
+			List<WebElement> tm_list = ob
+					.findElements(By.xpath(OR.getProperty("reg_passwordStrength_tickMark_labels")));
+			logger.info("TickMark Size : " + tm_list.size());
+			List<WebElement> listOfTags = ob
+					.findElements(By.xpath("(//div[@class='col-xs-12 password-validator__container ng-scope'])[2]/div"));
+			logger.info("Total Tags : " + listOfTags.size());
+
+			if (listOfTags.size() == tm_list.size()) {
+				if (validity.equalsIgnoreCase("YES")) {
+//					ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
+//					ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+					ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
+					ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+					ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(password);
+					ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
+					ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys("ricky");
+					ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
+					ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("behl");
+					ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
+				}else{
+					test.log(LogStatus.FAIL, "Locator issue");
+				}
+			}else{
+				test.log(LogStatus.PASS, "Total TickMarks : "+tm_list.size());
+			}
+			
+			closeBrowser();
+			
 			//BrowserWaits.waitTime(3);
-			if (validity.equalsIgnoreCase("NO")) {
+			/*if (validity.equalsIgnoreCase("NO")) {
 				waitUntilText("Passwords should be at least 8 characters");
 				closeBrowser();
 			}else{
 				waitUntilText("Sign up with Facebook","Sign up with LinkedIn");
 				closeBrowser();
-			}
+			}*/
 			
 		/*	List<WebElement> tm_list = ob
 					.findElements(By.xpath(OR.getProperty("reg_passwordStrength_tickMark_labels")));

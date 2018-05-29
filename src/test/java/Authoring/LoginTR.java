@@ -69,7 +69,8 @@ public class LoginTR extends TestBase {
 
 	public void clickLogin() throws Exception {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+		fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS.toString()), 100);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 
 		closeOnBoardingModal();
 	}
@@ -209,7 +210,7 @@ public class LoginTR extends TestBase {
 		driver.findElement(By.id(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME.toString())).sendKeys(username);
 		driver.findElement(By.id(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_NAME.toString())).sendKeys(pwd);
 		// BrowserWaits.waitTime(2);
-		driver.findElement(By.id(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_NAME.toString())).click();
+		driver.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_NAME.toString())).click();
 	}
 
 	public static WebDriver launchBrowser() throws Exception {

@@ -2382,6 +2382,7 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception
 	 */
 	public void clickProfileFlyout() throws Exception {
+		fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS.toString()), 200);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_FOOTER_LINKS_CSS);

@@ -90,13 +90,13 @@ public class IAM012 extends TestBase {
 					.findElements(By.xpath(OR.getProperty("reg_passwordStrength_tickMark_labels")));
 			logger.info("TickMark Size : " + tm_list.size());
 			List<WebElement> listOfTags = ob
-					.findElements(By.xpath("(//div[@class='col-xs-12 password-validator__container'])[2]/div"));
+					.findElements(By.xpath("(//div[@class='col-xs-12 password-validator__container ng-scope'])[2]/div"));
 			logger.info("Total Tags : " + listOfTags.size());
 
 			if (listOfTags.size() == tm_list.size()) {
 				if (validity.equalsIgnoreCase("YES")) {
-					ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
-					ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+//					ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
+//					ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 					ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
 					ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
 					ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(password);
@@ -105,7 +105,11 @@ public class IAM012 extends TestBase {
 					ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 					ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("behl");
 					ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
+				}else{
+					test.log(LogStatus.FAIL, "Locator issue");
 				}
+			}else{
+				test.log(LogStatus.PASS, "Total TickMarks : "+tm_list.size());
 			}
 			closeBrowser();
 

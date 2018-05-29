@@ -1027,4 +1027,32 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		else
 			test.log(LogStatus.INFO, "Author count is less than 3");
 		}
+	
+	/**
+	 * Select Author name and navigate to selected author record page
+	 * @param authorName
+	 * @throws Exception
+	 */
+	public void selectAuthorFromSearchResults(String authorName,ExtentTest test) throws Exception {
+		waitForauthorClusterSearchResults(test);
+		pubDetailsList = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
+
+		for (WebElement eachCart : pubDetailsList) {
+			pf.getBrowserActionInstance(ob).scrollingToElement(eachCart);
+			String primaryName = eachCart.findElement(By.cssSelector(
+					OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PRIMARY_NAME_CSS
+							.toString()))
+					.getText();
+			logger.info("Primary author name-->"+primaryName);
+			if(primaryName.equals(authorName)){
+				WebElement ele=eachCart.findElement(By.cssSelector(
+						OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PRIMARY_NAME_CSS.toString()));
+				pf.getBrowserActionInstance(ob).jsClick(ele);		
+				pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
+				break;
+			}
+		}
+	}
+	
 }

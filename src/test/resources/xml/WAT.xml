@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="WAT" parallel="tests" thread-count="1">
+<suite name="WAT" parallel="tests" thread-count="10">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -17,7 +17,7 @@
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
 
-   	<test name="WAT_Login" preserve-order="true">
+	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -261,13 +261,12 @@
 		</classes>
 	</test>
 
-
 	<test name="navigate_to_name_search_results_from_record_page"
 		preserve-order="true">
 		<parameter name="lastName" value="VENUGOPALACHAR" />
 		<classes>
 			<class name="wat.WAT35"></class>
-		</classes>
+		</classes>     
 	</test>
 
 	<test name="search_results_tab_highlight" preserve-order="true">
@@ -440,10 +439,6 @@
 			<class name="wat.WAT63"></class>
 		</classes>
 	</test>
-
-
-
-
 
 	<test name="WAT_Author_Combine_Selectall" preserve-order="true">
 		<classes>
@@ -990,10 +985,91 @@
 		<parameter name="dropdownOptions"
 	value="Relevance (Top hits, aggregated by count)|Publication years (newest first)|Publication years (oldest first)/"></parameter>
 		<classes>
+		<class name="wat.WAT169"></class>
 		</classes>
 	</test>
-
-	<test name="Test_WelcomeNote" preserve-order="true">
+	
+	<test name="author_record_last_name_match_recommend_paper_last_name" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, ROBERT E." />
+		<classes>
+		<class name="wat.WAT170"></class>
+		</classes>
+	</test>
+	
+	<test name="author_record_first_name_not_match_recommend_paper_last_name" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, ROBERT E." />
+		<classes>
+		<class name="wat.WAT171"></class>
+		</classes>
+	</test>
+	
+	<test name="recommend_paper_last_names_match_atleast_one_author_lastname" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, ROBERT E." />
+		<classes>
+		<class name="wat.WAT172"></class>
+		</classes>
+	</test>
+	
+	<test name="combine_recommend_paper_last_names_match_atleast_one_author_lastname" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+		<class name="wat.WAT173"></class>
+		</classes>
+	</test>
+	
+	<test name="publications_more_link" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, RB" />
+		<classes>
+		<class name="wat.WAT174"></class>
+		</classes>
+	</test>
+	
+	<test name="publications_less_link" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, RB" />
+		<classes>
+		<class name="wat.WAT175"></class>
+		</classes>
+	</test>
+	
+	<test name="publications_more_to_less_link" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, RB" />
+		<classes>
+		<class name="wat.WAT176"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="combined_author_record_page_organizations" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+		<class name="wat.WAT177"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="combined_author_record_page_organizations_tab" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+		<class name="wat.WAT178"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="combined_author_record_page_organizations_count" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+		<class name="wat.WAT179"></class>
+		</classes>
+	</test>
+	
+	
+	 <test name="Test_WelcomeNote" preserve-order="true">
 		<classes>
 			<class name="wat.WAT123"></class>
 		</classes>
@@ -1061,4 +1137,76 @@
 			<class name="wat.WAT132"></class>
 		</classes>
 	</test>
+	
+	<test name="Test_Curation_mode_functionality"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT133"></class>
+		</classes>
+	</test>
+	
+	<test name="Test_Suggest_Update_btn_functionality"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT134"></class>
+		</classes>
+	</test>
+	
+	<test name="Test_Curation_Accept_Recommendation"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT135"></class>
+		</classes>
+	</test>
+	
+	<test name="Test_Curation_Reject_Recommendation"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT136"></class>
+		</classes>
+	</test>
+	
+	<test name="Test_Curation_cancel_functionality"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT137"></class>
+		</classes>
+	</test> 
+	
+	<test name="Test_Pre_Curation_functionality"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT138"></class>
+		</classes>
+	</test> 
+	
+	<test name="Test_Submit_Update_btn"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT139"></class>
+		</classes>
+	</test>
+	
+		<test name="Test_Single_publication_remove"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT140"></class>
+		</classes>
+	</test>
+	
+	<test name="Test_Publication_Count_value"
+		preserve-order="true">
+		<classes>
+			<class name="wat.WAT141"></class>
+		</classes>
+	</test> 
+	
+	<test name="Test_Publication_Cancel_btn"
+		preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+			<class name="wat.WAT142"></class>
+		</classes>
+	</test>
+	
 </suite>

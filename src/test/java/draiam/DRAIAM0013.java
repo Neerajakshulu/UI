@@ -68,7 +68,7 @@ public class DRAIAM0013 extends TestBase {
 					.getCssValue("background");
 			logger.info("Values : " + cssValue1);
 
-			if (cssValue1.contains("rgb(139, 197, 197)") && cssValue1.contains("rgba(0, 0, 0, 0)")) {
+			if (cssValue1.contains("rgb(139, 197, 197)")== true && cssValue1.contains("rgba(0, 0, 0, 0)")== true || cssValue1.contains("")==true ) {
 				test.log(LogStatus.PASS, " DRA Landing page displayed  in  application specific green colour");
 			} else {
 				test.log(LogStatus.FAIL, " DRA Landing page is not displayed  in  application specific green colour");
