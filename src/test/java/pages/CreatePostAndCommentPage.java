@@ -38,8 +38,10 @@ public class CreatePostAndCommentPage extends TestBase {
 		commentSizeBeforeAdd = pf.getProfilePageInstance(ob).getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		BrowserWaits.waitTime(8);
-		WebElement commentArea = ob.findElement(By.xpath("//textarea[@placeholder='Join the discussion']"));
 		scrollingToElementofAPage();
+		WebElement commentArea = ob.findElement(By.xpath("//textarea[@placeholder='Join the discussion']"));
+		//scrollingToElementofAPage();
+		BrowserWaits.waitTime(2);
 		commentArea.click();
 		BrowserWaits.waitTime(2);
 		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
