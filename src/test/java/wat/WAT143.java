@@ -1,6 +1,5 @@
 package wat;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -11,24 +10,22 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class to Verify that when a user clicks on curate button each Publication
- * should have a "X" symbol, which upon clicking will remove the Publication
- * from the combined author publication list.
- * 
+ * Class to "Verify that for a Combined author The left-to-right order of the
+ * metrics in the Author Metadata area of the Author Record should be: h-index
+ * Sum of Times Cited Citing Articles"
  * 
  * @author UC225218
  *
  */
-public class WAT142 extends TestBase {
+public class WAT143 extends TestBase {
 
 	static int status = 1;
 	int i;
-	int aaa;
+	String text = "H-INDEX";
 
 	/**
 	 * Method to displaying JIRA ID's for test case in specified path of Extent
@@ -110,38 +107,47 @@ public class WAT142 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that when a user clicks on curate button each
-	 * Publication should have a "X" symbol, which upon clicking will remove the
-	 * Publication from the combined author publication list.
+	 * Method to "Verify that for a Combined author The left-to-right order of
+	 * the metrics in the Author Metadata area of the Author Record should be:
+	 * h-index Sum of Times Cited Citing Articles"
 	 * 
 	 * @throws Exception,
 	 *             When Something unexpected
 	 */
 	@Test(dependsOnMethods = { "searchAuthorCluster" })
-	public void testPubDeletionForCombinedAuthor() throws Exception {
+	public void testMetricsForCombinedAuthor() throws Exception {
 		try {
+			test.log(LogStatus.INFO, "Checking wheather H-Index metrics is displayed");
 			Assert.assertTrue(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH).isDisplayed(),
-					"Remove Publication button is not displayed");
-			test.log(LogStatus.INFO, "Remove Publication button is displayed for each publication");
-			test.log(LogStatus.INFO, "Reading total publication count");
-			int pubCountBeforeRemoval = pf.getAuthorRecordPage(ob).getPublicationCount();
-			for (int x = 1; x<6; x++) {
-				test.log(LogStatus.INFO, "Removing " + x + "Publication.");
-				String j = OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_PARAMETERIZED_XPATH.toString();
-				ob.findElement(By.xpath(j.replaceAll("q", String.valueOf(x)))).click();
-				BrowserWaits.waitTime(2);
-				waitForPageLoad(ob);
-			}
-			test.log(LogStatus.INFO, "Removed 5 Publications.");
-			test.log(LogStatus.INFO, "Reading Current publication count");
-			int pubCountAfterRemoval = pf.getAuthorRecordPage(ob).getPublicationCount();
-			test.log(LogStatus.INFO, "Asserting with the Initial Publication count");
-			Assert.assertEquals(pubCountAfterRemoval, pubCountBeforeRemoval - 5);
-			test.log(LogStatus.PASS, "Combined Author publication deleted matches with the displayed count");
+					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_METADATA_HINDEX_XPATH).isDisplayed(),
+					"H-Index metrics is not displayed");
+			Assert.assertEquals(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_METADATA_HINDEX_XPATH).getText().trim(), text.trim(),
+					"H-Index metrics text is not matching");
+			test.log(LogStatus.INFO, "H-Index metrics is displayed and text is present as expected");
+			test.log(LogStatus.INFO, "Checking wheather Sum of times cited metrics is displayed");
+			Assert.assertTrue(
+					pf.getBrowserActionInstance(ob)
+							.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_METADATA_SUMOFTIMESCITED_XPATH).isDisplayed(),
+					"Sum of times cited metrics is not displayed");
+			Assert.assertTrue(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_METADATA_SUMOFTIMESCITED_XPATH).getText()
+					.contains("SUM OF TIMES CITED"), "Sum of Times Cited metrics text is not matching");
+			test.log(LogStatus.INFO, "Sum of Times Cited metrics is displayed and text is present as expected");
+			test.log(LogStatus.INFO, "Checking wheather Citing articles metrics is displayed");
+			Assert.assertTrue(
+					pf.getBrowserActionInstance(ob)
+							.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_METADATA_CITINGARTICLES_XPATH).isDisplayed(),
+					"Citing articles metrics is not displayed");
+			Assert.assertTrue(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_METADATA_CITINGARTICLES_XPATH).getText()
+					.contains("CITING ARTICLES"), "Citing Articles metrics text is not matching");
+			test.log(LogStatus.INFO, "Citing Articles metrics is displayed and text is present as expected");
+			test.log(LogStatus.PASS, "All 3 metrics are displayed one after the other as expected");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Combined Author Publication count before and after not matching", "Curation_issue");
+			logFailureDetails(test, t, "Metrics in Combined author page is not displayed as expected",
+					"Metric_display_issue");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 	}
