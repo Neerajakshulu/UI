@@ -1242,6 +1242,14 @@
 		<classes>
 			<class name="wat.WAT143"></class>
 		</classes>
+	</test> 
+	
+	<test name="Test_Metrics_Count"
+			preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+			<class name="wat.WAT144"></class>
+		</classes>
 	</test>
 	
 </suite>

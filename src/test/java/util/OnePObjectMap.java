@@ -1438,8 +1438,11 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_ALL_PUBLICATION_REMOVE_BTN_XPATH("//wat-author-record-publications[@class='ng-scope ng-isolate-scope']/descendant::button[@class='wui-icon-only-btn wui-icon-only-btn']"),
 	WAT_AUTHOR_RECORD_METADATA_HINDEX_XPATH("//div[contains(text(),'H-index')]"),
 	WAT_AUTHOR_RECORD_METADATA_SUMOFTIMESCITED_XPATH("//div[div[contains(text(),'H-index')]]/following-sibling::div[1]"),
+	WAT_AUTHOR_RECORD_METADATA_SUMOFTIMESCITED_VALUE_XPATH("(//div[@class='wui-title ng-binding'])[2]"),
 	WAT_AUTHOR_RECORD_METADATA_CITINGARTICLES_XPATH("//div[div[contains(text(),'H-index')]]/following-sibling::div[2]"),
-
+	WAT_AUTHOR_RECORD_METADATA_CITINGARTICLES_VALUE_XPATH("(//div[@class='wui-title ng-binding'])[3]"),
+	
+	
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
 	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),
 	DRA_SSO_LOGIN_PAGE_LOGIN_BUTTON_CSS("input[class='btn btn-primary btn-lg']"),
