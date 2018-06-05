@@ -66,8 +66,8 @@ public class Watchlist008 extends TestBase {
 		try {
 
 			// Opening browser
-			openBrowser();
-			// runOnSauceLabsFromLocal("Windows","Chrome");
+			//openBrowser();
+			runOnSauceLabsFromLocal("Windows","IE");
 
 			try {
 				maximizeWindow();
@@ -105,9 +105,11 @@ public class Watchlist008 extends TestBase {
 			for (int i = 0; i < 1; i++) {
 
 				 watchButton = watchButtonList.get(i);
-				watchButton.click();
+				 jsClick(ob, watchButton);
+				//watchButton.click();
 				Thread.sleep(5000);
-				ob.findElement(By.linkText(newWatchlistName)).click();
+				jsClick(ob,ob.findElement(By.linkText(newWatchlistName)));
+				//ob.findElement(By.linkText(newWatchlistName)).click();
 				Thread.sleep(3000);
 				ob.findElement(By.xpath("//input[@type='text']")).click();
 			}

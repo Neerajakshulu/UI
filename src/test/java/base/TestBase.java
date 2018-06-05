@@ -1521,7 +1521,8 @@ public class TestBase {
 
 		// Navigate to the watch list landing page
 		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
-		ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
+		jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
+		//ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
 		waitForElementTobeVisible(ob, By.xpath("//aside[@class='watchlist-side-menu__refine-list wui-side-menu']"), 60);
 
 		// Getting all the watch lists
