@@ -403,6 +403,32 @@ public class AuthorRecordPage extends TestBase {
 				"User not taken to the ORCID page of the Author");
 		test.log(LogStatus.PASS, "User is taken to the ORCID page of the Author successfully");
 	}
+	
+	/**
+	 * Method for to check ORCiD as URI
+	 * @throws Exception
+	 * @throws InterruptedException
+	 */
+	public void orcidAsURI() throws Exception{
+		String ORCID = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LINK_XPATH).getAttribute("href");
+		logger.info("ORCID"+ORCID);
+		if(!(StringUtils.isNotEmpty(ORCID) && StringUtils.contains(ORCID, "https://orcid.org/"))){
+			throw new Exception("Author record page ORCID not displayed as URI");
+		}
+	}
+	
+	/**
+	 * Method for to check RID as URI
+	 * @throws Exception
+	 * @throws InterruptedException
+	 */
+	public void ridAsURI() throws Exception{
+		String rid = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RESEARCHERID_LINK_XPATH).getAttribute("href");
+		logger.info("RID-->"+rid);
+		if(!(StringUtils.isNotEmpty(rid) && StringUtils.contains(rid,"http://www.researcherid.com/rid/"))){
+			throw new Exception("Author record page RID not displayed as URI");
+		}
+	}
 
 	/**
 	 * Method for to check RID Functionality

@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="WAT" parallel="tests" thread-count="10">
+<suite name="WAT" parallel="tests" thread-count="1">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -1092,6 +1092,22 @@
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
 			<class name="wat.WAT183"></class>
+		</classes>
+	</test>
+	
+	<test name="authors_orcid_uri" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, JOHN M." />
+		<classes>
+			<class name="wat.WAT184"></class>
+		</classes> 
+	</test>
+	
+	<test name="authors_rid_uri" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, JOHN M." />
+		<classes>
+			<class name="wat.WAT185"></class>
 		</classes>
 	</test>
 	
