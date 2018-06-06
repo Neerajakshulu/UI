@@ -19,6 +19,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -95,7 +96,7 @@ public class Authoring8 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication")
-	@Parameters({"username", "password", "article", "completeArticle"})
+	@Parameters({"username", "password", "sampleArticle", "completeArticle"})
 	public void chooseArtilce(String username,
 			String password,
 			String article,
@@ -137,9 +138,11 @@ public class Authoring8 extends TestBase {
 			WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
 			innerTextBox.sendKeys("x");
 			innerTextBox.sendKeys(Keys.BACK_SPACE);
+			BrowserWaits.waitTime(3);
 			 //((JavascriptExecutor)ob).executeScript("document.getElementByXpath('//div[@class='fr-element fr-view']').value='Q '");
 
 			pf.getBrowserActionInstance(ob).scrollingPageDown();
+			BrowserWaits.waitTime(3);
 			String minValidErrMsg = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			// System.out.println("Min Validation Error

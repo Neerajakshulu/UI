@@ -79,6 +79,7 @@ public class Authoring19 extends TestBase {
 			pf.getPostCommentPageInstance(ob).enterArticleComment(comment);
 			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 			pf.getLoginTRInstance(ob).logOutApp();
+			BrowserWaits.waitTime(3);
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME3", "PASSWORD3");
@@ -99,11 +100,12 @@ public class Authoring19 extends TestBase {
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
 				if (commentText.contains(PROFILE_NAME)) {
+					BrowserWaits.waitTime(5);
 					flagWe = commentsList.get(i).findElement(
 							By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString()));
 					if (flagWe.getAttribute("class").contains("fa-flag-o")) {
 						scrollElementIntoView(ob, flagWe);
-						//BrowserWaits.waitTime(10);
+						//BrowserWaits.waitTime(5);
 						jsClick(ob, flagWe);
 						//BrowserWaits.waitTime(5);
 						break;
@@ -119,6 +121,7 @@ public class Authoring19 extends TestBase {
 			pf.getpostRVPageInstance(ob).clickFlagButtonInFlagModal();
 
 			pf.getLoginTRInstance(ob).logOutApp();
+			BrowserWaits.waitTime(3);
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME5", "PASSWORD5");

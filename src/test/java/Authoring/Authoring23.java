@@ -85,7 +85,7 @@ public class Authoring23 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication")
-	@Parameters({"username", "password", "article", "completeArticle"})
+	@Parameters({"username", "password", "sampleArticle", "completeArticle"})
 	public void chooseArtilce(String username,
 			String password,
 			String article,

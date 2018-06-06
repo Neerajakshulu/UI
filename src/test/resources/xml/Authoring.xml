@@ -8,6 +8,7 @@
 	<parameter name="username" value="user1testautomation@gmail.com"/>
 	<parameter name="password" value="Neon@123"/>
 	<parameter name="article" value="COPD"/>
+	<parameter name="sampleArticle" value="sample"/>
 	<parameter name="completeArticle" value="Differential diagnosis between asthma and COPD"/>
 	<parameter name="addComments" value="Testing Comments"/>
 
