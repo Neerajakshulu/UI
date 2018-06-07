@@ -1297,8 +1297,9 @@ public enum OnePObjectMap {
 	WAT_PROFILE_NAME_XPATH("//div[@class='wui-subtitle wui-profile-flyout__name ng-binding']"),
 	WAT_PROFILE_PAGE_PROFILE_TEXT_XPATH("//h2[text()='Profile']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_RECENT_PUBLICATIONS_CSS("button[event-category='wat-recent-publications']"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_RECENT_HIDE_PUBLICATIONS_CSS("button[class*='wat-search-results-publications']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_HIDE_PUBLICATIONS_CSS("button[event-category='wat-hide-publications']"),
-	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_TOP_PUBLICATIONS_CSS("div[ng-repeat='publication in vm.publications track by $index']"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_TOP_PUBLICATIONS_CSS("div[ng-repeat='publication in vm.publications track by $index'][class='ng-scope']"),
 	WAT_SEARCH_RESULTS_TAB_HIGHLIGHT_XPATH("//span[text()='Search Results']/ancestor::li"),
 
 	WAT_ORCID_SEARCH_BTN_XPATH("//span[text()='ORCiD search']"),

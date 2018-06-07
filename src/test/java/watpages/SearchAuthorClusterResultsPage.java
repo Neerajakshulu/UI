@@ -240,6 +240,54 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 
 		}
 	}
+	
+	
+	/**
+	 * Method for validate Recent and Hide Publications
+	 * 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void recentAndHidePublications(ExtentTest test) throws Exception {
+		waitForauthorClusterSearchResults(test);
+		pubDetailsList = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
+		recentPublications = pubDetailsList.get(0).findElements(By.cssSelector(
+				OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_RECENT_HIDE_PUBLICATIONS_CSS.toString()));
+		if (recentPublications.size() > 0) {
+			test.log(LogStatus.INFO, "Recent Publications link available in Publication cart");
+			pf.getBrowserActionInstance(ob).scrollingToElement(recentPublications.get(0));
+			pf.getBrowserActionInstance(ob).jsClick(recentPublications.get(0));
+			BrowserWaits.waitTime(4);
+			test.log(LogStatus.INFO, "Click Recent Publications link and it turns into Hide Publications");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
+					OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_HIDE_PUBLICATIONS_CSS);
+			List<WebElement> topPubs = pubDetailsList.get(0).findElements(By.cssSelector(
+					OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_TOP_PUBLICATIONS_CSS.toString()));
+			
+			logger.info("pub text-->"+recentPublications.get(1).getText());
+			logger.info("top publications-->" + topPubs.size());
+			
+			if (!((topPubs.size() <= 3) && StringUtils.equals(recentPublications.get(1).getText(),"Hide publications")
+					&& StringUtils.isNotEmpty(topPubs.get(0).getText())
+					&& StringUtils.isNotEmpty(topPubs.get(1).getText())
+					&& StringUtils.isNotEmpty(topPubs.get(2).getText()))) {
+				test.log(LogStatus.FAIL, "Top 3 Recent Publications displayed");
+				throw new Exception("Top 3 publications are not displayed while click Recent Publications");
+			}
+			pf.getBrowserActionInstance(ob).jsClick(recentPublications.get(0));
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
+					OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_RECENT_PUBLICATIONS_CSS);
+			List<WebElement> topPubsAfterHide = pubDetailsList.get(0).findElements(By.cssSelector(
+					OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_TOP_PUBLICATIONS_CSS.toString()));
+			logger.info("pub text-->"+recentPublications.get(0).getText());
+			logger.info("Hide publications-->" + topPubsAfterHide.size());
+			if (!(topPubsAfterHide.size() == 0 && StringUtils.equals(recentPublications.get(0).getText(),"Recent publications"))) {
+				test.log(LogStatus.FAIL, "Recent Publications Not hidden after clicking on Hide Publications");
+				throw new Exception("Recent Publications Not hidden after clicking on Hide Publications");
+			}
+		}
+	}
 
 	/**
 	 * Method for Author Cluster Search Results page fields in each cart

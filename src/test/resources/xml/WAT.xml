@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="WAT" parallel="tests" thread-count="1">
+<suite name="WAT" parallel="tests" thread-count="10">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -16,7 +16,7 @@
 	<parameter name="CountryName2" value="USA"></parameter>
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
-  	<test name="WAT_Login" preserve-order="true">
+	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -1108,6 +1108,13 @@
 		<parameter name="authorName" value="TRANQUADA, JOHN M." />
 		<classes>
 			<class name="wat.WAT185"></class>
+		</classes>
+	</test> 
+		
+	<test name="recent_and_hide_publications" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+			<class name="wat.WAT64"></class>
 		</classes>
 	</test>
 	
