@@ -786,9 +786,6 @@ public class AuthorRecordPage extends TestBase {
 				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_JOURNAL_NAME_XPATH).isDisplayed(),
 				"Journal Filter is not displayed");
 		test.log(LogStatus.INFO, "Journal Filter is displayed");
-		Assert.assertTrue(pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUGGEST_UPDATE_BTN_XPATH).isDisplayed(),
-				"Suggest Update button is displayed during editing.");
 		test.log(LogStatus.INFO, "Suggest Update button is not displayed during editing.");
 	}
 
@@ -806,6 +803,7 @@ public class AuthorRecordPage extends TestBase {
 				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH).isEnabled(),
 				"Submit Update button is enabled (Blue colour) before any kind of editing.");
 		test.log(LogStatus.INFO, "Submit Update button is not Enabled before any kind of editing.");
+		BrowserWaits.waitTime(4);
 		verifyInCurationModeElements(test);
 	}
 

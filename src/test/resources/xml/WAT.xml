@@ -1110,6 +1110,14 @@
 			<class name="wat.WAT185"></class>
 		</classes>
 	</test> 
+	
+	<test name="accepted_rejected_recommend_paper_last_names_match_atleast_one_author_lastname" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, JOHN M." />
+		<classes>
+			<class name="wat.WAT186"></class>
+		</classes>
+	</test> 
 		
 	<test name="recent_and_hide_publications" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
