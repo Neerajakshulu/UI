@@ -16,7 +16,7 @@
 	<parameter name="CountryName2" value="USA"></parameter>
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
-	<test name="WAT_Login" preserve-order="true">
+<!-- 	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -1317,5 +1317,20 @@
 		<classes>
 			<class name="wat.WAT149"></class>
 		</classes>
-		</test> 
+		</test>  -->
+		
+	<test name="Test_Recommendation_Count_Single"
+			preserve-order="true">
+		<classes>
+			<class name="wat.WAT190"></class>
+		</classes>
+	</test> 
+	
+	<test name="Test_Recommendation_Count_Combined"
+			preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+			<class name="wat.WAT191"></class>
+		</classes>
+	</test>
 </suite>
