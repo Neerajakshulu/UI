@@ -48,7 +48,8 @@ public class HeaderFooterLinksPage extends TestBase {
 			}
 
 			else if (headerFooterLinks[i].equalsIgnoreCase("Terms of Use")){   
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK);
+				//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK_CSS);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK_CSS);
 				pf.getBrowserWaitsInstance(ob).waitUntilText(
 						"These Terms of Use shall govern your use of this online service and associated applications","Last updated");
 				
@@ -67,8 +68,8 @@ public class HeaderFooterLinksPage extends TestBase {
 	 */
 	public void helpLinkValidation() throws Exception {
 		clickProfileImage();
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK_CSS);
 		waitForPageLoad(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Feedback or questions about Project Neon?");
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Send feedback to the Project Neon team");
@@ -83,8 +84,8 @@ public class HeaderFooterLinksPage extends TestBase {
 	 */
 	public void accountLinkValidation() throws Exception {
 		clickProfileImage();
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK_CSS);
 		waitForPageLoad(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Account", "Manage accounts", "Communications");
 	}
