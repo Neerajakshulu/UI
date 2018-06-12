@@ -49,7 +49,8 @@ public class DRAPage extends TestBase {
 	public void clickLoginDRA() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
+		fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.DRA_SEARCH_BOX_CSS.toString()), 100);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 
 	}
 
@@ -144,7 +145,8 @@ public class DRAPage extends TestBase {
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS, password);
 
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
+		fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.DRA_SEARCH_BOX_CSS.toString()), 200);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 
 	}
 
@@ -272,7 +274,8 @@ public class DRAPage extends TestBase {
 	}
 
 	public void clickProfileLink() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_PROFILE_FLYOUT_IMAGE_CSS);
+		fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.IPA_PROFILE_FLYOUT_IMAGE_CSS.toString()), 100);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_PROFILE_FLYOUT_IMAGE_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.IPA_PROFILE_FLYOUT_IMAGE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_NAME_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_PROFILE_FLYOUT_NAME_CSS);

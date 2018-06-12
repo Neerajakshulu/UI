@@ -3,6 +3,7 @@ package draiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.openqa.selenium.By;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -57,7 +58,8 @@ public class DRAIAM0011 extends TestBase {
 					LOGIN.getProperty("DRAUSERPWD11"));
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		//	BrowserWaits.waitTime(5);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_CSS);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_CSS);
+			fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_CSS.toString()), 100);
 			pf.getDraPageInstance(ob).validateInactiveaccount(test);	
 			pf.getDraPageInstance(ob).validateDRAInactiveErrorMsg(test);
 			closeBrowser();
