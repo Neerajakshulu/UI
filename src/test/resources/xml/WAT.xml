@@ -1346,5 +1346,13 @@
 		<classes>
 			<class name="wat.WAT192"></class>
 		</classes>
+	</test> 
+	
+	<test name="Test_Curation_Negative"
+			preserve-order="true">
+		<classes>
+			<class name="wat.WAT193"></class>
+		</classes>
+
 	</test>
 </suite>
