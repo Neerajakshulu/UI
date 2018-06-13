@@ -742,6 +742,21 @@ public class AuthorRecordPage extends TestBase {
 			throw new Exception("Suggest updates button is not displayed in author record page");
 		}
 	}
+	
+	
+	/**
+	 * Method for check Submit update button is displayed in Author Record page for combined author
+	 * 
+	 * @throws Exception
+	 */
+	public void checkSubmitUpdateBtn() throws Exception {
+		String submitButton = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH).getText();
+		logger.info("Actual Value : " + submitButton);
+		if (!submitButton.equals("Submit updates")) {
+			throw new Exception("Submit updates button is not displayed in author record page for combined author");
+		}
+	}
 
 
 	/**
