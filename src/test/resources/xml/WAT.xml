@@ -1361,4 +1361,11 @@
 			<class name="wat.WAT194"></class>
 		</classes>
 	</test>
+	
+	<test name="Test_MidCuration_rejoining"
+			preserve-order="true">
+		<classes>
+			<class name="wat.WAT195"></class>
+		</classes>
+	</test>
 </suite>

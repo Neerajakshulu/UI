@@ -1379,6 +1379,7 @@ public enum OnePObjectMap {
 	WAT_CANCEL_UPDATE_BTN_XPATH("//button[@class='wat-improve-author-message-cancel']"),
 	WAT_PUBLICATION_REMOVE_CHKBOX_DISABLED_XPATH("//div[@class='wui-card__body']/descendant::button[@class='wui-icon-only-btn wui-icon-only-btn ng-hide'][2]"),
 	WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH("//div[@class='wui-card'][1]/descendant::h3[@class='wui-content-title wui-content-title--medium wat-search-results-meta-title ng-scope']/a"),
+	WAT_AUTHOR_SEARCH_RESULT_SECOND_CARD_XPATH("//div[@class='wui-card'][2]/descendant::h3[@class='wui-content-title wui-content-title--medium wat-search-results-meta-title ng-scope']/a"),
 	WAT_FEEDBACK_AUTHOR_SEARCH_PAGE_XPATH("//a[contains(text(),'your feedback')]"),
 	WAT_FEEDBACK_AUTHOR_SEARCH_RESULT_PAGE_XPATH("//a[contains(text(),'Tell us what you think')]"),
 	WAT_AUTHOR_SEARCH_RESULT_PAGE_STATICTEXT_XPATH("//div[@class='wat-search-results__message']"),

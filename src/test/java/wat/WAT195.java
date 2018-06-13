@@ -14,12 +14,12 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class to Verify that user should not land into mid curation mode after returning from a cancelled curation
+ * Class to Verify that rejoining an In-Progress curation has delete option for Publication
  * 
  * @author UC225218
  *
  */
-public class WAT194 extends TestBase {
+public class WAT195 extends TestBase {
 
 	static int status = 1;
 
@@ -100,7 +100,7 @@ public class WAT194 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that user should not land into mid curation mode after returning from a cancelled curation
+	 * Method to Verify that rejoining an In-Progress curation has delete option for Publication
 	 * 
 	 * @param LastName,
 	 *            FirstName, CountryName, OrgName
@@ -118,23 +118,33 @@ public class WAT194 extends TestBase {
 			pf.getAuthorRecordPage(ob).getintoCuration(test, "SuggestUpdate");
 			test.log(LogStatus.INFO, "Removing first publication");
 			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH).click();
-			test.log(LogStatus.INFO, "Clicking cancel curation");
-			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_CANCEL_UPDATE_BTN_XPATH).click();
 			test.log(LogStatus.INFO, "Going back to search results page by clicking search results link");
 			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).click();
 			waitForPageLoad(ob);
+			test.log(LogStatus.INFO, "Clicking Second author card");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_SECOND_CARD_XPATH).click();
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
+			waitForPageLoad(ob);
+			test.log(LogStatus.INFO, "Getting into curation mode by clicking Suggest Update button");
+			pf.getAuthorRecordPage(ob).getintoCuration(test, "SuggestUpdate");
+			test.log(LogStatus.INFO, "Removing first publication");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH).click();
+			test.log(LogStatus.INFO, "Going back to search results page by clicking search results link");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).click();
+			waitForPageLoad(ob);			
 			test.log(LogStatus.INFO, "Clicking first author card");
 			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 			waitForPageLoad(ob);
-			Assert.assertFalse(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SUBMIT_UPDATE_BTN_XPATH).isEnabled(),
-					"User is able to land into mid curation mode after returning from a cancelled curation");
-			test.log(LogStatus.PASS, "User is not able to land into mid curation mode after returning from a cancelled curation");
+			Assert.assertTrue(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH).isDisplayed(),
+					"Rejoining an In-Progress curation has no delete option for Publication");
+			test.log(LogStatus.PASS, "Rejoining an In-Progress curation has delete option for Publication");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "User is able to land into mid curation mode after returning from a cancelled curation", "Curation_issue");
+			logFailureDetails(test, t, "Rejoining an In-Progress curation has no delete option for Publication", "Curation_issue");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 
