@@ -1365,7 +1365,21 @@
 	<test name="Test_MidCuration_rejoining"
 			preserve-order="true">
 		<classes>
-			<class name="wat.WAT195"></class>
+			<class name="wat.WAT195"></class> 
+		</classes>
+	</test>
+	
+	<test name="Test_Bulk_pub_removal_in_NonCuration"
+			preserve-order="true">
+		<classes>
+			<class name="wat.WAT196"></class> 
+		</classes>
+	</test>
+	
+	<test name="Test_Single_pub_removal_in_NonCuration"
+			preserve-order="true">
+		<classes>
+			<class name="wat.WAT197"></class> 
 		</classes>
 	</test>
 </suite>
