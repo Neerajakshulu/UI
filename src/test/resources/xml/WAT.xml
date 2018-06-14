@@ -1368,4 +1368,11 @@
 			<class name="wat.WAT195"></class> 
 		</classes>
 	</test>
+	
+	<test name="Test_Bulk_pub_removal"
+			preserve-order="true">
+		<classes>
+			<class name="wat.WAT196"></class> 
+		</classes>
+	</test>
 </suite>
