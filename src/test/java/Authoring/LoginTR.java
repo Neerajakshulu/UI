@@ -73,7 +73,13 @@ public class LoginTR extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 
-		closeOnBoardingModal();
+		//closeOnBoardingModal();
+		try {
+			ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).isDisplayed();
+			ob.findElement(By.xpath("//a[text()='Not now']")).click();
+		} catch (Exception e) {
+			System.out.println("Loging in to Neon without linking popup");
+		}
 	}
 
 	public void closeOnBoardingModal() throws Exception, InterruptedException {
