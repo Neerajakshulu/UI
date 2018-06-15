@@ -1445,6 +1445,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_METADATA_SUMOFTIMESCITED_VALUE_XPATH("(//div[@class='wui-title ng-binding'])[2]"),
 	WAT_AUTHOR_RECORD_METADATA_CITINGARTICLES_XPATH("//div[div[contains(text(),'H-index')]]/following-sibling::div[2]"),
 	WAT_AUTHOR_RECORD_METADATA_CITINGARTICLES_VALUE_XPATH("(//div[@class='wui-title ng-binding'])[3]"),
+	WAT_AUTHOR_RECORD_PUBLICATION_UNDO_LINK_XPATH("(//button[contains(text(),'undo')])[1]"),
 	
 	
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
