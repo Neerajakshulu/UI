@@ -1125,7 +1125,21 @@
 			<class name="wat.WAT187"></class>
 		</classes>
 	</test> 
-		
+	
+	<test name="combined_author_submit_update_modal" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+			<class name="wat.WAT188"></class>
+		</classes>
+	</test> 
+	
+	<test name="combined_author_submit_authorship_feedback_without_making_changes" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+			<class name="wat.WAT189"></class>
+		</classes>
+	</test> 	
+	
 	<test name="recent_and_hide_publications" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>

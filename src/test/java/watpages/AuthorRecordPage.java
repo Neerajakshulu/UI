@@ -757,6 +757,48 @@ public class AuthorRecordPage extends TestBase {
 			throw new Exception("Submit updates button is not displayed in author record page for combined author");
 		}
 	}
+	
+	/**
+	 * Method for submit authorship
+	 * 
+	 * @throws Exception
+	 */
+	public void submitAuthorship() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_XPATH);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_SUCCESS_TOAST_MESSAGE_CSS);
+		String toastMessage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_SUCCESS_TOAST_MESSAGE_CSS).getText();
+		logger.info("success toast message-->"+toastMessage);
+		if(!StringUtils.equals(toastMessage, "Thank you. Your contributions have been submitted. We'll notify you when this author record is updated.")){
+			throw new Exception("Authorship Feedback not submitted and no success confirmation toast notification displayed ");
+		}
+		
+	}
+	
+	/**
+	 * Method for validate Submit updates modal 
+	 * 
+	 * @throws Exception
+	 */
+	public void verifySubmitUpdatesModal() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_XPATH);
+		List<WebElement> buttons=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_BUTTONS_XPATH);
+		String header=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_HEADER_XPATH).getText();
+		List<WebElement> modalBody=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_BODY_XPATH);
+		logger.info("cancel button text-->"+buttons.get(1).getText());
+		logger.info("Submit updates button text-->"+buttons.get(2).getText());
+		logger.info("Header  text-->"+header);
+		logger.info("boddy  text-->"+modalBody.get(0).getText()+"text 2-->"+modalBody.get(1).getText());
+		
+		if (!(buttons.get(1).isEnabled()&&StringUtils.equals(buttons.get(1).getText(), "Cancel") && StringUtils.equals(buttons.get(2).getText(), "Submit updates")
+				&& StringUtils.equals(header, "Submit updates") && StringUtils.isNotEmpty(modalBody.get(0).getText()) && StringUtils.isNotEmpty(modalBody.get(1).getText()))) {
+			throw new Exception("Submit updates modal Title,body and Buttons are not available/displayed");
+		}
+		
+		
+	}
 
 
 	/**

@@ -1446,6 +1446,11 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_METADATA_CITINGARTICLES_XPATH("//div[div[contains(text(),'H-index')]]/following-sibling::div[2]"),
 	WAT_AUTHOR_RECORD_METADATA_CITINGARTICLES_VALUE_XPATH("(//div[@class='wui-title ng-binding'])[3]"),
 	WAT_AUTHOR_RECORD_PUBLICATION_UNDO_LINK_XPATH("(//button[contains(text(),'undo')])[1]"),
+	WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_XPATH("(//div[@class='modal-content'])[2]"),
+	WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_BUTTONS_XPATH("(//div[@class='modal-content'])[2]/descendant::button"),
+	WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_HEADER_XPATH("(//div[@class='modal-content'])[2]/descendant::h3"),
+	WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_BODY_XPATH("(//div[@class='modal-content'])[2]/descendant::p"),
+	WAT_AUTHOR_RECORD_SUBMIT_UPDATES_SUCCESS_TOAST_MESSAGE_CSS("div[class='wui-toast__message ng-binding']"),
 	
 	
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
