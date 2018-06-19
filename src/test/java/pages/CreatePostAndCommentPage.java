@@ -45,7 +45,7 @@ public class CreatePostAndCommentPage extends TestBase {
 		commentArea.click();
 		BrowserWaits.waitTime(2);
 		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
-		String comment = addComments + RandomStringUtils.randomNumeric(3);
+		String comment = addComments;
 		innerTextBox.sendKeys(comment);
 		Thread.sleep(1000);// after entering the comments wait for submit button
 							// to get enabled or disabled
