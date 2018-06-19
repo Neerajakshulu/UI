@@ -1057,7 +1057,8 @@ public class PostRecordViewPage extends TestBase {
 		// .sendKeys(comment);
 		// jsClick(ob, ob.findElement(
 		// By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString())));
-		BrowserWaits.waitTime(2);
+		BrowserWaits.waitTime(5);
+		fluentwaitforElement(ob, By.xpath("//textarea[@placeholder='Join the discussion']"), 100);
 		WebElement commentArea = ob.findElement(By.xpath("//textarea[@placeholder='Join the discussion']"));
 		commentArea.click();
 		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));

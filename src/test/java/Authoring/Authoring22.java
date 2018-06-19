@@ -102,7 +102,7 @@ public class Authoring22 extends TestBase {
 			Thread.sleep(6000);// wait for new comment to get added and
 								// displayed.
 			pf.getPostCommentPageInstance(ob).validateAppreciationComment(test);
-			pf.getPostCommentPageInstance(ob).validateAppreciationComment(test);
+			//pf.getPostCommentPageInstance(ob).validateAppreciationComment(test);
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Test execution ends ");
 			closeBrowser();
 		} catch (Throwable t) {
