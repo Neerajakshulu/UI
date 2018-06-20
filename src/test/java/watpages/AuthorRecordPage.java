@@ -796,10 +796,24 @@ public class AuthorRecordPage extends TestBase {
 				&& StringUtils.equals(header, "Submit updates") && StringUtils.isNotEmpty(modalBody.get(0).getText()) && StringUtils.isNotEmpty(modalBody.get(1).getText()))) {
 			throw new Exception("Submit updates modal Title,body and Buttons are not available/displayed");
 		}
-		
-		
 	}
-
+	
+	/**
+	 * Method for validate Publication count decreased or not when publication removed
+	 * 
+	 * @throws Exception
+	 */
+	public void validatePubRemoveCount() throws Exception {
+		int beforeRemove=getPublicationCount();
+		logger.info("before remove-->"+beforeRemove);
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
+		int afterRemove=getPublicationCount();
+		logger.info("before remove-->"+beforeRemove+"after remove-->"+afterRemove);
+		if(afterRemove == beforeRemove && afterRemove == beforeRemove-1){
+			throw new Exception("Publicaton count is not decreased when user removes publication for single/combined author");
+		}
+	}
 
 	/**
 	 * @throws Exception

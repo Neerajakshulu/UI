@@ -1376,38 +1376,48 @@
 		</classes>
 	</test>
 	
-	<test name="Test_MidCuration_rejoining"
-			preserve-order="true">
+	<test name="Test_MidCuration_rejoining" preserve-order="true">
 		<classes>
-			<class name="wat.WAT195"></class> 
+			<class name="wat.WAT195"/> 
 		</classes>
 	</test>
 	
-	<test name="Test_Bulk_pub_removal_in_NonCuration"
-			preserve-order="true">
+	<test name="Test_Bulk_pub_removal_in_NonCuration" preserve-order="true">
 		<classes>
-			<class name="wat.WAT196"></class> 
+			<class name="wat.WAT196"/> 
 		</classes>
 	</test>
 	
-	<test name="Test_Single_pub_removal_in_NonCuration"
-			preserve-order="true">
+	<test name="Test_Single_pub_removal_in_NonCuration" preserve-order="true">
 		<classes>
-			<class name="wat.WAT197"></class> 
+			<class name="wat.WAT197"/> 
 		</classes>
 	</test> 
 	
-	<test name="Test_Single_pub_undo_in_NonCuration"
-			preserve-order="true">
+	<test name="Test_Single_pub_undo_in_NonCuration" preserve-order="true">
 		<classes>
-			<class name="wat.WAT198"></class> 
+			<class name="wat.WAT198"/> 
 		</classes>
 	</test>
 	
-	<test name="Test_Cancel_Bulk_pub"
-			preserve-order="true">
+	<test name="Test_Cancel_Bulk_pub" preserve-order="true">
 		<classes>
-			<class name="wat.WAT199"></class> 
+			<class name="wat.WAT199"/> 
 		</classes>
+	</test>
+	
+	<test name="publication_count_decrease_single_author" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, ROBERT E." />
+		<classes>
+			<class name="wat.WAT200"></class>
+		</classes> 
+	</test> 
+	
+	<test name="publication_count_decrease_combined_author" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+			<class name="wat.WAT201"></class>
+		</classes> 
 	</test>
 </suite>
