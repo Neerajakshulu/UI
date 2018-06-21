@@ -56,7 +56,6 @@ public class Search38 extends TestBase {
 		try {
 
 			String search_query = "biology";
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -81,10 +80,11 @@ public class Search38 extends TestBase {
 			jse.executeScript("scroll(0, 250);");
 			waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 90);
 
-			// Finding out time cited values for the displayed articles in
-			// article result page
-			List<WebElement> resultTypeList = ob.findElements(By.xpath("//div[@class='row']/div[1]/h5"));
-
+			// Finding out time cited values for the displayed articles in article result page
+			
+		    List<WebElement> resultTypeList = ob.findElements(By.xpath("//span[text()='article']"));
+           
+			//List<WebElement> resultTypeList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			boolean flag = false;
 
 			for (WebElement e : resultTypeList) {

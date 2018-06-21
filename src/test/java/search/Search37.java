@@ -92,8 +92,7 @@ public class Search37 extends TestBase {
 			jse.executeScript("scroll(0, 250);");
 			
 
-			// Finding out time cited values for the displayed articles in
-			// article result page
+			// Finding out time cited values for the displayed articles in article result page
 			List<WebElement> timeCitedCountList = ob.findElements(By.xpath("//div[@class='h6 doc-info']/span[1]"));
 
 			List<Integer> purifiedTimeCitedCountList = getPurifiedTimeCitedCountList(timeCitedCountList);
@@ -155,7 +154,7 @@ public class Search37 extends TestBase {
 		String purifiedString;
 		String[] arr;
 		for (WebElement e : timeCitedCountList) {
-			arr = e.getText().split(",");
+			arr = e.getText().split("");
 			purifiedString = "";
 
 			for (int i = 0; i < arr.length; i++) {
