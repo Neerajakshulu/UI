@@ -807,7 +807,8 @@ public class AuthorRecordPage extends TestBase {
 		int beforeRemove=getPublicationCount();
 		logger.info("before remove-->"+beforeRemove);
 		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
+		waitForAjax(ob);
 		int afterRemove=getPublicationCount();
 		logger.info("before remove-->"+beforeRemove+"after remove-->"+afterRemove);
 		if(afterRemove == beforeRemove && afterRemove == beforeRemove-1){
