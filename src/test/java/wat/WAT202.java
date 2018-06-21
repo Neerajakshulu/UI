@@ -13,10 +13,10 @@ import util.BrowserWaits;
 import util.ExtentManager;
 
 /**
- * Class Verify that publication count should decrease when user removes publication for combined author	
+ * Class Verify that undo option is present until user leaves the page	
  * @author UC202376
  */
-public class WAT201 extends TestBase {
+public class WAT202 extends TestBase {
 
 	static int status = 1;
 
@@ -77,7 +77,7 @@ public class WAT201 extends TestBase {
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters("lastName")
-	public void removePublicationCombineAuthor(String lastName) throws Exception {
+	public void removePublicationRemoveUndo(String lastName) throws Exception {
 
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
@@ -86,12 +86,12 @@ public class WAT201 extends TestBase {
 			pf.getSearchAuthClusterResultsPage(ob).combineAuthorCard(test);
 			pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
 			BrowserWaits.waitTime(4);
-			test.log(LogStatus.INFO, "Verify that publication count should decrease when user removes publication for combined author");
-			pf.getAuthorRecordPage(ob).validatePubRemoveCount();
-			test.log(LogStatus.PASS, "Publication count decreased  when user removes publication for combined author");
+			test.log(LogStatus.INFO, "Verify that undo option is present until user leaves the page	");
+			pf.getAuthorRecordPage(ob).validatePubRemoveUndo();
+			test.log(LogStatus.PASS, "undo option is present for removed publication until user leaves the page");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Publication count not decreased  when user removes publication for combined author", "publicaton_count_not_decreased_when_remove");
+			logFailureDetails(test, t, "undo option is not present for removed publication until user leaves the page", "undo_option_not_present_for_removed_publication");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

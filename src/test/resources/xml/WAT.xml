@@ -16,7 +16,7 @@
 	<parameter name="CountryName2" value="USA"></parameter>
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
- 	<test name="WAT_Login" preserve-order="true">
+   <test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -1418,6 +1418,21 @@
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
 			<class name="wat.WAT201"></class>
+		</classes> 
+	</test> 
+	
+	<test name="publication_remove_undo" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+			<class name="wat.WAT202"></class>
+		</classes> 
+	</test> 
+	
+	<test name="publication_reject_updated_with_new" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, ROBERT E." />
+		<classes>
+			<class name="wat.WAT203"></class>
 		</classes> 
 	</test>
 </suite>

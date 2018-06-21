@@ -815,6 +815,48 @@ public class AuthorRecordPage extends TestBase {
 			throw new Exception("Publicaton count is not decreased when user removes publication for single/combined author");
 		}
 	}
+	
+	
+	/**
+	 * Method for validate Publication Remove undo
+	 * 
+	 * @throws Exception
+	 */
+	public void validatePubRemoveUndo() throws Exception {
+		
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
+		waitForAjax(ob);
+		String undo=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATION_UNDO_LINK_XPATH).getText();
+		logger.info("undo text-->"+undo);
+		if(!undo.trim().equals("undo")){
+			throw new Exception("Removed Publication not avaible to perform undo");
+		}
+	}
+	
+	/**
+	 * Method for validate Recommend publication rejected updated with new publication
+	 * 
+	 * @throws Exception
+	 */
+	public void validateRecommendPubRejectUpdated(ExtentTest test) throws Exception {
+		String beforeRecmPubReject= pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PUBLICATIONS_XPATH).get(0).getText();
+		logger.info("Before Recommend Reject-->"+beforeRecmPubReject);
+		getintoCuration(test, "RejectRecommendation");
+		waitForAjax(ob);
+		String afterRecmPubReject= pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PUBLICATIONS_XPATH).get(0).getText();
+		logger.info("After Recommend Reject-->"+afterRecmPubReject);
+		
+		if(afterRecmPubReject.equals(beforeRecmPubReject)){
+			throw new Exception("Rejected publication not updated with new, when user rejected recommended publication");
+		}
+	}
+	
+	
+	
+
 
 	/**
 	 * @throws Exception

@@ -9,14 +9,13 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ExtentManager;
 
 /**
- * Class Verify that publication count should decrease when user removes publication for combined author	
+ * Class Verify that rejected publication should updated with new, when user rejected recommended publication
  * @author UC202376
  */
-public class WAT201 extends TestBase {
+public class WAT203 extends TestBase {
 
 	static int status = 1;
 
@@ -76,22 +75,22 @@ public class WAT201 extends TestBase {
 	 * @throws Exception, When Something unexpected
 	 */
 	@Test(dependsOnMethods = {"testLoginWATApp"})
-	@Parameters("lastName")
-	public void removePublicationCombineAuthor(String lastName) throws Exception {
+	@Parameters({"lastName","authorName"})
+	public void removePublicationSingleAuthor(String lastName,String authorName) throws Exception {
 
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, test);
 			pf.getSearchAuthClusterResultsPage(ob).waitForauthorClusterSearchResults(test);
-			pf.getSearchAuthClusterResultsPage(ob).combineAuthorCard(test);
-			pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
-			BrowserWaits.waitTime(4);
-			test.log(LogStatus.INFO, "Verify that publication count should decrease when user removes publication for combined author");
-			pf.getAuthorRecordPage(ob).validatePubRemoveCount();
-			test.log(LogStatus.PASS, "Publication count decreased  when user removes publication for combined author");
+			pf.getSearchAuthClusterResultsPage(ob).selectAuthorFromSearchResults(authorName,test);
+			test.log(LogStatus.INFO, "Rejected publication should update with new, when user rejected recommended publication");
+			pf.getAuthorRecordPage(ob).validateRecommendPubRejectUpdated(test);
+			test.log(LogStatus.PASS, "Rejected publication should updated successfully with new, when user rejected recommended publication");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Publication count not decreased  when user removes publication for combined author", "publicaton_count_not_decreased_when_remove");
+			logFailureDetails(test, t,
+					"Rejected publication not updated successfully with new, when user rejected recommended publicationPublication count not decreased  when user removes publication for single author",
+					"Rejected_publication_not_updated_with_new_pub");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 
