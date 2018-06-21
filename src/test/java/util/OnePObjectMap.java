@@ -1428,6 +1428,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_JOURNAL_NAME_XPATH("//button[contains(text(),'Journals')]"),
 	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_AUTHOR_BULK_FIRST_CHECKBOX_XPATH("(//span[@class='wui-checkbox__visible'])[1]"),
 	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_AUTHOR_BULK_FIRST_CHECKBOX_UNCHECKED_XPATH("(//input[@class='wui-checkbox__hidden ng-pristine ng-untouched ng-valid'])[1]"),
+	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_AUTHOR_BULK_ALL_CHECKBOX_UNCHECKED_XPATH("//input[@class='wui-checkbox__hidden ng-pristine ng-untouched ng-valid']"),
 	WAT_AUTHOR_RECORD_PAGE_RECOMMENDATION_BOX_TEXT_XPATH("//div[contains(text(),'Do some of these records belong to the same author?')]"),
 	WAT_AUTHOR_RECORD_RECOMMEND_PAPER_AUTHORS_XPATH("(//div[@class='wui-card__body-content'])[2]/descendant::div[@class='wui-descriptor wat-search-results-publications-authors wat-author-record-publications-authors']"),
 	WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH("descendant::*[contains(@class,'wat-author-record-publications-author ng-binding')]"),

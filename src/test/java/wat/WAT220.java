@@ -1,5 +1,8 @@
 package wat;
 
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -14,16 +17,16 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class to Verify that If after canceling, the user then begins curation
- * again,the Publications List should contain all publications, and the Bulk
- * Remove panels should have all values un-checked.
+ * Class to Verify that if after canceling, the user then begins curation again,
+ * they should start from a "blank slate" state
  * 
  * @author UC225218
  *
  */
-public class WAT199 extends TestBase {
+public class WAT220 extends TestBase {
 
 	static int status = 1;
+	String classValue = "wui-checkbox__hidden ng-pristine ng-untouched ng-valid";
 
 	/**
 	 * Method to displaying JIRA ID's for test case in specified path of Extent
@@ -102,9 +105,8 @@ public class WAT199 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that If after canceling, the user then begins curation
-	 * again,the Publications List should contain all publications, and the Bulk
-	 * Remove panels should have all values un-checked.
+	 * Method to Verify that if after canceling, the user then begins curation
+	 * again, they should start from a "blank slate" state
 	 * 
 	 * @param LastName,
 	 *            FirstName, CountryName, OrgName
@@ -118,6 +120,15 @@ public class WAT199 extends TestBase {
 			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
+			test.log(LogStatus.INFO,
+					"Checking whether undo option for removed Publication is available before getting into curation mode in Author record page");
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATION_UNDO_LINK_XPATH)
+					.isDisplayed())
+				throw new Exception(
+						"Undo option for removed Publication is available before getting into curation mode in Author record page");
+			test.log(LogStatus.PASS,
+					"Undo option for removed Publication is not available before getting into curation mode in Author record page");
+
 			test.log(LogStatus.INFO, "Getting into curation mode by clicking Suggest Update button");
 			pf.getAuthorRecordPage(ob).getintoCuration(test, "SuggestUpdate");
 			test.log(LogStatus.INFO, "Removing first publication");
@@ -148,6 +159,8 @@ public class WAT199 extends TestBase {
 					.isDisplayed())
 				throw new Exception(
 						"Undo option for removed Publication is available before getting into curation mode in Author record page");
+			test.log(LogStatus.PASS,
+					"Undo option for removed Publication is not available before getting into curation mode after returning from cancel curation in Author record page");
 			test.log(LogStatus.INFO,
 					"Checking whether previously checked bulk removal selection is still available in Author record page");
 			Assert.assertEquals(
@@ -155,10 +168,18 @@ public class WAT199 extends TestBase {
 							.getElement(
 									OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_AUTHOR_BULK_FIRST_CHECKBOX_UNCHECKED_XPATH)
 							.getAttribute("class"),
-					"wui-checkbox__hidden ng-pristine ng-untouched ng-valid",
+					classValue,
 					"The Publications List dosent contains all publications or the Bulk Remove panels dosent have all values un-checked after returning from a cancelled curation");
+			List<WebElement> all_checkboxes = pf.getBrowserActionInstance(ob).getElements(
+					OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_AUTHOR_BULK_ALL_CHECKBOX_UNCHECKED_XPATH);
+			for (WebElement checkBox : all_checkboxes) {
+				if (!checkBox.getAttribute("class").equals(classValue)) {
+					throw new Exception(
+							"Previously checked bulk removal selection is still available in Author record page");
+				}
+			}
 			test.log(LogStatus.PASS,
-					"The Publications List contains all publications and the Bulk Remove panels have all values un-checked after returning from a cancelled curation");
+					"Bulk Remove panels have all values un-checked after returning from a cancelled curation");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t,
