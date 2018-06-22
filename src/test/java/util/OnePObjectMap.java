@@ -1423,6 +1423,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_RECOMMENDATION_PUBLICATION_ADDED_COUNT_XPATH("(//div[@class='wui-subtitle wat-author-record-recommended-publications-added-count ng-binding ng-scope'])[2]"),
 	WAT_AUTHOR_RECORD_PAGE_RECOMMENDATION_BOX_PUBLICATION_ADDED_TEXT_XPATH("//div[contains(text(),'Publications Added')]"),
 	WAT_AUTHOR_RECORD_PAGE_FIRST_RECOMMENDATION_PUBLICATION_NAME_XPATH("(//div[div[button[@aria-label='Accept']]])[1]/following-sibling::wat-author-record-publication/div/div[1]"),
+	WAT_AUTHOR_RECORD_PAGE_SECOND_RECOMMENDATION_PUBLICATION_NAME_XPATH("(//div[div[button[@aria-label='Accept']]])[2]/following-sibling::wat-author-record-publication/div/div[1]"),
 	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_RESET_LINK_XPATH("//button[contains(text(),'Reset')]"),
 	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_AUTHOR_NAME_XPATH("//button[contains(text(),'Author name')]"),
 	WAT_AUTHOR_RECORD_PAGE_IN_CURATION_FILTER_JOURNAL_NAME_XPATH("//button[contains(text(),'Journals')]"),

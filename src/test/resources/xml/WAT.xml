@@ -1443,4 +1443,11 @@
 			<class name="wat.WAT203"></class>
 		</classes> 
 	</test>
+	
+	<test name="Test_Cancel_Recommendation"
+			preserve-order="true">
+		<classes>
+			<class name="wat.WAT221"></class> 
+		</classes>
+	</test>
 </suite>
