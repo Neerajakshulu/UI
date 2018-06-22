@@ -91,9 +91,10 @@ public class Search37 extends TestBase {
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0, 250);");
 			
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()),60);
 
 			// Finding out time cited values for the displayed articles in article result page
-			List<WebElement> timeCitedCountList = ob.findElements(By.xpath("//div[@class='h6 doc-info']/span[1]"));
+			List<WebElement> timeCitedCountList = ob.findElements(By.xpath("//results-metrics[div[@class='wui-metric ng-scope']]/div[3]/span[1]"));
 
 			List<Integer> purifiedTimeCitedCountList = getPurifiedTimeCitedCountList(timeCitedCountList);
 			List<Integer> sortedTimeCitedCountList = new LinkedList<Integer>(purifiedTimeCitedCountList);
@@ -132,23 +133,6 @@ public class Search37 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-
-	@AfterTest
-	public void reportTestResult() {
-		extent.endTest(test);
-
-		// if (status == 1)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "PASS");
-		// else if (status == 2)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "FAIL");
-		// else
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "SKIP");
-
-	}
-
 	private List<Integer> getPurifiedTimeCitedCountList(List<WebElement> timeCitedCountList) {
 		LinkedList<Integer> list = new LinkedList<Integer>();
 		String purifiedString;
@@ -167,4 +151,20 @@ public class Search37 extends TestBase {
 		return list;
 	}
 
+	@AfterTest
+	public void reportTestResult() {
+		extent.endTest(test);
+
+		// if (status == 1)
+		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
+		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "PASS");
+		// else if (status == 2)
+		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
+		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "FAIL");
+		// else
+		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
+		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "SKIP");
+
+	}
+	
 }

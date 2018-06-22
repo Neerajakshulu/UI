@@ -91,7 +91,7 @@ public class Search34 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()),60);
 			// Finding out the time cited values for the displayed items in all
 			// result page
-			List<WebElement> timeCitedCountList = ob.findElements(By.xpath("//div[@class='h6 doc-info']/span[1]"));
+			List<WebElement> timeCitedCountList = ob.findElements(By.xpath("//div[span[text()='Times Cited']]/span[1]"));
 
 			List<Integer> purifiedTimeCitedCountList = getPurifiedTimeCitedCountList(timeCitedCountList);
 			List<Integer> sortedTimeCitedCountList = new LinkedList<Integer>(purifiedTimeCitedCountList);
@@ -136,7 +136,7 @@ public class Search34 extends TestBase {
 		String purifiedString;
 		String[] arr;
 		for (WebElement e : timeCitedCountList) {
-			arr = e.getText().split(",");
+			arr = e.getText().split("");
 			purifiedString = "";
 
 			for (int i = 0; i < arr.length; i++) {
