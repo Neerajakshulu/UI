@@ -419,7 +419,7 @@ public enum OnePObjectMap {
 	SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS("div[class^='add-to-group-toggle'][class$='dropdown open'] div[class='ne-action-dropdown dropdown-menu']"),
 	// Added by bhavya
 	SEARCH_RESULT_PAGE_SORT_DROPDOWN_ITEMS_CSS("ul[class='wui-dropdown__menu dropdown-menu']"),
-	SEARCH_RESULT_PAGE_RESULTS_LINK_CSS("div[class='wui-card__body-content'] a"),
+	SEARCH_RESULT_PAGE_RESULTS_LINK_CSS("P[class='wui-title']"),
 	SEARCH_RESULT_PAGE_FILTER_LIST_CSS("div[class='panel-heading']"),
 	SEARCH_RESULT_PAGE_FILTER_VALUES_CSS("span[class='wui-checkbox__visible']"),
 	SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS("div[class='col-xs-12'] a"),

@@ -74,118 +74,83 @@ public class Search44 extends TestBase {
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]"),
-					30);
-			ob.findElement(By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]")).click();
+			 waitForAjax(ob);
+				// Check the filter is collapsed by default
+				collapseFilter();
+				// Check if the filter expanded
+				expandFilter();
+				// Check if filter is collapsible
+				collapseFilter();
+				test.log(LogStatus.PASS, "Institutions filter is collapsible");
 
-			if (!checkElementPresence("filter_up_icon")) {
+				closeBrowser();
 
-				test.log(LogStatus.FAIL, "Filter not getting expended");// extent report
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_filter_not_expanding")));// screenshot
-
-			}
-
-			jsClick(ob, ob.findElement(By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]")));
-
-			List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("filter_up_icon")));
-			System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-			System.out.println(mylist.size());
-			System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-
-			try {
-
-				Assert.assertEquals(mylist.size(), 0);
-
-				test.log(LogStatus.PASS, "Filter getting collapsed");// extent report
-
-			}
-
-			catch (Throwable t) {
-
-				test.log(LogStatus.FAIL, "Filter not getting collapsed");// extent report
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Something unexpected happened");// extent
+																			// reports
+				// next 3 lines to print whole testng error in report
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_filter_not_getting_collapsed")));// screenshot
-
+				// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+				// captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+				closeBrowser();
 			}
-			closeBrowser();
 
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-																		// reports
-			// next 3 lines to print whole testng error in report
-			StringWriter errors = new StringWriter();
-			t.printStackTrace(new PrintWriter(errors));
-			test.log(LogStatus.INFO, errors.toString());// extent reports
-			ErrorUtil.addVerificationFailure(t);// testng
-			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
-			closeBrowser();
+			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-	}
+		private void expandFilter() {
+			List<WebElement> filterPanelHeadingList;
+			List<WebElement> filterPanelBodyList;
+			WebElement documentTypePanelBody;
+			WebElement documentTypePanelHeading;
+			// Capturing panel heading after expanding document type filter
+			filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
+			documentTypePanelHeading = filterPanelHeadingList.get(3);
+			WebElement upArrow = documentTypePanelHeading
+					.findElement(By.cssSelector("i[class='fa pull-right fa-sort-desc']"));
 
-	private void expandFilter() throws Exception {
-		List<WebElement> filterPanelHeadingList;
-		List<WebElement> filterPanelBodyList;
-		WebElement documentTypePanelBody;
-		WebElement documentTypePanelHeading;
-		// Capturing panel heading after expanding document type filter
-		filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
-		documentTypePanelHeading = filterPanelHeadingList.get(3);
-		WebElement upArrow = documentTypePanelHeading.findElement(By
-				.cssSelector("i[class='fa pull-right fa-sort-desc']"));
+			if (upArrow != null) {
+				test.log(LogStatus.PASS, "Down arrow is visible for Institutions filter");
+			}
 
-		if (upArrow != null) {
-			test.log(LogStatus.PASS, "Up arrow is visible for Institutions filter");
+			filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-body'] ul"));
+			documentTypePanelBody = filterPanelBodyList.get(0);
+
+			if (!documentTypePanelBody.isDisplayed()) {
+				test.log(LogStatus.PASS, "Institutions filter values are displayed");
+			}
+
+			// Collapse the document type filter by clicking it again
+			documentTypePanelHeading.click();
+
 		}
 
-		filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse in']"));
-		documentTypePanelBody = filterPanelBodyList.get(0);
+		private void collapseFilter() {
+			// Finding out the types filer in refine panel
+			waitForElementTobeVisible(ob,By.cssSelector("div[class=panel-heading]"),40);
+			List<WebElement> filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
+			WebElement documentTypePanelHeading = filterPanelHeadingList.get(3);
+			WebElement downArrow = documentTypePanelHeading
+					.findElement(By.cssSelector("i[class='fa pull-right fa-sort-asc']"));
 
-		if (documentTypePanelBody.isDisplayed()) {
-			test.log(LogStatus.PASS, "Institutions filter values are displayed");
+			if (downArrow != null) {
+				test.log(LogStatus.PASS, "UP arrow is visible for Institutions filter");
+			}
+			List<WebElement> filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse collapse']"));
+			WebElement documentTypePanelBody = filterPanelBodyList.get(3);
+
+			if (documentTypePanelBody.isDisplayed()) {
+
+				test.log(LogStatus.FAIL, "Categories filter values are not displayed");
+			}
+
+			// Expanding the document type filter by clicking it
+			documentTypePanelHeading.click();
 		}
-
-		// Collapse the document type filter by clicking it again
-		documentTypePanelHeading.click();
-		Thread.sleep(2000);
-
-	}
-
-	private void collapseFilter() {
-		// Finding out the types filer in refine panel
-		List<WebElement> filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
-		WebElement documentTypePanelHeading = filterPanelHeadingList.get(3);
-		WebElement downArrow = documentTypePanelHeading.findElement(By
-				.cssSelector("i[class='fa pull-right fa-sort-asc']"));
-
-		if (downArrow != null) {
-			test.log(LogStatus.PASS, "Down arrow is visible for Institutions filter");
-		}
-		List<WebElement> filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse collapse']"));
-		WebElement documentTypePanelBody = filterPanelBodyList.get(3);
-
-		if (!documentTypePanelBody.isDisplayed()) {
-			test.log(LogStatus.PASS, "Institutions filter values are not displayed");
-		}
-		// Expanding the document type filter by clicking it
-		documentTypePanelHeading.click();
-	}
 
 	@AfterTest
 	public void reportTestResult() {
