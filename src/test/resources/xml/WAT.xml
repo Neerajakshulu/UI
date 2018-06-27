@@ -17,7 +17,7 @@
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
 
-    <test name="WAT_Login" preserve-order="true">
+     <test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -1451,10 +1451,17 @@
 		</classes>
 	</test>
 	
-		<test name="Test_ReenterCurationSameAuthor"
+	<test name="Test_ReenterCurationSameAuthor"
 			preserve-order="true">
 		<classes>
 			<class name="wat.WAT222"></class> 
+		</classes>
+	</test>
+	 
+	<test name="Test_ReenterCurationSameAuthor_Cancel"
+			preserve-order="true">
+		<classes>
+			<class name="wat.WAT223"></class> 
 		</classes>
 	</test>
 </suite>
