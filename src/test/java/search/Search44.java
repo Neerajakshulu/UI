@@ -141,7 +141,7 @@ public class Search44 extends TestBase {
 				test.log(LogStatus.PASS, "UP arrow is visible for Institutions filter");
 			}
 			List<WebElement> filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse collapse']"));
-			WebElement documentTypePanelBody = filterPanelBodyList.get(3);
+			WebElement documentTypePanelBody = filterPanelBodyList.get(2);
 
 			if (documentTypePanelBody.isDisplayed()) {
 

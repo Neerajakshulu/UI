@@ -78,7 +78,7 @@ public class Search63 extends TestBase {
 			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			System.out.println(searchResults.size());
 
-			if (!compareNumbers(1, searchResults.size())) {
+			if (!compareNumbers(0, searchResults.size())) {
 
 				test.log(LogStatus.FAIL,
 						"Search resuls getting displayed even when user searches for an absurd keyword");// extent
