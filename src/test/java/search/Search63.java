@@ -57,8 +57,7 @@ public class Search63 extends TestBase {
 
 			String search_query = "tyitutyigtiugiuuioyrfuy";
 
-			//openBrowser();
-			runOnSauceLabsFromLocal("Windows", "IE");
+			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
