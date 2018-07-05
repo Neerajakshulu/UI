@@ -1444,6 +1444,14 @@
 		</classes> 
 	</test>
 	
+	<test name="publication_metadata_validate" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, ROBERT E." />
+		<classes>
+			<class name="wat.WAT204"></class>
+		</classes> 
+	</test>
+	
 	<test name="Test_Cancel_Recommendation"
 			preserve-order="true">
 		<classes>

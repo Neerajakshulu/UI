@@ -982,5 +982,51 @@ public class AuthorRecordPage extends TestBase {
 			test.log(LogStatus.WARNING, "None of the curation mode executed");
 		}
 	}
+	
+	/**
+	 * Method for validate publication metadata
+	 * @throws Exception
+	 */
+	public void publicationMetaDataValidation() throws Exception {
+		List<WebElement> pubsMetadata = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_METADATA_XPATH);
+
+		for(WebElement metadata:pubsMetadata){
+			List<WebElement> data=metadata.findElements(By.tagName("div"));
+			logger.info("Publication metadata 0-->"+data.get(0).getText());
+			logger.info("Publication metadata 1-->"+data.get(1).getText());
+			logger.info("Publication metadata 2-->"+data.get(2).getText());
+			
+			if(data.size()==4){
+				logger.info("Publication metadata 3-->"+data.get(3).getText());
+				if(!StringUtils.isNotEmpty(data.get(0).getText()) && StringUtils.contains(data.get(1).getText(), "Volume") && StringUtils.contains(data.get(2).getText(), "Issue") && StringUtils.contains(data.get(3).getText(), "Published")){
+					throw new Exception("Publication Metadata not available");
+				}
+			} else {
+				if(!StringUtils.isNotEmpty(data.get(0).getText()) && StringUtils.contains(data.get(1).getText(), "Volume") && StringUtils.contains(data.get(2).getText(), "Published")){
+					throw new Exception("Publication Metadata not available");
+				}
+			}
+		}
+	}
+	
+	
+	/**
+	 * Method for validate publication metadata Metrics count
+	 * @throws Exception
+	 */
+	public void publicationMetaDataMetricsCountValidation() throws Exception {
+		List<WebElement> metricsCount = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_METADATA_METRICS_COUNT_XPATH);
+		logger.info("Time cited count11-->"+metricsCount.get(0).getText());
+		for(WebElement metric:metricsCount){
+			String [] citedCount=metric.getText().split("\n");
+			logger.info("Time cited count-->"+citedCount[0]+"-->"+citedCount[1]);
+			if(!StringUtils.equals(citedCount[0],"TIMES CITED")&&StringUtils.isNumeric(citedCount[1])){
+				throw new Exception("Publication Metadata Time cited count not available");
+			}
+		}
+	}
+
 
 }

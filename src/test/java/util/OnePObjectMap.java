@@ -1455,7 +1455,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_HEADER_XPATH("(//div[@class='modal-content'])[2]/descendant::h3"),
 	WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_BODY_XPATH("(//div[@class='modal-content'])[2]/descendant::p"),
 	WAT_AUTHOR_RECORD_SUBMIT_UPDATES_SUCCESS_TOAST_MESSAGE_CSS("div[class='wui-toast__message ng-binding']"),
-	
+	WAT_AUTHOR_RECORD_PUBLICATIONS_METADATA_XPATH("//div[@class='wui-card__body-content ng-isolate-scope']/descendant::div[@class='wui-descriptor-uppercase wat-search-results-publications-source-section wat-author-record-publications-source-section']"),
+	WAT_AUTHOR_RECORD_PUBLICATIONS_METADATA_METRICS_COUNT_XPATH("//div[@class='wui-card__body-content ng-isolate-scope']/descendant::div[@class='wat-author-record-publication-section-metric-count']"),
 	
 	DRA_SSO_LOGIN_PAGE_USERNAME_NAME("username"),
 	DRA_SSO_LOGIN_PAGE_PASSWORD_NAME("password"),
