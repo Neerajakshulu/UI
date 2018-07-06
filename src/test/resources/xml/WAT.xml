@@ -1460,6 +1460,14 @@
 		</classes> 
 	</test>
 	
+	<test name="author_lastknown_org_single_author" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<parameter name="authorName" value="TRANQUADA, ROBERT E." />
+		<classes>
+			<class name="wat.WAT206"></class>
+		</classes> 
+	</test>
+	
 	<test name="Test_Cancel_Recommendation"
 			preserve-order="true">
 		<classes>
