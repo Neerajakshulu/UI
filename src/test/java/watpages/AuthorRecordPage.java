@@ -1008,6 +1008,42 @@ public class AuthorRecordPage extends TestBase {
 				}
 			}
 		}
+	}	
+	
+	/**
+	 * Method for validate publication metadata tile and authors
+	 * @throws Exception
+	 */
+	public void publicationMetaDataTitleAndAuthors() throws Exception {
+		List<WebElement> pubsTitle = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_METADATA_PUB_TITLE_XPATH);
+		
+		for(WebElement title:pubsTitle) {
+			logger.info("publication title -->"+title.getText());
+			if(!StringUtils.isNotEmpty(title.getText())){
+				throw new Exception("Each publication doesnot have publication Title");
+			}
+		}
+		
+		List<WebElement> pubAuthors = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_METADATA_AUTHORS_XPATH);
+		
+		for(WebElement author:pubAuthors) {
+			String authorName=author.getText();
+			logger.info("Author name-->"+authorName);
+			if(authorName.contains(";")){
+				String authorsList[]=authorName.split(";");
+				logger.info("no.of authors-->"+authorsList.length);
+				if(authorsList.length==3){
+					if(!StringUtils.contains(authorName, "…More")){
+						throw new Exception("Each publication authors which are morethan 3 should contain More link");
+					}
+				}
+			}
+			
+		}
+		
+		
 	}
 	
 	
