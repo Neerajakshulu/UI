@@ -90,17 +90,17 @@ public class Watchlist021 extends TestBase {
 //			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 			
 			// Watching a patents to a particular watch list
-			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
+			/*pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);*/
 			
 //			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
 //			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 			
 			// Watching a posts to a particular watch list
-			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
+			/*pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);*/
 //			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
 //			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
@@ -119,7 +119,7 @@ public class Watchlist021 extends TestBase {
 			}
 			logger.info("total watchlists by content type-->"+actualWatchedItems);
 			List<String> expectedWatchedItems = Arrays
-					.asList(new String[] {"PATENT","ARTICLE","POST",});
+					.asList(new String[] {"ARTICLE"});
 
 			if (!actualWatchedItems.equals(expectedWatchedItems)) {
 				logFailureDetails(test, "Watchlist items are not displayed by content type", this.getClass().getSimpleName()+"_watchlist_items_are_not_displayed_by_content_type");

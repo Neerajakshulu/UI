@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Watchlist" parallel="tests" thread-count="10">
+<suite name="Watchlist" parallel="tests" thread-count="5">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -19,17 +19,17 @@
 		</classes>
 	</test>
 
-	<test name="Watchlist002">
+	<!-- <test name="Watchlist002">
 		<classes>
 			<class name="watchlist.Watchlist002"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="Watchlist003">
+	<!-- <test name="Watchlist003">
 		<classes>
 			<class name="watchlist.Watchlist003"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Watchlist004">
 		<classes>
@@ -43,17 +43,17 @@
 		</classes>
 	</test>
 
-	<test name="Watchlist006">
+	<!-- <test name="Watchlist006">
 		<classes>
 			<class name="watchlist.Watchlist006"></class>
 		</classes>
-	</test>
-
+	</test> 
+	
 	<test name="Watchlist007">
 		<classes>
 			<class name="watchlist.Watchlist007"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Watchlist008">
 		<classes>
@@ -66,18 +66,18 @@
 			<class name="watchlist.Watchlist009"></class>
 		</classes>
 	</test>
-
+-->
 	<test name="Watchlist010">
 		<classes>
 			<class name="watchlist.Watchlist010"></class>
 		</classes>
 	</test>
 
-	<test name="Watchlist011">
+	<!-- <test name="Watchlist011">
 		<classes>
 			<class name="watchlist.Watchlist011"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Watchlist012">
 		<classes>
@@ -116,17 +116,17 @@
 		</classes>
 	</test> -->
 
-	<test name="Watchlist018">
+	<!-- <test name="Watchlist018">
 		<classes>
 			<class name="watchlist.Watchlist018"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Watchlist019">
 		<classes>
 			<class name="watchlist.Watchlist019"></class>
 		</classes>
-	</test>
+	</test>-->
 
 	<test name="Watchlist020">
 		<classes>
@@ -146,11 +146,11 @@
 		</classes>
 	</test>
 
-	<test name="Watchlist023">
+	<!-- <test name="Watchlist023">
 		<classes>
 			<class name="watchlist.Watchlist023"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Watchlist024">
 		<classes>
@@ -158,7 +158,7 @@
 		</classes>
 	</test>
 
-	<test name="Watchlist025">
+	<!-- <test name="Watchlist025">
 		<classes>
 			<class name="watchlist.Watchlist025"></class>
 		</classes>
@@ -168,7 +168,7 @@
 		<classes>
 			<class name="watchlist.Watchlist026"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Watchlist027">
 		<classes>
@@ -176,17 +176,17 @@
 		</classes>
 	</test>
 
-	<test name="Watchlist028">
+	<!-- <test name="Watchlist028">
 		<classes>
 			<class name="watchlist.Watchlist028"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="Watchlist029">
+	<!-- <test name="Watchlist029">
 		<classes>
 			<class name="watchlist.Watchlist029"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Watchlist030">
 		<classes>
@@ -217,12 +217,12 @@
 			<class name="watchlist.Watchlist034"></class>
 		</classes>
 	</test>
-	<test name="Watchlist035">
+	<!-- <test name="Watchlist035">
 		<parameter name="user" value="nali tk" />
 		<classes>
 			<class name="watchlist.Watchlist035"></class>
 		</classes>
-	</test>
+	</test> -->
 
 </suite>
 
