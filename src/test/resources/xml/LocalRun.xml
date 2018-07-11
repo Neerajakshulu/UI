@@ -12,7 +12,8 @@
 		on local due to saucelabs issue -->
 
 	<!-- ENW -->
-	<test name="ENW008">
+	<!-- commented because search posts feature has been removed. -->
+	<!-- <test name="ENW008">
 		<classes>
 			<class name="enw.ENW008"></class>
 		</classes>
@@ -21,7 +22,7 @@
 		<classes>
 			<class name="enw.ENW0008"></class>
 		</classes>
-	</test>
+	</test> -->
 	<test name="ENW000012">
 		<classes>
 			<class name="enw.ENW000012"></class>
@@ -112,28 +113,27 @@
 		</classes>
 
 	</test>
-	<test name="ENW037">
+	<!-- Searched patents feature has been removed so disabled this test. -->
+	<!-- <test name="ENW037">
 		<classes>
 			<class name="enw.ENW037"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="ENW041">
+	<!-- <test name="ENW041">
 		<classes>
 			<class name="enw.ENW041"></class>
 		</classes>
-
-	</test>
+	</test> -->
 
 	<!-- <test name="ENW042"> <classes> <class name="enw.ENW042"></class> </classes> 
 		</test> <test name="ENW043"> <classes> <class name="enw.ENW043"></class> 
 		</classes> </test> -->
-	<test name="ENW044">
+	<!-- <test name="ENW044">
 		<classes>
 			<class name="enw.ENW044"></class>
 		</classes>
-
-	</test>
+	</test> -->
 
 	<!-- IAM -->
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">

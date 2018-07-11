@@ -24,7 +24,7 @@ import util.OnePObjectMap;
 public class ENW021 extends TestBase {
 
 	static int status = 1;
-	String expectedUrl = "https://dev-stable.1p.thomsonreuters.com/#/profile/";
+	String expectedUrl = "https://app.qc.endnote.com/EndNoteWeb.html";
 
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -83,8 +83,6 @@ public class ENW021 extends TestBase {
 		pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("MARKETUSEREMAIL"),
 				(LOGIN.getProperty("MARKETUSERPASSWORD")));
 		//BrowserWaits.waitTime(4);
-		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
 		//BrowserWaits.waitTime(8);
 		if (ob.getCurrentUrl().contains(expectedUrl)) {
 			if (!ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).isDisplayed()) {
