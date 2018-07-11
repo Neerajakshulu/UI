@@ -247,11 +247,11 @@
 		</classes>
 	</test>
 
-	<test name="Test B49">
+	<!-- <test name="Test B49">
 		<classes>
 			<class name="search.Search49"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Test B54">
 		<classes>
@@ -260,7 +260,7 @@
 	</test>
 
 
-	<test name="Test B55">
+	<!-- <test name="Test B55">
 		<classes>
 			<class name="search.Search55"></class>
 		</classes>
@@ -278,7 +278,7 @@
 			<class name="search.Search57"></class>
 		</classes>
 	</test>
-
+ -->
 	<test name="Test B58">
 		<classes>
 			<class name="search.Search58"></class>
@@ -297,11 +297,11 @@
 		</classes>
 	</test>
 
-	<test name="Test B66">
+	<!-- <test name="Test B66">
 		<classes>
 			<class name="search.Search66"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Test B67">
 		<classes>
@@ -329,11 +329,11 @@
 	</test>
 
 
-	<test name="Test B71">
+	<!-- <test name="Test B71">
 		<classes>
 			<class name="search.Search71"></class>
 		</classes>
-	</test>
+	</test> -->
 
 
 	<test name="Test B72">
@@ -390,7 +390,7 @@
 
 
 
-	<test name="Test B84">
+	<!-- <test name="Test B84">
 		<classes>
 			<class name="search.Search84"></class>
 		</classes>
@@ -406,7 +406,7 @@
 		<classes>
 			<class name="search.Search86"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Test B87">
 		<classes>
@@ -415,7 +415,7 @@
 	</test>
 
 
-	<test name="Test B88">
+	<!-- <test name="Test B88">
 		<classes>
 			<class name="search.Search88"></class>
 		</classes>
@@ -426,7 +426,7 @@
 		<classes>
 			<class name="search.Search89"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Test B90">
 		<classes>
@@ -434,7 +434,7 @@
 		</classes>
 	</test>
 
-	<test name="Test B91">
+	<!-- <test name="Test B91">
 		<classes>
 			<class name="search.Search91"></class>
 		</classes>
@@ -468,7 +468,7 @@
 			<class name="search.Search96"></class>
 		</classes>
 	</test>
-
+ -->
 
 
 	<test name="Test B97">
@@ -477,7 +477,7 @@
 		</classes>
 	</test>
 
-	<test name="Test B99">
+	<!-- <test name="Test B99">
 		<classes>
 			<class name="search.Search99"></class>
 		</classes>
@@ -517,7 +517,7 @@
 			<class name="search.Search106"></class>
 		</classes>
 	</test>
-
+ -->
 	<test name="TestCase_B107">
 		<classes>
 			<class name="search.Search107"></class>
@@ -530,7 +530,7 @@
 		</classes>
 	</test>
 
-	<test name="TestCase_B109">
+	<!-- <test name="TestCase_B109">
 		<classes>
 			<class name="search.Search109"></class>
 		</classes>
@@ -582,7 +582,7 @@
 		<classes>
 			<class name="search.Search118"></class>
 		</classes>
-	</test>
+	</test> -->
 
 
 	<test name="TestCase_B119">
@@ -604,7 +604,7 @@
 		</classes>
 	</test>
 
-	<test name="TestCase_B122">
+	<!-- <test name="TestCase_B122">
 		<classes>
 			<class name="search.Search122"></class>
 		</classes>
@@ -614,7 +614,7 @@
 		<classes>
 			<class name="search.Search123"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="TestCase_B124">
 		<classes>
@@ -641,7 +641,7 @@
 		</classes>
 	</test>
 	
-	<test name="TestCase_B131">
+	<!-- <test name="TestCase_B131">
 		<classes>
 			<class name="search.Search131"></class>
 		</classes>
@@ -652,7 +652,7 @@
 		<classes>
 			<class name="search.Search132"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Test B1" preserve-order="true">
 		<classes>
