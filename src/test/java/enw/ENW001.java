@@ -106,7 +106,7 @@ public class ENW001 extends TestBase {
 				//BrowserWaits.waitTime(4);
 				
 			}
-			else if(recordType.equalsIgnoreCase("Patents"))
+			/*else if(recordType.equalsIgnoreCase("Patents"))
 			{
 				pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 				pf.getSearchResultsPageInstance(ob).chooseArticle();
@@ -116,11 +116,11 @@ public class ENW001 extends TestBase {
 				pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 				pf.getSearchResultsPageInstance(ob).clickOnFirstPostTitle();
 				//BrowserWaits.waitTime(4);
-			}
+			}*/
 				
 		
-			pf.getBrowserWaitsInstance(ob)
-			.waitUntilElementIsDisplayed(OnePObjectMap.RECORD_VIEW_PAGE_SENDTOENDNOTE_BUTTON_CSS);
+//			pf.getBrowserWaitsInstance(ob)
+//			.waitUntilElementIsDisplayed(OnePObjectMap.RECORD_VIEW_PAGE_SENDTOENDNOTE_BUTTON_CSS);
 		waitForAjax(ob);
 		
 	
@@ -145,7 +145,7 @@ public class ENW001 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);
 		}
     
-		ob.navigate().back();
+		//ob.navigate().back();
 		//clearing the record from Endnote
 		//pf.getENWReferencePageInstance(ob).clearRecordEndnote();
 		
