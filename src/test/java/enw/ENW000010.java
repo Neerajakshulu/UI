@@ -165,7 +165,7 @@ public class ENW000010 extends TestBase {
 
 			System.out.println(actualEmail1);
 			try {
-				Assert.assertEquals(LOGIN.getProperty("UserENWsteam000010"), actualEmail1);
+				Assert.assertEquals(LOGIN.getProperty("STEAMUSEREMAIL"), actualEmail1);
 				test.log(LogStatus.PASS, " Email id getting displayed in Account Setting page is correct");
 
 			} catch (Throwable t) {
