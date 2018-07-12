@@ -611,7 +611,7 @@ public class DRAPage extends TestBase {
 			ob.switchTo().window(al.get(2));*/
 			String actual_URL = ob.getCurrentUrl();
 			System.out.println(actual_URL);
-			String expected_URL = "https://access.clarivate.com/#/login";
+			String expected_URL = "https://apps.clarivate.com/cmty/#/customer-care?app=dra";
 			Assert.assertTrue(actual_URL.contains(expected_URL));
 			test.log(LogStatus.PASS,
 					" user is taken to the customer care page in the seperate browser when User clicks on support link");
