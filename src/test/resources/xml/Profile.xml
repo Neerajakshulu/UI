@@ -17,12 +17,12 @@
 		</classes> 
 	</test>
 
-	<test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
+	<!-- <test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
 		<parameter name="searchPeople" value="Kavya Revanna Real" />
 		<classes>
 			<class name="Profile.Profile2"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Others_Profile_Edit" preserve-order="true">
 		<classes>
@@ -36,7 +36,7 @@
 		<classes>
 			<class name="Profile.Profile4"></class>
 		</classes>
-	</test>
+	</test>-->
 
 
 	<test name="Validate_View_Profile">
@@ -75,12 +75,12 @@
 		</classes>
 	</test>
 
-	<test name="Validate_Other_User_Profile_Comments_Like">
+	<!-- <test name="Validate_Other_User_Profile_Comments_Like">
 		<parameter name="otherProfileName" value="janardhana" />
 		<classes>
 			<class name="Profile.Profile10"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Validate_Add_Topic_InterestsAndSkillsUpdate">
 		<parameter name="topics" value="tes|aut|dru" />
@@ -89,12 +89,12 @@
 		</classes>
 	</test>
 
-	<test name="Validate_User_Own_Profile_Following_Others_Profiles">
+	<!-- <test name="Validate_User_Own_Profile_Following_Others_Profiles">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile12"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="ProfileSummaryTest">
 		<classes>
@@ -284,12 +284,12 @@
 		</classes>
 	</test>
 
-	<test name="HCR_Profile_Badge">
+	<!-- <test name="HCR_Profile_Badge">
 		<parameter name="hcrProfile" value="professor"></parameter>
 		<classes>
 			<class name="Profile.Profile38"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Post_comment_count">
 		<parameter name="username" value="testing.reddygaru@gmail.com" />
@@ -301,19 +301,19 @@
 		</classes>
 	</test>
 
-	<test name="other_profiles_watchlist_tab">
+	<!-- <test name="other_profiles_watchlist_tab">
 		<parameter name="profile" value="hao"></parameter>
 		<classes>
 			<class name="Profile.Profile40"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="HCR_Badge_Profile_Page">
 		<parameter name="hcrProfile" value="professor"></parameter>
 		<classes>
 			<class name="Profile.Profile41"></class>
 		</classes>
-	</test>
+	</test>-->
 
 	<test name="Validate_Profile_First_Last_Names">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
