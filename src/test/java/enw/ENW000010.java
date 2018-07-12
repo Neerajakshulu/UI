@@ -71,6 +71,8 @@ public class ENW000010 extends TestBase {
             
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserENWsteam000010"),LOGIN.getProperty("PWDuserENW000010"));
 			pf.getLoginTRInstance(ob).clickLogin();
+			waitForElementTobeClickable(ob, By.xpath("//button[@class='wui-modal__close-btn']/i"), 60);
+			ob.findElement(By.xpath("//button[@class='wui-modal__close-btn']/i")).click();
 			
 			pf.getSearchResultsPageInstance(ob).searchArticle(CONFIG.getProperty("article"));
 		

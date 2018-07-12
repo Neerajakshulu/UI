@@ -39,7 +39,7 @@ public class ENW023 extends TestBase {
 	public void testcaseENW023() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		String expected_URL = "https://access.dev-stable.clarivate.com/#/login?referrer=%252Fcmty%252F%23%252Fhome&app=cmty&pageview=";
+		String expected_URL = "https://access.dev-stable.clarivate.com/#/login?referrer=%252Fcmty%252F%2523%252Fhome&app=cmty&pageview=";
 		String uRl="";
 		//String neonHomePage = "https://dev-stable.1p.thomsonreuters.com/#/home";
 		//String Expected_Result = "Sign in";
@@ -75,7 +75,7 @@ public class ENW023 extends TestBase {
 				//ob.findElement(By.xpath("//div[@class='modal-content ng-scope']")).isDisplayed();
 				uRl=ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).getText();
 				Assert.assertEquals(uRl, "Did you know?");
-				ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).click(); 
+//				ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).click(); 
 				//BrowserWaits.waitTime(5);
 				ob.findElement(By.xpath("//button[@class='wui-modal__close-btn']")).click();
 				String exp_uRl=ob.getCurrentUrl().toString();
