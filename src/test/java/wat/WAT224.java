@@ -1,5 +1,6 @@
 package wat;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -13,15 +14,14 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class to Verify that If user opens curation on the same author after
- * cancelling curation in previous attempt(via Suggest Updates or by doing
- * accept/reject on a recommendation) the Publications List should show all
- * publications (ie, none in a removed state)
+ * Class to Verify that if the user submitted a previous curation on the same
+ * author during the current user session, canceling "this" curation should have
+ * no effect on "that" earlier curation or its effects
  * 
  * @author UC225218
  *
  */
-public class WAT223 extends TestBase {
+public class WAT224 extends TestBase {
 
 	static int status = 1;
 	String classValue = "wui-checkbox__hidden ng-pristine ng-untouched ng-valid";
@@ -104,10 +104,9 @@ public class WAT223 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that If user opens curation on the same author after
-	 * cancelling curation in previous attempt(via Suggest Updates or by doing
-	 * accept/reject on a recommendation) the Publications List should show all
-	 * publications (ie, none in a removed state)
+	 * Method to Verify that if the user submitted a previous curation on the
+	 * same author during the current user session, canceling "this" curation
+	 * should have no effect on "that" earlier curation or its effects
 	 * 
 	 * @param LastName,
 	 *            FirstName, CountryName, OrgName
@@ -115,7 +114,7 @@ public class WAT223 extends TestBase {
 	 *             When Something unexpected
 	 */
 	@Test(dependsOnMethods = { "searchAuthorCluster" })
-	public void testReenterCurationSameAuthorPubList() throws Exception {
+	public void testCancelRecommendation() throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Clicking first author card");
 			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
@@ -131,39 +130,65 @@ public class WAT223 extends TestBase {
 					"Undo option for removed Publication is not available before getting into curation mode in Author record page");
 			test.log(LogStatus.INFO, "Getting into curation mode by clicking Suggest Update button");
 			pf.getAuthorRecordPage(ob).getintoCuration(test, "SuggestUpdate");
+			recommendationArray[0] = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_FIRST_RECOMMENDATION_PUBLICATION_NAME_XPATH)
+					.getText();
+			recommendationArray[1] = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SECOND_RECOMMENDATION_PUBLICATION_NAME_XPATH)
+					.getText();
+			waitForPageLoad(ob);
 			test.log(LogStatus.INFO, "Rejecting first Recommendation");
 			pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_REJECT_FIRST_RECOMMENDATION_XPATH).click();
 			waitForPageLoad(ob);
-			test.log(LogStatus.INFO, "Accepting Next Recommendation");
+			test.log(LogStatus.INFO, "Accepting first Recommendation");
 			pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ACCEPT_FIRST_RECOMMENDATION_XPATH).click();
 			waitForPageLoad(ob);
-			test.log(LogStatus.INFO, "Clicking cancel curation");
-			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_CANCEL_UPDATE_BTN_XPATH)
+			test.log(LogStatus.INFO, "Submitting the curation");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH)
 					.click();
+			test.log(LogStatus.INFO, "Confirming Submitting the curation");
+			pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_OVERLAY_SUBMIT_UPDATE_BTN_XPATH).click();
+			waitForPageLoad(ob);
 			test.log(LogStatus.INFO, "Going back to search results page by clicking search results link");
 			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).click();
 			waitForPageLoad(ob);
-			test.log(LogStatus.INFO, "Clicking Same author card which was selected before");
+			test.log(LogStatus.INFO, "Clicking first author card");
 			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 			waitForPageLoad(ob);
 			test.log(LogStatus.INFO, "Getting into curation mode again by clicking Suggest Update button");
 			pf.getAuthorRecordPage(ob).getintoCuration(test, "SuggestUpdate");
-			test.log(LogStatus.INFO,
-					"Checking whether undo option for removed Publication is available in Author record page");
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATION_UNDO_LINK_XPATH)
-					.isDisplayed())
-				throw new Exception(
-						"Undo option for removed Publication is available after returning from a cancelled curation in Author record page");
+			test.log(LogStatus.INFO, "Rejecting first Recommendation");
+			pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_REJECT_FIRST_RECOMMENDATION_XPATH).click();
+			waitForPageLoad(ob);
+			test.log(LogStatus.INFO, "Clicking cancel curation");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_CANCEL_UPDATE_BTN_XPATH)
+					.click();
+			Assert.assertNotEquals(
+					pf.getBrowserActionInstance(ob)
+							.getElement(
+									OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_FIRST_RECOMMENDATION_PUBLICATION_NAME_XPATH)
+							.getText(),
+					recommendationArray[0],
+					"Previously Accepted/Rejected recommendation is available after a cancelled curation");
+			Assert.assertNotEquals(
+					pf.getBrowserActionInstance(ob)
+							.getElement(
+									OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SECOND_RECOMMENDATION_PUBLICATION_NAME_XPATH)
+							.getText(),
+					recommendationArray[1],
+					"Previously Accepted/Rejected recommendation is available after a cancelled curation");
 			test.log(LogStatus.PASS,
-					"Undo option for removed Publication is not available after returning from a cancelled curation in Author record page");
+					"If the user submitted a previous curation on the same author during the current user session, canceling this curation does not have any effect on earlier curation or its effects");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t,
-					"Undo option for removed Publication is available after returning from a cancelled curation in Author record page",
+					"Previously Accepted/Rejected recommendation is available after a cancelled curation",
 					"Curation_issue");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}

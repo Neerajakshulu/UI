@@ -1417,6 +1417,7 @@ public enum OnePObjectMap {
 
 	WAT_AUTHOR_RECORD_PAGE_SUGGEST_UPDATE_BTN_XPATH("//button[contains(text(),'Suggest updates')]"),
 	WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH("//button[contains(text(),'Submit updates')]"),
+	WAT_AUTHOR_RECORD_PAGE_OVERLAY_SUBMIT_UPDATE_BTN_XPATH("(//button[contains(text(),'Submit updates')])[1]"),
 	WAT_AUTHOR_RECORD_PAGE_CANCEL_UPDATE_BTN_XPATH("//button[contains(text(),'Cancel')]"),
 	WAT_AUTHOR_RECORD_PAGE_ACCEPT_FIRST_RECOMMENDATION_XPATH("(//button[@aria-label='Accept'])[1]"),
 	WAT_AUTHOR_RECORD_PAGE_REJECT_FIRST_RECOMMENDATION_XPATH("(//button[@aria-label='Reject'])[1]"),
