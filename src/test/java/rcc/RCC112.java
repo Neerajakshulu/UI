@@ -138,7 +138,7 @@ public class RCC112 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(groupTitle);
 			
 
-			test.log(LogStatus.INFO, "Add Patent into Group from Record view page");
+			/*test.log(LogStatus.INFO, "Add Patent into Group from Record view page");
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(documentTitle);
 			String patentTitle=pf.getSearchResultsPageInstance(ob).getPatentsTitle();
 			pf.getSearchResultsPageInstance(ob).clickOnArticleOrPatentTitle(patentTitle);
@@ -152,7 +152,7 @@ public class RCC112 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).clickOnArticleOrPatentTitle(postTitle);
 			pf.getpostRVPageInstance(ob).validateDocumentInRecordViewPage(postTitle);
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(groupTitle);
-			
+			*/
 			
 			test.log(LogStatus.INFO, "Go to Group Record Details Page");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
@@ -162,12 +162,12 @@ public class RCC112 extends TestBase {
 			test.log(LogStatus.INFO, "Verify Added Article available in Group Details Artilce tab");
 			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(test,articleTitle);
 			
-			test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
+		/*	test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
 			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(test,patentTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Post available in Group Details Posts tab");
 			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);
-			
+			*/
 			
 			test.log(LogStatus.INFO, "Delete Created Group");
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
