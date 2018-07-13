@@ -223,7 +223,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS("input[aria-label*='Role']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS("input[ng-model*='vm.field']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_PRIINS_CSS("input[placeholder='+ Institution']"),
-	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[placeholder='+ Country/Region']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[placeholder='+ Country']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_SUMMARY_CSS("textarea[placeholder='Add a summary']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS("button[class='wui-btn wui-btn--secondary']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS("button[class='wui-btn wui-btn--primary']"),
