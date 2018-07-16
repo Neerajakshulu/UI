@@ -65,7 +65,7 @@ public class Authoring16 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("USERNAME16", "PASSWORD16");
 			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
-			pf.getHFPageInstance(ob).searchForText("Physics");
+			pf.getHFPageInstance(ob).searchForText("biology");
 			pf.getSearchResultsPageInstance(ob).searchForArticleWithComments();
 			pf.getpostRVPageInstance(ob).loadComments();
 			int commentsCount = pf.getpostRVPageInstance(ob).clickOnFlagOfOtherUserComments(PROFILE_NAME);
