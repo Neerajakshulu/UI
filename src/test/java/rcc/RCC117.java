@@ -135,9 +135,9 @@ public class RCC117 extends TestBase {
 			ob.navigate().refresh();
 			pf.getNewsfeedPageInstance(ob).clickNewsfeedLink();
 			
-			test.log(LogStatus.INFO, "Add Post into Multiple Groups from Newsfeed page");
+			/*test.log(LogStatus.INFO, "Add Post into Multiple Groups from Newsfeed page");
 			String postTitle=pf.getNewsfeedPageInstance(ob).getPostTitle();
-			pf.getNewsfeedPageInstance(ob).addFirstPostToGroup(Arrays.asList(groupTitle,groupTitle2));
+			pf.getNewsfeedPageInstance(ob).addFirstPostToGroup(Arrays.asList(groupTitle,groupTitle2));*/
 			
 			test.log(LogStatus.INFO, "Add Article into Multiple Groups from Newsfeed page");
 			String articleTitle=pf.getNewsfeedPageInstance(ob).getArticleTitle();
@@ -148,8 +148,8 @@ public class RCC117 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsLink();
 			pf.getGroupsListPage(ob).navigateToGroupRecordPage(groupTitle);
 			
-			test.log(LogStatus.INFO, "Verify Added Post available in Group1 Details Post tab");
-			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);
+			/*test.log(LogStatus.INFO, "Verify Added Post available in Group1 Details Post tab");
+			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);*/
 			
 			test.log(LogStatus.INFO, "Verify Added Article available in Group1 Details Article tab");
 			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(test,articleTitle);
@@ -164,8 +164,8 @@ public class RCC117 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsLink();
 			pf.getGroupsListPage(ob).navigateToGroupRecordPage(groupTitle2);
 			
-			test.log(LogStatus.INFO, "Verify Added Post available in Group2 Details Post tab");
-			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);
+		/*	test.log(LogStatus.INFO, "Verify Added Post available in Group2 Details Post tab");
+			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);*/
 			
 			test.log(LogStatus.INFO, "Verify Added Article available in Group2 Details Article tab");
 			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(test,articleTitle);

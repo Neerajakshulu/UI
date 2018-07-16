@@ -148,7 +148,7 @@ public class RCC115 extends TestBase {
 			pf.getpostRVPageInstance(ob).validateDocumentInRecordViewPage(articleTitle);
 			pf.getSearchResultsPageInstance(ob).addDocumentToMultipleGroup(Arrays.asList(groupTitle,groupTitle2));
 			
-			test.log(LogStatus.INFO, "Add Patent into Multiple Groups from Record View page");
+			/*test.log(LogStatus.INFO, "Add Patent into Multiple Groups from Record View page");
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(docTitle);
 			String patentTitle=pf.getSearchResultsPageInstance(ob).getPatentsTitle();
 			pf.getSearchResultsPageInstance(ob).clickOnArticleOrPatentTitle(patentTitle);
@@ -161,7 +161,7 @@ public class RCC115 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).clickOnArticleOrPatentTitle(postTitle);
 			pf.getpostRVPageInstance(ob).validateDocumentInRecordViewPage(postTitle);
 			pf.getSearchResultsPageInstance(ob).addDocumentToMultipleGroup(Arrays.asList(groupTitle,groupTitle2));
-			
+			*/
 			
 			test.log(LogStatus.INFO, "Go to First Group Record Details Page");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
@@ -171,11 +171,11 @@ public class RCC115 extends TestBase {
 			test.log(LogStatus.INFO, "Verify Added Article available in Group Details Artilce tab");
 			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(test,articleTitle);
 			
-			test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
+		/*	test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
 			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(test,patentTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Post available in Group Details Patents tab");
-			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);
+			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);*/
 			
 			
 			test.log(LogStatus.INFO, "Delete Created Group");
@@ -192,11 +192,11 @@ public class RCC115 extends TestBase {
 			test.log(LogStatus.INFO, "Verify Added Article available in Group Details Artilce tab");
 			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(test,articleTitle);
 			
-			test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
+			/*test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
 			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(test,patentTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Post available in Group Details Patents tab");
-			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);
+			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);*/
 			
 			
 			test.log(LogStatus.INFO, "Delete Created Group");
