@@ -171,8 +171,9 @@ public class ENW000012 extends TestBase {
 
 			String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL1_XPATH.toString()))
 					.getText();
+			System.out.println("============="+actualEmail1);
 			try {
-				Assert.assertEquals(LOGIN.getProperty("UsersteamENW000011"), actualEmail1);
+				Assert.assertEquals(LOGIN.getProperty("UserFBENW000012"), actualEmail1);
 				test.log(LogStatus.PASS, " Email id getting displayed in Account Setting page is correct");
 
 			} catch (Throwable t) {
