@@ -1,6 +1,6 @@
 package wat;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -11,28 +11,28 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class to Verify that after removing a publication, the total publication
- * count should get updated accordingly.
+ * Class to Verify that If a curation is begun but not submitted, a user should
+ * be able to navigate away from the mid-curation state, and then subsequently
+ * return to that same mid-curation state
  * 
  * @author UC225218
  *
  */
-public class WAT141 extends TestBase {
+public class WAT225 extends TestBase {
 
 	static int status = 1;
-	int pubCountBeforeDeletion;
+	String classValue = "wui-checkbox__hidden ng-pristine ng-untouched ng-valid";
+	String[] recommendationArray;
 
 	/**
 	 * Method to displaying JIRA ID's for test case in specified path of Extent
 	 * Reports
 	 * 
-	 * @throws Exception,
-	 *             When Something unexpected
+	 * @throws Exception , When Something unexpected
 	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -44,8 +44,7 @@ public class WAT141 extends TestBase {
 	/**
 	 * Method for login into WAT application using TR ID
 	 * 
-	 * @throws Exception,
-	 *             When WAT Login is not done
+	 * @throws Exception , When WAT Login is not done
 	 */
 	@Test
 	@Parameters({ "username", "password" })
@@ -83,9 +82,8 @@ public class WAT141 extends TestBase {
 	/**
 	 * Method for Search Author cluster Results
 	 * 
-	 * @param lastName,countryName,orgName
-	 * @throws Exception,
-	 *             When Something unexpected
+	 * @param lastName ,countryName,orgName
+	 * @throws Exception , When Something unexpected
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2", "OrgName1", "OrgName2" })
@@ -104,71 +102,79 @@ public class WAT141 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that after removing a publication, the total publication
-	 * count should get updated accordingly.
+	 * Method to Verify that If a curation is begun but not submitted, a user should
+	 * be able to navigate away from the mid-curation state, and then subsequently
+	 * return to that same mid-curation state
 	 * 
-	 * @throws Exception,
-	 *             When Something unexpected
+	 * @param LastName , FirstName, CountryName, OrgName
+	 * @throws Exception , When Something unexpected
 	 */
 	@Test(dependsOnMethods = { "searchAuthorCluster" })
-	public void testPubDeletionCount() throws Exception {
+	public void testCurationNavigation() throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Clicking first author card");
 			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
+			test.log(LogStatus.INFO,
+					"Checking whether undo option for removed Publication is available before getting into curation mode in Author record page");
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATION_UNDO_LINK_XPATH)
+					.isDisplayed())
+				throw new Exception(
+						"Undo option for removed Publication is available before getting into curation mode in Author record page");
+			test.log(LogStatus.PASS,
+					"Undo option for removed Publication is not available before getting into curation mode in Author record page");
 			test.log(LogStatus.INFO, "Getting into curation mode by clicking Suggest Update button");
-			pf.getAuthorRecordPage(ob).checkSuggestUpdateBtn();
-			test.log(LogStatus.PASS, "Suggest updates button is displayed in author record page");
-			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUGGEST_UPDATE_BTN_XPATH)
-					.click();
-			test.log(LogStatus.PASS, "Entered Curation mode through the Suggest Update button");
-			Assert.assertTrue(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH).isDisplayed(),
-					"Remove Publication button is not displayed");
-			test.log(LogStatus.INFO, "Remove Publication button is displayed for each publication");
-			test.log(LogStatus.INFO, "Reading total publication count");
+			pf.getAuthorRecordPage(ob).getintoCuration(test, "SuggestUpdate");
+			scrollingToElementofAPage();
 			int pubCountBeforeRemoval = pf.getAuthorRecordPage(ob).getPublicationCount();
-			for (int x = 1; x<6; x++) {
-				test.log(LogStatus.INFO, "Removing " + x + "Publication.");
-				String j = OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_PARAMETERIZED_XPATH.toString();
-				ob.findElement(By.xpath(j.replaceAll("q", String.valueOf(x)))).click();
-				BrowserWaits.waitTime(2);
-				waitForPageLoad(ob);
-			}
-			test.log(LogStatus.INFO, "Removed 5 Publications.");
-			test.log(LogStatus.INFO, "Reading Current publication count");
+			test.log(LogStatus.INFO, "Removing first publication");
+			pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH).click();
+			waitForPageLoad(ob);
+			test.log(LogStatus.INFO, "Removing Second publication");
+			pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_SECOND_PUBLICATION_REMOVE_BTN_XPATH).click();
+			JavascriptExecutor jse = (JavascriptExecutor) ob;
+			jse.executeScript("scroll(0, -250);");
+			test.log(LogStatus.INFO, "Going back to search results page by clicking search results link");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).click();
+			waitForPageLoad(ob);
+			test.log(LogStatus.INFO, "Clicking first author card");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
+			waitForPageLoad(ob);
 			int pubCountAfterRemoval = pf.getAuthorRecordPage(ob).getPublicationCount();
-			test.log(LogStatus.INFO, "Asserting with the Initial Publication count");
-			Assert.assertEquals(pubCountAfterRemoval, pubCountBeforeRemoval - 5);
-			test.log(LogStatus.PASS, "Number of publication deleted matches with the displayed count");
+			Assert.assertTrue(pubCountBeforeRemoval - 2 == pubCountAfterRemoval,
+					"Removed publication count is not same after returning to curation, back from a navigation");
+			test.log(LogStatus.PASS,
+					"user is able to navigate away from the mid-curation state, and then subsequently return to that same mid-curation state");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Publication count before and after not matching", "Curation_issue");
+			logFailureDetails(test, t,
+					"user is not able to navigate away from the mid-curation state, and then subsequently return to that same mid-curation state",
+					"Curation_issue");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 
 	}
 
-	
-
 	/**
-	 * updating Extent Report with test case status whether it is PASS or FAIL
-	 * or SKIP
+	 * updating Extent Report with test case status whether it is PASS or FAIL or
+	 * SKIP
 	 */
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(profilexls,
-		 * "Test Cases", TestUtil.getRowNum(profilexls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()), "PASS");
+		 * else if (status == 2) TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()), "FAIL");
+		 * else TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()), "SKIP");
 		 */
 
 	}
