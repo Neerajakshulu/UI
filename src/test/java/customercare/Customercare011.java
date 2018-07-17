@@ -72,13 +72,12 @@ public class Customercare011 extends TestBase {
 			ob.navigate().to(host + CONFIG.getProperty("appendPACCAppUrl"));
 
 			try {
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_CC_NAME_CSS);
+				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_CC_NAME_CSS);
 				Select dropdown = new Select(ob.findElement(By.name("category")));
 				dropdown.selectByIndex(7);
-				String DropText = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_CC_COUNTRY_NAME)
-						.getText();
 
-				if (DropText.contains("Data Changes")) {
+
+				if (dropdown.getFirstSelectedOption().getText().contains("Data Changes")) {
 					test.log(LogStatus.PASS,
 							"user is able to select the issue type/category of the issue as an option");
 
