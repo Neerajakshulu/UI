@@ -135,7 +135,7 @@
 	
 	 <test name="Validate_details_of_post_article_patent_added_to_the_group">
 		<classes>
-			<class name="rcc.RCC015"></class>
+		<!-- 	<class name="rcc.RCC015"></class> -->
 			<class name="rcc.RCC016"></class>
 			<class name="rcc.RCC017"></class>
 		</classes>
@@ -147,13 +147,13 @@
 		</classes>
 	</test>
 	
-	<test name="Validate_removing_action_for_post_article_patent_added_to_the_group">
+	<!-- <test name="Validate_removing_action_for_post_article_patent_added_to_the_group">
 		<classes>
 			<class name="rcc.RCC018"></class>
 			<class name="rcc.RCC019"></class>
 			<class name="rcc.RCC014"></class>
 		</classes>
-	</test>
+	</test> -->
 	 <!--Moved this tests to Local Run suite as google doc and image upload scripts will not work on saucelabs  -->
 	 
 	<!-- <test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group">

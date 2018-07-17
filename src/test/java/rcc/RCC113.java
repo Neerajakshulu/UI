@@ -137,7 +137,7 @@ public class RCC113 extends TestBase {
 			test.log(LogStatus.INFO, "Add Article into Group from Watchlist page");
 			pf.getWatchlistPageInstance(ob).addDoucmentToGroupFromWatchlist(groupTitle,articleTitle);
 			
-			String patentTitle=pf.getWatchlistPageInstance(ob).getDocumentTitleInWatchlist("patent");
+			/*String patentTitle=pf.getWatchlistPageInstance(ob).getDocumentTitleInWatchlist("patent");
 			logger.info("patent title-->"+patentTitle);
 			test.log(LogStatus.INFO, "Add Patent into Group from Watchlist page");
 			pf.getWatchlistPageInstance(ob).addDoucmentToGroupFromWatchlist(groupTitle,patentTitle);
@@ -146,7 +146,7 @@ public class RCC113 extends TestBase {
 			logger.info("post title-->"+postTitle);
 			test.log(LogStatus.INFO, "Add Post into Group from Watchlist page");
 			pf.getWatchlistPageInstance(ob).addDoucmentToGroupFromWatchlist(groupTitle,postTitle);
-			
+			*/
 			
 			test.log(LogStatus.INFO, "Go to Group Record Details Page");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
@@ -158,12 +158,12 @@ public class RCC113 extends TestBase {
 			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(test,articleTitle);
 			
 			
-			test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
+			/*test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
 			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(test,patentTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Post available in Group Details Posts tab");
 			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);
-			
+			*/
 			test.log(LogStatus.INFO, "Delete Created Group");
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();

@@ -66,7 +66,7 @@ public class Authoring17 extends TestBase {
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME16", "PASSWORD16");
 			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
-			pf.getHFPageInstance(ob).searchForText("Physics");
+			pf.getHFPageInstance(ob).searchForText("biology");
 
 			pf.getSearchResultsPageInstance(ob).searchForArticleWithComments();
 			pf.getpostRVPageInstance(ob).loadComments();

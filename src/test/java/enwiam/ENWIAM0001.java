@@ -100,7 +100,7 @@ public class ENWIAM0001 extends TestBase {
 		pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials(LOGIN.getProperty("UserFBENWIAM80"), LOGIN.getProperty("PWDUserFBENWIAM80"));
 		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("PWDUserFBENWIAM80"));
 
-		try {
+		/*try {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
@@ -108,7 +108,7 @@ public class ENWIAM0001 extends TestBase {
 		} catch (Exception e) {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-		}
+		}*/
 	pf.getENWReferencePageInstance(ob).clickAccount();
 		//pf.getENWReferencePageInstance(ob).closeOnBoardingModal();
 		//validateLinkedAccounts(2, accountType);

@@ -65,7 +65,7 @@ public enum OnePObjectMap {
 	ENW_LINK_ACCOUNTS_DONE_BUTTON_XPATH("//button[@class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary']"),
 	ENW_LINK_ACCOUNTS_DONE_BUTTON_CSS("form#linkAccounts button"),
 
-	ENW_FB_LOGIN_BUTTON_XPATH("//button[@id='loginbutton']"),
+	ENW_FB_LOGIN_BUTTON_XPATH("//input[@name='login']"),
 	ENW_CONTINUE_BUTTON_XPATH("//div[@id='continue']"),
 	ENW_FB_PROFILE_IMGCIRCLE_XPATH("//img[@id='proSmallImg']"),
 	ENW_FB_PROFILE_IMGCIRCLE_ACCOUNT_XPATH("//a[contains(.,'Account')]"),
@@ -1417,6 +1417,7 @@ public enum OnePObjectMap {
 
 	WAT_AUTHOR_RECORD_PAGE_SUGGEST_UPDATE_BTN_XPATH("//button[contains(text(),'Suggest updates')]"),
 	WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH("//button[contains(text(),'Submit updates')]"),
+	WAT_AUTHOR_RECORD_PAGE_OVERLAY_SUBMIT_UPDATE_BTN_XPATH("(//button[contains(text(),'Submit updates')])[1]"),
 	WAT_AUTHOR_RECORD_PAGE_CANCEL_UPDATE_BTN_XPATH("//button[contains(text(),'Cancel')]"),
 	WAT_AUTHOR_RECORD_PAGE_ACCEPT_FIRST_RECOMMENDATION_XPATH("(//button[@aria-label='Accept'])[1]"),
 	WAT_AUTHOR_RECORD_PAGE_REJECT_FIRST_RECOMMENDATION_XPATH("(//button[@aria-label='Reject'])[1]"),
