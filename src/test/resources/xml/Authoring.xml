@@ -256,12 +256,12 @@
 		</classes>
 	</test>
 
-
-	<test name="Authoring39">
+<!--Commented because searched post feature no longer support.-->
+	<!-- <test name="Authoring39">
 		<classes>
 			<class name="Authoring.Authoring39"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Authoring40">
 		<classes>
@@ -269,23 +269,23 @@
 		</classes>
 	</test>
 
-	<test name="Authoring41">
+	<!-- <test name="Authoring41">
 		<classes>
 			<class name="Authoring.Authoring41"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Authoring42">
 		<classes>
 			<class name="Authoring.Authoring42"></class>
 		</classes>
 	</test>
-
 	<test name="Authoring43">
 		<classes>
 			<class name="Authoring.Authoring43"></class>
 		</classes>
-	</test>
+	</test> -->
+	
 
 	<test name="Authoring44">
 		<classes>
@@ -306,11 +306,11 @@
 		</classes>
 	</test>
 
-	<test name="Authoring47">
+	<!-- <test name="Authoring47">
 		<classes>
 			<class name="Authoring.Authoring47"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Authoring48">
 		<classes>
@@ -318,11 +318,11 @@
 		</classes>
 	</test>
 
-	<test name="Authoring49">
+	<!-- <test name="Authoring49">
 		<classes>
 			<class name="Authoring.Authoring49"></class>
 		</classes>
-	</test>
+	</test> -->
 
 
 	<test name="Authoring50">
@@ -331,19 +331,19 @@
 		</classes>
 	</test>
 
-	<test name="Authoring51">
+	<!-- <test name="Authoring51">
 		<classes>
 			<class name="Authoring.Authoring51"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="Authoring52">
+	<!-- <test name="Authoring52">
 		<parameter name="fbusername" value="test_wnqvjum_user@tfbnw.net" />
         <parameter name="fbpassword" value="auth123*" />
 		<classes>
 			<class name="Authoring.Authoring52"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Authoring53">
 		<parameter name="liusername" value="testing.prasadreddy@gmail.com" />
@@ -451,7 +451,7 @@
 		<classes>
 			<class name="Authoring.Authoring68"></class>
 		</classes>
-	</test>
+	</test>-->
 
 	<test name="Authoring69">
 		<classes>
