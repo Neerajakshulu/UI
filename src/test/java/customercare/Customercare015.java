@@ -84,7 +84,8 @@ public class Customercare015 extends TestBase {
 					test.log(LogStatus.PASS,
 							"extension field should be placed next to phone number field in customer care page.");
 				}
-				String Name = "Naznina";
+				String firstName = "Naznina";
+				String lastName ="clarivate";
 				String Orgname = "Clarivate Analytics";
 				String Email = "naznina.b@clarivate.com";
 				String Phone = "74873023486";
@@ -94,8 +95,7 @@ public class Customercare015 extends TestBase {
 				String Country = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_USER_COUNTRY_NAME).getAttribute("value");
 						
 				String Request = "Please test the above scenario --ts0001";
-				pf.getCustomercarePage(ob).EnterCustomercareDetails(test, Name, Orgname, Email, Phone, Extension,
-						Country, Request);
+				pf.getCustomercarePage(ob).EnterCustomercareDetails(test, firstName, lastName, Orgname, Email, Phone, Extension, Country, Request);
 
 				test.log(LogStatus.PASS, "user is able to submit the form in DRA Customer care page . ");
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_REQUEST_MSG_CSS);

@@ -69,10 +69,12 @@ public class Customercare002 extends TestBase{
 			ob.navigate().to(host + CONFIG.getProperty("appendDRACCUrl"));
 
 			try {
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_FULLNAME_NAME);
-				WebElement name_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_FULLNAME_NAME);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_FIRSTNAME_NAME);
+				WebElement firstname_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_USER_FIRSTNAME_NAME);
+				
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_LASTNAME_NAME);
+				WebElement lastname_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_USER_LASTNAME_NAME);
+				
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_ORGANIZATION_NAME);
 				WebElement organz_element = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_ORGANIZATION_NAME);
@@ -93,7 +95,7 @@ public class Customercare002 extends TestBase{
 						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_REQUEST_NAME);
 			
 
-				if (name_element.isDisplayed() && organz_element.isDisplayed() && email_element.isDisplayed()
+				if (firstname_element.isDisplayed() && lastname_element.isDisplayed() && organz_element.isDisplayed() && email_element.isDisplayed()
 						&& phone_element.isDisplayed() && country_element.isDisplayed() &&  category_element.isDisplayed() && description_element.isDisplayed()){
 					
 					test.log(LogStatus.PASS,

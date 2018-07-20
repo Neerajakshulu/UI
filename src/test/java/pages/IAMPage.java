@@ -327,12 +327,12 @@ public class IAMPage extends TestBase {
 
 	public void loginCustomerCare(String userName,
 			String password) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_NAME_ID);
-		ob.findElement(By.id(OnePObjectMap.CUSTOMER_CARE_USER_NAME_ID.toString())).sendKeys(userName);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_PASSWORD_ID);
-		ob.findElement(By.id(OnePObjectMap.CUSTOMER_CARE_PASSWORD_ID.toString())).sendKeys(password);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CLICK_LOGIN_BUTTON_ID);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_CARE_CLICK_LOGIN_BUTTON_ID);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_NAME_XPATH);
+		ob.findElement(By.id(OnePObjectMap.CUSTOMER_CARE_USER_NAME_XPATH.toString())).sendKeys(userName);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_PASSWORD_XPATH);
+		ob.findElement(By.id(OnePObjectMap.CUSTOMER_CARE_PASSWORD_XPATH.toString())).sendKeys(password);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CLICK_LOGIN_BUTTON_XPATH);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_CARE_CLICK_LOGIN_BUTTON_XPATH);
 		// pf.getBrowserWaitsInstance(ob).waitUntilText("Customer Care Version");
 	}
 

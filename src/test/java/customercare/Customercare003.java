@@ -77,7 +77,7 @@ public class Customercare003 extends TestBase{
 
 			
 				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_FULLNAME_NAME);
+						.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_FIRSTNAME_NAME);
 				
 				JavascriptExecutor jse = (JavascriptExecutor)ob;
 				jse.executeScript("window.scrollBy(0,250)", "");

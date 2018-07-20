@@ -130,7 +130,8 @@ public class Customercare021 extends TestBase{
 	}
 
 	private void validate3() throws Exception {
-		String Name = "Srinivas";
+		String firstName = "Srinivas";
+		String lastName ="clarivate";
 		String Orgname = "Clarivate Analytics";
 		String Email = "srinivas.bms@clarivate.com";
 		String Phone = "+ 3 (123) 456-789";
@@ -140,9 +141,7 @@ public class Customercare021 extends TestBase{
 		String Country = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_USER_COUNTRY_NAME).getAttribute("value");
 				
 		String Request = "Please test the above scenario --ts0001";
-		pf.getCustomercarePage(ob).EnterCustomercareDetails(test, Name, Orgname, Email, Phone, Extension,
-				Country, Request);
-
+		pf.getCustomercarePage(ob).EnterCustomercareDetails(test, firstName, lastName, Orgname, Email, Phone, Extension, Country, Request);
 		test.log(LogStatus.PASS, "user is able to submit the form in DRA Customer care page and Phone number field allowed only  "
 				+ "special characters + ( ) - ");
 		BrowserWaits.waitTime(3);

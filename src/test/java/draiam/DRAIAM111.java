@@ -68,6 +68,9 @@ public class DRAIAM111 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("dra_sso_url"));
 			pf.getDraSSOPageInstance(ob).loginDRAApp(LOGIN.getProperty("DRASSOUSERNAME"),LOGIN.getProperty("DRASSOPASSWORD"));
+			fluentwaitforElement(ob, By.xpath("//span[text()='Explore Target Druggability']"), 60);
+			jsClick(ob, ob.findElement(By.xpath("//span[text()='Explore Target Druggability']")));
+			
 			pf.getDraPageInstance(ob).logoutDRA();
 			waitUntilText("Drug Research Advisor","Sign in");
 			closeBrowser();

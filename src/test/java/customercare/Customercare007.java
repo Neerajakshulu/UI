@@ -78,8 +78,8 @@ public class Customercare007 extends TestBase {
 				dropdown.selectByIndex(7);
 				String DropText = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_CC_COUNTRY_NAME)
 						.getAttribute("value");
-
-				if (DropText.contains("Data Changes")) {
+				System.out.println(DropText);
+				if (DropText.contains("Other & General Information")) {
 					test.log(LogStatus.PASS,
 							"user is able to select the issue type/category of the issue as an option");
 

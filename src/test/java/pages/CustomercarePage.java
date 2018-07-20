@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
@@ -27,10 +28,16 @@ public class CustomercarePage extends TestBase {
 		pf = new PageFactory();
 	}
 
-	public void EnterCustomercareDetails(ExtentTest test, String Name, String Orgname, String Email, String Phone,
+	public void EnterCustomercareDetails(ExtentTest test, String firstName,String lastName, String Orgname, String Email, String Phone,
 			String Extension, String Country, String Request) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.CUSTOMER_CARE_USER_FULLNAME_NAME);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_USER_FULLNAME_NAME, Name);
+		/*pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.CUSTOMER_CARE_USER_FULLNAME_NAME);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_USER_FULLNAME_NAME, Name);*/
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_FIRSTNAME_NAME);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_USER_FIRSTNAME_NAME, firstName);
+		
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_LASTNAME_NAME);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_USER_LASTNAME_NAME, lastName);
+
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_USER_ORGANIZATION_NAME, Orgname);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_USER_EMAILID_NAME, Email);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_USER_PHONE_NAME, Phone);

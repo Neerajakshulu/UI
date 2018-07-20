@@ -94,9 +94,7 @@ public class Customercare020 extends TestBase {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILEDATA_CSS);
             fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.DRA_PROFILE_FNAME_CSS.toString()), 100);
 			String expectedName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FNAME_CSS)
-					.getAttribute("value") + " "
-					+ pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_LNAME_CSS)
-							.getAttribute("value");
+					.getAttribute("value");
 			fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.DRA_PROFILE_ORG_CSS.toString()), 20);
 			String expectedOrg = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_ORG_CSS)
 					.getAttribute("value");
@@ -157,6 +155,7 @@ public class Customercare020 extends TestBase {
 			fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_NAME_CSS.toString()), 30);
 			String actualName = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_NAME_CSS).getAttribute("value");
+			
 			fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_ORG_CSS.toString()), 30);
 			String actualOrg = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_ORG_CSS).getAttribute("value");
