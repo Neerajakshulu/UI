@@ -156,7 +156,7 @@ public class ENWIAM51 extends TestBase {
 
 				test.log(LogStatus.INFO, "Preference page is opened successfully");
 				String actual_URL = ob.getCurrentUrl();
-				String expected_URL = "https://endnote.com/downloads/30-day-trial?utm_source=en-online-1p&utm_medium=referral&utm_campaign=en-online-trial";
+				String expected_URL = "https://endnote.com/downloads/30-day-trial/?utm_source=en-online-1p&utm_medium=referral&utm_campaign=en-online-trial";
 				Assert.assertTrue(actual_URL.contains(expected_URL));
 				test.log(LogStatus.PASS,
 						"user is taken to the Endnote desktop X7 free trial download form by clicking Download link on the Endnote sign");
