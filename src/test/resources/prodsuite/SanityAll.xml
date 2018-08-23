@@ -6,7 +6,7 @@
 	
 	<suite-files>
 		<suite-file path="./IAM.xml" />
-		<suite-file path="./Search.xml" />
+		<!-- <suite-file path="./Search.xml" /> -->
 		<suite-file path="./Authoring.xml" />
 		<suite-file path="./Profile.xml" />
 		<suite-file path="./Watchlist.xml" />

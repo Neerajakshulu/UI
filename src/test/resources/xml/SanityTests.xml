@@ -15,7 +15,7 @@
 	<parameter name="addComments" value="Testing Comments"></parameter>
 	<parameter name="article" value="Biology"></parameter>
 	
-	<test name="Search2">
+	<!-- <test name="Search2">
 		<classes>
 			<class name="search.Search2"></class>
 		</classes>
@@ -173,13 +173,13 @@
 		</classes>
 	</test>
 
-<!-- Duplicated
+Duplicated
     <test name="Search77">
       	<classes>
 			<class name="search.Search77"></class>
 		</classes>
 	</test>
- -->
+
 	<test name="Search87">
 		<classes>
 			<class name="search.Search87"></class>
@@ -209,7 +209,7 @@
 			<class name="search.Search94"></class>
 		</classes>
 	</test>
-
+ -->
 	<!-- Profile Sanity Testcases -->
 	<test name="Validate_View_Profile">
 		<classes>
