@@ -5,12 +5,7 @@
 	</listeners>
 	
 	<suite-files>
-		<suite-file path="./IAM.xml" />
-		<!-- <suite-file path="./Search.xml" /> -->
-		<suite-file path="./Authoring.xml" />
-		<suite-file path="./Profile.xml" />
-		<suite-file path="./Watchlist.xml" />
-		<!-- <suite-file path="./Notifications.xml" /> -->
+		<suite-file path="./SanityTests.xml" />
 	</suite-files>
 	
 </suite>
