@@ -76,12 +76,13 @@ public class ENWIAM011 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
+			test.log(LogStatus.INFO, "User Sucessfully login using facebook account");
 
-			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
+			/*String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
 			if (text.equalsIgnoreCase("Continue")) {
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-			}
+			}*/
 			if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing FB user credentials are not working fine");// extent reports

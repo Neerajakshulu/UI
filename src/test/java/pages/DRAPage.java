@@ -49,7 +49,7 @@ public class DRAPage extends TestBase {
 	public void clickLoginDRA() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.DRA_SEARCH_BOX_CSS.toString()), 100);
+		//fluentwaitforElement(ob, By.cssSelector(OnePObjectMap.DRA_SEARCH_BOX_CSS.toString()), 100);
 		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 
 	}

@@ -1,9 +1,10 @@
-package draiam;
+package enw;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,69 +18,63 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class DRAIAM0010 extends TestBase {
+public class ENW045 extends TestBase {
 
 	static int status = 1;
-	static boolean fail = false;
 
+	// Following is the list of status:
+	// 1--->PASS
+	// 2--->FAIL
+	// 3--->SKIP
+	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRAIAM");
-
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
 
 	@Test
-	public void testcaseDRA0010() throws Exception {
+	public void testcaseENW045() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		// static boolean fail = false;
 
 		if (!master_condition) {
-			status = 3;
+
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
-
 		}
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-
 		try {
-
 			openBrowser();
-			clearCookies();
 			maximizeWindow();
-			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
-			test.log(LogStatus.PASS, "User is succeccfully sent to the DRA landing page. ");
-
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0010"),
-					LOGIN.getProperty("INVALIDDRAPWD10"));
+			clearCookies();
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+			waitUntilText("Sign in");
+			try {
+			waitForElementTobeClickable(ob, By.name("loginEmail"), 180);
+			ob.findElement(By.name("loginEmail")).clear();
+			ob.findElement(By.name("loginEmail")).sendKeys("linkedinloginid@gmail.com");
+			waitForElementTobeClickable(ob, By.name("loginPassword"), 180);
+			ob.findElement(By.name("loginPassword")).clear();
+			ob.findElement(By.name("loginPassword")).sendKeys("Neon@1234");
+			// jsClick(ob, ob.findElement(By.cssSelector("button[class*='login-button']")));
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-
-			pf.getDraPageInstance(ob).validateInvalidCredentialsErrorMsg(test);
-			//BrowserWaits.waitTime(2);
-			ob.navigate().refresh();
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0010"),
-					LOGIN.getProperty("DRAUSERPWD10"));
-			pf.getDraPageInstance(ob).clickLoginDRA();
-			test.log(LogStatus.PASS,
-					"user successfully authenticated to the platform by by supplying correct STeAM credentials (email address + password), on the DRA sign in screen.");
-			
-            //
-			//fluentwaitforElement(ob, By.xpath(OnePObjectMap.DRA_EXPLORE_TARGET_DRUGGABILITY_XPATH.toString()), 60);
-			//BrowserWaits.waitTime(5);
-			fluentwaitforElement(ob, By.xpath(OnePObjectMap.DRA_EXPLORE_TARGET_DRUGGABILITY_XPATH.toString()),60);
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_EXPLORE_TARGET_DRUGGABILITY_XPATH);
-			
-			pf.getDraPageInstance(ob).logoutDRA();
+			test.log(LogStatus.PASS, "User is able to sign in with STeAM account.");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "User not able to sign In using STeAM account.");// extent
+				ErrorUtil.addVerificationFailure(t);// testng reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
+			}					
 			closeBrowser();
-
+			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-			// reports
+																		// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
@@ -87,18 +82,13 @@ public class DRAIAM0010 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
-			ErrorUtil.addVerificationFailure(t);
-
 			closeBrowser();
 		}
-
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+		
 	}
-
 
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
 	}
 }

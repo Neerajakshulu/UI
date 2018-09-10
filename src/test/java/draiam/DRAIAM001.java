@@ -88,7 +88,7 @@ public class DRAIAM001 extends TestBase {
 				String dra_logo = brand_element.getText();
 		
 				if (brand_element.isDisplayed() && b_element.isDisplayed()) {
-					Assert.assertEquals(dra_logo, "Drug Research Advisor");
+					Assert.assertEquals(dra_logo, "Sign in to continue with Drug Research Advisor");
 					
 					test.log(LogStatus.PASS, "DRA Landing page displays branding and marketing copy");
 				}
@@ -179,7 +179,7 @@ public class DRAIAM001 extends TestBase {
 			
 			// Verifying the Learn more link is displaying
 			//pf.getDraPageInstance(ob).validateProductOverviewPage(test);
-			try {
+			/*try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_LEARNMORE_LINK_XPATH);
 				WebElement lm_element = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.DRA_LANDINGPAGE_LEARNMORE_LINK_XPATH);
@@ -212,7 +212,7 @@ public class DRAIAM001 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			closeBrowser();
+			*/
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -226,11 +226,11 @@ public class DRAIAM001 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-
+		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 
 	}
-
+  
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);

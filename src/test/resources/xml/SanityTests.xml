@@ -1,12 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Sanity suite" parallel="tests" thread-count="10">
+<suite name="Sanity suite" parallel="tests" thread-count="5">
 
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="username" value="user1testautomation@gmail.com" />
+	<!-- <parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 	<parameter name="articleName" value="biology" />
 	<parameter name="patentName" value="Percutaneous placement valve stent" />
@@ -15,7 +15,7 @@
 	<parameter name="addComments" value="Testing Comments"></parameter>
 	<parameter name="article" value="Biology"></parameter>
 	
-	<!-- <test name="Search2">
+	<test name="Search2">
 		<classes>
 			<class name="search.Search2"></class>
 		</classes>
@@ -209,8 +209,8 @@ Duplicated
 			<class name="search.Search94"></class>
 		</classes>
 	</test>
- -->
-	<!-- Profile Sanity Testcases -->
+
+	Profile Sanity Testcases
 	<test name="Validate_View_Profile">
 		<classes>
 			<class name="Profile.Profile5"></class>
@@ -258,24 +258,24 @@ Duplicated
 			<class name="Profile.Profile2"></class>
 		</classes>
 	</test>
-<!--  Removing from sanity due to saucelabs doesnot have permission to image from Git -->
-	<!-- <test name="Validate_Profile_image_upload">
+ Removing from sanity due to saucelabs doesnot have permission to image from Git
+	<test name="Validate_Profile_image_upload">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
 		<classes>
 			<class name="Profile.Profile69"></class>
 		</classes>
-	</test> -->
+	</test>
 
-	 <!-- IAM test cases -->
+	 IAM test cases
 	 <test name="IAM002">
 		<classes>
 			<class name="iam.IAM002"></class>
 		</classes>
 	</test>
 
-	<!-- <test name="IAM003"> <classes> <class name="iam.IAM003"></class> </classes> 
-		</test> -->
+	<test name="IAM003"> <classes> <class name="iam.IAM003"></class> </classes> 
+		</test>
 
 	<test name="IAM004">
 		<classes>
@@ -289,7 +289,7 @@ Duplicated
 		</classes>
 	</test>
 
-	<!-- Watchlist test cases -->
+	Watchlist test cases
 
 	<test name="Watchlist004">
 		<classes>
@@ -346,9 +346,9 @@ Duplicated
 	</test>
 
 
-<!-- Notifications Test Cases -->
+Notifications Test Cases
 
-	<!-- <test name="Test F11">
+	<test name="Test F11">
 		<classes>
 			<class name="notifications.Notifications0011"></class>
 		</classes>
@@ -383,9 +383,9 @@ Duplicated
 		<classes>
 			<class name="notifications.Notifications0013"></class>
 		</classes>
-	</test> -->
+	</test>
 	
-	<!-- Authoring Test cases -->
+	Authoring Test cases
 	<test name="Authoring43">
 		<classes>
 			<class name="Authoring.Authoring43"></class>
@@ -526,7 +526,7 @@ Duplicated
 		<classes>
 			<class name="Authoring.Authoring76"></class>
 		</classes>
-	</test>
+	</test> -->
 	
 	<!-- <test name="Share_On_Google_Plus">
 		<parameter name="gusername" value="romanreings2016csk" />
@@ -535,4 +535,47 @@ Duplicated
                 <class name="Authoring.Authoring82"></class> 
 		</classes>
 	</test> -->
+	
+<!-- Added DRA test for the Sanity production job. --> 
+    <test name="DRAIAM001">
+		<classes>
+			<class name="draiam.DRAIAM001"></class>
+		</classes>
+	</test>
+	<test name="DRAIAM0010">
+		<classes>
+			<class name="draiam.DRAIAM0010"></class>	</classes>
+	</test>
+	<test name="DRAIAM0011">
+		<classes>
+			<class name="draiam.DRAIAM0011"></class>
+		</classes>
+	</test>
+	<test name="DRAIAM0013">
+		<classes>
+			<class name="draiam.DRAIAM0013"></class>
+		</classes>
+	</test>
+	<test name="DRAIAM101">
+		<classes>
+			<class name="draiam.DRAIAM101"></class>
+		</classes>
+	</test>
+	<!-- Added ENDNOTE test for the Sanity production job. --> 
+	<test name="Login_and_logout_enw_application_using_facebook_account">
+		<classes>
+			<class name="enwiam.ENWIAM011"></class>
+		</classes>
+	</test>
+	<test name="Login_and_logout_enw_application_using_LI_account">
+		<classes>
+			<class name="enwiam.ENWIAM012"></class>
+		</classes>
+	</test> 
+	<test name="Login_and_logout_enw_application_using_STeAM_account">
+		<classes>
+			<class name="enw.ENW045"></class>
+		</classes>
+	</test> 
+	
 </suite>

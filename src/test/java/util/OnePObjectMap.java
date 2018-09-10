@@ -831,7 +831,8 @@ public enum OnePObjectMap {
 
 	// #################### DRA ##########################
 	DRA_LOGO_CSS("h2[class='wui-title wui-title--app-signin-primaryname']"),
-	DRA_BRANDING_NAME_CSS("h2[class='wui-title wui-title--app-signin-primaryname']"),
+	DRA_EXPLORE_TARGET_DRUGGABILITY_XPATH("//span[text()='Explore Target Druggability']"),
+	DRA_BRANDING_NAME_CSS("h3[class='wui-subtitle wui-subtitle--app-signin-no-input ng-binding ng-scope']"),
 	DRA_ONBOARDING_CSS("div[class='applications-buttons-container'] a"),
 	DRA_LANDINGPAGE_DESIGN_ICON_CSS("i[class='wui-icon wui-icon--design login-splash-icon']"),
 	DRA_LANDINGPAGE_IDENTIFY_ICON_CSS("i[class='wui-icon wui-icon--target login-splash-icon']"),
