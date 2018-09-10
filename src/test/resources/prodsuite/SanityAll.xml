@@ -5,7 +5,8 @@
 	</listeners>
 	
 	<suite-files>
-		<suite-file path="./SanityTests.xml" />
+		<suite-file path="./DRAIAM.xml" />
+		<suite-file path="./ENWIAM.xml" />
 	</suite-files>
 	
 </suite>
