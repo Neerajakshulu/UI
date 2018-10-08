@@ -41,6 +41,7 @@ public class PageFactory {
 	private IPASearch searchPage = null;
 	private IPApage ipapage = null;
 	private IAMPage iamPage = null;
+	private PUBLONSPage pubPage=null;
 	private CustomercarePage customercarePage = null;
 	private IpaSavedSearchDetailsPage ipasavedsearchpage = null;
 	private DashboardPage dashboardPage = null;
@@ -61,6 +62,14 @@ public class PageFactory {
 			iamPage = new IAMPage(ob);
 		}
 		return iamPage;
+	}
+	
+	public PUBLONSPage getPubPage(WebDriver ob) {
+
+		if (pubPage == null) {
+			pubPage = new PUBLONSPage(ob);
+		}
+		return pubPage;
 	}
 
 	public IPASearch getSearchPageInstance(WebDriver ob) {
@@ -431,5 +440,6 @@ public class PageFactory {
 		searchAuthorClusterResultsPage=null;
 		authorRecordPage=null;
 		watProfilePage=null;
+		pubPage=null;
 	}
 }

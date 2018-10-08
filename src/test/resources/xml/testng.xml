@@ -17,5 +17,6 @@
 		<!-- <suite-file path="./IPA.xml" /> --> <!--  Commenting Dev and QA Activites has been stopped -->
 		<!-- <suite-file path="./IPAIAM.xml" /> -->
 		<suite-file path="./customercare.xml" />
+		<suite-file path="./PUBLONS.xml" />
 	</suite-files>
 </suite>
