@@ -43,7 +43,7 @@ public class DRASSOPage extends TestBase {
 				.findElement(By.xpath(OnePObjectMap.DRA_SSO_SUSPEND_PAGE_ERROR_MESSAGE_TEXT_XPATH.toString()))
 				.getText();
 		Assert.assertEquals(errorMessage1, "Your account has been suspended.");
-		Assert.assertEquals(errorMessage2, "Questions? Contact Drug Research Advisor Customer Care.");
+		Assert.assertEquals(errorMessage2, "Please contact community.info@clarivate.com to unlock your account.");
 
 	}
 
