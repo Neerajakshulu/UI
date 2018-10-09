@@ -15,7 +15,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class PUBLONS001 extends TestBase {
+public class PUBLONS002 extends TestBase {
 
 	static int status = 1;
 
@@ -53,12 +53,7 @@ public class PUBLONS001 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-			pf.getIamPage(ob).login(userName, pass);
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Newsfeed","Watchlists","Groups");
-			logout();
-			pf.getBrowserWaitsInstance(ob)
-			.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
-			test.log(LogStatus.PASS, "Publons application Login and Logout successfylly");
+			
 			closeBrowser();
 
 		} catch (Throwable t) {

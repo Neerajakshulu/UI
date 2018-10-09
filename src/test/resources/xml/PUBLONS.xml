@@ -11,6 +11,11 @@
 			<class name="Publons.PUBLONS001"></class>
 		</classes>
 	</test>
+	<test name="PUBLONS002">
+		<classes>
+			<class name="Publons.PUBLONS001"></class>
+		</classes>
+	</test>
 	<test name="Publon_FB_Login">
 		<classes>
 			<class name="Publons.PUBLONS020"></class>

@@ -33,7 +33,6 @@ public class PUBLONS020 extends TestBase{
 
 	@Test
 	public void testcaseA1() throws Exception {
-		WebElement element = null;
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
