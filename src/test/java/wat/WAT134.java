@@ -45,8 +45,8 @@ public class WAT134 extends TestBase {
 	 *             When WAT Login is not done
 	 */
 	@Test
-	@Parameters({ "username", "password" })
-	public void testLoginWATApp(String username, String password) throws Exception {
+	//@Parameters({ "username", "password" })
+	public void testLoginWATApp() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -66,10 +66,7 @@ public class WAT134 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
-
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -84,7 +81,7 @@ public class WAT134 extends TestBase {
 	 * @throws Exception,
 	 *             When Something unexpected
 	 */
-	@Test(dependsOnMethods = { "testLoginWATApp" })
+//	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2", "OrgName1", "OrgName2" })
 	public void searchAuthorCluster(String LastName, String CountryName1, String CountryName2, String OrgName1,
 			String OrgName2) throws Exception {
@@ -109,7 +106,7 @@ public class WAT134 extends TestBase {
 	 * @throws Exception,
 	 *             When Something unexpected
 	 */
-	@Test(dependsOnMethods = { "searchAuthorCluster" })
+	//@Test(dependsOnMethods = { "searchAuthorCluster" })
 	public void testCurationMode() throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Clicking first author card");

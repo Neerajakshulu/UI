@@ -1484,6 +1484,13 @@ public enum OnePObjectMap {
 	DRA_SSO_LOGIN_PAGE_EXPIRED_SUBSCRIPTION("//div[@class='col-md-12']"),
 	DRA_SSO_LOGIN_PAGE_WITH_SUBSCRIPTION("//p[@class='ng-binding']"),
 
+	
+	WOS_WAT_LANDING_PAGE_LOGO_XPATH("(//img[@alt='Clarivate Analytics'])[2]"),
+	WOS_WAT_DB_SELECTION_XPATH("//span[@id='selectdb-title']/following-sibling::span/span"),
+	WOS_WAT_RESEARCHER_SEARCH_LINK_XPATH("//a[text()='Researcher Search']"),
+	WOS_WAT_NAME_SEARCH_LINK_XPATH("//span[text()='Name Search']"),
+	WOS_WAT_DB_NAME_ID("select2-databases-result-f4uq-selected"),
+	WOS_WAT_DB_DROPDOWN_VALUES_XPATH("//span[@class='select2-container select2-container--dbselect select2-container--open']/descendant::li")
 	;
 
 	private String locator;
