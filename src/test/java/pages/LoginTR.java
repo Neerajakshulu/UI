@@ -1,4 +1,4 @@
-package Authoring;
+package pages;
 
 import java.net.URL;
 import java.util.List;

@@ -87,20 +87,6 @@ public class TestBase {
 	public static Properties OR = null;
 	public static Properties LOGIN = null;
 	public static Xls_Reader suiteXls = null;
-	public static Xls_Reader iamxls = null;
-	public static Xls_Reader searchxls = null;
-	public static Xls_Reader authoringxls = null;
-	public static Xls_Reader profilexls = null;
-	public static Xls_Reader watchlistXls = null;
-	public static Xls_Reader notificationxls = null;
-	public static Xls_Reader enwxls = null;
-	public static Xls_Reader enwiamxls = null;
-	public static Xls_Reader pubxls = null;
-	public static Xls_Reader rccxls = null;
-	public static Xls_Reader draiamxls = null;
-	public static Xls_Reader ipaxls = null;
-	public static Xls_Reader ipaiamxls = null;
-	public static Xls_Reader customercarexls = null;
 	public static Xls_Reader watxls = null;
 	public static Xls_Reader watiamxls = null;
 	public static boolean isInitalized = false;
@@ -281,95 +267,23 @@ public class TestBase {
 
 			// logger.info(host);
 			// xls file
-			iamxls = new Xls_Reader("src/test/resources/xls/IAM.xlsx");
-			searchxls = new Xls_Reader("src/test/resources/xls/Search.xlsx");
-			authoringxls = new Xls_Reader(
-					"src/test/resources/xls/Authoring.xlsx");
-			profilexls = new Xls_Reader("src/test/resources/xls/Profile.xlsx");
-			watchlistXls = new Xls_Reader(
-					"src/test/resources/xls/Watchlist.xlsx");
-			notificationxls = new Xls_Reader(
-					"src/test/resources/xls/Notifications.xlsx");
-			enwxls = new Xls_Reader("src/test/resources/xls/ENW.xlsx");
-			enwiamxls = new Xls_Reader("src/test/resources/xls/ENWIAM.xlsx");
-			pubxls = new Xls_Reader("src/test/resources/xls/PUBLONS.xlsx");
-			rccxls = new Xls_Reader("src/test/resources/xls/RCC.xlsx");
-			draiamxls = new Xls_Reader("src/test/resources/xls/DRAIAM.xlsx");
-			ipaxls = new Xls_Reader("src/test/resources/xls/IPA.xlsx");
-			ipaiamxls = new Xls_Reader("src/test/resources/xls/IPAIAM.xlsx");
-			customercarexls = new Xls_Reader(
-					"src/test/resources/xls/customercare.xlsx");
+	
 			watxls = new Xls_Reader("src/test/resources/xls/WAT.xlsx");
 			watiamxls = new Xls_Reader("src/test/resources/xls/WATIAM.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
 		}
 		testcase = new HashMap<String, RowData>();
-		if (suiteName.equals("Notifications")) {
-			loadModuleData(notificationxls.path);
-		} else if (suiteName.equals("Profile")) {
-			loadModuleData(profilexls.path);
-		} else if (suiteName.equals("IAM")) {
-			loadModuleData(iamxls.path);
-		} else if (suiteName.equals("Authoring")) {
-			loadModuleData(authoringxls.path);
-		} else if (suiteName.equals("Search")) {
-			loadModuleData(searchxls.path);
-		} else if (suiteName.equals("Watchlist")) {
-			loadModuleData(watchlistXls.path);
-		} else if (suiteName.equals("ENW")) {
-			loadModuleData(enwxls.path);
-		} else if (suiteName.equals("ENWIAM")) {
-			loadModuleData(enwiamxls.path);
-		}else if (suiteName.equals("PUBLONS")) {
-			loadModuleData(pubxls.path);
-		}  else if (suiteName.equals("RCC")) {
-			loadModuleData(rccxls.path);
-		} else if (suiteName.equals("DRAIAM")) {
-			loadModuleData(draiamxls.path);
-		} else if (suiteName.equals("IPA")) {
-			loadModuleData(ipaxls.path);
-		} else if (suiteName.equals("IPAIAM")) {
-			loadModuleData(ipaiamxls.path);
-		} else if (suiteName.equals("customercare")) {
-			loadModuleData(customercarexls.path);
-		} else if (suiteName.equals("WAT")) {
+		 if (suiteName.equals("WAT")) {
 			loadModuleData(watxls.path);
 		} else if (suiteName.equals("WATIAM")) {
 			loadModuleData(watiamxls.path);
 		} else if (suiteName.equals("Sanity suite")) {
-			loadModuleData(iamxls.path);
-			loadModuleData(searchxls.path);
-			loadModuleData(authoringxls.path);
-			loadModuleData(profilexls.path);
-			loadModuleData(watchlistXls.path);
-			loadModuleData(notificationxls.path);
-			loadModuleData(enwxls.path);
-			loadModuleData(enwiamxls.path);
-			loadModuleData(pubxls.path);
-			loadModuleData(rccxls.path);
-			loadModuleData(draiamxls.path);
-			loadModuleData(ipaxls.path);
-			loadModuleData(ipaiamxls.path);
-			loadModuleData(customercarexls.path);
 			loadModuleData(watxls.path);
 			loadModuleData(watiamxls.path);
 		} else if (suiteName.equals("LocalRun")) {
-			loadModuleData(iamxls.path);
-			loadModuleData(profilexls.path);
-			loadModuleData(enwxls.path);
-			loadModuleData(enwiamxls.path);
-			loadModuleData(pubxls.path);
-			loadModuleData(searchxls.path);
-			loadModuleData(rccxls.path);
-			loadModuleData(authoringxls.path);
-			loadModuleData(draiamxls.path);
-			loadModuleData(ipaxls.path);
-			loadModuleData(ipaiamxls.path);
-			loadModuleData(customercarexls.path);
 			loadModuleData(watxls.path);
 			loadModuleData(watiamxls.path);
-			loadModuleData(watchlistXls.path);
 		}
 
 		logger.info(suiteName + "---" + testcase.size());

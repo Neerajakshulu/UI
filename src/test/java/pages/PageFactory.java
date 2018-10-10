@@ -2,11 +2,8 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-//import Authoring.Authoring;
-import Authoring.LoginTR;
 import util.BrowserAction;
 import util.BrowserWaits;
-import util.Utility;
 import watpages.AuthorRecordPage;
 import watpages.SearchAuthorClusterPage;
 import watpages.SearchAuthorClusterResultsPage;
@@ -17,36 +14,16 @@ public class PageFactory {
 
 	private SearchProfile searchProfilePage = null;
 	private ProfilePage profilePage = null;
-	private PostRecordViewPage postRVPage = null;
 	private SearchResultsPage searchResultsPage = null;
-	private Watchlist WatchlistPage = null;
 	private HeaderFooterLinksPage hfPage = null;
 	private BrowserAction browserAction = null;
 	private BrowserWaits browserWaits = null;
 	private LoginTR loginTR = null;
-	// private Authoring authoring = null;
 	private OnboardingModalsPage onboarding = null;
 	private AccountPage accountPage = null;
-	private ENWReferencePage enwReferencePage = null;
-	private EnwReference enwReference = null;
 	private LinkingModalsPage linkingModalsPage = null;
-	private GroupDetailsPage groupDetailsPage = null;
-	private GroupsListPage groupsListPage = null;
-	private GroupInvitationPage groupInvitationPage = null;
-	private GroupsPage groupsPage = null;
-	private Utility utility = null;
-	private NewsfeedPage newsfeedPage = null;
-	private DRAPage draPage = null;
-	private DRASSOPage draSSOPage=null;
-	private IPASearch searchPage = null;
-	private IPApage ipapage = null;
 	private IAMPage iamPage = null;
-	private PUBLONSPage pubPage=null;
 	private CustomercarePage customercarePage = null;
-	private IpaSavedSearchDetailsPage ipasavedsearchpage = null;
-	private DashboardPage dashboardPage = null;
-	private IPARecordViewPage rvpage = null;
-	private GmailLoginPage gmpage = null;
 	private CreatePostAndCommentPage postncommentpage = null;
 	
 	private WATLogInPage watLogInPage = null;
@@ -62,22 +39,6 @@ public class PageFactory {
 			iamPage = new IAMPage(ob);
 		}
 		return iamPage;
-	}
-	
-	public PUBLONSPage getPubPage(WebDriver ob) {
-
-		if (pubPage == null) {
-			pubPage = new PUBLONSPage(ob);
-		}
-		return pubPage;
-	}
-
-	public IPASearch getSearchPageInstance(WebDriver ob) {
-		if (searchPage == null) {
-			searchPage = new IPASearch(ob);
-		}
-		return searchPage;
-
 	}
 
 	public CreatePostAndCommentPage getPostCommentPageInstance(WebDriver ob) {
@@ -105,15 +66,7 @@ public class PageFactory {
 		return profilePage;
 
 	}
-
-	public PostRecordViewPage getpostRVPageInstance(WebDriver ob) {
-		if (postRVPage == null) {
-			postRVPage = new PostRecordViewPage(ob);
-		}
-
-		return postRVPage;
-
-	}
+	
 
 	public SearchResultsPage getSearchResultsPageInstance(WebDriver ob) {
 		if (searchResultsPage == null) {
@@ -124,14 +77,6 @@ public class PageFactory {
 
 	}
 
-	public Watchlist getWatchlistPageInstance(WebDriver ob) {
-		if (WatchlistPage == null) {
-			WatchlistPage = new Watchlist(ob);
-		}
-
-		return WatchlistPage;
-
-	}
 
 	public HeaderFooterLinksPage getHFPageInstance(WebDriver ob) {
 		if (hfPage == null) {
@@ -204,24 +149,6 @@ public class PageFactory {
 
 	}
 
-	public ENWReferencePage getENWReferencePageInstance(WebDriver ob) {
-		if (enwReferencePage == null) {
-			enwReferencePage = new ENWReferencePage(ob);
-		}
-
-		return enwReferencePage;
-
-	}
-
-	// Arvind ENWReference method
-	public EnwReference getEnwReferenceInstance(WebDriver ob) {
-		if (enwReference == null) {
-			enwReference = new EnwReference(ob);
-		}
-
-		return enwReference;
-	}
-
 	public LinkingModalsPage getLinkingModalsInstance(WebDriver ob) {
 
 		if (linkingModalsPage == null) {
@@ -232,79 +159,6 @@ public class PageFactory {
 
 	public void setAccountPageInstance(AccountPage obj) {
 		accountPage = obj;
-	}
-
-	public GroupDetailsPage getGroupDetailsPage(WebDriver ob) {
-
-		if (groupDetailsPage == null) {
-			groupDetailsPage = new GroupDetailsPage(ob);
-		}
-		return groupDetailsPage;
-	}
-
-	public GroupsListPage getGroupsListPage(WebDriver ob) {
-
-		if (groupsListPage == null) {
-			groupsListPage = new GroupsListPage(ob);
-		}
-		return groupsListPage;
-	}
-
-	public GroupInvitationPage getGroupInvitationPage(WebDriver ob) {
-
-		if (groupInvitationPage == null) {
-			groupInvitationPage = new GroupInvitationPage(ob);
-		}
-		return groupInvitationPage;
-	}
-
-	public GroupsPage getGroupsPage(WebDriver ob) {
-
-		if (groupsPage == null) {
-			groupsPage = new GroupsPage(ob);
-		}
-		return groupsPage;
-	}
-
-	public Utility getUtility(WebDriver ob) {
-
-		if (utility == null) {
-			utility = new Utility(ob);
-		}
-		return utility;
-	}
-
-	public NewsfeedPage getNewsfeedPageInstance(WebDriver ob) {
-		if (newsfeedPage == null) {
-			newsfeedPage = new NewsfeedPage(ob);
-		}
-		return newsfeedPage;
-	}
-
-	public DRAPage getDraPageInstance(WebDriver ob) {
-
-		if (draPage == null) {
-			draPage = new DRAPage(ob);
-		}
-		return draPage;
-	}
-	
-	public DRASSOPage getDraSSOPageInstance(WebDriver ob) {
-
-		if (draSSOPage == null) {
-			draSSOPage = new DRASSOPage(ob);
-		}
-		return draSSOPage;
-	}
-	
-
-	public IPApage getIpaPage(WebDriver ob) {
-		if (ipapage == null) {
-			ipapage = new IPApage(ob);
-		}
-
-		return ipapage;
-
 	}
 
 	public WATLogInPage getWatPageInstance(WebDriver ob) {
@@ -323,36 +177,6 @@ public class PageFactory {
 		return customercarePage;
 
 	}
-
-	public IpaSavedSearchDetailsPage getIpaSavedSearchpage(WebDriver ob) {
-		if (ipasavedsearchpage == null) {
-			ipasavedsearchpage = new IpaSavedSearchDetailsPage(ob);
-		}
-		return ipasavedsearchpage;
-	}
-
-	public DashboardPage getDashboardPage(WebDriver ob) {
-		if (dashboardPage == null) {
-			dashboardPage = new DashboardPage(ob);
-		}
-
-		return dashboardPage;
-	}
-
-	public IPARecordViewPage getIpaRecordViewPage(WebDriver ob) {
-		if (rvpage == null) {
-			rvpage = new IPARecordViewPage(ob);
-		}
-		return rvpage;
-	}
-
-	public GmailLoginPage getGmailLoginPage(WebDriver ob) {
-		if (gmpage == null) {
-			gmpage = new GmailLoginPage(ob);
-		}
-		return gmpage;
-	}
-	
 	
 	/**
 	 * This Method provides Search author cluster page object to access the common methods related to search author
@@ -414,32 +238,15 @@ public class PageFactory {
 		accountPage = null;
 		loginTR = null;
 		onboarding = null;
-		// authoring = null;
 		browserWaits = null;
 		browserAction = null;
 		hfPage = null;
 		searchProfilePage = null;
 		profilePage = null;
-		postRVPage = null;
-		WatchlistPage = null;
-		enwReference = null;
-		enwReferencePage = null;
 		linkingModalsPage = null;
-		groupDetailsPage = null;
-		groupsPage = null;
-		groupInvitationPage = null;
-		groupsListPage = null;
-		utility = null;
-		draPage = null;
-		ipapage = null;
-		ipasavedsearchpage = null;
-		dashboardPage = null;
-		rvpage = null;
-		gmpage = null;
 		postncommentpage = null;
 		searchAuthorClusterResultsPage=null;
 		authorRecordPage=null;
 		watProfilePage=null;
-		pubPage=null;
 	}
 }
