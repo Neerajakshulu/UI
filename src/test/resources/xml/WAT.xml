@@ -17,7 +17,7 @@
 	<parameter name="CountryName2" value="USA"></parameter>
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
-	<test name="WAT_Login" preserve-order="true">
+<!-- 	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -1281,7 +1281,7 @@
 		<classes>
 			<class name="wat.WAT132"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Test_Curation_mode_functionality"
 		preserve-order="true">
@@ -1290,12 +1290,12 @@
 		</classes>
 	</test>
 
-	<test name="Test_Suggest_Update_btn_functionality"
+<!--	<test name="Test_Suggest_Update_btn_functionality"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT134"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Test_Curation_Accept_Recommendation"
 		preserve-order="true">
@@ -1304,7 +1304,7 @@
 		</classes>
 	</test>
 
-	<test name="Test_Curation_Reject_Recommendation"
+	 <test name="Test_Curation_Reject_Recommendation"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT136"></class>
@@ -1563,5 +1563,5 @@
 		<classes>
 			<class name="wat.WAT225"></class>
 		</classes>
-	</test>
+	</test> -->
 </suite>
