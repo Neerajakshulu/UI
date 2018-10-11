@@ -65,8 +65,9 @@ public class WAT01 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			ob.navigate().to(host);
+			//pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 			Assert.assertTrue(
 					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).isDisplayed(),
