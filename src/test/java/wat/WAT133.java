@@ -64,10 +64,8 @@ public class WAT133 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -117,6 +115,7 @@ public class WAT133 extends TestBase {
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 			test.log(LogStatus.INFO, "Getting into curation mode by clicking Suggest Updates button");
 			pf.getAuthorRecordPage(ob).getintoCuration(test, "SuggestUpdate");
+			test.log(LogStatus.PASS, "Submit Updates button is displayed, which when clicked gets into curation mode");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Unable to get into Curation mode", "Curation_issue");
