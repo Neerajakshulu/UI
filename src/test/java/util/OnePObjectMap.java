@@ -1233,10 +1233,10 @@ public enum OnePObjectMap {
 
 	WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH("//h2[text()='Web of Science: Author search']"),
 	WAT_AUTHOR_SEARCH_DRILL_DOWN_SUGGESTION_TEXT_XPATH("//wat-too-many-records-message[@class='ng-isolate-scope']"),
-	WAT_AUTHOR_LASTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--last']/descendant::input"),
+	//WAT_AUTHOR_LASTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--last']/descendant::input"),
 	WAT_AUTHOR_LASTNAME2_XPATH("//div[@class='ng-scope'][2]/descendant::input[1]"),
 	WAT_AUTHOR_LASTNAME3_XPATH("//div[@class='ng-scope'][3]/descendant::input[1]"),
-	WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH("//label[text()='Last name']"),
+	//WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH("//label[text()='Last name']"),
 	WAT_AUTHOR_FIRSTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--first-and-middle']/descendant::input"),
 	WAT_AUTHOR_FIRSTNAME2_XPATH("//div[@class='ng-scope'][2]/descendant::input[2]"),
 	WAT_AUTHOR_FIRSTNAME3_XPATH("//div[@class='ng-scope'][3]/descendant::input[2]"),
@@ -1255,10 +1255,9 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_LASTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
 	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
 
-	WAT_SEARCH_LINK_XPATH("//span[text()='Search']"),
+	//WAT_SEARCH_LINK_XPATH("//span[text()='Search']"),
 	WAT_LASTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='U MAYER']"),
 	WAT_FIRSTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='JOHN']"),
-	WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH("//button[@ng-click='vm.findClusters()' and text()[normalize-space() = 'Find']]"),
 	WAT_SEARCH_RESULTS_TEXT_XPATH("//span[text()='Search Results']"),
 	WAT_SAR_LABS_TEXT_XPATH("//a[text()[normalize-space() = 'SaR Labs']]"),
 	WAT_WELCOME_TEXT_XPATH("//div[@class='wat-search__welcome']/p"),
@@ -1277,7 +1276,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS("div.wui-card"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_NAME_CSS("div.wui-card h3 a"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PRIMARY_NAME_CSS("h3 a"),
-	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_CSS("div[class='wat-search-terms-topic-tags']"),
+	//WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_CSS("div[class='wat-search-terms-topic-tags']"),
 
 	WAT_AUTHOR_NAME_DIVIDER_XPATH("//div[button[contains(text(), 'Author name')]]/descendant::div[@class='wui-divider']"),
 	WAT_AUTHOR_NAME_ABOVE_DIVIDER_XPATH("//div[button[contains(text(), 'Author name')]]/descendant::div[@class='wui-divider']/preceding-sibling::div"),
@@ -1389,7 +1388,6 @@ public enum OnePObjectMap {
 	WAT_SUBMIT_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Submit updates')]"),
 	WAT_CANCEL_UPDATE_BTN_XPATH("//button[@class='wat-improve-author-message-cancel']"),
 	WAT_PUBLICATION_REMOVE_CHKBOX_DISABLED_XPATH("//div[@class='wui-card__body']/descendant::button[@class='wui-icon-only-btn wui-icon-only-btn ng-hide'][2]"),
-	WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH("//div[@class='wui-card'][1]/descendant::h3[@class='wui-content-title wui-content-title--medium wat-search-results-meta-title ng-scope']/a"),
 	WAT_AUTHOR_SEARCH_RESULT_SECOND_CARD_XPATH("//div[@class='wui-card'][2]/descendant::h3[@class='wui-content-title wui-content-title--medium wat-search-results-meta-title ng-scope']/a"),
 	WAT_FEEDBACK_AUTHOR_SEARCH_PAGE_XPATH("//a[contains(text(),'your feedback')]"),
 	WAT_FEEDBACK_AUTHOR_SEARCH_RESULT_PAGE_XPATH("//a[contains(text(),'Tell us what you think')]"),
@@ -1484,13 +1482,21 @@ public enum OnePObjectMap {
 	DRA_SSO_LOGIN_PAGE_EXPIRED_SUBSCRIPTION("//div[@class='col-md-12']"),
 	DRA_SSO_LOGIN_PAGE_WITH_SUBSCRIPTION("//p[@class='ng-binding']"),
 
-	
+	//-----------------------------------New Locators WoSWAT-------------------------------------------------
 	WOS_WAT_LANDING_PAGE_LOGO_XPATH("(//img[@alt='Clarivate Analytics'])[2]"),
 	WOS_WAT_DB_SELECTION_XPATH("//span[@id='selectdb-title']/following-sibling::span/span"),
 	WOS_WAT_RESEARCHER_SEARCH_LINK_XPATH("//a[text()='Researcher Search']"),
 	WOS_WAT_NAME_SEARCH_LINK_XPATH("//span[text()='Name Search']"),
 	WOS_WAT_DB_NAME_ID("select2-databases-result-f4uq-selected"),
-	WOS_WAT_DB_DROPDOWN_VALUES_XPATH("//span[@class='select2-container select2-container--dbselect select2-container--open']/descendant::li")
+	WOS_WAT_DB_DROPDOWN_VALUES_XPATH("//span[@class='select2-container select2-container--dbselect select2-container--open']/descendant::li"),
+	WAT_AUTHOR_LASTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--last']/descendant::input"),
+	WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH("//label[text()='Last name']"),
+	WAT_SEARCH_LINK_XPATH("//span[text()='Search']"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_CSS("div[class='wat-search-terms-topic-tags']"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_TEXT_XPATH("//div[@class='wui-subtitle']"),
+	WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH("//button[@ng-click='vm.findClusters()' and text()[normalize-space() = 'Find']]"),
+	WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH("(//div[@class='wui-card__content ng-scope'])[1]/descendant::h3[@class='wui-content-title wui-content-title--medium wat-search-results-meta-title ng-scope']/a")
+
 	;
 
 	private String locator;

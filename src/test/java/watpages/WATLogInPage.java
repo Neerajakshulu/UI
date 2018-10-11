@@ -44,13 +44,14 @@ public class WATLogInPage extends TestBase {
 		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WOS_WAT_LANDING_PAGE_LOGO_XPATH)
 				.isDisplayed());
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WOS_WAT_DB_SELECTION_XPATH);
-		List<WebElement> lst = 				
-				pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WOS_WAT_DB_DROPDOWN_VALUES_XPATH);
-		for(int i=0;i<lst.size();i++) {
-		    if (lst.get(i).getText().equals(WoS_DB_Name)) {
-		    	lst.get(i).click();
-		    	break;
-		    }
+		List<WebElement> options = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WOS_WAT_DB_DROPDOWN_VALUES_XPATH);
+
+		for (WebElement opt : options) {
+			if (opt.getText().equalsIgnoreCase(WoS_DB_Name)) {
+				opt.click();
+				break;
+			}
 		}
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WOS_WAT_RESEARCHER_SEARCH_LINK_XPATH);
 		test.log(LogStatus.INFO, "Verifing whether Researcher search link is visible");

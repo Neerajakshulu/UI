@@ -65,7 +65,7 @@ public class WAT134 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
 			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -81,7 +81,7 @@ public class WAT134 extends TestBase {
 	 * @throws Exception,
 	 *             When Something unexpected
 	 */
-//	@Test(dependsOnMethods = { "testLoginWATApp" })
+	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2", "OrgName1", "OrgName2" })
 	public void searchAuthorCluster(String LastName, String CountryName1, String CountryName2, String OrgName1,
 			String OrgName2) throws Exception {
@@ -106,7 +106,7 @@ public class WAT134 extends TestBase {
 	 * @throws Exception,
 	 *             When Something unexpected
 	 */
-	//@Test(dependsOnMethods = { "searchAuthorCluster" })
+	@Test(dependsOnMethods = { "searchAuthorCluster" })
 	public void testCurationMode() throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Clicking first author card");
