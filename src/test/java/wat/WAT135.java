@@ -1,6 +1,8 @@
 package wat;
 
-import org.testng.SkipException;
+//NOTE - Test Script feature Depricated, HEnce commenting
+
+/*import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -12,7 +14,7 @@ import base.TestBase;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-/**
+*//**
  * Class to Verify that CURATION MODE IS TRIGGERED when the user provides
  * feedback on a recommended publication(Accept Publication), "Review updates" and "Submit updates
  * [blue]" are displayed. The remove panel and delete individual pubs options
@@ -20,18 +22,18 @@ import util.OnePObjectMap;
  * 
  * @author UC225218
  *
- */
+ *//*
 public class WAT135 extends TestBase {
 
 	static int status = 1;
 
-	/**
+	*//**
 	 * Method to displaying JIRA ID's for test case in specified path of Extent
 	 * Reports
 	 * 
 	 * @throws Exception,
 	 *             When Something unexpected
-	 */
+	 *//*
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -39,12 +41,12 @@ public class WAT135 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("WAT");
 	}
 
-	/**
+	*//**
 	 * Method for login into WAT application using TR ID
 	 * 
 	 * @throws Exception,
 	 *             When WAT Login is not done
-	 */
+	 *//*
 	@Test
 	@Parameters({ "username", "password" })
 	public void testLoginWATApp(String username, String password) throws Exception {
@@ -76,13 +78,13 @@ public class WAT135 extends TestBase {
 
 	}
 
-	/**
+	*//**
 	 * Method for Search Author cluster Results
 	 * 
 	 * @param lastName,countryName,orgName
 	 * @throws Exception,
 	 *             When Something unexpected
-	 */
+	 *//*
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2", "OrgName1", "OrgName2" })
 	public void searchAuthorCluster(String LastName, String CountryName1, String CountryName2, String OrgName1,
@@ -99,7 +101,7 @@ public class WAT135 extends TestBase {
 
 	}
 
-	/**
+	*//**
 	 * Method to Verify that CURATION MODE IS TRIGGERED when the user provides
 	 * feedback on a recommended publication(Accept Publication), "Review updates" and "Submit
 	 * updates [blue]" are displayed. The remove panel and delete individual
@@ -109,7 +111,7 @@ public class WAT135 extends TestBase {
 	 *            FirstName, CountryName, OrgName
 	 * @throws Exception,
 	 *             When Something unexpected
-	 */
+	 *//*
 	@Test(dependsOnMethods = { "searchAuthorCluster" })
 	public void testCurationModeAcceptRecmndtn() throws Exception {
 		try {
@@ -118,6 +120,7 @@ public class WAT135 extends TestBase {
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 			test.log(LogStatus.INFO, "Getting into curation mode by clicking Suggest Update button");
+			//Changed to Suggest Update - Original value Accept/reject recommendation
 			pf.getAuthorRecordPage(ob).getintoCuration(test, "SuggestUpdate");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
@@ -127,15 +130,15 @@ public class WAT135 extends TestBase {
 
 	}
 
-	/**
+	*//**
 	 * updating Extent Report with test case status whether it is PASS or FAIL
 	 * or SKIP
-	 */
+	 *//*
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*
+		
 		 * if (status == 1) TestUtil.reportDataSetResult(profilexls,
 		 * "Test Cases", TestUtil.getRowNum(profilexls,
 		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
@@ -144,8 +147,9 @@ public class WAT135 extends TestBase {
 		 * "FAIL"); else TestUtil.reportDataSetResult(profilexls, "Test Cases",
 		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
 		 * "SKIP");
-		 */
+		 
 
 	}
 
 }
+*/
