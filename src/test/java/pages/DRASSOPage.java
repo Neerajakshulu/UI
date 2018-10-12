@@ -46,7 +46,18 @@ public class DRASSOPage extends TestBase {
 		Assert.assertEquals(errorMessage2, "Please contact community.info@clarivate.com to unlock your account.");
 
 	}
+	public void checkEvictedUserErrorMessage() {
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Your account has been evicted.");
+		String errorMessage1 = ob
+				.findElement(By.xpath(OnePObjectMap.DRA_SSO_SUSPEND_PAGE_ERROR_MESSAGE_XPATH.toString())).getText();
+		String errorMessage2 = ob
+				.findElement(By.xpath(OnePObjectMap.DRA_SSO_EVICTED_PAGE_ERROR_MESSAGE_TEXT_XPATH.toString()))
+				.getText();
+		Assert.assertEquals(errorMessage1, "Your account has been evicted.");
+		Assert.assertEquals(errorMessage2, "Please contact community.info@clarivate.com for further assistance.");
 
+	}
+   
 	public void deleteUserUsingXRPC(String userId) throws Exception{
 		String sid = getSessionId();
 		deleteUser(sid, userId);
