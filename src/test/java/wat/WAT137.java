@@ -64,11 +64,8 @@ public class WAT137 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
-
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -112,8 +109,8 @@ public class WAT137 extends TestBase {
 			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
-			test.log(LogStatus.INFO, "Getting into curation mode by clicking Accept Recommendation button");
-			pf.getAuthorRecordPage(ob).getintoCuration(test, "AcceptRecommendation");
+			test.log(LogStatus.INFO, "Getting into curation mode by clicking Suggest Update button");
+			pf.getAuthorRecordPage(ob).getintoCuration(test, "SuggestUpdate");
 			pf.getAuthorRecordPage(ob).testRecommendPublicationCancelFunctionality(test);
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
