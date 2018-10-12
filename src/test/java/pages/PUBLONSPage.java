@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import base.TestBase;
 import util.BrowserWaits;
@@ -67,9 +68,17 @@ public class PUBLONSPage extends TestBase {
 			
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_ACCESS_BUTTON_ID);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_ACCESS_BUTTON_ID);
-			
-			
-
-				
+						
 	}
+		public void checkBlockedUserErrorMessage() {
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Your account has been locked.");
+			String errorMessage1 = ob
+					.findElement(By.xpath(OnePObjectMap.DRA_SSO_SUSPEND_PAGE_ERROR_MESSAGE_XPATH.toString())).getText();
+			String errorMessage2 = ob
+					.findElement(By.xpath(OnePObjectMap.PUBLONS_BLOCKED_PAGE_ERROR_MESSAGE_AFTER30MIN_XPATH.toString()))
+					.getText();
+			Assert.assertEquals(errorMessage1, "Your account has been locked.");
+			Assert.assertEquals(errorMessage2, "Please try again in 30 minutes.");
+
+		}
 }
