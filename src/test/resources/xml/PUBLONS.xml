@@ -11,11 +11,29 @@
 			<class name="Publons.PUBLONS001"></class>
 		</classes>
 	</test>
-	<test name="PUBLONS002">
+	<test name="Publon_Email_format">
 		<classes>
-			<class name="Publons.PUBLONS001"></class>
+			<class name="Publons.PUBLONS002"></class>
 		</classes>
 	</test>
+	<test name="Publon_Email_Field_Empty_Error_Message">
+		<classes>
+			<class name="Publons.PUBLONS003"></class>
+		</classes>
+	</test>
+	
+	<test name="Publon_Invalid_Email_Error_Message">
+		<classes>
+			<class name="Publons.PUBLONS004"></class>
+		</classes>
+	</test>
+	
+	<test name="Publon_Email_Standard _Format">
+		<classes>
+			<class name="Publons.PUBLONS005"></class>
+		</classes>
+	</test>
+	
 	<test name="Publon_FB_Login">
 		<classes>
 			<class name="Publons.PUBLONS020"></class>

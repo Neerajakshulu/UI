@@ -1488,6 +1488,10 @@ public enum OnePObjectMap {
 	DRA_SSO_LOGIN_PAGE_QUESTIONCONTACT("//p[text()='Questions? Contact ']"),
 	DRA_SSO_LOGIN_PAGE_EXPIRED_SUBSCRIPTION("//div[@class='col-md-12']"),
 	DRA_SSO_LOGIN_PAGE_WITH_SUBSCRIPTION("//p[@class='ng-binding']"),
+	
+	PUBLONS_LOGIN_PAGE_REGISTER_LINK_CSS("a[class='wui-btn wui-btn--secondary']"),
+	PUBLONS_REGISTER_PAGE_EMAIL_TEXTBOX_CSS("input[name='emailId']"),
+	PUBLONS_MAXLENGTH_ERROR_MESSAGE_CSS("span[data-ng-message='maxlength']"),
 
 	;
 
