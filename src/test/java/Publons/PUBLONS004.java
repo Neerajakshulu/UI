@@ -65,6 +65,7 @@ public class PUBLONS004 extends TestBase {
 					.findElements(By.cssSelector(OnePObjectMap.LOGING_PAGE_ERROR_MESSAGE_CSS.toString())).get(0)
 					.getText();
 			Assert.assertTrue(emailErrorMessage.contains("Please enter a valid email address."));
+			test.log(LogStatus.PASS, "Expected Error message getting");
 			closeBrowser();
 
 		} catch (Throwable t) {
