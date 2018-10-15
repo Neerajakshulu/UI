@@ -68,10 +68,8 @@ public class WAT141 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -129,10 +127,12 @@ public class WAT141 extends TestBase {
 			test.log(LogStatus.INFO, "Remove Publication button is displayed for each publication");
 			test.log(LogStatus.INFO, "Reading total publication count");
 			int pubCountBeforeRemoval = pf.getAuthorRecordPage(ob).getPublicationCount();
+			pf.getBrowserActionInstance(ob).scrollingPageDown();
 			for (int x = 1; x<6; x++) {
 				test.log(LogStatus.INFO, "Removing " + x + "Publication.");
 				String j = OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_PARAMETERIZED_XPATH.toString();
-				ob.findElement(By.xpath(j.replaceAll("q", String.valueOf(x)))).click();
+				//X value Changed to x+1 for wosWat
+				ob.findElement(By.xpath(j.replaceAll("q", String.valueOf(x+1)))).click();
 				BrowserWaits.waitTime(2);
 				waitForPageLoad(ob);
 			}
@@ -140,6 +140,8 @@ public class WAT141 extends TestBase {
 			test.log(LogStatus.INFO, "Reading Current publication count");
 			int pubCountAfterRemoval = pf.getAuthorRecordPage(ob).getPublicationCount();
 			test.log(LogStatus.INFO, "Asserting with the Initial Publication count");
+			System.out.println(pubCountAfterRemoval);
+			System.out.println(pubCountBeforeRemoval);
 			Assert.assertEquals(pubCountAfterRemoval, pubCountBeforeRemoval - 5);
 			test.log(LogStatus.PASS, "Number of publication deleted matches with the displayed count");
 			pf.getBrowserActionInstance(ob).closeBrowser();
