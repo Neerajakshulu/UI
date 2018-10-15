@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -147,6 +148,8 @@ public class SearchAuthorClusterPage extends TestBase {
 					selectOrgofAuthor(test, org1, org2);
 					pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
 					cliclFindBtn(test);
+					pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
+					pf.getBrowserActionInstance(ob).scrollingPageDown();
 
 				} else {
 					test.log(LogStatus.INFO,
@@ -157,11 +160,11 @@ public class SearchAuthorClusterPage extends TestBase {
 						"Country name selection is not required as the searched user resulted in less than 50 clusters... ");
 			}
 			pf.getBrowserWaitsInstance(ob)
-					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_TEXT_XPATH);
-			Assert.assertEquals(
+					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_TEXT1_XPATH);
+			Assert.assertTrue(
 					(pf.getBrowserActionInstance(ob)
-							.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_TEXT_XPATH).getText()),
-					"Search terms", "Unable to search for an author and land in Author search result page.");
+							.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_TEXT1_XPATH).isDisplayed()),
+					"Unable to search for an author and land in Author search result page.");
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unable to search for an author cluster and land in Author search result page.");
 			throw new Exception();
@@ -214,6 +217,8 @@ public class SearchAuthorClusterPage extends TestBase {
 				.waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH, 10);
 		test.log(LogStatus.INFO, "Clicking find button... ");
 		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
 		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
 				.isEnabled()) {
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);

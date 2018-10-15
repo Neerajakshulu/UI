@@ -65,11 +65,8 @@ public class WAT140 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
-
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -116,6 +113,7 @@ public class WAT140 extends TestBase {
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 			test.log(LogStatus.INFO, "Getting into curation mode by clicking Suggest Update button");
 			pf.getAuthorRecordPage(ob).checkSuggestUpdateBtn();
+			pf.getBrowserActionInstance(ob).scrollingPageDown();
 			test.log(LogStatus.PASS, "Suggest updates button is displayed in author record page");
 			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUGGEST_UPDATE_BTN_XPATH)
 					.click();
@@ -123,6 +121,7 @@ public class WAT140 extends TestBase {
 			Assert.assertTrue(pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH).isDisplayed(),
 					"Remove Publication button is not displayed");
+			pf.getBrowserActionInstance(ob).scrollingPageDown();
 			test.log(LogStatus.INFO, "Remove Publication button is displayed for each publication");
 			String FirstPubName = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_NAME_BEFORE_ANY_REMOVAL_XPATH).getText();
@@ -130,6 +129,8 @@ public class WAT140 extends TestBase {
 			pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH).click();
 			test.log(LogStatus.INFO, "Comparing the actual removed publication and the displayed removed one");
+			pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
+			pf.getBrowserActionInstance(ob).scrollingPageDown();
 			Assert.assertEquals(pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_AFTER_REMOVAL_GREY_XPATH).getText(),
 					FirstPubName,
