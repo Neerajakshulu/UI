@@ -40,7 +40,7 @@
 		</classes>
 	</test>
 
-	<test name="Publon_Email_Standard">
+	<test name="Publon_Last_Name_Standard">
 		<classes>
 			<class name="Publons.PUBLONS009"></class>
 		</classes>
