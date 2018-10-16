@@ -23,7 +23,7 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
 
-public class PUBLONS005 extends TestBase {
+public class PUBLONS009 extends TestBase {
 
 	String runmodes[] = null;
 	static int count = -1;
@@ -42,9 +42,7 @@ public class PUBLONS005 extends TestBase {
 	}
 
 	@Test(dataProvider = "getTestData")
-	public void testcaseA10(String charLength,
-			String suffix,
-			String error,
+	public void testcaseA6(String charLength,
 			String validity) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
@@ -70,84 +68,69 @@ public class PUBLONS005 extends TestBase {
 
 		try {
 
-			String characterLength = charLength.substring(0, 3);
+			String characterLength = charLength.substring(0, 2);
 			Double d = new Double(Double.parseDouble(characterLength));
 			int i = d.intValue();
-			logger.info("Char Length : " + characterLength);
 			test.log(LogStatus.INFO,
 					this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1) + "--->");
 			test.log(LogStatus.INFO, characterLength + " -- " + validity);
 
-			logger.info("Length : " + characterLength);
-			String email = generateRandomName(i) + suffix;
-			logger.info(email);
+			logger.info("Character Length : " + i);
+			String last_name = generateRandomName(i);
+			logger.info("Last Name : " + last_name);
 
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-//			pf.getPubPage(ob).clickRegisterLink();
-			/*pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.PUBLONS_LOGIN_PAGE_REGISTER_LINK_CSS);
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.PUBLONS_LOGIN_PAGE_REGISTER_LINK_CSS);*/
-			
+
 			ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_LOGIN_PAGE_REGISTER_LINK_CSS.toString())).click();
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_lastName_textbox")), 30);
+			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
+			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
 
-			if (email.contains(".com")) {
-				waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
-
-				JavascriptExecutor js = (JavascriptExecutor) ob;
-				String text = (String) (js.executeScript("return arguments[0].value",
-						ob.findElement(By.name(OR.getProperty("signup_email_texbox")))));
-				
-				
-				//String text = ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).getText();
-				logger.info("Text : " + text);
-
-				if (validity.equalsIgnoreCase("YES")) {
-					try {
-						List<WebElement> l=ob.findElements(By.cssSelector(OnePObjectMap.PUBLONS_MAXLENGTH_ERROR_MESSAGE_CSS.toString()));
-						if(l.size()==0){
-						test.log(LogStatus.PASS, "Error message not displaying with"+email.length()+" characters");
-						}
-					} catch (Throwable t) {
-						test.log(LogStatus.FAIL, "Sign up button is not enabled in Singn up page" + t);// extent
-						StringWriter errors = new StringWriter();
-						t.printStackTrace(new PrintWriter(errors));
-						// test.log(LogStatus.INFO, errors.toString()); // reports
-						test.log(LogStatus.INFO, "Error--->" + t);
-						ErrorUtil.addVerificationFailure(t);
-						status = 2;// excel
-						test.log(LogStatus.INFO, "Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName())));// screenshot
+			if (validity.equalsIgnoreCase("YES")) {
+				try {
+					List<WebElement> l=ob.findElements(By.cssSelector(OnePObjectMap.PUBLONS_MAXLENGTH_ERROR_MESSAGE_CSS.toString()));
+					if(l.size()==0){
+					test.log(LogStatus.PASS, "Error message not displaying with"+last_name.length()+" characters");
 					}
-
+				} catch (Throwable t) {
+					test.log(LogStatus.FAIL, "Sign up button is not enabled in Singn up page" + t);// extent
+					StringWriter errors = new StringWriter();
+					t.printStackTrace(new PrintWriter(errors));
+					// test.log(LogStatus.INFO, errors.toString()); // reports
+					test.log(LogStatus.INFO, "Error--->" + t);
+					ErrorUtil.addVerificationFailure(t);
+					status = 2;// excel
+					test.log(LogStatus.INFO, "Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName())));// screenshot
 				}
 
-				else {
-					try {
-						waitUntilText("Email address is too long.");
-						String emailErrorMessage = ob
-								.findElements(By.cssSelector(OnePObjectMap.PUBLONS_MAXLENGTH_ERROR_MESSAGE_CSS.toString())).get(0)
-								.getText();
-						Assert.assertTrue(emailErrorMessage.contains("Email address is too long."));
-						test.log(LogStatus.PASS, "Error message displaying with"+email.length()+" characters");
-					} catch (Throwable t) {
-						test.log(LogStatus.FAIL, "Sign up Page is not opened successfully" + t);// extent
-						StringWriter errors = new StringWriter();
-						t.printStackTrace(new PrintWriter(errors));
-						test.log(LogStatus.INFO, "Error--->" + t);
-						ErrorUtil.addVerificationFailure(t);
-						status = 2;// excel
-						test.log(LogStatus.INFO, "Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName())));// screenshot
-					}
-
-				}
 			}
+
+			else {
+				try {
+					waitUntilText("Last name is too long.");
+					String emailErrorMessage = ob
+							.findElements(By.cssSelector(OnePObjectMap.PUBLONS_MAXLENGTH_ERROR_MESSAGE_CSS.toString())).get(0)
+							.getText();
+					Assert.assertTrue(emailErrorMessage.contains("Last name is too long."));
+					test.log(LogStatus.PASS, "Error message displaying with"+last_name.length()+" characters");
+				} catch (Throwable t) {
+					test.log(LogStatus.FAIL, "Sign up Page is not opened successfully" + t);// extent
+					StringWriter errors = new StringWriter();
+					t.printStackTrace(new PrintWriter(errors));
+					test.log(LogStatus.INFO, "Error--->" + t);
+					ErrorUtil.addVerificationFailure(t);
+					status = 2;// excel
+					test.log(LogStatus.INFO, "Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName())));// screenshot
+				}
+
+			}
+
 			closeBrowser();
 
 		}

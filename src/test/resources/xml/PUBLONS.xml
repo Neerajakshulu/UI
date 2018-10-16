@@ -21,19 +21,31 @@
 			<class name="Publons.PUBLONS003"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Publon_Invalid_Email_Error_Message">
 		<classes>
 			<class name="Publons.PUBLONS004"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Publon_Email_Standard _Format">
 		<classes>
 			<class name="Publons.PUBLONS005"></class>
 		</classes>
 	</test>
-	
+
+	<test name="Publon_Last_Field_Empty_Error_Message">
+		<classes>
+			<class name="Publons.PUBLONS008"></class>
+		</classes>
+	</test>
+
+	<test name="Publon_Email_Standard">
+		<classes>
+			<class name="Publons.PUBLONS009"></class>
+		</classes>
+	</test>
+
 	<test name="Publon_FB_Login">
 		<classes>
 			<class name="Publons.PUBLONS020"></class>
@@ -44,5 +56,5 @@
 			<class name="Publons.PUBLONS021"></class>
 		</classes>
 	</test>
-	
+
 </suite>
