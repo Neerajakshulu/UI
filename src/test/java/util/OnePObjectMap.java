@@ -1452,7 +1452,7 @@ public enum OnePObjectMap {
 	//WAT_AUTHOR_RECORD_FIRST_PUBLICATION_NAME_BEFORE_ANY_REMOVAL_XPATH("(//div[@class='wui-emphasis wat-search-results-publications-title wat-author-record-publications-title ng-binding'])[4]"),
 	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_AFTER_REMOVAL_GREY_XPATH("//div[@class='wui-emphasis wat-search-results-publications-title wat-author-record-publications-title ng-binding wat-author-record-publications-title__title-only']"),
 	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_AFTER_REMOVAL_REMOVED_LINK_XPATH("(//div[contains(text(),'removed')])[1]"),
-	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_PARAMETERIZED_XPATH("(//button[@aria-label='Remove'])[q]"),
+	//WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_PARAMETERIZED_XPATH("(//button[@aria-label='Remove'])[q]"),
 	//WAT_AUTHOR_RECORD_PUBLICATION_COUNT_XPATH("//div[@class='wat-author-record-publications-count ng-binding']"),
 	//div[@class='wat-author-record-publications-count']
 	WAT_AUTHOR_RECORD_ALL_PUBLICATION_REMOVE_BTN_XPATH("//wat-author-record-publications[@class='ng-scope ng-isolate-scope']/descendant::button[@class='wui-icon-only-btn wui-icon-only-btn']"),
@@ -1503,6 +1503,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH("(//button[@aria-label='Remove'])[2]"),
 	WAT_AUTHOR_RECORD_SECOND_PUBLICATION_REMOVE_BTN_XPATH("(//button[@aria-label='Remove'])[3]"),
 	WAT_AUTHOR_RECORD_PUBLICATION_COUNT_XPATH("//div[@class='wat-author-record-publications-count']/button"),
+	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_PARAMETERIZED_XPATH("(//button[@aria-label='Remove'])[q]")
 	
 
 	;

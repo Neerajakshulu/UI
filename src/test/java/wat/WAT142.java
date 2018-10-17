@@ -71,11 +71,8 @@ public class WAT142 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
-
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -91,19 +88,16 @@ public class WAT142 extends TestBase {
 	 *             When Something unexpected
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "lastName" })
-	public void searchAuthorCluster(String lastName) throws Exception {
+	@Parameters({ "LastName", "CountryName1", "CountryName2", "OrgName1", "OrgName2" })
+	public void searchAuthorCluster(String LastName, String CountryName1, String CountryName2, String OrgName1,
+			String OrgName2) throws Exception {
 		try {
-			test.log(LogStatus.INFO, "Search an Author using last name");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, test);
-			pf.getSearchAuthClusterResultsPage(ob).waitForauthorClusterSearchResults(test);
-			test.log(LogStatus.INFO, "Combine two Authors");
-			pf.getSearchAuthClusterResultsPage(ob).combineAuthorCard(test);
-			test.log(LogStatus.INFO, "Verify System must display default avatar for combined Author");
-			pf.getAuthorRecordPage(ob).defaultAvatar();
-			test.log(LogStatus.INFO, "Combined Author Search Results are displayed");
+			test.log(LogStatus.INFO, "Entering author name... ");
+			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1, CountryName2,
+					OrgName1, OrgName2, test);
+			test.log(LogStatus.INFO, "Author Search Results are displayed");
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Combined Author Search Results are not displayed", "Search_Fail");
+			logFailureDetails(test, t, "Author Search Results are not displayed", "Search_Fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 
@@ -120,16 +114,27 @@ public class WAT142 extends TestBase {
 	@Test(dependsOnMethods = { "searchAuthorCluster" })
 	public void testPubDeletionForCombinedAuthor() throws Exception {
 		try {
+			test.log(LogStatus.INFO, "Clicking first author card");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
+			test.log(LogStatus.INFO, "Getting into curation mode by clicking Suggest Update button");
+			pf.getAuthorRecordPage(ob).checkSuggestUpdateBtn();
+			test.log(LogStatus.PASS, "Suggest updates button is displayed in author record page");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUGGEST_UPDATE_BTN_XPATH)
+					.click();
+			test.log(LogStatus.PASS, "Entered Curation mode through the Suggest Update button");
 			Assert.assertTrue(pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH).isDisplayed(),
 					"Remove Publication button is not displayed");
-			test.log(LogStatus.INFO, "Remove Publication button is displayed for each publication");
+			test.log(LogStatus.PASS, "Remove Publication button is displayed for each publication");
 			test.log(LogStatus.INFO, "Reading total publication count");
 			int pubCountBeforeRemoval = pf.getAuthorRecordPage(ob).getPublicationCount();
+			pf.getBrowserActionInstance(ob).scrollingPageDown();
 			for (int x = 1; x<6; x++) {
 				test.log(LogStatus.INFO, "Removing " + x + "Publication.");
 				String j = OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_PARAMETERIZED_XPATH.toString();
-				ob.findElement(By.xpath(j.replaceAll("q", String.valueOf(x)))).click();
+				ob.findElement(By.xpath(j.replaceAll("q", String.valueOf(x+1)))).click();
 				BrowserWaits.waitTime(2);
 				waitForPageLoad(ob);
 			}
