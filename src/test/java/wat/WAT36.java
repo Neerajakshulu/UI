@@ -11,21 +11,23 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ExtentManager;
 
+//THIS TEST IS COMMENTED AS OF NOW AS THE SEARCH RESULTS LINK IS NOT AVAILABLE IN AUTHOR RECORD PAGE 
+
 /**
  * Class for Search Results Tab highlight when navigate back to "Search Results" page  on Author record page using Name search
  * 
  * @author UC202376
  *
- */
+ *//*
 public class WAT36 extends TestBase {
 
 	static int status = 1;
 
-	/**
+	*//**
 	 * Method to displaying JIRA ID's for test case in specified path of Extent Reports
 	 * 
 	 * @throws Exception, When Something unexpected
-	 */
+	 *//*
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -33,11 +35,11 @@ public class WAT36 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("WAT");
 	}
 
-	/**
+	*//**
 	 * Method for login into WAT application using TR ID
 	 * 
 	 * @throws Exception, When WAT Login is not done
-	 */
+	 *//*
 	@Test
 	@Parameters({"username", "password"})
 	public void testLoginWATApp(String username,
@@ -72,12 +74,12 @@ public class WAT36 extends TestBase {
 
 	}
 
-	/**
+	*//**
 	 * Method for Navigate to Author Record page from Search page
 	 * 
 	 * @param orcid
 	 * @throws Exception, When Something unexpected
-	 */
+	 *//*
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters("lastName")
 	public void ORCIDSearchToAuthorRecordPage(String lastName) throws Exception {
@@ -94,12 +96,12 @@ public class WAT36 extends TestBase {
 	}
 	
 	
-	/**
+	*//**
 	 * Method for Navigate from Author Record page to Search page
 	 * 
 	 * @param orcid
 	 * @throws Exception, When Something unexpected
-	 */
+	 *//*
 	@Test(dependsOnMethods = {"ORCIDSearchToAuthorRecordPage"})
 	@Parameters("lastName")
 	public void navigateBackAuthorRecordToSearchPage(String lastName) throws Exception {
@@ -116,21 +118,22 @@ public class WAT36 extends TestBase {
 		}
 	}
 
-	/**
+	*//**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
-	 */
+	 *//*
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*
+		
 		 * if (status == 1) TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
 		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(profilexls,
 		 * "Test Cases", TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()), "FAIL"); else
 		 * TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
 		 * this.getClass().getSimpleName()), "SKIP");
-		 */
+		 
 
 	}
 
 }
+*/
