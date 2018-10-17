@@ -65,11 +65,8 @@ public class WAT193 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
-
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -117,8 +114,8 @@ public class WAT193 extends TestBase {
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 			test.log(LogStatus.INFO, "Trying to submit a feedback without entering curation");
-			Assert.assertTrue(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SUBMIT_UPDATE_BTN_XPATH).isEnabled(),
+			Assert.assertFalse(
+					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SUBMIT_UPDATE_BTN_XPATH).isDisplayed(),
 					"Able to submit a feedback without entering curation");
 			test.log(LogStatus.PASS, "Unable to submit a feedback without entering curation");
 			pf.getBrowserActionInstance(ob).closeBrowser();

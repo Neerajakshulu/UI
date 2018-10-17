@@ -1385,7 +1385,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_ADDRESS_DETAILS_XPATH("//div[@class='wat-search-results-meta-location ng-binding']"),
 
 	WAT_SUGGEST_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Suggest updates')]"),
-	WAT_SUBMIT_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Submit updates')]"),
+	//WAT_SUBMIT_UPDATE_BTN_XPATH("//button[@class='wui-btn wui-btn--primary' and contains(text(),'Submit updates')]"),
+
 	WAT_CANCEL_UPDATE_BTN_XPATH("//button[@class='wat-improve-author-message-cancel']"),
 	WAT_PUBLICATION_REMOVE_CHKBOX_DISABLED_XPATH("//div[@class='wui-card__body']/descendant::button[@class='wui-icon-only-btn wui-icon-only-btn ng-hide'][2]"),
 	WAT_AUTHOR_SEARCH_RESULT_SECOND_CARD_XPATH("//div[@class='wui-card'][2]/descendant::h3[@class='wui-content-title wui-content-title--medium wat-search-results-meta-title ng-scope']/a"),
@@ -1503,7 +1504,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH("(//button[@aria-label='Remove'])[2]"),
 	WAT_AUTHOR_RECORD_SECOND_PUBLICATION_REMOVE_BTN_XPATH("(//button[@aria-label='Remove'])[3]"),
 	WAT_AUTHOR_RECORD_PUBLICATION_COUNT_XPATH("//div[@class='wat-author-record-publications-count']/button"),
-	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_PARAMETERIZED_XPATH("(//button[@aria-label='Remove'])[q]")
+	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_PARAMETERIZED_XPATH("(//button[@aria-label='Remove'])[q]"),
+	WAT_SUBMIT_UPDATE_BTN_XPATH("//div[button[@class='wui-btn wui-btn--primary' and @disabled='disabled']]"),
 	
 
 	;
