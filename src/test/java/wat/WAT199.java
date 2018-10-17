@@ -13,6 +13,8 @@ import base.TestBase;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
+//THIS TEST IS COMMENTED AS OF NOW AS THE SEARCH RESULTS LINK and recommendation block IS NOT AVAILABLE IN AUTHOR RECORD PAGE 
+
 /**
  * Class to Verify that If after canceling, the user then begins curation
  * again,the Publications List should contain all publications, and the Bulk
@@ -20,18 +22,18 @@ import util.OnePObjectMap;
  * 
  * @author UC225218
  *
- */
+ *//*
 public class WAT199 extends TestBase {
 
 	static int status = 1;
 
-	/**
+	*//**
 	 * Method to displaying JIRA ID's for test case in specified path of Extent
 	 * Reports
 	 * 
 	 * @throws Exception,
 	 *             When Something unexpected
-	 */
+	 *//*
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -39,12 +41,12 @@ public class WAT199 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("WAT");
 	}
 
-	/**
+	*//**
 	 * Method for login into WAT application using TR ID
 	 * 
 	 * @throws Exception,
 	 *             When WAT Login is not done
-	 */
+	 *//*
 	@Test
 	@Parameters({ "username", "password" })
 	public void testLoginWATApp(String username, String password) throws Exception {
@@ -66,10 +68,8 @@ public class WAT199 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+		    test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -78,13 +78,13 @@ public class WAT199 extends TestBase {
 
 	}
 
-	/**
+	*//**
 	 * Method for Search Author cluster Results
 	 * 
 	 * @param lastName,countryName,orgName
 	 * @throws Exception,
 	 *             When Something unexpected
-	 */
+	 *//*
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName1", "CountryName2", "OrgName1", "OrgName2" })
 	public void searchAuthorCluster(String LastName, String CountryName1, String CountryName2, String OrgName1,
@@ -101,7 +101,7 @@ public class WAT199 extends TestBase {
 
 	}
 
-	/**
+	*//**
 	 * Method to Verify that If after canceling, the user then begins curation
 	 * again,the Publications List should contain all publications, and the Bulk
 	 * Remove panels should have all values un-checked.
@@ -110,7 +110,7 @@ public class WAT199 extends TestBase {
 	 *            FirstName, CountryName, OrgName
 	 * @throws Exception,
 	 *             When Something unexpected
-	 */
+	 *//*
 	@Test(dependsOnMethods = { "searchAuthorCluster" })
 	public void testCurationPublicationUndo() throws Exception {
 		try {
@@ -169,15 +169,15 @@ public class WAT199 extends TestBase {
 
 	}
 
-	/**
+	*//**
 	 * updating Extent Report with test case status whether it is PASS or FAIL
 	 * or SKIP
-	 */
+	 *//*
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*
+		
 		 * if (status == 1) TestUtil.reportDataSetResult(profilexls,
 		 * "Test Cases", TestUtil.getRowNum(profilexls,
 		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
@@ -186,8 +186,9 @@ public class WAT199 extends TestBase {
 		 * "FAIL"); else TestUtil.reportDataSetResult(profilexls, "Test Cases",
 		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
 		 * "SKIP");
-		 */
+		 
 
 	}
 
 }
+*/
