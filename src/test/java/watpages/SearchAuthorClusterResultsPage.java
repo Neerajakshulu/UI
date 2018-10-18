@@ -602,9 +602,9 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	public void searchResultsSubOrgField(ExtentTest test) throws Exception {
 		waitForauthorClusterSearchResults(test);
 		WebElement dept = pf.getBrowserActionInstance(ob).getElement(
-				OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_AFFILIATION_SUB_ORG_CSS);
+				OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_AFFILIATION_SUB_ORG_XPATH);
 
-		if (!(StringUtils.containsIgnoreCase(dept.getAttribute("class"), "wat-search-results-meta-contact")
+		if (!(StringUtils.containsIgnoreCase(dept.getAttribute("class"), "wat-search-results-meta-affiliation ng-binding")
 				&& StringUtils.isNotEmpty(dept.getText()))) {
 			test.log(LogStatus.FAIL, "Department(sub-org) is not displayed under Org name");
 			throw new Exception("Department(sub-org) is not displayed under Org name");

@@ -79,10 +79,13 @@ public class SearchAuthorClusterPage extends TestBase {
 				test.log(LogStatus.INFO,
 						"Country name selection is not required as the searched user resulted in less than 50 clusters... ");
 			}
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
+			
+			// Commenting off the below assertions as there is no SEARCH RESULTS link displayed in the latest version of WAT.
+			
+			/*pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
 			Assert.assertEquals(
 					(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).getText()),
-					"Search Results", "Unable to search for an author and land in Author search result page.");
+					"Search Results", "Unable to search for an author and land in Author search result page.");*/
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unable to search for an author cluster and land in Author search result page.");
 			throw new Exception();
