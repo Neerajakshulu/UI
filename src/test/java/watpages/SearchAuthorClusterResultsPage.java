@@ -26,16 +26,16 @@ import util.OnePObjectMap;
  *
  */
 public class SearchAuthorClusterResultsPage extends TestBase {
-	
-	boolean ispublicationNamePresent=false;
-	boolean isPublicationAuthorPresent=false;
-	boolean isPublicationCategoryPresent=false;
-	boolean isPublicationVolumePresent=false;
-	boolean isPublicationIssuePresent=false;
-	boolean isPublicationPublishedYearPresent=false;
-	boolean isPublicationTimesCitedPresent=false;
-	boolean isPublicationTimesCitedCountPresent=false;
-	
+
+	boolean ispublicationNamePresent = false;
+	boolean isPublicationAuthorPresent = false;
+	boolean isPublicationCategoryPresent = false;
+	boolean isPublicationVolumePresent = false;
+	boolean isPublicationIssuePresent = false;
+	boolean isPublicationPublishedYearPresent = false;
+	boolean isPublicationTimesCitedPresent = false;
+	boolean isPublicationTimesCitedCountPresent = false;
+
 	List<WebElement> pubDetailsList;
 	List<WebElement> morePublications;
 	List<WebElement> recentPublications;
@@ -66,7 +66,8 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 */
 	public void waitForauthorClusterSearchResults(ExtentTest test) throws Exception {
 		pf.getBrowserActionInstance(ob).waitForAjax(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Search terms", "results", "Sorted by", "Relevance");
+		// pf.getBrowserWaitsInstance(ob).waitUntilText("Search terms", "results",
+		// "Sorted by", "Relevance");
 		pf.getBrowserWaitsInstance(ob)
 				.waitForAllElementsToBePresent(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
 		test.log(LogStatus.INFO, "Author Cluster Search Results page is displayed");
@@ -136,8 +137,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	}
 
 	/**
-	 * Method for Default avatar/profile image available for each publication
-	 * cart
+	 * Method for Default avatar/profile image available for each publication cart
 	 * 
 	 * @param test
 	 * @throws Exception
@@ -240,8 +240,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 
 		}
 	}
-	
-	
+
 	/**
 	 * Method for validate Recent and Hide Publications
 	 * 
@@ -252,8 +251,10 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		waitForauthorClusterSearchResults(test);
 		pubDetailsList = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
-		recentPublications = pubDetailsList.get(0).findElements(By.cssSelector(
-				OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_RECENT_HIDE_PUBLICATIONS_CSS.toString()));
+		recentPublications = pubDetailsList.get(0)
+				.findElements(By.cssSelector(
+						OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_RECENT_HIDE_PUBLICATIONS_CSS
+								.toString()));
 		if (recentPublications.size() > 0) {
 			test.log(LogStatus.INFO, "Recent Publications link available in Publication cart");
 			pf.getBrowserActionInstance(ob).scrollingToElement(recentPublications.get(0));
@@ -264,11 +265,11 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 					OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_HIDE_PUBLICATIONS_CSS);
 			List<WebElement> topPubs = pubDetailsList.get(0).findElements(By.cssSelector(
 					OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_TOP_PUBLICATIONS_CSS.toString()));
-			
-			logger.info("pub text-->"+recentPublications.get(1).getText());
+
+			logger.info("pub text-->" + recentPublications.get(1).getText());
 			logger.info("top publications-->" + topPubs.size());
-			
-			if (!((topPubs.size() <= 3) && StringUtils.equals(recentPublications.get(1).getText(),"Hide publications")
+
+			if (!((topPubs.size() <= 3) && StringUtils.equals(recentPublications.get(1).getText(), "Hide publications")
 					&& StringUtils.isNotEmpty(topPubs.get(0).getText())
 					&& StringUtils.isNotEmpty(topPubs.get(1).getText())
 					&& StringUtils.isNotEmpty(topPubs.get(2).getText()))) {
@@ -280,9 +281,10 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 					OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_RECENT_PUBLICATIONS_CSS);
 			List<WebElement> topPubsAfterHide = pubDetailsList.get(0).findElements(By.cssSelector(
 					OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_TOP_PUBLICATIONS_CSS.toString()));
-			logger.info("pub text-->"+recentPublications.get(0).getText());
+			logger.info("pub text-->" + recentPublications.get(0).getText());
 			logger.info("Hide publications-->" + topPubsAfterHide.size());
-			if (!(topPubsAfterHide.size() == 0 && StringUtils.equals(recentPublications.get(0).getText(),"Recent publications"))) {
+			if (!(topPubsAfterHide.size() == 0
+					&& StringUtils.equals(recentPublications.get(0).getText(), "Recent publications"))) {
 				test.log(LogStatus.FAIL, "Recent Publications Not hidden after clicking on Hide Publications");
 				throw new Exception("Recent Publications Not hidden after clicking on Hide Publications");
 			}
@@ -377,8 +379,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	}
 
 	/**
-	 * Method for Author Cluster Search Results Top Journals should contain max
-	 * 3
+	 * Method for Author Cluster Search Results Top Journals should contain max 3
 	 * 
 	 * @param test
 	 * @throws Exception
@@ -428,38 +429,39 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			}
 		}
 	}
-	
+
 	/**
-	 * Method for Verify SortedBy Dropdown operations 
+	 * Method for Verify SortedBy Dropdown operations
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void sortedByDropddown(String dropDownName,ExtentTest test) throws Exception {
+	public void sortedByDropddown(String dropDownName, ExtentTest test) throws Exception {
 		waitForauthorClusterSearchResults(test);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_RELAVANCE_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_DROPDOWN_MENU_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_DROPDOWN_MENU_CSS);
 		List<WebElement> ddValues = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_DROPDOWN_MENU_CSS)
 				.findElements(By.tagName("li"));
-		for(WebElement value:ddValues){
-			logger.info("Dropdown name-->"+value.getText());
-			if(value.getText().equals(dropDownName)){
+		for (WebElement value : ddValues) {
+			logger.info("Dropdown name-->" + value.getText());
+			if (value.getText().equals(dropDownName)) {
 				value.click();
 				BrowserWaits.waitTime(3);
 				break;
 			}
 		}
-		
+
 		String ddHeader = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_RELAVANCE_CSS).getText();
-		logger.info("Dropdown Header Name-->"+ddHeader);
-		if(!(ddHeader.contains(dropDownName) || ddHeader.contains("Relevance"))){
+		logger.info("Dropdown Header Name-->" + ddHeader);
+		if (!(ddHeader.contains(dropDownName) || ddHeader.contains("Relevance"))) {
 			test.log(LogStatus.FAIL, "Sorted by Dropdown not updated with selected dropdown option value");
 			throw new Exception("Sorted by Dropdown not updated with selected dropdown option value");
 		}
 
 	}
-
 
 	/**
 	 * Method for Verify sorted by relevance count
@@ -488,8 +490,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			val2 = sortByRelevance.get(i);
 		}
 	}
-	
-	
+
 	/**
 	 * Method for Verify sorted by Publication Years Newest First
 	 * 
@@ -516,15 +517,14 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			if (!(year1 >= year2)) {
 				test.log(LogStatus.FAIL, "Publicaiton Years Newest First not displayed");
 				throw new Exception("Publicaiton Years Newest First not displayed");
-			 }//if
+			} // if
 			nextYear = getYear(searchResults.get(i).getText());
 			year1 = year2;
 			year2 = nextYear;
 			logger.info("nextYear-->" + nextYear);
-		} //for
+		} // for
 	}
-	
-	
+
 	/**
 	 * Method for Verify sorted by Publication Years Newest First
 	 * 
@@ -551,47 +551,48 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			if (!(year1 <= year2)) {
 				test.log(LogStatus.FAIL, "Publicaiton Years Oldest First not displayed");
 				throw new Exception("Publicaiton Years Oldest First not displayed");
-			 }//if
+			} // if
 			nextYear = getYear(searchResults.get(i).getText());
 			year1 = year2;
 			year2 = nextYear;
 			logger.info("nextYear-->" + nextYear);
-		} //for
+		} // for
 	}
-	
-	public int getYear(String yearValue){
-		int year=0;
-		if(yearValue.contains("-")){
-			String years[]=yearValue.split("\\-");
-			 year=Integer.parseInt(years[1].trim());
+
+	public int getYear(String yearValue) {
+		int year = 0;
+		if (yearValue.contains("-")) {
+			String years[] = yearValue.split("\\-");
+			year = Integer.parseInt(years[1].trim());
 		} else {
-			year=Integer.parseInt(yearValue.trim());
+			year = Integer.parseInt(yearValue.trim());
 		}
 		return year;
 	}
-	
+
 	/**
 	 * Method for Verify sorted by Publication Years Newest First
 	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void sortedByDropdownOptions(String ddOptions,ExtentTest test) throws Exception {
-		String dropdownOptions[]=ddOptions.split("\\|");
+	public void sortedByDropdownOptions(String ddOptions, ExtentTest test) throws Exception {
+		String dropdownOptions[] = ddOptions.split("\\|");
 		waitForauthorClusterSearchResults(test);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_RELAVANCE_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_DROPDOWN_MENU_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_DROPDOWN_MENU_CSS);
 		List<WebElement> ddValues = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_SORTEDBY_DROPDOWN_MENU_CSS)
 				.findElements(By.tagName("li"));
-		for(int i=0;i<ddValues.size();i++){
-			logger.info("Dropdown option-->"+ddValues.get(i).getText());
-			if(!ddValues.get(i).getText().equals(dropdownOptions[i])){
+		for (int i = 0; i < ddValues.size(); i++) {
+			logger.info("Dropdown option-->" + ddValues.get(i).getText());
+			if (!ddValues.get(i).getText().equals(dropdownOptions[i])) {
 				throw new Exception("Sorted By dropdown having unsupported options ");
 			}
 		}
 	}
-	
+
 	/**
 	 * Method for Verify Sub-org field displayed in search results page
 	 * 
@@ -717,8 +718,8 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	}
 
 	/**
-	 * Method to verify card selection in search author result page after
-	 * clicking select all link.
+	 * Method to verify card selection in search author result page after clicking
+	 * select all link.
 	 * 
 	 * @param test
 	 * @throws Exception
@@ -734,8 +735,8 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	}
 
 	/**
-	 * Method to verify card highlight after selection in search author result
-	 * page after clicking select all link.
+	 * Method to verify card highlight after selection in search author result page
+	 * after clicking select all link.
 	 * 
 	 * @param test
 	 * @throws Exception
@@ -774,8 +775,8 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void clickAuthorCard(ExtentTest test) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH,
-				5);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH, 5);
 		try {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH);
 			test.log(LogStatus.INFO, "Author card 1 is selected.");
@@ -784,9 +785,11 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			throw new Exception(e);
 		}
 	}
-	
+
 	/**
-	 *  Method to Verify that the user should be able to further refine the search result based on Subject Category
+	 * Method to Verify that the user should be able to further refine the search
+	 * result based on Subject Category
+	 * 
 	 * @param LastName
 	 * @param CountryName1
 	 * @param CountryName2
@@ -797,30 +800,38 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	@SuppressWarnings("static-access")
-	public void verifySubCatFilterFunctionality(ExtentTest test) throws Exception, NumberFormatException, InterruptedException {
+	public void verifySubCatFilterFunctionality(ExtentTest test)
+			throws Exception, NumberFormatException, InterruptedException {
 		int result_Count_old;
 		int result_Count_new;
-		
-		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_SUBCAT_XPATH).isDisplayed(), "Subject categories filter name not displayed in Author search results page");
+
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_SUBCAT_XPATH).isDisplayed(),
+				"Subject categories filter name not displayed in Author search results page");
 		test.log(LogStatus.PASS, "Subject categories filter name displayed in Author search results page");
-		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_SUBCAT_XPATH).isDisplayed(), "Subject categories filter not displayed in Author search results page");
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_SUBCAT_XPATH).isDisplayed(),
+				"Subject categories filter not displayed in Author search results page");
 		test.log(LogStatus.PASS, "Subject categories filter displayed in Author search results page");
 		result_Count_old = getResultCount();
-		
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_SUBCAT_XPATH);	
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_SUBCAT_XPATH);
 		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
 		pf.getBrowserWaitsInstance(ob).waitTime(3);
 		result_Count_new = getResultCount();
-		
-		Assert.assertTrue(result_Count_old>result_Count_new, "User is not able to further refine the search result based on Subject Category");
-		test.log(LogStatus.INFO, "New result count is less than old result count");			
+
+		Assert.assertTrue(result_Count_old > result_Count_new,
+				"User is not able to further refine the search result based on Subject Category");
+		test.log(LogStatus.INFO, "New result count is less than old result count");
 		test.log(LogStatus.PASS, "User is able to further refine the search result based on Subject Category");
 
 		pf.getBrowserActionInstance(ob).closeBrowser();
 	}
-	
+
 	/**
-	 *  Method to Verify that the user should be able to further refine the search result based on Organization
+	 * Method to Verify that the user should be able to further refine the search
+	 * result based on Organization
+	 * 
 	 * @param LastName
 	 * @param CountryName1
 	 * @param CountryName2
@@ -831,29 +842,36 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	@SuppressWarnings("static-access")
-	public void verifyOrgFilterFunctionality(ExtentTest test) throws Exception, NumberFormatException, InterruptedException {
+	public void verifyOrgFilterFunctionality(ExtentTest test)
+			throws Exception, NumberFormatException, InterruptedException {
 		int result_Count_old;
 		int result_Count_new;
-		
-		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_ORG_XPATH).isDisplayed(), "Organization filter name not displayed in Author search results page");
+
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_ORG_XPATH)
+				.isDisplayed(), "Organization filter name not displayed in Author search results page");
 		test.log(LogStatus.PASS, "Organization filter name displayed in Author search results page");
-		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_ORG_XPATH).isDisplayed(), "Organization filter not displayed in Author search results page");
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_ORG_XPATH).isDisplayed(),
+				"Organization filter not displayed in Author search results page");
 		test.log(LogStatus.PASS, "Organization filter displayed in Author search results page");
 		result_Count_old = getResultCount();
-		
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_ORG_XPATH);	
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_ORG_XPATH);
 		pf.getBrowserWaitsInstance(ob).waitTime(3);
 		result_Count_new = getResultCount();
-		
-		Assert.assertTrue(result_Count_old>result_Count_new, "User is not able to further refine the search result based on Organization");
-		test.log(LogStatus.INFO, "New result count is less than old result count");			
+
+		Assert.assertTrue(result_Count_old > result_Count_new,
+				"User is not able to further refine the search result based on Organization");
+		test.log(LogStatus.INFO, "New result count is less than old result count");
 		test.log(LogStatus.PASS, "User is able to further refine the search result based on Organization");
 
 		pf.getBrowserActionInstance(ob).closeBrowser();
 	}
 
 	/**
-	 *  Method to Verify that the user should be able to further refine the search result based on Author name
+	 * Method to Verify that the user should be able to further refine the search
+	 * result based on Author name
+	 * 
 	 * @param LastName
 	 * @param CountryName1
 	 * @param CountryName2
@@ -864,27 +882,32 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	@SuppressWarnings("static-access")
-	public void verifyNameFilterFunctionality(ExtentTest test) throws Exception, NumberFormatException, InterruptedException {
+	public void verifyNameFilterFunctionality(ExtentTest test)
+			throws Exception, NumberFormatException, InterruptedException {
 		int result_Count_old;
 		int result_Count_new;
-		
-		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_NAME_XPATH).isDisplayed(), "Author name filter not displayed in Author search results page");
+
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_NAME_XPATH)
+				.isDisplayed(), "Author name filter not displayed in Author search results page");
 		test.log(LogStatus.PASS, "Author name filter displayed in Author search results page");
-		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_NAME_XPATH).isDisplayed(), "Author name filter not displayed in Author search results page");
+		Assert.assertTrue(pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_OPTIONS_NAME_XPATH).isDisplayed(),
+				"Author name filter not displayed in Author search results page");
 		test.log(LogStatus.PASS, "Author name filter displayed in Author search results page");
 		result_Count_old = getResultCount();
-		
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_NAME_XPATH);	
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_SEARCH_RESULTS_FILTER_1st_NAME_XPATH);
 		pf.getBrowserWaitsInstance(ob).waitTime(3);
 		result_Count_new = getResultCount();
-		
-		Assert.assertTrue(result_Count_old>result_Count_new, "User is not able to further refine the search result based on Author name");
-		test.log(LogStatus.INFO, "New result count is less than old result count");			
+
+		Assert.assertTrue(result_Count_old > result_Count_new,
+				"User is not able to further refine the search result based on Author name");
+		test.log(LogStatus.INFO, "New result count is less than old result count");
 		test.log(LogStatus.PASS, "User is able to further refine the search result based on Author name");
 
 		pf.getBrowserActionInstance(ob).closeBrowser();
 	}
-	
+
 	/**
 	 * @return
 	 * @throws Exception
@@ -893,14 +916,15 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	public int getResultCount() throws Exception, NumberFormatException {
 		int result_Count_old;
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_COUNT_XPATH);
-		String[] Search_result_Count_old = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_COUNT_XPATH).getText().split(" ");
-		if(Search_result_Count_old[0].contains("Approx"))
-				result_Count_old = Integer.parseInt(Search_result_Count_old[1]);
+		String[] Search_result_Count_old = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_SEARCH_RESULTS_COUNT_XPATH).getText().split(" ");
+		if (Search_result_Count_old[0].contains("Approx"))
+			result_Count_old = Integer.parseInt(Search_result_Count_old[1]);
 		else
 			result_Count_old = Integer.parseInt(Search_result_Count_old[0]);
 		return result_Count_old;
 	}
-	
+
 	/**
 	 * Method for Select All option present or not in Search Results Page
 	 * 
@@ -908,199 +932,231 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void verifySelectAll(ExtentTest test) throws Exception {
-		List<WebElement> selAll=
-				pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_SELECTALL_CSS);
-		logger.info("size is -->"+selAll.size());
-		if(selAll.size()==1){
-			test.log(LogStatus.INFO, "Select All option should not display when quantity of search results of an author morethan 50. and Search Results count is only one");
+		List<WebElement> selAll = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_SELECTALL_CSS);
+		logger.info("size is -->" + selAll.size());
+		if (selAll.size() == 1) {
+			test.log(LogStatus.INFO,
+					"Select All option should not display when quantity of search results of an author morethan 50. and Search Results count is only one");
 		} else {
-			logger.info("Select-->"+selAll.get(0).getText());
-			if(selAll.get(0).getText().equals("Select all")){
-				test.log(LogStatus.INFO, "Select All option shoulddisplay when quantity of search results of an author lessthan 50.");
+			logger.info("Select-->" + selAll.get(0).getText());
+			if (selAll.get(0).getText().equals("Select all")) {
+				test.log(LogStatus.INFO,
+						"Select All option shoulddisplay when quantity of search results of an author lessthan 50.");
 			}
 		}
-			
+
 	}
-	
+
 	/**
-	 * Method for validate Dept and Organization in Each author cluster search result
+	 * Method for validate Dept and Organization in Each author cluster search
+	 * result
 	 * 
 	 * @param test
 	 * @throws Exception
 	 */
 	public void deptAndOrgInSearchResults(ExtentTest test) throws Exception {
-		List<WebElement> depts=
-				pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_DEPT_CSS);
-		
-		List<WebElement> orgs=
-				pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_ORG_CSS);
-		
-		for(int i=0;i<depts.size();i++){
-			logger.info("dept and org-->"+depts.get(i).getText()+"-->"+orgs.get(i).getText());
+		List<WebElement> depts = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_DEPT_CSS);
+
+		List<WebElement> orgs = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_ORG_CSS);
+
+		for (int i = 0; i < depts.size(); i++) {
+			logger.info("dept and org-->" + depts.get(i).getText() + "-->" + orgs.get(i).getText());
 			if (!(StringUtils.isEmpty(depts.get(i).getText()) || StringUtils.isNotEmpty(depts.get(i).getText()))
 					&& (StringUtils.isEmpty(orgs.get(i).getText()) || StringUtils.isNotEmpty(orgs.get(i).getText()))) {
-				throw new Exception("department name (sub-organization) Not displayed in addition to the institution/org name");
+				throw new Exception(
+						"department name (sub-organization) Not displayed in addition to the institution/org name");
 			}
-			
+
 		}
-		
+
 	}
 
 	/**
 	 * Method for publication Name
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void publicationName(ExtentTest test) throws Exception{
-		ispublicationNamePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_NAME_XPATH).isDisplayed();
-		if(!ispublicationNamePresent){
+	public void publicationName(ExtentTest test) throws Exception {
+		ispublicationNamePresent = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_NAME_XPATH).isDisplayed();
+		if (!ispublicationNamePresent) {
 			throw new Exception("No publication Name is displayed in Author Record page");
 		}
 		test.log(LogStatus.PASS, "publication Name is displayed in Author Record page");
-    }
-	
+	}
+
 	/**
-	 * Method for Publication Author 
+	 * Method for Publication Author
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void PublicationAuthor(ExtentTest test) throws Exception{
-		isPublicationAuthorPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_AUTHORS_XPATH).isDisplayed();
-		if(!isPublicationAuthorPresent){
+	public void PublicationAuthor(ExtentTest test) throws Exception {
+		isPublicationAuthorPresent = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_AUTHORS_XPATH).isDisplayed();
+		if (!isPublicationAuthorPresent) {
 			throw new Exception("No Publication Author is displayed in Author Record page");
 		}
 		test.log(LogStatus.PASS, "Publication Author is displayed in Author Record page");
-    }
-	
+	}
+
 	/**
-	 * Method for Publication Category 
+	 * Method for Publication Category
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void PublicationCategory(ExtentTest test) throws Exception{
-		isPublicationCategoryPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_CATEGORY_XPATH).isDisplayed();
-		if(!isPublicationCategoryPresent){
+	public void PublicationCategory(ExtentTest test) throws Exception {
+		isPublicationCategoryPresent = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_CATEGORY_XPATH).isDisplayed();
+		if (!isPublicationCategoryPresent) {
 			throw new Exception("No Publication Category is displayed in Author Record page");
 		}
 		test.log(LogStatus.PASS, "Publication Category is displayed in Author Record page");
-    }
-	
+	}
+
 	/**
-	 * Method for Publication Volume 
+	 * Method for Publication Volume
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void PublicationVolume(ExtentTest test) throws Exception{
-		isPublicationVolumePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_VOLUME_XPATH).isDisplayed();
-		if(!isPublicationVolumePresent){
+	public void PublicationVolume(ExtentTest test) throws Exception {
+		isPublicationVolumePresent = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_VOLUME_XPATH).isDisplayed();
+		if (!isPublicationVolumePresent) {
 			throw new Exception("No Publication Volume is displayed in Author Record page");
 		}
 		test.log(LogStatus.PASS, "Publication Volume is displayed in Author Record page");
-    }
-	
+	}
+
 	/**
-	 * Method for Publication Issue 
+	 * Method for Publication Issue
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void PublicationIssue(ExtentTest test) throws Exception{
-		isPublicationIssuePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_ISSUE_XPATH).isDisplayed();
-		if(!isPublicationIssuePresent){
+	public void PublicationIssue(ExtentTest test) throws Exception {
+		isPublicationIssuePresent = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_ISSUE_XPATH).isDisplayed();
+		if (!isPublicationIssuePresent) {
 			throw new Exception("No Publication Issue is displayed in Author Record page");
 		}
 		test.log(LogStatus.PASS, "Publication Issue is displayed in Author Record page");
-    }
-	
+	}
+
 	/**
-	 * Method for Publication Published Year 
+	 * Method for Publication Published Year
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void PublicationPublishedYear(ExtentTest test) throws Exception{
-		isPublicationPublishedYearPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_PUBLISHED_XPATH).isDisplayed();
-		if(!isPublicationPublishedYearPresent){
+	public void PublicationPublishedYear(ExtentTest test) throws Exception {
+		isPublicationPublishedYearPresent = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_PUBLISHED_XPATH).isDisplayed();
+		if (!isPublicationPublishedYearPresent) {
 			throw new Exception("No Publication Published Year is displayed in Author Record page");
 		}
 		test.log(LogStatus.PASS, "Publication Published Year is displayed in Author Record page");
-    }
-	
+	}
+
 	/**
-	 * Method for Publication Times Cited 
+	 * Method for Publication Times Cited
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void PublicationTimesCited(ExtentTest test) throws Exception{
-		isPublicationTimesCitedPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_TIMES_CITED_TEXT_XPATH).isDisplayed();
-		if(!isPublicationTimesCitedPresent){
+	public void PublicationTimesCited(ExtentTest test) throws Exception {
+		isPublicationTimesCitedPresent = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_TIMES_CITED_TEXT_XPATH)
+				.isDisplayed();
+		if (!isPublicationTimesCitedPresent) {
 			throw new Exception("No Publication Times Cited is displayed in Author Record page");
 		}
 		test.log(LogStatus.PASS, "Publication Times Cited is displayed in Author Record page");
-    }
-	
+	}
+
 	/**
-	 * Method for Publication Times Cited Count 
+	 * Method for Publication Times Cited Count
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void PublicationTimesCitedCount(ExtentTest test) throws Exception{
-		isPublicationTimesCitedCountPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_TIMES_CITED_COUNT_XPATH).isDisplayed();
-		if(!isPublicationTimesCitedCountPresent){
+	public void PublicationTimesCitedCount(ExtentTest test) throws Exception {
+		isPublicationTimesCitedCountPresent = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_TIMES_CITED_COUNT_XPATH)
+				.isDisplayed();
+		if (!isPublicationTimesCitedCountPresent) {
 			throw new Exception("No Publication Times Cited Count is displayed in Author Record page");
 		}
 		test.log(LogStatus.PASS, "Publication Times Cited Count is displayed in Author Record page");
-    }
-	
+	}
+
 	/**
 	 * Method for Publication Author Count test
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void PublicationAuthorCount(ExtentTest test) throws Exception{
-		String[] PublicationAuthorCount = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_AUTHORS_XPATH).getText().split(";");
-		test.log(LogStatus.INFO, "Author count = "+ PublicationAuthorCount.length);
-		if (PublicationAuthorCount.length >= 3)
-		{
-			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MORE_LINK_XPATH).isDisplayed(), 
+	public void PublicationAuthorCount(ExtentTest test) throws Exception {
+		String[] PublicationAuthorCount = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_AUTHORS_XPATH).getText()
+				.split(";");
+		test.log(LogStatus.INFO, "Author count = " + PublicationAuthorCount.length);
+		if (PublicationAuthorCount.length >= 3) {
+			Assert.assertTrue(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MORE_LINK_XPATH).isDisplayed(),
 					"More link not displayed even though the count of authors for this publication is more than 3");
 			test.log(LogStatus.INFO, "More link displayed");
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MORE_LINK_XPATH);
+			pf.getBrowserActionInstance(ob)
+					.click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MORE_LINK_XPATH);
 			test.log(LogStatus.INFO, "More Link clicked");
-			String[] PublicationAuthorCountAfterMoreLinkClick = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_AUTHORS_XPATH).getText().split(";");
-			test.log(LogStatus.INFO, "Author count after clicking More link = "+ PublicationAuthorCountAfterMoreLinkClick.length);
+			String[] PublicationAuthorCountAfterMoreLinkClick = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_AUTHORS_XPATH).getText()
+					.split(";");
+			test.log(LogStatus.INFO,
+					"Author count after clicking More link = " + PublicationAuthorCountAfterMoreLinkClick.length);
 			if (PublicationAuthorCountAfterMoreLinkClick.length > 3)
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_LESS_LINK_XPATH);
-			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MORE_LINK_XPATH).isDisplayed(), 
+				pf.getBrowserActionInstance(ob)
+						.click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_LESS_LINK_XPATH);
+			Assert.assertTrue(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_PUBLICATION_MORE_LINK_XPATH).isDisplayed(),
 					"More link not displayed after LESS link is clicked");
-		}
-		else
+		} else
 			test.log(LogStatus.INFO, "Author count is less than 3");
-		}
-	
+	}
+
 	/**
 	 * Select Author name and navigate to selected author record page
+	 * 
 	 * @param authorName
 	 * @throws Exception
 	 */
-	public void selectAuthorFromSearchResults(String authorName,ExtentTest test) throws Exception {
+	public void selectAuthorFromSearchResults(String authorName, ExtentTest test) throws Exception {
 		waitForauthorClusterSearchResults(test);
 		pubDetailsList = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
 
 		for (WebElement eachCart : pubDetailsList) {
 			pf.getBrowserActionInstance(ob).scrollingToElement(eachCart);
-			String primaryName = eachCart.findElement(By.cssSelector(
-					OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PRIMARY_NAME_CSS
-							.toString()))
+			String primaryName = eachCart
+					.findElement(By.xpath(
+							OnePObjectMap.WAT_AUTHOR_SEARCH_RECORD_FIRST_AUTHOR_PRIMARY_NAME_XPATH.toString()))
 					.getText();
-			logger.info("Primary author name-->"+primaryName);
-			if(primaryName.equals(authorName)){
-				WebElement ele=eachCart.findElement(By.cssSelector(
-						OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PRIMARY_NAME_CSS.toString()));
-				pf.getBrowserActionInstance(ob).jsClick(ele);		
+			logger.info("Primary author name-->" + primaryName);
+			if (primaryName.equals(authorName)) {
+				WebElement ele = eachCart.findElement(By.cssSelector(
+						OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PRIMARY_NAME_CSS
+								.toString()));
+				pf.getBrowserActionInstance(ob).jsClick(ele);
 				pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
 				break;
 			}
 		}
 	}
-	
+
 }

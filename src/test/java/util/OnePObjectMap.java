@@ -1274,7 +1274,7 @@ public enum OnePObjectMap {
 
 	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_OPTION_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']/li"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS("div.wui-card"),
-	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_NAME_CSS("div.wui-card h3 a"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_NAME_CSS("div.wat-search-results-meta h3 a"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PRIMARY_NAME_CSS("h3 a"),
 	//WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_CSS("div[class='wat-search-terms-topic-tags']"),
 
@@ -1506,6 +1506,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PUBLICATION_COUNT_XPATH("//div[@class='wat-author-record-publications-count']/button"),
 	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_PARAMETERIZED_XPATH("(//button[@aria-label='Remove'])[q]"),
 	WAT_SUBMIT_UPDATE_BTN_XPATH("//div[button[@class='wui-btn wui-btn--primary' and @disabled='disabled']]"),
+	WAT_AUTHOR_SEARCH_RECORD_FIRST_AUTHOR_PRIMARY_NAME_XPATH("(//a/span[@class='wui-content-title--name ng-binding'])[1]")
 	
 
 	;
