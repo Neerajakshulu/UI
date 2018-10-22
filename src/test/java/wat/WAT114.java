@@ -70,10 +70,8 @@ public class WAT114 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Login to WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -93,7 +91,7 @@ public class WAT114 extends TestBase {
 	public void testCountryDropdownFunctionality(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
 			throws Exception {
 			try {
-				pf.getSearchAuthClusterPage(ob).testCountryDropdownFunctionality(LastName);
+				pf.getSearchAuthClusterPage(ob).testCountryDropdownFunctionality(LastName,test);
 			} catch (Throwable t) {
 				logFailureDetails(test, t, "Country Dropdown is not disaplayed when search results are more than 50 clusters", "Country_Dropdown_fail");
 				pf.getBrowserActionInstance(ob).closeBrowser();

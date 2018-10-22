@@ -427,7 +427,8 @@ public class SearchAuthorClusterPage extends TestBase {
 			List<WebElement> lastNameSuggestions = pf.getBrowserActionInstance(ob)
 					.getElements(OnePObjectMap.WAT_AUTHOR_LASTNAME_TYPEAHEAD_OPTION_XPATH);
 
-			if (web.size() != 0) {
+			if (web.size() != 0 && pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_LASTNAME_TYPEAHEAD_OPTION_XPATH).size() !=0) {
 				for (int j = 0; j < lastNameSuggestions.size(); j++) {
 					if (lastNameSuggestions.get(j).getText().equals(selectionText)) {
 						lastNameSuggestions.get(j).click();
@@ -620,7 +621,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	}
 
 	@SuppressWarnings("static-access")
-	public void testCountryDropdownFunctionality(String LastName) throws Exception, InterruptedException {
+	public void testCountryDropdownFunctionality(String LastName,ExtentTest test) throws Exception, InterruptedException {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
 		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
 		pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);

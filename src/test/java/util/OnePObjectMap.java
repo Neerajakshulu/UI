@@ -1498,7 +1498,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_CSS("div[class='wat-search-terms-topic-tags']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_TEXT_XPATH("//div[@class='wui-subtitle']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_TEXT1_XPATH("//h2[contains(text(),'search')]"),
-	WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH("//button[@ng-click='vm.findClusters()' and text()[normalize-space() = 'Find']]"),
+	WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH("(//button[@ng-click='vm.findClusters()' and text()[normalize-space() = 'Find']])[1]"),
 	//WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH("(//div[@class='wui-card__content ng-scope'])[1]/descendant::h3[@class='wui-content-title wui-content-title--medium wat-search-results-meta-title ng-scope']/a"),
 	WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH("(//div[@class='wui-card__content ng-scope'])[1]/descendant::a"),
 	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_NAME_BEFORE_ANY_REMOVAL_XPATH("(//div[@class='wui-emphasis wat-search-results-publications-title wat-author-record-publications-title ng-binding'])[1]"),
