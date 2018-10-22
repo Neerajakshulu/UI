@@ -181,7 +181,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	 */
 
 	@SuppressWarnings("static-access")
-	public void testFindButtonFunctionality2(String LastName) throws Exception, InterruptedException {
+	public void testFindButtonFunctionality2(String LastName,ExtentTest test) throws Exception, InterruptedException {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
 		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
 		pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
@@ -204,10 +204,10 @@ public class SearchAuthorClusterPage extends TestBase {
 					"Find button is not enabled when country dropdown is displayed");
 			test.log(LogStatus.INFO, "Find button is enabled when country dropdown is diaplayed");
 			pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_LINK_XPATH);
 			Assert.assertEquals(
-					(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).getText()),
-					"Search Results", "Unable to search for an author and land in Author search result page.");
+					(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_LINK_XPATH).getText()),
+					"Search", "Unable to search for an author and land in Author search result page.");
 			test.log(LogStatus.PASS,
 					"Able to click Find button when no country option is clicked and successfully land in Author search result page");
 			pf.getBrowserActionInstance(ob).closeBrowser();

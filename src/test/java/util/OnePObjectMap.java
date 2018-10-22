@@ -1494,7 +1494,7 @@ public enum OnePObjectMap {
 	WOS_WAT_DB_DROPDOWN_VALUES_XPATH("//span[@class='select2-container select2-container--dbselect select2-container--open']/descendant::li"),
 	WAT_AUTHOR_LASTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--last']/descendant::input"),
 	WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH("//label[text()='Last name']"),
-	WAT_SEARCH_LINK_XPATH("//span[text()='Search']"),
+	WAT_SEARCH_LINK_XPATH("//a[contains(text(),'Search')]"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_CSS("div[class='wat-search-terms-topic-tags']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_TEXT_XPATH("//div[@class='wui-subtitle']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_SEARCH_TERMS_TEXT1_XPATH("//h2[contains(text(),'search')]"),
