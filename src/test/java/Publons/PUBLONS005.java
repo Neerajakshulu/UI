@@ -42,7 +42,7 @@ public class PUBLONS005 extends TestBase {
 	}
 
 	@Test(dataProvider = "getTestData")
-	public void testcaseA10(String charLength,
+	public void testcaseA5(String charLength,
 			String suffix,
 			String error,
 			String validity) throws Exception {

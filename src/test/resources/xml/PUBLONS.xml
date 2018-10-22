@@ -32,13 +32,13 @@
 		<classes>
 			<class name="Publons.PUBLONS005"></class>
 		</classes>
-	</test>
+	</test> 
 	<test name="Publon_FirstName_Standard_Format">
 		<classes>
 			<class name="Publons.PUBLONS006"></class>
 		</classes>
 	</test>
-	<test name="Publon_FirstName_Field_Empty_Error_Message">
+	 <test name="Publon_FirstName_Field_Empty_Error_Message">
 		<classes>
 			<class name="Publons.PUBLONS007"></class>
 		</classes>
@@ -57,6 +57,6 @@
 		<classes>
 			<class name="Publons.PUBLONS021"></class>
 		</classes>
-	</test>
+	</test> 
 	
 </suite>

@@ -40,7 +40,8 @@ public class PUBLONS006 extends TestBase {
 	}
 
 	@Test(dataProvider = "getTestData")
-	public void testcaseA6(String charLength, String validity) throws Exception {
+	public void testcaseA6(String charLength,
+					String validity) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
