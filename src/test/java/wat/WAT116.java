@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
@@ -72,9 +73,8 @@ public class WAT116 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Login to WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -95,7 +95,7 @@ public class WAT116 extends TestBase {
 	public void testFindButtonFunctionality(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
 			throws Exception {
 			try {
-				pf.getSearchAuthClusterPage(ob).testFindButtonFunctionality(LastName, CountryName1, CountryName2);
+				pf.getSearchAuthClusterPage(ob).testFindButtonFunctionality(LastName, CountryName1, CountryName2,test);
 			} catch (Throwable t) {
 				logFailureDetails(test, t, "Find button is not enabled when country option is clicked", "Find_btn_error");
 				pf.getBrowserActionInstance(ob).closeBrowser();

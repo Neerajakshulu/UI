@@ -512,7 +512,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * @throws Exception
 	 * @throws InterruptedException
 	 */
-	public void testFindButtonFunctionality(String LastName, String CountryName1, String CountryName2)
+	public void testFindButtonFunctionality(String LastName, String CountryName1, String CountryName2,ExtentTest test)
 			throws Exception, InterruptedException {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
 		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
