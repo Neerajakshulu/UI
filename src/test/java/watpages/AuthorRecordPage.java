@@ -48,14 +48,14 @@ public class AuthorRecordPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void waitForAuthorRecordPage(ExtentTest test) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Search Results");
-		pf.getBrowserWaitsInstance(ob).waitUntilText("The following details are available for this author.",
-				"This author record is algorithmically generated and may not be complete.",
-				"All information is derived from the publication metadata.");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Search");
+	//	pf.getBrowserWaitsInstance(ob).waitUntilText("The following details are available for this author.",
+		//		"This author record is algorithmically generated and may not be complete.",
+		//		"All information is derived from the publication metadata.");
 		// pf.getBrowserWaitsInstance(ob).waitUntilText("Future iterations of
 		// author search will allow you to claim and","edit your own profile to
 		// create a complete and accurate record of your work.");
-		pf.getBrowserWaitsInstance(ob).waitUntilText("in Web of Science", "Sorted by");
+		//pf.getBrowserWaitsInstance(ob).waitUntilText("in Web of Science", "Sorted by");
 		test.log(LogStatus.INFO, "User navigated to Author Record page");
 	}
 
@@ -87,7 +87,11 @@ public class AuthorRecordPage extends TestBase {
 	 * @param test
 	 * @throws Exception
 	 */
-	public void defaultAvatar() throws Exception {
+	public void defaultAvatar(ExtentTest test) throws Exception {
+		test.log(LogStatus.INFO, "Clicking first author card");
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 		isDefaultAvatarPresent = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS).isDisplayed();
 		if (!isDefaultAvatarPresent) {

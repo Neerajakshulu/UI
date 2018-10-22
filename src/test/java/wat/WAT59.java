@@ -60,10 +60,8 @@ public class WAT59 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -87,7 +85,8 @@ public class WAT59 extends TestBase {
 			test.log(LogStatus.INFO, "Entering author name... ");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, test);
 			pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
-			pf.getAuthorRecordPage(ob).defaultAvatar();
+			pf.getBrowserActionInstance(ob).waitForPageLoad(ob);
+			pf.getAuthorRecordPage(ob).defaultAvatar(test);
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "No Default Avatar/Author Profile Pic is not displayed in Author Record page", "author_record_default_avatar_fail");
