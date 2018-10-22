@@ -1,7 +1,11 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import base.TestBase;
@@ -101,5 +105,34 @@ public class PUBLONSPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH);
 			
+		}
+		
+		/*public void checkAlreadyUsedMail(String message) throws InterruptedException {
+			pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,By.xpath(OR.getProperty("signup_email_texbox")),30);
+			ob.findElement(By.xpath(OR.getProperty("signup_email_texbox"))).sendKeys("trloginid@gmail.com");
+			//List<WebElement> email_list = ob.findElements(By.name(OR.getProperty("signup_email_texbox")));
+			//logger.info(email_list.size());
+			//WebElement myE = email_list.get(1);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Your email address is already registered. Please sign in.");
+			String error_message = ob.findElement(By.xpath(OR.getProperty("reg_error_email"))).getText();
+			String expectederror_message = message + "Your email address is already registered. Please sign in.";
+			Assert.assertEquals(error_message, expectederror_message);
+
+		}*/
+
+		public void checkPrepopulatedText(String email) throws Exception {
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("loginpage_email_textbox")),30);
+			JavascriptExecutor js = (JavascriptExecutor) ob;
+			String populatText = (String) (js.executeScript("return arguments[0].value", ob.findElement(By.xpath(OR.getProperty("loginpage_email_textbox".toString())))));
+			logger.info("PopulatText--->" + populatText);
+
+			/*
+			 * String textValues = (String)(js.executeScript("return angular.element(arguments[0]).scope().vm.email",
+			 * ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))));
+			 * System.out.println("PopulatText--->"+textValues);
+			 */
+			logger.info("email--->" + email);
+			Assert.assertEquals(email, populatText);
+			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
 		}
 }
