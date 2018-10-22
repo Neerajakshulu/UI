@@ -201,7 +201,7 @@ public class SearchAuthorClusterPage extends TestBase {
 			test.log(LogStatus.INFO, "Country Dropdown is disaplayed when search results are more than 50 clusters");
 			Assert.assertTrue(pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled(),
-					"Find button is not enabled when country dropdown is diaplayed");
+					"Find button is not enabled when country dropdown is displayed");
 			test.log(LogStatus.INFO, "Find button is enabled when country dropdown is diaplayed");
 			pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
@@ -439,7 +439,8 @@ public class SearchAuthorClusterPage extends TestBase {
 				}
 				break;
 			} else if (ele.size() == 0 && pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isDisplayed()) {
+					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isDisplayed()) 
+			{
 				test.log(LogStatus.INFO, "Author Last name entered");
 				test.log(LogStatus.INFO,
 						"No Typeahead displayed, Might be due to exact matching of provided last name with name in typeahead suggestion, Hence directly clicking FIND button");
@@ -532,7 +533,7 @@ public class SearchAuthorClusterPage extends TestBase {
 			test.log(LogStatus.INFO, "Country Dropdown is disaplayed when search results are more than 50 clusters");
 			Assert.assertTrue(pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled(),
-					"Find button is not enabled when country dropdown is diaplayed");
+					"Find button is not enabled when country dropdown is displayed");
 			test.log(LogStatus.INFO, "Find button is enabled when country dropdown is diaplayed");
 			pf.getSearchAuthClusterPage(ob).selectCountryofAuthor(test, CountryName1, CountryName2);
 			pf.getBrowserWaitsInstance(ob)
@@ -567,7 +568,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	@SuppressWarnings("static-access")
-	public void testFindButtonFunctionality(String LastName) throws Exception, InterruptedException {
+	public void testFindButtonFunctionality(String LastName,ExtentTest test) throws Exception, InterruptedException {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
 		pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
 		pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
@@ -587,11 +588,11 @@ public class SearchAuthorClusterPage extends TestBase {
 			test.log(LogStatus.INFO, "Country Dropdown is disaplayed when search results are more than 50 clusters");
 			Assert.assertTrue(pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled(),
-					"Find button is not enabled when country dropdown is diaplayed");
+					"Find button is not enabled when country dropdown is displayed");
 			test.log(LogStatus.PASS, "Find button is enabled when country dropdown is diaplayed");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} else
-			throw new Exception("Find button is not enabled when country dropdown is diaplayed");
+			throw new Exception("Find button is not enabled when country dropdown is displayed");
 	}
 
 	public void selectCountryofAuthor(ExtentTest test, String country) throws Exception {

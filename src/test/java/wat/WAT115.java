@@ -72,9 +72,8 @@ public class WAT115 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Login to WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -95,9 +94,9 @@ public class WAT115 extends TestBase {
 	public void testFindButtonFunctionality(String LastName, String CountryName1,String CountryName2, String OrgName1,String OrgName2)
 			throws Exception {
 			try {
-				pf.getSearchAuthClusterPage(ob).testFindButtonFunctionality(LastName);
+				pf.getSearchAuthClusterPage(ob).testFindButtonFunctionality(LastName,test);
 			} catch (Throwable t) {
-				logFailureDetails(test, t, "Find button is not enabled when country dropdown is diaplayed", "Find_Button_Issue");
+				logFailureDetails(test, t, "Find button is not enabled when country dropdown is displayed", "Find_Button_Issue");
 				pf.getBrowserActionInstance(ob).closeBrowser();
 			}
 
