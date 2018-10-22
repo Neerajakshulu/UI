@@ -72,9 +72,8 @@ public class WAT118 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Login to WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -122,10 +121,10 @@ public class WAT118 extends TestBase {
 							.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled(),
 							"Find button is not enabled when country option is clicked");
 					pf.getSearchAuthClusterPage(ob).cliclFindBtn(test);
-					pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_LINK_XPATH);
 					Assert.assertEquals(
-							(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).getText()),
-							"Search Results", "Unable to search for an author and land in Author search result page.");
+							(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_LINK_XPATH).getText()),
+							"Search", "Unable to search for an author and land in Author search result page.");
 					test.log(LogStatus.PASS, "Able to Ignore Org filter and successfully land in Author search result page");
 					pf.getBrowserActionInstance(ob).closeBrowser();
 				}
