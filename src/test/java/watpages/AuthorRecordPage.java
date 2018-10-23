@@ -391,7 +391,7 @@ public class AuthorRecordPage extends TestBase {
 	 */
 	@SuppressWarnings("static-access")
 	public void researcherIdFunctionality(ExtentTest test) throws Exception, InterruptedException {
-		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_CARD_1_XPATH).click();
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
 		pf.getBrowserWaitsInstance(ob).waitTime(3);
 		String RESEARCHERID = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RESEARCHERID_LINK_XPATH)
 				.getText();
