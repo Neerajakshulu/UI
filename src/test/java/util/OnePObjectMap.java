@@ -1509,7 +1509,10 @@ public enum OnePObjectMap {
 	WAT_SUBMIT_UPDATE_BTN_XPATH("//div[button[@class='wui-btn wui-btn--primary' and @disabled='disabled']]"),
 	WAT_AUTHOR_SEARCH_RECORD_FIRST_AUTHOR_PRIMARY_NAME_XPATH("(//a/span[@class='wui-content-title--name ng-binding'])[1]"),
 	WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS("i[class='wui-icon wui-icon--profile wat-author-record-icon--profile']"),
-	WAT_AUTHOR_RECORD_META_TITLE_CSS("div[class*='wui-title wat-author-record-meta-title']")
+	WAT_AUTHOR_RECORD_META_TITLE_CSS("div[class*='wui-title wat-author-record-meta-title']"),
+	
+	WAT_AUTHOR_SEARCH_RESULTS_SELECTALL_XPATH("//div[@class='wat-search-results-select-deselect-all']//span[@class='wui-checkbox__visible']"),
+	WAT_AUTHOR_SEARCH_RESULTS_STRING_XPATH("//h2[@class='wui-title wat-search-results-count ng-binding ng-scope']"),
 	;
 
 	private String locator;

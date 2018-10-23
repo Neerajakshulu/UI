@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ExtentManager;
 
 /**
@@ -61,8 +60,10 @@ public class WAT157 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			//ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
+			//pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			ob.navigate().to(host);
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
 
 		} catch (Throwable t) {
@@ -86,12 +87,12 @@ public class WAT157 extends TestBase {
 			test.log(LogStatus.INFO, "Search an Author using last name, country and org name");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorClusterUsingLastnameAndCountry(lastName,countryName,test);
 			pf.getSearchAuthClusterResultsPage(ob).waitForauthorClusterSearchResults(test);
-			test.log(LogStatus.INFO, "Verify Select All option for morethan 50 Search Results");
+			test.log(LogStatus.INFO, "Verify Select All option for more than 50 Search Results");
 			pf.getSearchAuthClusterResultsPage(ob).verifySelectAll(test);
-			test.log(LogStatus.PASS, "Select All option should not display when quantity of search results of an author morethan 50");
+			//test.log(LogStatus.PASS, "Select All option should not display when quantity of search results of an author morethan 50");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Select All Option should not displayed for morethan 50 Results","Search_Results_morethan50_Select_All_Fail");
+			logFailureDetails(test, t, "Select All Option should not displayed for more than 50 Results.","Search_Results_morethan50_Select_All_Fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

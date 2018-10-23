@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import com.google.common.base.CharMatcher;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -68,6 +69,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		pf.getBrowserActionInstance(ob).waitForAjax(ob);
 		// pf.getBrowserWaitsInstance(ob).waitUntilText("Search terms", "results",
 		// "Sorted by", "Relevance");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("search term", "results", "Sorted by", "Relevance");
 		pf.getBrowserWaitsInstance(ob)
 				.waitForAllElementsToBePresent(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
 		test.log(LogStatus.INFO, "Author Cluster Search Results page is displayed");
@@ -932,19 +934,37 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void verifySelectAll(ExtentTest test) throws Exception {
-		List<WebElement> selAll = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_SELECTALL_CSS);
-		logger.info("size is -->" + selAll.size());
-		if (selAll.size() == 1) {
-			test.log(LogStatus.INFO,
-					"Select All option should not display when quantity of search results of an author morethan 50. and Search Results count is only one");
+		WebElement resultString = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_STRING_XPATH);
+		String digit = CharMatcher.inRange('0', '9').retainFrom(resultString.getText());
+		logger.info("Total Records Number -->" + digit);
+		if ((Integer.parseInt(digit) > 1) && (Integer.parseInt(digit) < 50)) {
+			WebElement selAllCheckBox = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_SELECTALL_XPATH);
+			logger.info("Select All check box displayed -->" + selAllCheckBox.isDisplayed());
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Select all", 5);
+			Assert.assertTrue(selAllCheckBox.isDisplayed(),
+					"Select All option should display when quantity of search results of an author is less than 50");
+			test.log(LogStatus.PASS,
+					"Select All option should display when quantity of search results of an author less than 50.");
 		} else {
-			logger.info("Select-->" + selAll.get(0).getText());
-			if (selAll.get(0).getText().equals("Select all")) {
-				test.log(LogStatus.INFO,
-						"Select All option shoulddisplay when quantity of search results of an author lessthan 50.");
-			}
+			WebElement selAllCheckBox = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_SELECTALL_XPATH);
+			pf.getBrowserWaitsInstance(ob).waitUntilNotText("Select all", 5);
+			Assert.assertTrue(!selAllCheckBox.isDisplayed(),
+					"Select All option should not display when quantity of search results of an author is equal to 1 and more than 50");
+			test.log(LogStatus.PASS,
+					"Select All option should display when quantity of search results of an author less than 50.");
 		}
+
+		/*
+		 * List<WebElement> selAll = pf.getBrowserActionInstance(ob)
+		 * .getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_SELECTALL_CSS);
+		 * logger.info("size is -->" + selAll.size()); if (selAll.size() == 1) {
+		 * test.log(LogStatus.INFO,
+		 * "Select All option should not display when quantity of search results of an author morethan 50. and Search Results count is only one"
+		 * ); } else { logger.info("Select-->" + selAll.get(0).getText()); if
+		 * (selAll.get(0).getText().equals("Select all")) { test.log(LogStatus.INFO,
+		 * "Select All option shoulddisplay when quantity of search results of an author lessthan 50."
+		 * ); } }
+		 */
 
 	}
 

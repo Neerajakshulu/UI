@@ -61,8 +61,10 @@ public class WAT158 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			ob.navigate().to(host);
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
+			//ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
+			//pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
 			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
 
 		} catch (Throwable t) {
@@ -73,7 +75,7 @@ public class WAT158 extends TestBase {
 	}
 
 	/**
-	 * Method for Verify Select All option present or not for Morethan 50 Search Results
+	 * Method for Verify Select All option present for less than 50 Search Results
 	 * 
 	 * @param lastName,countryName
 	 * @throws Exception, When Something unexpected
@@ -86,12 +88,12 @@ public class WAT158 extends TestBase {
 			test.log(LogStatus.INFO, "Search an Author using last name");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName,test);
 			pf.getSearchAuthClusterResultsPage(ob).waitForauthorClusterSearchResults(test);
-			test.log(LogStatus.INFO, "Verify Select All option for lessthan 50 Search Results");
+			test.log(LogStatus.INFO, "Verify Select All option for less than 50 Search Results.");
 			pf.getSearchAuthClusterResultsPage(ob).verifySelectAll(test);
-			test.log(LogStatus.PASS, "Select All option should display when quantity of search results of an author lessthan 50");
+			test.log(LogStatus.PASS, "Select All option should display when quantity of search results of an author less than 50.");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Select All Option should displayed for lessthan 50 Results","Search_Results_lessthan50_Select_All_Fail");
+			logFailureDetails(test, t, "Select All Option should displayed for less than 50 Results","Search_Results_less than50_Select_All_Fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 
