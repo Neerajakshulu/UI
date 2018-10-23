@@ -442,7 +442,11 @@ public class AuthorRecordPage extends TestBase {
 	 * @throws Exception
 	 * @throws InterruptedException
 	 */
-	public void ridAsURI() throws Exception{
+	public void ridAsURI(ExtentTest test) throws Exception{
+		test.log(LogStatus.INFO, "Clicking first author card");
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 		String rid = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RESEARCHERID_LINK_XPATH).getAttribute("href");
 		logger.info("RID-->"+rid);
 		if(!(StringUtils.isNotEmpty(rid) && StringUtils.contains(rid,"http://www.researcherid.com/rid/"))){

@@ -59,10 +59,8 @@ public class WAT185 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -87,7 +85,7 @@ public class WAT185 extends TestBase {
 			pf.getSearchAuthClusterResultsPage(ob).waitForauthorClusterSearchResults(test);
 			pf.getSearchAuthClusterResultsPage(ob).selectAuthorFromSearchResults(authorName,test);
 			test.log(LogStatus.INFO,"Verify that System displays the author's RID (when available) as a URI");
-			pf.getAuthorRecordPage(ob).ridAsURI();
+			pf.getAuthorRecordPage(ob).ridAsURI(test);
 			test.log(LogStatus.PASS, "Author's RID displayed as a URI");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
