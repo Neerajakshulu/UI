@@ -923,7 +923,7 @@
 	<test name="Search_Resutls_Select_All_Morethan_50"
 		preserve-order="true">
 		<parameter name="lastName" value="WANG" />
-		<parameter name="countryName" value="BRAZIL" />
+		<parameter name="countryName" value="BRAZIL" />  
 		<classes>
 			<class name="wat.WAT157"></class>
 		</classes>
