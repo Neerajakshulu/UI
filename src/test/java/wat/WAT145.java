@@ -97,7 +97,7 @@ public class WAT145 extends TestBase {
 			test.log(LogStatus.INFO, "Combine two Authors");
 			pf.getSearchAuthClusterResultsPage(ob).combineAuthorCard(test);
 			test.log(LogStatus.INFO, "Verify System must display default avatar for combined Author");
-			pf.getAuthorRecordPage(ob).defaultAvatar();
+			pf.getAuthorRecordPage(ob).defaultAvatar(test);
 			test.log(LogStatus.INFO, "Combined Author Search Results are displayed");
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Combined Author Search Results are not displayed", "Search_Fail");

@@ -88,6 +88,7 @@ public class WAT59 extends TestBase {
 			pf.getBrowserActionInstance(ob).waitForPageLoad(ob);
 			pf.getAuthorRecordPage(ob).defaultAvatar(test);
 			pf.getBrowserActionInstance(ob).closeBrowser();
+			test.log(LogStatus.PASS, "Default Avatar in Author Record page is dispalyed");
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "No Default Avatar/Author Profile Pic is not displayed in Author Record page", "author_record_default_avatar_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();

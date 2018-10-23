@@ -60,10 +60,9 @@ public class WAT60 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
+
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -87,8 +86,10 @@ public class WAT60 extends TestBase {
 			test.log(LogStatus.INFO, "Entering author name... ");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, test);
 			pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
-			pf.getAuthorRecordPage(ob).authorRecordMetaTitle();
+			pf.getBrowserActionInstance(ob).waitForPageLoad(ob);
+			pf.getAuthorRecordPage(ob).authorRecordMetaTitle(test);
 			pf.getBrowserActionInstance(ob).closeBrowser();
+			test.log(LogStatus.PASS, "Profile Title in the form of First name, last name");
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Profile Title not in the form of First name, last name", "author_record_meta_title_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();

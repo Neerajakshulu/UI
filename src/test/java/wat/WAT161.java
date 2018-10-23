@@ -89,9 +89,9 @@ public class WAT161 extends TestBase {
 			test.log(LogStatus.INFO, "Combine two Authors");
 			pf.getSearchAuthClusterResultsPage(ob).combineAuthorCard(test);
 			test.log(LogStatus.INFO, "Verify System must display default avatar for combined Author");
-			pf.getAuthorRecordPage(ob).defaultAvatar();
+			pf.getAuthorRecordPage(ob).defaultAvatar(test);
 			test.log(LogStatus.INFO, "Verify System displays the author's full name for combined Author");
-			pf.getAuthorRecordPage(ob).authorRecordMetaTitle();
+			pf.getAuthorRecordPage(ob).authorRecordMetaTitle(test);
 			test.log(LogStatus.PASS, "Combined Author Default Avatar and Full name displayed");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {

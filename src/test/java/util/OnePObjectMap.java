@@ -1334,7 +1334,7 @@ public enum OnePObjectMap {
 	WAT_SUPPORT_CONTACT_EMAIL_CSS("td[bgcolor='#ffffff'] span a"),
 	WAT_SUPPORT_CONTACT_FOOTER_EMAIL_CSS("td[bgcolor='#e6e7e9'] span a"),
 	
-	WAT_AUTHOR_RECORD_META_TITLE_CSS("div[class*='wui-title wat-author-record-meta-title']"),
+
 	WAT_AUTHOR_RECORD_META_AFFILIATION_CSS("div[class*='wat-author-record-meta-affiliation']"),
 	WAT_AUTHOR_RECORD_META_DEPT_CSS("div[class*='wat-author-record-meta-department']"),
 	WAT_AUTHOR_RECORD_META_LOCATION_CSS("div[class*='wat-author-record-meta-location']"),
@@ -1508,8 +1508,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_PARAMETERIZED_XPATH("(//button[@aria-label='Remove'])[q]"),
 	WAT_SUBMIT_UPDATE_BTN_XPATH("//div[button[@class='wui-btn wui-btn--primary' and @disabled='disabled']]"),
 	WAT_AUTHOR_SEARCH_RECORD_FIRST_AUTHOR_PRIMARY_NAME_XPATH("(//a/span[@class='wui-content-title--name ng-binding'])[1]"),
-	WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS("i[class='wui-icon wui-icon--profile wat-author-record-icon--profile']")
-
+	WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS("i[class='wui-icon wui-icon--profile wat-author-record-icon--profile']"),
+	WAT_AUTHOR_RECORD_META_TITLE_CSS("div[class*='wui-title wat-author-record-meta-title']")
 	;
 
 	private String locator;
