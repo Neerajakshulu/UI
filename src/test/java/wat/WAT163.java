@@ -90,7 +90,7 @@ public class WAT163 extends TestBase {
 			test.log(LogStatus.INFO, "Combine two Authors");
 			pf.getSearchAuthClusterResultsPage(ob).combineAuthorCard(test);
 			test.log(LogStatus.INFO, "Verify System must display Authors Location for comnbined author");
-			pf.getAuthorRecordPage(ob).authorRecordMetaLocation();
+			pf.getAuthorRecordPage(ob).authorRecordMetaLocation(test);
 			test.log(LogStatus.PASS, "Combined Author displayed Authors Location");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
