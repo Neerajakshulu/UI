@@ -61,10 +61,8 @@ public class WAT206 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -90,7 +88,7 @@ public class WAT206 extends TestBase {
 			pf.getSearchAuthClusterResultsPage(ob).selectAuthorFromSearchResults(authorName, test);
 			pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
 			test.log(LogStatus.INFO, "Verify that System displays city/state/country (when available) which corresponds to the last known organization");
-			pf.getAuthorRecordPage(ob).authorRecordMetaLocation();
+			pf.getAuthorRecordPage(ob).authorRecordMetaLocation(test);
 			test.log(LogStatus.PASS, "Author metadata details - city/state/country (when available) displayed");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {

@@ -157,7 +157,11 @@ public class AuthorRecordPage extends TestBase {
 	 * @param test
 	 * @throws Exception
 	 */
-	public void authorRecordMetaLocation() throws Exception {
+	public void authorRecordMetaLocation(ExtentTest test) throws Exception {
+		test.log(LogStatus.INFO, "Clicking first author card");
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 		location = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_LOCATION_CSS)
 				.getText();
 		logger.info("Location-->" + location);
