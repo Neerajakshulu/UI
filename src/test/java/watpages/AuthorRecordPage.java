@@ -138,7 +138,11 @@ public class AuthorRecordPage extends TestBase {
 	 * @param test
 	 * @throws Exception
 	 */
-	public void authorRecordMetaOrganization() throws Exception {
+	public void authorRecordMetaOrganization(ExtentTest test) throws Exception {
+		test.log(LogStatus.INFO, "Clicking first author card");
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 		metaOrg = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_AFFILIATION_CSS)
 				.getText();
 		logger.info("Orgnization-->" + metaOrg);

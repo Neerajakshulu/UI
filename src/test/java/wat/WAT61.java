@@ -60,10 +60,9 @@ public class WAT61 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
+
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -87,8 +86,10 @@ public class WAT61 extends TestBase {
 			test.log(LogStatus.INFO, "Entering author name... ");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, test);
 			pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
-			pf.getAuthorRecordPage(ob).authorRecordMetaOrganization();
+			pf.getBrowserActionInstance(ob).waitForPageLoad(ob);
+			pf.getAuthorRecordPage(ob).authorRecordMetaOrganization(test);
 			pf.getBrowserActionInstance(ob).closeBrowser();
+			test.log(LogStatus.PASS, "Author Record successfully showing Profile meta Organization");
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Author Record doesn't showing Profile meta Organization", "author_record_meta_org_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();

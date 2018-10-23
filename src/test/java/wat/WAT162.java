@@ -89,7 +89,7 @@ public class WAT162 extends TestBase {
 			test.log(LogStatus.INFO, "Combine two Authors");
 			pf.getSearchAuthClusterResultsPage(ob).combineAuthorCard(test);
 			test.log(LogStatus.INFO, "Verify System must display Authors organization for comnbine author");
-			pf.getAuthorRecordPage(ob).authorRecordMetaOrganization();
+			pf.getAuthorRecordPage(ob).authorRecordMetaOrganization(test);
 			test.log(LogStatus.INFO, "Verify System displays Authors sub-organization for comnbine author");
 			pf.getAuthorRecordPage(ob).authorRecordDept();
 			test.log(LogStatus.PASS, "Combined Author displayed Authors organization and sub-organization");
