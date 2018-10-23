@@ -107,7 +107,7 @@ public class SearchAuthorClusterPage extends TestBase {
 			enterAuthorLastName(LastName, test);
 			cliclFindBtn(test);
 			List<WebElement> ele = pf.getBrowserActionInstance(ob)
-					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_INNER_XPATH);
 			if (ele.size() != 0) {
 				selectCountryofAuthor(test, country);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
@@ -117,9 +117,13 @@ public class SearchAuthorClusterPage extends TestBase {
 						"Country name selection is not required as the searched user resulted in less than 50 clusters... ");
 			}
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
-			Assert.assertEquals(
+			String title = ob.getTitle();
+			Assert.assertEquals(title, "Researcher Search Results – Web of Science | Clarivate",
+					"Unable to search for an author and land in Author search result page.");
+			/*Assert.assertEquals(
 					(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).getText()),
 					"Search Results", "Unable to search for an author and land in Author search result page.");
+			*/
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unable to search for an author cluster and land in Author search result page.");
 			throw new Exception();

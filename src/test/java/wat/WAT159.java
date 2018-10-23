@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ExtentManager;
 
 /**
@@ -61,8 +60,10 @@ public class WAT159 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			ob.navigate().to(host);
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
+			//ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
+			//pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
 			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
 
 		} catch (Throwable t) {
@@ -86,9 +87,9 @@ public class WAT159 extends TestBase {
 			test.log(LogStatus.INFO, "Search an Author using last name");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName,test);
 			pf.getSearchAuthClusterResultsPage(ob).waitForauthorClusterSearchResults(test);
-			test.log(LogStatus.INFO, "Verify Select All option for lessthan 50 Search Results");
+			test.log(LogStatus.INFO, "Verify Select All option for only 1 Search Result.");
 			pf.getSearchAuthClusterResultsPage(ob).verifySelectAll(test);
-			test.log(LogStatus.PASS, "Select All option should not display when quantity of search results of an author Only 1");
+			//test.log(LogStatus.PASS, "Select All option should not display when quantity of search results of an author Only 1");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Select All Option should not displayed for Only 1 Search Result","Search_Result_Only_1__Select_All_Fail");
