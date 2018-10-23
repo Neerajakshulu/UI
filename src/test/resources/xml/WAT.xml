@@ -928,8 +928,7 @@
 			<class name="wat.WAT157"></class>
 		</classes>
 	</test>
-	<test name="Search_Resutls_Select_All_lessthan_50"
-		preserve-order="true">
+	<test name="Search_Resutls_Select_All_lessthan_50" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
 			<class name="wat.WAT158"></class>
