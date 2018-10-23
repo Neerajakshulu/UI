@@ -933,7 +933,7 @@
 		<classes>
 			<class name="wat.WAT158"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Search_Resutls_Select_All_only_1"
 		preserve-order="true">
