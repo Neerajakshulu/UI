@@ -64,8 +64,10 @@ public class WAT72 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			/*ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
+			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);*/
+			ob.navigate().to(host);
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -87,8 +89,8 @@ public class WAT72 extends TestBase {
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2,
 					OrgName1, OrgName2,test);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH, 5);
-			Assert.assertEquals(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_COMBINE_BTN_PRECEDING_TEXT_XPATH).getText(), Combine_btn_text, "Text not matching");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_RRC_COMBINE_BUTTON_XPATH, 5);
+			Assert.assertEquals(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RRC_COMBINE_BTN_PRECEDING_TEXT_CSS).getText(), Combine_btn_text, "Text not matching");
 			test.log(LogStatus.PASS, "Combine button preceding text is displayed as expected");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {

@@ -64,8 +64,10 @@ public class WAT70 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			/*ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
+			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);*/
+			ob.navigate().to(host);
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -87,7 +89,7 @@ public class WAT70 extends TestBase {
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2,
 					OrgName1, OrgName2,test);
-			Assert.assertEquals(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH).getAttribute("disabled"), "true");
+			Assert.assertEquals(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RRC_COMBINE_BUTTON_XPATH).getAttribute("disabled"), "true");
 			test.log(LogStatus.PASS, "Combine Button is disabled at the begining");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {

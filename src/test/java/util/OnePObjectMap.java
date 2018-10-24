@@ -1343,6 +1343,17 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULT_CARD2_XPATH("//div[@class='wui-card'][2]/descendant::i[@class='fa fa-check']"),
 	WAT_AUTHOR_SEARCH_RESULT_CARDS_XPATH("//div[@class='wui-card']/descendant::i[@class='fa fa-check']"),
 	WAT_COMBINE_BUTTON_XPATH("//button[@class='wui-btn wui-btn--primary']"),
+	
+	//######Chinna#############
+	WAT_RRC_AUTHOR_SEARCH_RESULT_CARD1_XPATH("(//div[@class='wat-search-results-meta ng-scope']/descendant::span[@class='wui-checkbox__visible'])[1]"),
+	WAT_RRC_AUTHOR_SEARCH_RESULT_CARD2_XPATH("(//div[@class='wat-search-results-meta ng-scope']/descendant::span[@class='wui-checkbox__visible'])[2]"),
+	WAT_RRC_AUTHOR_SEARCH_RESULT_CARDS_XPATH("//div[@class='wat-search-results-meta ng-scope']/descendant::span[@class='wui-checkbox__visible']"),
+	WAT_RRC_COMBINE_BUTTON_XPATH("//button[@class='standard-button wui-btn--primary']"),
+	WAT_RRC_COMBINE_BTN_PRECEDING_TEXT_CSS("div[class='wat-search-results-header-combine-label']"),
+	
+	//######Chinna#############
+	
+	
 	WAT_AUTHOR_RECORD_PAGE_AUTHOR_PROFILE_ICON_XPATH("//i[@class='wui-icon wui-icon--profile wat-author-record-icon--profile']"),
 	WAT_AUTHOR_CARD_1_XPATH("//div[@class='wui-card'][1]/descendant::a"),
 	WAT_AUTHOR_RECORD_PAGE_WELCOME_TEXT_XPATH("//p"),

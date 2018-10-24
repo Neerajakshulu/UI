@@ -666,17 +666,17 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void combineAuthorCard(ExtentTest test) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_CARD1_XPATH,
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_RRC_AUTHOR_SEARCH_RESULT_CARD1_XPATH,
 				5);
 		try {
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_CARD1_XPATH);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RRC_AUTHOR_SEARCH_RESULT_CARD1_XPATH);
 			test.log(LogStatus.INFO, "Author card 1 is selected.");
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_CARD2_XPATH);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RRC_AUTHOR_SEARCH_RESULT_CARD2_XPATH);
 			test.log(LogStatus.INFO, "Author card 2 is selected.");
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH, 5);
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH).isEnabled()) {
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_RRC_COMBINE_BUTTON_XPATH, 5);
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RRC_COMBINE_BUTTON_XPATH).isEnabled()) {
 				test.log(LogStatus.INFO, "Author Combine button  is enabled");
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH);
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RRC_COMBINE_BUTTON_XPATH);
 				test.log(LogStatus.INFO, "Author Combine button is clicked.");
 			} else {
 				throw new Exception("Combine button not enabled");

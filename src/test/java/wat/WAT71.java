@@ -64,8 +64,10 @@ public class WAT71 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			/*ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
+			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);*/
+			ob.navigate().to(host);
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -87,16 +89,16 @@ public class WAT71 extends TestBase {
 		try {
 			pf.getSearchAuthClusterPage(ob).searchAuthorClusterOnlyLastName(LastName, CountryName1,CountryName2,
 					OrgName1, OrgName2,test);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_CARD1_XPATH, 5);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_CARD1_XPATH);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_RRC_AUTHOR_SEARCH_RESULT_CARD1_XPATH, 5);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RRC_AUTHOR_SEARCH_RESULT_CARD1_XPATH);
 			test.log(LogStatus.INFO, "Author card 1 is selected.");
-			Assert.assertEquals(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH).getAttribute("disabled"), "true", "Combine button is not in disabled state");
+			Assert.assertEquals(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RRC_COMBINE_BUTTON_XPATH).getAttribute("disabled"), "true", "Combine button is not in disabled state");
 			test.log(LogStatus.INFO, "Combine button is in disabled state");
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_CARD2_XPATH, 5);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_CARD2_XPATH);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_RRC_AUTHOR_SEARCH_RESULT_CARD2_XPATH, 5);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RRC_AUTHOR_SEARCH_RESULT_CARD2_XPATH);
 			test.log(LogStatus.INFO, "Author card 2 is selected.");
 			
-			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_COMBINE_BUTTON_XPATH).isEnabled());
+			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RRC_COMBINE_BUTTON_XPATH).isEnabled());
 			test.log(LogStatus.INFO, "Combine button is in enabled state");
 			test.log(LogStatus.PASS, "Combine button functionality is working as expected");
 			pf.getBrowserActionInstance(ob).closeBrowser();
