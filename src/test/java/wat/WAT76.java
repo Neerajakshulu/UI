@@ -62,8 +62,10 @@ public class WAT76 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			/*ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
+			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);*/
+			ob.navigate().to(host);
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
