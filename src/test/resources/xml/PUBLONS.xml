@@ -48,6 +48,18 @@
 			<class name="Publons.PUBLONS010"></class>
 		</classes>
 	</test>
+	
+	<test name="Password-Rules_Validation_In_Registration_Page">
+		<classes>
+			<class name="Publons.PUBLONS013"></class>
+		</classes>
+	</test>
+	<test name="Publon_Password_Field_Empty_Error_Message">
+		<classes>
+			<class name="Publons.PUBLONS014"></class>
+		</classes>
+	</test>
+	
 	<test name="Publon_FB_Login">
 		<classes>
 			<class name="Publons.PUBLONS020"></class>
