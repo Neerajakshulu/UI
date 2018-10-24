@@ -34,11 +34,9 @@ public class PUBLONS008 extends TestBase {
 	}
 
 	@Test
-	public void testcaseA1() throws Exception {
+	public void testcaseA1() throws Exception { 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		String userName="neon.user2@tr.com";
-		String pass="Neon@123";
 
 		if (!master_condition) {
 
