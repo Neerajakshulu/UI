@@ -1492,6 +1492,13 @@ public enum OnePObjectMap {
 	PUBLONS_LOGIN_PAGE_REGISTER_LINK_CSS("a[class='wui-btn wui-btn--secondary']"),
 	PUBLONS_REGISTER_PAGE_EMAIL_TEXTBOX_CSS("input[name='emailId']"),
 	PUBLONS_MAXLENGTH_ERROR_MESSAGE_CSS("span[data-ng-message='maxlength']"),
+	
+	
+	
+	PUBLONS_ACCOUNT_SETTING_PAGE_EMAILS_TAB_CSS("a[class='nav-link ng-binding']"),
+	PUBLONS_LOGIN_PAGE_ACCOUNT_PROFILE_IMAGE_CSS("div[class='ne-user-profile-image-main-wrapper wui-circle'] img"),
+	PUBLONS_ACCOUNT_BUTTON_IN_PROFILE_PAGE("i[class='fa fa-cog ne-profile-flyout__icon ne-profile-flyout__icon--account']"),
+	
 
 	;
 
