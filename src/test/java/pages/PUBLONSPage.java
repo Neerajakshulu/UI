@@ -1,6 +1,7 @@
 package pages;
 
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -165,8 +166,8 @@ public class PUBLONSPage extends TestBase {
 	 * pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible
 	 * (ob,By.xpath(OR.getProperty("signup_email_texbox")),30);
 	 * ob.findElement(By
-	 * .xpath(OR.getProperty("signup_email_texbox"))).sendKeys("trloginid@gmail.com"
-	 * ); //List<WebElement> email_list =
+	 * .xpath(OR.getProperty("signup_email_texbox"))).sendKeys(
+	 * "trloginid@gmail.com" ); //List<WebElement> email_list =
 	 * ob.findElements(By.name(OR.getProperty("signup_email_texbox")));
 	 * //logger.info(email_list.size()); //WebElement myE = email_list.get(1);
 	 * pf.getBrowserWaitsInstance(ob).waitUntilText(
@@ -218,4 +219,36 @@ public class PUBLONSPage extends TestBase {
 						.toString())).click();
 	}
 
+	public void clickOnReruiredTab(String tabvalue) throws Exception {
+
+	}
+
+	public void windowHandle() {
+
+		String parent = ob.getWindowHandle();
+		Set<String> child = ob.getWindowHandles();
+		for (String ss : child) {
+			if (!ss.equals(parent)) {
+				ob.switchTo().window(ss);
+			}
+		}
+
+	}
+
+	public void clickTab(String string) {
+		List<WebElement> list1 = ob.findElements(By
+				.cssSelector("ul[class='nav nav-tabs'] li"));
+
+		for (WebElement we : list1)
+
+		{
+			System.out.println("Text : "+we.getText());
+			if(we.getText().equals(string)){
+				we.click();
+				break;
+			}
+			
+	}
+		
+	}
 }
