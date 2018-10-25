@@ -60,6 +60,18 @@
 		</classes>
 	</test>
 	
+	<test name="Password_Change_Account_setting_Page">
+		<classes>
+			<class name="Publons.PUBLONS015"></class>
+		</classes>
+	</test>
+	
+	<test name="Forgot_Password_Link_Signin_Page">
+		<classes>
+			<class name="Publons.PUBLONS016"></class>
+		</classes>
+	</test>
+	
 	<test name="Publon_FB_Login">
 		<classes>
 			<class name="Publons.PUBLONS020"></class>

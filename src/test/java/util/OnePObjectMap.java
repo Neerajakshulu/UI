@@ -988,7 +988,7 @@ public enum OnePObjectMap {
 	NEON_IPA_COMPANYCLIPBOARD_CSS("li[ng-repeat='item in vm.items track by \\$index'][class='search-term__item ng-scope']"),
 	NEON_IPA_NONSELECTED_TABS_CSS("li[class='ipa-content-tabs__list-item ng-scope']"),
 
-	IPA_BRANDING_NAME_CSS("h3[class='wui-title login-header__app-name ng-binding']"),
+	IPA_BRANDING_NAME_CSS("h3[class='wui-subtitle wui-subtitle--app-signin-no-input ng-binding ng-scope']"),
 	IPA_LOGO_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
 	IPA_NEW_LOGO_CSS("img[class='login-logo']"),
 	IPA_LANDINGPAGE_TERMS_LINK_CSS("a[data-event-action='login-terms.of.use']"),
@@ -1499,6 +1499,7 @@ public enum OnePObjectMap {
 	PUBLONS_LOGIN_PAGE_ACCOUNT_PROFILE_IMAGE_CSS("div[class='ne-user-profile-image-main-wrapper wui-circle'] img"),
 	PUBLONS_ACCOUNT_BUTTON_IN_PROFILE_PAGE("i[class='fa fa-cog ne-profile-flyout__icon ne-profile-flyout__icon--account']"),
 	
+	PUBLONS_ACCOUNT_PAGE_PASSWORD_LINK_XPATH("//a[contains(text(),'Password')]"),
 
 	;
 
