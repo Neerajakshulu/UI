@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import com.relevantcodes.extentreports.LogStatus;
+
 import base.TestBase;
 import util.BrowserWaits;
 import util.OnePObjectMap;
@@ -237,18 +239,54 @@ public class PUBLONSPage extends TestBase {
 
 	public void clickTab(String string) {
 		List<WebElement> list1 = ob.findElements(By
-				.cssSelector("ul[class='nav nav-tabs'] li"));
+				.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_LIST_OF_LINKS_CSS.toString()));
 
 		for (WebElement we : list1)
 
 		{
-			System.out.println("Text : "+we.getText());
-			if(we.getText().equals(string)){
+			if (we.getText().equals(string)) {
 				we.click();
 				break;
 			}
-			
+
+		}
+
 	}
-		
+
+	public boolean userVerification() throws Exception {
+		try {
+			// BrowserWaits.waitTime(3);
+			ob.get("https://www.guerrillamail.com");
+			waitUntilText("Please verify your", "Project Neon Account");
+			// BrowserWaits.waitTime(22);
+			waitForElementTobeVisible(ob,
+					By.xpath(OR.getProperty("email_list")), 30);
+			List<WebElement> email_list = ob.findElements(By.xpath(OR
+					.getProperty("email_list")));
+			WebElement myE = email_list.get(0);
+			JavascriptExecutor executor = (JavascriptExecutor) ob;
+			executor.executeScript("arguments[0].click();", myE);
+			// BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob,
+					By.xpath(OR.getProperty("email_body")), 30);
+			WebElement email_body = ob.findElement(By.xpath(OR
+					.getProperty("email_body")));
+			List<WebElement> links = email_body.findElements(By.tagName("a"));
+
+			ob.get(links.get(0).getAttribute("href"));
+			waitUntilText("Account sign in & security");
+
+		} catch (Throwable t) {
+			t.printStackTrace();
+			test.log(
+					LogStatus.FAIL,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this
+									.getClass().getSimpleName()
+									+ "_user_not_registered")));// screenshot
+			closeBrowser();
+			return false;
+		}
+		return true;
 	}
 }

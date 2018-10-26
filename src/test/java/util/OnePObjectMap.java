@@ -1494,6 +1494,7 @@ public enum OnePObjectMap {
 	PUBLONS_MAXLENGTH_ERROR_MESSAGE_CSS("span[data-ng-message='maxlength']"),
 		
 	PUBLONS_ACCOUNT_SETTING_PAGE_EMAILS_TAB_CSS("a[class='nav-link ng-binding']"),
+	
 	PUBLONS_LOGIN_PAGE_ACCOUNT_PROFILE_IMAGE_CSS("div[class='ne-user-profile-image-main-wrapper wui-circle'] img"),
 	PUBLONS_ACCOUNT_BUTTON_IN_PROFILE_PAGE("i[class='fa fa-cog ne-profile-flyout__icon ne-profile-flyout__icon--account']"),
 	PUBLONS_ACCOUNT_PAGE_PASSWORD_LINK_XPATH("//a[contains(text(),'Password')]"),
@@ -1503,6 +1504,12 @@ public enum OnePObjectMap {
 	PUBLONS_ACCOUNT_PAGE_EMPTY_FIELD_ERROR_MESSAGE_CSS("span[class='wui-material-input__error ng-active'] span"),
 	PUBLONS_ACCOUNT_PAGE_PASSWORD_VALIDATION_CSS("//div[@class='account-option-item__change-password-form-error']//p"),
 	PUBLONS_ACCOUNT_PAGE_PASSWORD_RULES_XPATH("//div[@ng-message='customValidation']"),
+	
+	PUBLONS_ACCOUNT_SETTING_PAGE_LIST_OF_LINKS_CSS("ul[class='nav nav-tabs'] li"),
+	PUBLONS_ACCOUNT_SETTING_PAGE_ADD_EMIAL_LINK_CSS("a[ng-hide='vm.showAddEmail']"),
+	PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_LABEL("input[wui-material-input-label='Email address']"),
+	PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_SUBMIT_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--primary pull-right']"),
+	PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_CANCEL_BUTTON_CSS("a[class='pull-right email-button--cancel']"),
 
 	;
 
