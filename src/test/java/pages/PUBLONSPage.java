@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -225,16 +227,23 @@ public class PUBLONSPage extends TestBase {
 
 	}
 
+	ArrayList<String> al=new ArrayList<String>();
 	public void windowHandle() {
 
-		String parent = ob.getWindowHandle();
-		Set<String> child = ob.getWindowHandles();
-		for (String ss : child) {
-			if (!ss.equals(parent)) {
-				ob.switchTo().window(ss);
-			}
+		Set<String> myset = ob.getWindowHandles();
+		Iterator<String> myIT = myset.iterator();
+		for (int i = 0; i < myset.size(); i++) {
+
+			al.add(myIT.next());
 		}
 
+		ob.switchTo().window(al.get(1));
+
+	}
+	
+	public void navigateMainWindow() {
+		
+		ob.switchTo().window(al.get(0));
 	}
 
 	public void clickTab(String string) {

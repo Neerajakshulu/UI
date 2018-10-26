@@ -1510,6 +1510,10 @@ public enum OnePObjectMap {
 	PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_LABEL("input[wui-material-input-label='Email address']"),
 	PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_SUBMIT_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--primary pull-right']"),
 	PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_CANCEL_BUTTON_CSS("a[class='pull-right email-button--cancel']"),
+	
+	PUBLONS_ACCOUNT_PAGE_SUBMIT_BUTTON_CSS("button[class='wui-btn button-color-primary wui-btn--primary']"),
+	DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_XPATH("//input[@name='oldPassword']//following::label"),
+	DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_XPATH("//input[@name='newPassword']//following::label"),
 
 	;
 

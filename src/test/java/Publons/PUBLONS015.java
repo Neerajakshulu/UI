@@ -123,19 +123,15 @@ public class PUBLONS015 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				
 				
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS);
-				JavascriptExecutor js = (JavascriptExecutor) ob;
-				String populatText = (String) (js.executeScript("return arguments[0].value",
-						ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS.toString()))));
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_XPATH);
+				String populatText = ob.findElement(By.xpath(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_XPATH.toString())).getText();
 				logger.info("PopulatText--->" + populatText);
 				
 				Assert.assertEquals(populatText, "Enter current password");
 				
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS);
-				JavascriptExecutor js1 = (JavascriptExecutor) ob;
-				String populatText1 = (String) (js.executeScript("return arguments[0].value",
-						ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString()))));
-				logger.info("PopulatText--->" + populatText);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_XPATH);
+				String populatText1 = ob.findElement(By.xpath(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_XPATH.toString())).getText();
+				logger.info("PopulatText--->" + populatText1);
 				Assert.assertEquals(populatText1, "Enter new password");
 				
 				
@@ -448,6 +444,9 @@ public class PUBLONS015 extends TestBase {
 				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString())).clear();
 				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString())).sendKeys("Neon@1234");
 				
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.PUBLONS_ACCOUNT_PAGE_SUBMIT_BUTTON_CSS);
+				ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_PAGE_SUBMIT_BUTTON_CSS.toString())).click();
+								
 				waitUntilText("Incorrect password. Please try again.");
 				waitForElementTobeVisible(ob,
 						By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_PAGE_PASSWORD_VALIDATION_CSS.toString()),
@@ -489,6 +488,9 @@ public class PUBLONS015 extends TestBase {
 				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString())).click();
 				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString())).clear();
 				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString())).sendKeys("Neon@123");
+				
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.PUBLONS_ACCOUNT_PAGE_SUBMIT_BUTTON_CSS);
+				ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_PAGE_SUBMIT_BUTTON_CSS.toString())).click();
 				
 				waitUntilText("New password should not match current password");
 				waitForElementTobeVisible(ob,
@@ -604,18 +606,14 @@ public class PUBLONS015 extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.PUBLONS_ACCOUNT_PAGE_CLEAR_LINK_CSS);
 				ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_PAGE_CLEAR_LINK_CSS.toString())).click();
 				
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS);
-				JavascriptExecutor js = (JavascriptExecutor) ob;
-				String populatText = (String) (js.executeScript("return arguments[0].value",
-						ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS.toString()))));
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_XPATH);
+				String populatText = ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_XPATH.toString())).getText();
 				logger.info("PopulatText--->" + populatText);
 				
 				Assert.assertEquals(populatText, "Enter current password");
 				
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS);
-				JavascriptExecutor js1 = (JavascriptExecutor) ob;
-				String populatText1 = (String) (js.executeScript("return arguments[0].value",
-						ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString()))));
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_XPATH);
+				String populatText1 = ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_XPATH.toString())).getText();
 				logger.info("PopulatText--->" + populatText);
 				Assert.assertEquals(populatText1, "Enter new password");
 				
@@ -686,9 +684,14 @@ public class PUBLONS015 extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS);
 				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString())).click();
 				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString())).clear();
-				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString())).sendKeys("Neon@1234");
+				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString())).sendKeys(newPassword);
+				
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.PUBLONS_ACCOUNT_PAGE_SUBMIT_BUTTON_CSS);
+				ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_PAGE_SUBMIT_BUTTON_CSS.toString())).click();
 				
 				ob.close();
+				
+				pf.getPubPage(ob).navigateMainWindow();
 				logout();
 				ob.get("https://www.guerrillamail.com");
 				waitUntilText("Project Neon password changed");
@@ -707,7 +710,63 @@ public class PUBLONS015 extends TestBase {
 							this.getClass().getSimpleName() + "_password_change_email_not_received")));// screenshot
 				}
 				test.log(LogStatus.PASS,
-						"User receive a conformation mail when user changed password in account setting page.");
+						"User receiving a conformation mail when user changed password in account setting page.");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL,
+						"User not receiving a conformation mail when user changed password in account setting page.");
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+			
+			
+			
+			
+			try {
+				test = extent
+						.startTest("OPQA-5853",
+								"Verify that error message New password should not match previous 4 passwords. when enter new password match with previous four passwords.")
+						.assignCategory("PUBLONS");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				
+				ob.navigate().to(host);
+				
+				pf.getIamPage(ob).login(email, "Neon@1234");
+				waitUntilText("Newsfeed","Watchlists", "Groups");
+
+				pf.getPubPage(ob).moveToAccountSettingPage();
+				pf.getPubPage(ob).windowHandle();
+				pf.getPubPage(ob).clickTab("Password");
+				
+				
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS);
+				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS.toString())).click();
+				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS.toString())).clear();
+				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS.toString())).sendKeys("Neon@1234");
+				
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS);
+				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString())).click();
+				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString())).clear();
+				ob.findElement(By.cssSelector(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS.toString())).sendKeys(newPassword);
+				
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.PUBLONS_ACCOUNT_PAGE_SUBMIT_BUTTON_CSS);
+				ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_PAGE_SUBMIT_BUTTON_CSS.toString())).click();
+				
+				waitUntilText("New password should not match previous 4 passwords.");
+				waitForElementTobeVisible(ob,
+						By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_PAGE_PASSWORD_VALIDATION_CSS.toString()),
+						30);
+								
+				test.log(LogStatus.PASS,
+						"New password should not match previous 4 passwords. error message displaying");
 
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
@@ -724,16 +783,12 @@ public class PUBLONS015 extends TestBase {
 				extent.endTest(test);
 			}
 			
-			
-			
-			logout();
-
-			test.log(LogStatus.PASS, "Expected Error message getting");
 			closeBrowser();
 
 		} catch (Throwable t) {
 
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
+			t.printStackTrace();
 			// next 3 lines to print whole testng error in report
 			extent = ExtentManager.getReporter(filePath);
 			String var = rowData.getTestcaseId();
