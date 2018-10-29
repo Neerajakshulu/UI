@@ -999,8 +999,8 @@ public enum OnePObjectMap {
 	IPA_LANDINGPAGE_ANALYZE_ICON_CSS("i[class='wui-icon wui-icon--analyze login-splash-icon']"),
 	IPA_LANDINGPAGE_VISUALIZE_ICON_CSS("i[class='fa fa-pie-chart login-splash-icon']"),
 	IPA_LANDINGPAGE_REPORT_ICON_CSS("i[class='fa fa-signal login-splash-icon']"),
-	IPA_LINKINGMODAL_TEXT1_XPATH("(//p[@class='ng-binding'])[1]"),
-	IPA_LINKINGMODAL_TEXT2_XPATH("(//p[@class='ng-binding'])[2]"),
+	IPA_LINKINGMODAL_TEXT1_XPATH("(//p[text()='Your email address, ']"),
+	IPA_LINKINGMODAL_TEXT2_XPATH("(//span[@class='wui-modal__email ng-binding']"),
 	IPA_LINKINGMODAL_EMAIL_CSS("span[class='wui-modal__email ng-binding']"),
 	IPA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS("button[data-event-action='change-password-submitted']"),
 	IPA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS("button[event-action='change-password-cancelled']"),
@@ -1512,6 +1512,12 @@ public enum OnePObjectMap {
 	PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_CANCEL_BUTTON_CSS("a[class='pull-right email-button--cancel']"),
 	
 	PUBLONS_ACCOUNT_PAGE_SUBMIT_BUTTON_CSS("button[class='wui-btn button-color-primary wui-btn--primary']"),
+	PUBLONS_ACCOUNT_LINKING_MODEL_TEXT1_XPATH("//h3[@class='wui-modal__title']"),
+	PUBLONS_ACCOUNT_LINKING_MODEL_TEXT2_XPATH("//p[text()='Your email address, ']"),
+	PUBLONS_ACCOUNT_LINKING_MODEL_EMAIL_XPATH("//span[@class='wui-modal__email ng-binding']"),
+	PUBLONS_ACCOUNT_LINKING_MODEL_PASSWORD_TEXT_XPATH("//input[@name='steamPassword']"),
+	PUBLONS_ACCOUNT_LINKING_MODEL_SIGNIN_BUTTON_XPATH("//button[@class='wui-btn wui-btn--primary wui-btn--modal-footer button-color-secondary']"),
+			
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_XPATH("//input[@name='oldPassword']//following::label"),
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_XPATH("//input[@name='newPassword']//following::label"),
 
