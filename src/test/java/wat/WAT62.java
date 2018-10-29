@@ -10,6 +10,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 /** 
  * Class for 
@@ -59,10 +60,8 @@ public class WAT62 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -85,11 +84,16 @@ public class WAT62 extends TestBase {
 			test.log(LogStatus.INFO, "Entering author name... ");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, test);
 			//pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
+			test.log(LogStatus.INFO, "Clicking first author card");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 			pf.getAuthorRecordPage(ob).checkMetricsTab();
 			test.log(LogStatus.PASS, "Metrics tab displayed in author record page");
 			pf.getAuthorRecordPage(ob).checkMetricsTabStatus();
 			test.log(LogStatus.PASS, "Metrics tab highlighted by highlight bar when user clicked on Metrics tab");
-			pf.getWatPageInstance(ob).logoutWAT();
+			//Commenting logout as the user profile icon is not available
+			//pf.getWatPageInstance(ob).logoutWAT();
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Metrics tab not displaying/highlighted in author record page",
