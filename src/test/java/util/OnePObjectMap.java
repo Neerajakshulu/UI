@@ -1391,8 +1391,6 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_ORGANISATION_TAB_STATUS_XPATH("//ul[@class='nav nav-tabs']/li[3]/a/ancestor::li"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_STATUS_XPATH("//ul[@class='nav nav-tabs']/li[2]/a/ancestor::li"),
 	WAT_AUTHOR_RECORD_PAGE_METRICS_XPATH("//ul[@class='nav nav-tabs']/li[1]/a"),
-	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_TIMESCITED_XPATH("//div[@class='wat-author-record__metrics-item-column'][1]/child::div"),
-	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_HINDEX_XPATH("//div[@class='wat-author-record__metrics-item-column'][2]/child::div"),
 	WAT_SORT_BY_RELEVANCE_XPATH("//span[@class='wui-dropdown__toggle-label ng-binding']/b"),
 	WAT_AUTHOR_ORG_DETAILS_XPATH("//div[@class='wat-search-results-meta-affiliation ng-binding']"),
 	WAT_AUTHOR_SUB_ORG_DETAILS_XPATH("//div[@class='wat-search-results-meta-contact ng-binding']"),
@@ -1526,6 +1524,8 @@ public enum OnePObjectMap {
 	
 	WAT_AUTHOR_SEARCH_RESULTS_SELECTALL_XPATH("//div[@class='wat-search-results-select-deselect-all']//span[@class='wui-checkbox__visible']"),
 	WAT_AUTHOR_SEARCH_RESULTS_STRING_XPATH("//h2[@class='wui-title wat-search-results-count ng-binding ng-scope']"),
+	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_TIMESCITED_XPATH("//div[@class='wat-author-record__metrics-item-column'][2]/child::div"),
+	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_HINDEX_XPATH("//div[@class='wat-author-record__metrics-item-column'][1]/child::div"),
 	;
 
 	private String locator;
