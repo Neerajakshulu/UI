@@ -1,5 +1,7 @@
 package wat;
 
+//Feature not present now, Hence disabling this test script
+/*
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -10,18 +12,18 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ExtentManager;
 
-/**
+*//**
  * @author UC202376
- */
+ *//*
 public class WAT151 extends TestBase {
 
 	static int status = 1;
 
-	/**
+	*//**
 	 * Method to displaying JIRA ID's for test case in specified path of Extent Reports
 	 * 
 	 * @throws Exception, When Something unexpected
-	 */
+	 *//*
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -29,11 +31,11 @@ public class WAT151 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("WAT");
 	}
 
-	/**
+	*//**
 	 * Method for login into WAT application using TR ID
 	 * 
 	 * @throws Exception, When WAT Login is not done
-	 */
+	 *//*
 	@Test
 	public void testLoginWATApp() throws Exception {
 
@@ -68,12 +70,12 @@ public class WAT151 extends TestBase {
 
 	}
 
-	/**
+	*//**
 	 * Method for validate Ballon Popover Close in Author Search page 
 	 * 
 	 * @param lastName
 	 * @throws Exception, When Something unexpected
-	 */
+	 *//*
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	public void validateBallonPopover() throws Exception {
 
@@ -89,21 +91,22 @@ public class WAT151 extends TestBase {
 
 	}
 
-	/**
+	*//**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
-	 */
+	 *//*
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*
+		
 		 * if (status == 1) TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
 		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(profilexls,
 		 * "Test Cases", TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()), "FAIL"); else
 		 * TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
 		 * this.getClass().getSimpleName()), "SKIP");
-		 */
+		 
 
 	}
 
 }
+*/
