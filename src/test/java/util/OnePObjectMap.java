@@ -1346,7 +1346,9 @@ public enum OnePObjectMap {
 	
 	//######Chinna#############
 	WAT_RRC_AUTHOR_SEARCH_RESULT_CARD1_XPATH("(//div[@class='wat-search-results-meta ng-scope']/descendant::span[@class='wui-checkbox__visible'])[1]"),
+	WAT_RRC_AUTHOR_SEARCH_RESULT_CARD1_CHECKBOX_XPATH("(//div[@class='wat-search-results-meta ng-scope']/descendant::span[1])[1]"),
 	WAT_RRC_AUTHOR_SEARCH_RESULT_CARD2_XPATH("(//div[@class='wat-search-results-meta ng-scope']/descendant::span[@class='wui-checkbox__visible'])[2]"),
+	WAT_RRC_AUTHOR_SEARCH_RESULT_CARD2_CHECKBOX_XPATH("(//div[@class='wat-search-results-meta ng-scope']/descendant::span[1])[2]"),
 	WAT_RRC_AUTHOR_SEARCH_RESULT_CARDS_XPATH("//div[@class='wat-search-results-meta ng-scope']/descendant::span[@class='wui-checkbox__visible']"),
 	WAT_RRC_COMBINE_BUTTON_XPATH("//button[@class='standard-button wui-btn--primary']"),
 	WAT_RRC_COMBINE_BTN_PRECEDING_TEXT_CSS("div[class='wat-search-results-header-combine-label']"),

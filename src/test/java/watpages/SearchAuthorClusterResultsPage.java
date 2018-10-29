@@ -669,9 +669,9 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_RRC_AUTHOR_SEARCH_RESULT_CARD1_XPATH,
 				5);
 		try {
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RRC_AUTHOR_SEARCH_RESULT_CARD1_XPATH);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RRC_AUTHOR_SEARCH_RESULT_CARD1_CHECKBOX_XPATH);
 			test.log(LogStatus.INFO, "Author card 1 is selected.");
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RRC_AUTHOR_SEARCH_RESULT_CARD2_XPATH);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RRC_AUTHOR_SEARCH_RESULT_CARD2_CHECKBOX_XPATH);
 			test.log(LogStatus.INFO, "Author card 2 is selected.");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_RRC_COMBINE_BUTTON_XPATH, 5);
 			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RRC_COMBINE_BUTTON_XPATH).isEnabled()) {
