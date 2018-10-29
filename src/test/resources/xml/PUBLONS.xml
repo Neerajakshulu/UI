@@ -49,11 +49,6 @@
 		</classes>
 	</test>
 	
-	<test name="Publon_already_registered_Email_Error_Message">
-		<classes>
-			<class name="Publons.PUBLONS010"></class>
-		</classes>
-	</test>
 	<test name="Validation_of_Customercare_links">
 		<classes>
 			<class name="Publons.PUBLONS011"></class>
@@ -92,7 +87,11 @@
 			<class name="Publons.PUBLONS016"></class>
 		</classes>
 	</test>
-	
+	<test name="Publon_non-Verified_email_fn_ln_password">
+		<classes>
+			<class name="Publons.PUBLONS019"></class>
+		</classes>
+	</test>
 	<test name="Publon_FB_Login">
 		<classes>
 			<class name="Publons.PUBLONS020"></class>

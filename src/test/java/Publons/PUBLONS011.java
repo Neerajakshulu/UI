@@ -305,7 +305,7 @@ public class PUBLONS011 extends TestBase {
 			}
 			
 			//ENDNOTE Customercare
-			try{
+			/*try{
 				
 				ob.navigate().to(host +"/#/login?app=endnote");
 				String EndNote_Contact = ob.findElement(By.xpath(OR.getProperty("customercare_link_text"))).getText();
@@ -350,7 +350,7 @@ public class PUBLONS011 extends TestBase {
 			finally {
 				test.log(LogStatus.INFO, " ENDNOTE execution end");
 				extent.endTest(test);
-			}
+			}*/
 			
 			//PUBLONS Customercare
 			try{
