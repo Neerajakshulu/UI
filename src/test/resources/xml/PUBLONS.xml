@@ -49,6 +49,27 @@
 		</classes>
 	</test>
 	
+	<test name="Publon_already_registered_Email_Error_Message">
+		<classes>
+			<class name="Publons.PUBLONS010"></class>
+		</classes>
+	</test>
+	<test name="Validation_of_Customercare_links">
+		<classes>
+			<class name="Publons.PUBLONS011"></class>
+		</classes>
+	</test>
+	<test name="Publon_Terms of Use_PrivacyNotice_links_Signin_Registration_pages">
+		<classes>
+			<class name="Publons.PUBLONS012"></class>
+		</classes>
+	</test>
+	<test name="Publon_not_registered_email_populated_Registration_page">
+		<classes>
+			<class name="Publons.PUBLONS017"></class>
+		</classes>
+	</test>
+	
 	<test name="Password-Rules_Validation_In_Registration_Page">
 		<classes>
 			<class name="Publons.PUBLONS013"></class>

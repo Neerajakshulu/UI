@@ -25,16 +25,9 @@ public class PUBLONSPage extends TestBase {
 	}
 
 	public void loginPublonsAccont(String email, String pass) {
-		ob.findElement(
-				By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS
-						.toString())).sendKeys(email);
-		ob.findElement(
-				By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS
-						.toString())).sendKeys(pass);
-		jsClick(ob,
-				ob.findElement(By
-						.cssSelector(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS
-								.toString())));
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(email);
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString())).sendKeys(pass);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS.toString())));
 	}
 
 	// ===================================================================================
@@ -48,21 +41,14 @@ public class PUBLONSPage extends TestBase {
 	 * @throws Exception
 	 *             , When user is not able to login using FB
 	 */
-	public void loginWithFBCredentialsWithOutLinking(String username, String pwd)
-			throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
-				OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(
-				OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
+	public void loginWithFBCredentialsWithOutLinking(String username, String pwd) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
-				OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME);
-		pf.getBrowserActionInstance(ob).enterFieldValue(
-				OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME, username);
-		pf.getBrowserActionInstance(ob).enterFieldValue(
-				OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_NAME, pwd);
-		pf.getBrowserActionInstance(ob).jsClick(
-				OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_NAME);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME, username);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_NAME, pwd);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_NAME);
 
 	}
 
@@ -77,54 +63,38 @@ public class PUBLONSPage extends TestBase {
 	 * @throws Exception
 	 *             , When user is not able to login using FB
 	 */
-	public void loginWithGmailCredentialsWithOutLinking(String username,
-			String pwd) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
-				OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(
-				OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_BUTTON_CSS);
+	public void loginWithGmailCredentialsWithOutLinking(String username, String pwd) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_BUTTON_CSS);
 
-		fluentwaitforElement(ob,
-				By.name(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_EMAIL_TEXT_NAME
-						.toString()), 60);
-		pf.getBrowserActionInstance(ob).enterFieldValue(
-				OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_EMAIL_TEXT_NAME,
+		fluentwaitforElement(ob, By.name(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_EMAIL_TEXT_NAME.toString()), 60);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_EMAIL_TEXT_NAME,
 				username);
 
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
-				OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_NEXT_BUTTON_ID);
-		pf.getBrowserActionInstance(ob).jsClick(
-				OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_NEXT_BUTTON_ID);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_NEXT_BUTTON_ID);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_NEXT_BUTTON_ID);
 
-		fluentwaitforElement(
-				ob,
-				By.name(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_PASSWORD_TEXT_NAME
-						.toString()), 60);
-		pf.getBrowserActionInstance(ob).enterFieldValue(
-				OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_PASSWORD_TEXT_NAME, pwd);
+		fluentwaitforElement(ob, By.name(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_PASSWORD_TEXT_NAME.toString()), 60);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_PASSWORD_TEXT_NAME, pwd);
 
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
-				OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_SIGNIN_BUTTON_NAME);
-		pf.getBrowserActionInstance(ob).jsClick(
-				OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_SIGNIN_BUTTON_NAME);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_SIGNIN_BUTTON_NAME);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_SIGNIN_BUTTON_NAME);
 
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
-				OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_ACCESS_BUTTON_ID);
-		pf.getBrowserActionInstance(ob).jsClick(
-				OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_ACCESS_BUTTON_ID);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_ACCESS_BUTTON_ID);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_GMAIL_SIGN_IN_ACCESS_BUTTON_ID);
 
 	}
 
 	public void checkBlockedUserErrorMessage() {
-		pf.getBrowserWaitsInstance(ob).waitUntilText(
-				"Your account has been locked.");
-		String errorMessage1 = ob.findElement(
-				By.xpath(OnePObjectMap.DRA_SSO_SUSPEND_PAGE_ERROR_MESSAGE_XPATH
-						.toString())).getText();
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Your account has been locked.");
+		String errorMessage1 = ob
+				.findElement(By.xpath(OnePObjectMap.DRA_SSO_SUSPEND_PAGE_ERROR_MESSAGE_XPATH.toString())).getText();
 		String errorMessage2 = ob
-				.findElement(
-						By.xpath(OnePObjectMap.PUBLONS_BLOCKED_PAGE_ERROR_MESSAGE_AFTER30MIN_XPATH
-								.toString())).getText();
+				.findElement(By.xpath(OnePObjectMap.PUBLONS_BLOCKED_PAGE_ERROR_MESSAGE_AFTER30MIN_XPATH.toString()))
+				.getText();
 		Assert.assertEquals(errorMessage1, "Your account has been locked.");
 		Assert.assertEquals(errorMessage2, "Please try again in 30 minutes.");
 
@@ -132,24 +102,18 @@ public class PUBLONSPage extends TestBase {
 
 	public void clickRegisterLink() throws Exception {
 
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
-				OnePObjectMap.PUBLONS_LOGIN_PAGE_REGISTER_LINK_CSS);
-		pf.getBrowserActionInstance(ob).jsClick(
-				OnePObjectMap.PUBLONS_LOGIN_PAGE_REGISTER_LINK_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.PUBLONS_LOGIN_PAGE_REGISTER_LINK_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.PUBLONS_LOGIN_PAGE_REGISTER_LINK_CSS);
 	}
 
 	public void emailTextBox() throws Exception {
-		waitForElementTobeVisible(
-				ob,
-				By.cssSelector(OnePObjectMap.PUBLONS_REGISTER_PAGE_EMAIL_TEXTBOX_CSS
-						.toString()), 30);
-		ob.findElement(
-				By.name(OnePObjectMap.PUBLONS_REGISTER_PAGE_EMAIL_TEXTBOX_CSS
-						.toString())).click();
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.PUBLONS_REGISTER_PAGE_EMAIL_TEXTBOX_CSS.toString()),
+				30);
+		ob.findElement(By.name(OnePObjectMap.PUBLONS_REGISTER_PAGE_EMAIL_TEXTBOX_CSS.toString())).click();
 
 		/*
-		 * pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap
-		 * .PUBLONS_REGISTER_PAGE_EMAIL_TEXTBOX_CSS);
+		 * pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
+		 * OnePObjectMap .PUBLONS_REGISTER_PAGE_EMAIL_TEXTBOX_CSS);
 		 * pf.getBrowserActionInstance
 		 * (ob).jsClick(OnePObjectMap.PUBLONS_REGISTER_PAGE_EMAIL_TEXTBOX_CSS);
 		 */
@@ -157,10 +121,8 @@ public class PUBLONSPage extends TestBase {
 	}
 
 	public void clickPasswordTextBox() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
-				OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH);
-		pf.getBrowserActionInstance(ob).jsClick(
-				OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH);
 
 	}
 
@@ -186,12 +148,10 @@ public class PUBLONSPage extends TestBase {
 	 */
 
 	public void checkPrepopulatedText(String email) throws Exception {
-		waitForElementTobeVisible(ob,
-				By.xpath(OR.getProperty("loginpage_email_textbox")), 30);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("loginpage_email_textbox")), 30);
 		JavascriptExecutor js = (JavascriptExecutor) ob;
-		String populatText = (String) (js.executeScript(
-				"return arguments[0].value", ob.findElement(By.xpath(OR
-						.getProperty("loginpage_email_textbox".toString())))));
+		String populatText = (String) (js.executeScript("return arguments[0].value",
+				ob.findElement(By.xpath(OR.getProperty("loginpage_email_textbox".toString())))));
 		logger.info("PopulatText--->" + populatText);
 
 		/*
@@ -207,27 +167,20 @@ public class PUBLONSPage extends TestBase {
 	}
 
 	public void moveToAccountSettingPage() throws Exception {
-		waitForAllElementsToBePresent(
-				ob,
-				By.cssSelector(OnePObjectMap.PUBLONS_LOGIN_PAGE_ACCOUNT_PROFILE_IMAGE_CSS
-						.toString()), 30);
-		ob.findElement(
-				By.cssSelector(OnePObjectMap.PUBLONS_LOGIN_PAGE_ACCOUNT_PROFILE_IMAGE_CSS
-						.toString())).click();
-		waitForElementTobeClickable(
-				ob,
-				By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_BUTTON_IN_PROFILE_PAGE
-						.toString()), 30);
-		ob.findElement(
-				By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_BUTTON_IN_PROFILE_PAGE
-						.toString())).click();
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.PUBLONS_LOGIN_PAGE_ACCOUNT_PROFILE_IMAGE_CSS.toString()), 30);
+		ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_LOGIN_PAGE_ACCOUNT_PROFILE_IMAGE_CSS.toString())).click();
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_BUTTON_IN_PROFILE_PAGE.toString()),
+				30);
+		ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_BUTTON_IN_PROFILE_PAGE.toString())).click();
 	}
 
 	public void clickOnReruiredTab(String tabvalue) throws Exception {
 
 	}
 
-	ArrayList<String> al=new ArrayList<String>();
+	ArrayList<String> al = new ArrayList<String>();
+
 	public void windowHandle() {
 
 		Set<String> myset = ob.getWindowHandles();
@@ -240,15 +193,15 @@ public class PUBLONSPage extends TestBase {
 		ob.switchTo().window(al.get(1));
 
 	}
-	
+
 	public void navigateMainWindow() {
-		
+
 		ob.switchTo().window(al.get(0));
 	}
 
 	public void clickTab(String string) {
-		List<WebElement> list1 = ob.findElements(By
-				.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_LIST_OF_LINKS_CSS.toString()));
+		List<WebElement> list1 = ob
+				.findElements(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_LIST_OF_LINKS_CSS.toString()));
 
 		for (WebElement we : list1)
 
@@ -268,18 +221,14 @@ public class PUBLONSPage extends TestBase {
 			ob.get("https://www.guerrillamail.com");
 			waitUntilText("Please verify your", "Project Neon Account");
 			// BrowserWaits.waitTime(22);
-			waitForElementTobeVisible(ob,
-					By.xpath(OR.getProperty("email_list")), 30);
-			List<WebElement> email_list = ob.findElements(By.xpath(OR
-					.getProperty("email_list")));
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
+			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 			WebElement myE = email_list.get(0);
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
 			executor.executeScript("arguments[0].click();", myE);
 			// BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob,
-					By.xpath(OR.getProperty("email_body")), 30);
-			WebElement email_body = ob.findElement(By.xpath(OR
-					.getProperty("email_body")));
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
+			WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
 			List<WebElement> links = email_body.findElements(By.tagName("a"));
 
 			ob.get(links.get(0).getAttribute("href"));
@@ -287,15 +236,56 @@ public class PUBLONSPage extends TestBase {
 
 		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(
-					LogStatus.FAIL,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this
-									.getClass().getSimpleName()
-									+ "_user_not_registered")));// screenshot
+			test.log(LogStatus.FAIL, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
 			closeBrowser();
 			return false;
 		}
 		return true;
+	}
+
+	public void checkPrepopulatedText_login(String email) throws Exception {
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("loginpage_email_textbox")), 30);
+		JavascriptExecutor js = (JavascriptExecutor) ob;
+		String populatText = (String) (js.executeScript("return arguments[0].value",
+				ob.findElement(By.xpath(OR.getProperty("loginpage_email_textbox".toString())))));
+		logger.info("PopulatText--->" + populatText);
+		logger.info("email--->" + email);
+		Assert.assertEquals(email, populatText);
+	}
+
+	public void switchToWindow(int index) {
+
+		String WindowId = null;
+		Set<String> handler = ob.getWindowHandles();
+		Iterator<String> It = handler.iterator();
+
+		for (int i = 1; i <= index; i++) {
+			WindowId = It.next();
+		}
+		ob.switchTo().window(WindowId);
+	}
+
+	public void checkPrepopulatedText_Register(String Email) throws Exception {
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("regpage_email_textbox")), 30);
+		JavascriptExecutor js = (JavascriptExecutor) ob;
+		String PopulatText = (String) (js.executeScript("return arguments[0].value",
+				ob.findElement(By.xpath(OR.getProperty("regpage_email_textbox".toString())))));
+		logger.info("PopulatText--->" + PopulatText);
+		logger.info("email--->" + Email);
+		Assert.assertEquals(Email, PopulatText);
+	}
+
+	public void Reg_email_propopulated() {
+		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css")))
+				.sendKeys("fhyvvi+bxgo5pgubqr8g@sharklasers.com");
+		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_password_css"))).sendKeys("test1ng");
+		ob.findElement(By.xpath(OR.getProperty("Signin_button"))).click();
+		waitUntilText("Invalid email/password. Please try again.");
+		String email_error = ob.findElement(By.xpath(OR.getProperty("Signin_email_error"))).getText();
+		logger.info("Invalid email error --->" + email_error);
+		Assert.assertEquals("Invalid email/password. Please try again.", email_error);
+		ob.findElement(By.xpath(OR.getProperty("reg_button"))).click();
+
 	}
 }

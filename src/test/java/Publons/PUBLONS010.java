@@ -55,30 +55,18 @@ public class PUBLONS010 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host);
 			pf.getPubPage(ob).clickRegisterLink();
-			// waitForElementTobeVisible(ob, By.name("signup_email_texbox"),30);
+			//waitForElementTobeVisible(ob, By.name("signup_email_texbox"),30);
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys("trloginid@gmail.com");
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
 			waitUntilText("Your email address is already registered. Please sign in.");
-
+			//error message
 			String error_message = ob.findElement(By.xpath(OR.getProperty("reg_error_email"))).getText();
 			logger.info("Error Message : " + error_message);
 			Assert.assertEquals("Your email address is already registered. Please sign in.", error_message);
 			test.log(LogStatus.PASS, "Error text is correct");// extent reports
-
-			// String error_email = ob.findElement(By.xpath(""))
-
-			// String login_mail =
-			// ob.findElement(By.xpath("//form[@id='loginUser']//input[@aria-label='Email
-			// address']")).getText();
-			// logger.info("login mail :" +login_mail);
-			// waitForElementTobeVisible(ob,
-			// By.xpath("//form[@id='loginUser']//input[@aria-label='Email
-			// address']"),30);
-			// pf.getPubPage(ob).checkAlreadyUsedMail("Your email address is
-			// already registered. Please sign in.");
-			// test.log(LogStatus.PASS, "Error message populated");
-
-			pf.getPubPage(ob).checkPrepopulatedText("trloginid@gmail.com");
+			
+			//Email populated in signin page
+			pf.getPubPage(ob).checkPrepopulatedText_login("trloginid@gmail.com");
 			test.log(LogStatus.PASS, "Correct email id Populated in Sign in page");
 			closeBrowser();
 
