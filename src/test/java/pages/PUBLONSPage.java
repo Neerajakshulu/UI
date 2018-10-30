@@ -220,7 +220,7 @@ public class PUBLONSPage extends TestBase {
 	public boolean userVerification() throws Exception {
 		try {
 			// BrowserWaits.waitTime(3);
-			ob.get("https://www.guerrillamail.com");
+			//ob.get("https://www.guerrillamail.com");
 			waitUntilText("Please verify your", "Project Neon Account");
 			// BrowserWaits.waitTime(22);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
@@ -320,6 +320,19 @@ public class PUBLONSPage extends TestBase {
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
 		}
+	}
+	
+	public void moveToSpecificWindow(int index) {
+
+		Set<String> myset = ob.getWindowHandles();
+		Iterator<String> myIT = myset.iterator();
+		for (int i = 0; i < myset.size(); i++) {
+
+			al.add(myIT.next());
+		}
+
+		ob.switchTo().window(al.get(index));
+
 	}
 
 }

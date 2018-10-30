@@ -1,7 +1,10 @@
 package Publons;
 
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +17,7 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -61,17 +65,27 @@ public class PUBLONS031 extends TestBase {
 			clearCookies();
 			pf.getIamPage(ob).openGurillaMail();
 			String email=pf.getIamPage(ob).getEmail();
+			
+			Robot robot = new Robot();                          
+			robot.keyPress(KeyEvent.VK_CONTROL); 
+			robot.keyPress(KeyEvent.VK_T); 
+			robot.keyRelease(KeyEvent.VK_CONTROL); 
+			robot.keyRelease(KeyEvent.VK_T);
+			ArrayList<String> tabs = new ArrayList<String>(ob.getWindowHandles());
+			ob.switchTo().window(tabs.get(1));
 			ob.navigate().to(host);
 			pf.getIamPage(ob).login(userName, pass);
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Newsfeed",
 					"Watchlists", "Groups");
 			pf.getPubPage(ob).moveToAccountSettingPage();
-			pf.getPubPage(ob).windowHandle();
+			pf.getPubPage(ob).moveToSpecificWindow(2);
 			pf.getPubPage(ob).clickTab("email");
 			ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADD_EMIAL_LINK_CSS.toString())).click();
 			ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_LABEL.toString())).click();
 			ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_LABEL.toString())).sendKeys(email);
 			ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_SUBMIT_BUTTON_CSS.toString())).click();
+			pf.getPubPage(ob).moveToSpecificWindow(0);
+			//ob.navigate().refresh();
 		    pf.getPubPage(ob).userVerification();
 		  
 			
