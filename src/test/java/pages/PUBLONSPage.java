@@ -11,10 +11,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.BrowserWaits;
+import util.ErrorUtil;
 import util.OnePObjectMap;
 
 public class PUBLONSPage extends TestBase {
@@ -288,4 +290,36 @@ public class PUBLONSPage extends TestBase {
 		ob.findElement(By.xpath(OR.getProperty("reg_button"))).click();
 
 	}
+	public void linkAccount(String steamPassword) throws Exception{
+		waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_PASSWORD_TEXT_XPATH.toString()), 60);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_PASSWORD_TEXT_XPATH, steamPassword);
+		waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_SIGNIN_BUTTON_XPATH.toString()), 60);
+		//jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_SIGNIN_BUTTON_XPATH.toString())));
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_SIGNIN_BUTTON_XPATH);
+		moveToAccountSettingPage();
+		windowHandle();
+		clickTab("Connected accounts");
+		Thread.sleep(3000);
+	}
+	public void verifyLinkedAccounts(String emailid, int accountCount,ExtentTest test) throws Exception {
+		try {
+			waitForAllElementsToBePresent(ob, By.cssSelector("span[class='ng-binding ng-scope']"), 60);
+			List<WebElement> list = ob.findElements(By.cssSelector("span[class='ng-binding ng-scope']"));
+			Assert.assertEquals(accountCount, list.size(),"Account count is not matching in connected tab.");
+			for(WebElement el1:list){
+				String str1=el1.getText();
+				Assert.assertEquals(str1, emailid);
+					}
+			ob.close();
+			test.log(LogStatus.PASS,"Linked accounts are available in connected page : Facebook and STeAM accounts");
+			
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL,
+					"Linked accounts are not available in connected page : Facebook and STeAM accounts");
+			ErrorUtil.addVerificationFailure(t);// testng
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
+		}
+	}
+
 }

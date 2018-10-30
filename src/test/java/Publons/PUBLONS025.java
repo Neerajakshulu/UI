@@ -61,8 +61,8 @@ public class PUBLONS025 extends TestBase{
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 		try {
-			//String usertrueid="5756b449-594e-4a75-8c9b-14a7c250d7c6";
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
+			String usertrueid="5756b449-594e-4a75-8c9b-14a7c250d7c6";
+			String statuCode = delinkUserAccounts(usertrueid);
 
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
@@ -89,11 +89,47 @@ public class PUBLONS025 extends TestBase{
 						ob.navigate().to(host);
 						pf.getPubPage(ob).loginWithFBCredentialsWithOutLinking(LOGIN.getProperty("UserFBENWIAM80"), LOGIN.getProperty("PWDUserFBENWIAM80"));	
 					   // Verify Linking model.
-						
+						String expectedText1="Already have an account?";
+						String expectedText2="Your email address";
+						String expectedEmail="test_wnqvjum_user@tfbnw.net,";
+						waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_TEXT1_XPATH.toString()), 60);
+						String str1=
+								ob.findElement(By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_TEXT1_XPATH.toString())).getText();
+						waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_TEXT2_XPATH.toString()), 60);
+						String str2=
+								ob.findElement(By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_TEXT2_XPATH.toString())).getText();
+						waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_EMAIL_XPATH.toString()), 60);
+						String useremail=
+								ob.findElement(By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_EMAIL_XPATH.toString())).getText();
+						 if(expectedText1.equalsIgnoreCase(str1)
+								 && useremail.equalsIgnoreCase(expectedEmail) && str2.contains(expectedText2) )
+						 {
+							 test.log(LogStatus.PASS,"Linking Model has been seen. and all text present on linking model.");
+						 }
+						 else{
+							 test.log(LogStatus.PASS,"Linking Model has not been seen or text present on linking model is not matching.");
+						 }
+						 //Enter Password on linking model and click on SignIn.
+						 pf.getPubPage(ob).linkAccount(LOGIN.getProperty("PWDUserFBENWIAM80"));
+						 pf.getPubPage(ob).verifyLinkedAccounts(LOGIN.getProperty("UserFBENWIAM80"),2,test);
+						 pf.getPubPage(ob).navigateMainWindow();
+						 pf.getLoginTRInstance(ob).logOutApp();
+						 
+						 // Now Verify Once Account linked then second tie user will not challenged linking model.
+						 try{
+							 pf.getPubPage(ob).loginPublonsAccont(LOGIN.getProperty("UserFBENWIAM80"),LOGIN.getProperty("PWDUserFBENWIAM80"));
+							 pf.getLoginTRInstance(ob).logOutApp();
+							 test.log(LogStatus.PASS,"Once account linked then second time user not see the linking model.");
+						 }
+						 catch(Throwable t){
+							 t.printStackTrace();
+							 test.log(LogStatus.PASS,"After account linked User not able to login.");
+						 }
 					}
-					catch(Exception e){	
+					finally{	
+						closeBrowser();	
 					}	
-				closeBrowser();
+				
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 			// reports

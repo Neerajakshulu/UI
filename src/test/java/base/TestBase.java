@@ -2174,6 +2174,33 @@ public class TestBase {
 		return String.valueOf(resp.getStatusCode());
 
 	}
+	public String delinkUserAccounts(String usertrueid) throws Exception {
+
+		String local = null;
+		if (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) {
+			local = "N";
+		} else {
+			local = "Y";
+		}
+		if (host.contains("stable")) {
+			getAllAppHostsForGivenEnv(
+					"http://eureka.us-west-2.dev.oneplatform.build:8080/v2/apps",
+					"1p.stable.dev", local);
+		} else {
+			getAllAppHostsForGivenEnv(
+					"http://eureka.us-west-2.dev.oneplatform.build:8080/v2/apps",
+					"1p.snapshot.dev", local);
+		}
+
+		RequestSpecification reqSpec = given();
+		Response resp;
+		logger.info("host name-->" + appHosts.get("1PAUTH"));
+		resp = reqSpec.when()
+				.delete(appHosts.get("1PAUTH") + "/email/accounts/"
+						+ usertrueid);
+		return String.valueOf(resp.getStatusCode());
+
+	}
 
 	public String createENWNewUser(String first_name, String last_name)
 			throws Exception {

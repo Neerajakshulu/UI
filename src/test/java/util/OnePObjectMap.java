@@ -1515,7 +1515,7 @@ public enum OnePObjectMap {
 	PUBLONS_ACCOUNT_LINKING_MODEL_TEXT1_XPATH("//h3[@class='wui-modal__title']"),
 	PUBLONS_ACCOUNT_LINKING_MODEL_TEXT2_XPATH("//p[text()='Your email address, ']"),
 	PUBLONS_ACCOUNT_LINKING_MODEL_EMAIL_XPATH("//span[@class='wui-modal__email ng-binding']"),
-	PUBLONS_ACCOUNT_LINKING_MODEL_PASSWORD_TEXT_XPATH("//input[@name='steamPassword']"),
+	PUBLONS_ACCOUNT_LINKING_MODEL_PASSWORD_TEXT_XPATH("//div[@class='wui-material-input']/input"),
 	PUBLONS_ACCOUNT_LINKING_MODEL_SIGNIN_BUTTON_XPATH("//button[@class='wui-btn wui-btn--primary wui-btn--modal-footer button-color-secondary']"),
 			
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_XPATH("//input[@name='oldPassword']//following::label"),
