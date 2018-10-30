@@ -258,7 +258,6 @@ public class PUBLONSPage extends TestBase {
 			List<WebElement> links = email_body.findElements(By.tagName("a"));
 
 			ob.get(links.get(0).getAttribute("href"));
-			waitUntilText("Account sign in & security");
 
 		} catch (Throwable t) {
 			t.printStackTrace();
@@ -357,6 +356,16 @@ public class PUBLONSPage extends TestBase {
 
 		ob.switchTo().window(al.get(index));
 
+	}
+	
+	public void connectAccount(String name){
+		List<WebElement> list=ob.findElements(By.cssSelector("div[class='col-xs-12 account-option-item ng-scope']"));
+		for(WebElement web:list){
+			String str=web.findElement(By.tagName("div")).getText();
+			if(str.contains(name)){
+				web.findElements(By.tagName("div")).get(1).getText();
+			}
+		}
 	}
 
 }
