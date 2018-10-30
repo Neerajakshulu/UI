@@ -201,7 +201,7 @@ public class PUBLONS016 extends TestBase {
 						.startTest(
 								"OPQA-4246",
 								"Verify that when Email address is known from password reset token,error message 'The email address is prepopulated.' should be displayed and email address field should be editable")
-						.assignCategory("IAM");
+						.assignCategory("PUBLONS");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName()
 						+ " execution start");
 				ob.navigate().to(host);
@@ -238,7 +238,7 @@ public class PUBLONS016 extends TestBase {
 						.startTest(
 								"OPQA-5837",
 								"Verify that when Email address is not known from password reset token,email address field should be blank and user should be able to enter any email address")
-						.assignCategory("IAM");
+						.assignCategory("PUBLONS");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName()
 						+ " execution start");
 				pf.getIamPage(ob).clickForgotPasswordLink();
@@ -271,7 +271,7 @@ public class PUBLONS016 extends TestBase {
 				test = extent
 						.startTest("OPQA-5838",
 								"Verify that error message Please enter a valid email address.should be displayed in red color when user enters email address in wrong format")
-						.assignCategory("IAM");
+						.assignCategory("PUBLONS");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).sendEamilToTextBox("abcd.com");
@@ -300,7 +300,7 @@ public class PUBLONS016 extends TestBase {
 				test = extent
 						.startTest("OPQA-5841",
 								"Verify that Cancel link working in forgot password page")
-						.assignCategory("IAM");
+						.assignCategory("PUBLONS");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).clickCancelButton();
