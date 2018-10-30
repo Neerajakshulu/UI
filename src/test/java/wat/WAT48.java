@@ -65,9 +65,9 @@ public class WAT48 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Login to WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			ob.navigate().to(host);
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
+			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -88,7 +88,7 @@ public class WAT48 extends TestBase {
 	public void testOrcidSearch() throws Exception {
 		String example_orcid = "E.g., 0000-0001-5727-2427";
 		try {
-			pf.getSearchAuthClusterPage(ob).orcidSearch(example_orcid, test);
+			pf.getSearchAuthClusterPage(ob).orcidSearch(test);
 
 		} catch (Exception e) {
 			logFailureDetails(test, e, "Issue in orcid search page", "orcid_issue");

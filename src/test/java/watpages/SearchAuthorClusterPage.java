@@ -1522,7 +1522,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		test.log(LogStatus.PASS, "ORCiD logo present");
 
 		Assert.assertTrue(
-				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH).isDisplayed());
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOX_XPATH).isDisplayed());
 		test.log(LogStatus.PASS, "ORCiD text box present");
 
 		Assert.assertEquals(
@@ -1530,12 +1530,28 @@ public class SearchAuthorClusterPage extends TestBase {
 				orcid_Welcome_text, "Welcome text not matching");
 		test.log(LogStatus.PASS, "Welcome text matching");
 
-		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH)
+		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOX_XPATH)
 				.getAttribute("placeholder").equals(example_orcid)) {
 			test.log(LogStatus.PASS, "Example text is displayed for orcid field");
 		} else {
 			throw new Exception("Example text is not displayed for orcid field");
 		}
+	}
+	
+	public void orcidSearch(ExtentTest test) throws Exception {
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
+		test.log(LogStatus.INFO, "ResearcherID or ORCID Search Button clicked");
+
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_TEXTBOX_LAVEL_XPATH);
+
+		Assert.assertTrue(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOX_LAVEL_XPATH).isDisplayed());
+		test.log(LogStatus.PASS, "ResearcherID or ORCID Search lavel present.");
+
+		Assert.assertTrue(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOX_XPATH).isDisplayed());
+		test.log(LogStatus.PASS, "ResearcherID or ORCID text box present.");
 	}
 
 	public void findButtonFunctionalityORCIDSearch(ExtentTest test) throws Exception {
@@ -1573,7 +1589,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
 		test.log(LogStatus.INFO, "ORCiD logo present");
 
-		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH).sendKeys(InvalidORCid);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOX_XPATH).sendKeys(InvalidORCid);
 		// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH);
 		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH).isDisplayed()) {
@@ -1595,7 +1611,7 @@ public class SearchAuthorClusterPage extends TestBase {
 
 		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
 		test.log(LogStatus.INFO, "ORCiD logo present");
-		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH).sendKeys(ORCid);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOX_XPATH).sendKeys(ORCid);
 		BrowserWaits.waitTime(2);
 		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH)
 				.isEnabled()) {
@@ -1626,7 +1642,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
 		test.log(LogStatus.INFO, "ORCiD logo present");
 
-		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH).sendKeys(InvalidORCid);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOX_XPATH).sendKeys(InvalidORCid);
 		// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH);
 		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH).isDisplayed()) {
@@ -1653,7 +1669,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH, orcid);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_ORCID_TEXTBOX_XPATH, orcid);
 		waitForAjax(ob);
 		boolean findButtonStatus = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH).isEnabled();
@@ -1802,9 +1818,9 @@ public class SearchAuthorClusterPage extends TestBase {
 			throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH);
-		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_ORCID_TEXTBOC_XPATH, invalidORCiD);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_TEXTBOX_XPATH);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.WAT_ORCID_TEXTBOX_XPATH);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_ORCID_TEXTBOX_XPATH, invalidORCiD);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_POPOVER_POPUP_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH);
 		String orcidErrMsg = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH)
