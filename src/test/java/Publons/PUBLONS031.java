@@ -1,31 +1,29 @@
 package Publons;
 
+import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
-import com.relevantcodes.extentreports.LogStatus;
-
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import base.TestBase;
 
+import com.relevantcodes.extentreports.LogStatus;
+
 public class PUBLONS031 extends TestBase {
 
 	static int status = 1;
+	Robot robot;
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -64,14 +62,11 @@ public class PUBLONS031 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			pf.getIamPage(ob).openGurillaMail();
-			String email=pf.getIamPage(ob).getEmail();
-			
-			Robot robot = new Robot();                          
-			robot.keyPress(KeyEvent.VK_CONTROL); 
-			robot.keyPress(KeyEvent.VK_T); 
-			robot.keyRelease(KeyEvent.VK_CONTROL); 
-			robot.keyRelease(KeyEvent.VK_T);
-			ArrayList<String> tabs = new ArrayList<String>(ob.getWindowHandles());
+			String email = pf.getIamPage(ob).getEmail();
+
+			openNewWindow();
+			ArrayList<String> tabs = new ArrayList<String>(
+					ob.getWindowHandles());
 			ob.switchTo().window(tabs.get(1));
 			ob.navigate().to(host);
 			pf.getIamPage(ob).login(userName, pass);
@@ -80,16 +75,42 @@ public class PUBLONS031 extends TestBase {
 			pf.getPubPage(ob).moveToAccountSettingPage();
 			pf.getPubPage(ob).moveToSpecificWindow(2);
 			pf.getPubPage(ob).clickTab("email");
-			ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADD_EMIAL_LINK_CSS.toString())).click();
-			ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_LABEL.toString())).click();
-			ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_LABEL.toString())).sendKeys(email);
-			ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_SUBMIT_BUTTON_CSS.toString())).click();
+			List<WebElement> list1 = ob.findElements(By
+					.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_LIST_OF_EMAILS_CSS.toString()));
+			ob.findElement(
+					By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADD_EMIAL_LINK_CSS
+							.toString())).click();
+			ob.findElement(
+					By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_LABEL
+							.toString())).click();
+			ob.findElement(
+					By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_CANCEL_BUTTON_CSS
+							.toString())).click();
+			test.log(LogStatus.PASS,
+					"Cancel Button is working");
+			ob.findElement(
+					By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADD_EMIAL_LINK_CSS
+							.toString())).click();
+			ob.findElement(
+					By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_LABEL
+							.toString())).click();
+			ob.findElement(
+					By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_LABEL
+							.toString())).sendKeys(email);
+			ob.findElement(
+					By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_ADDING_EMAIL_ADDRESS_SUBMIT_BUTTON_CSS
+							.toString())).click();
+			test.log(LogStatus.PASS,
+					"Submit Button is clicked to add new account");
+			List<WebElement> list2 = ob.findElements(By
+					.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_SETTING_PAGE_LIST_OF_EMAILS_CSS.toString()));
+			if (list2.size() == list1.size() + 1)
+				test.log(LogStatus.PASS,
+						"Alias Email account is added in account setting page");
+			else
+				test.log(LogStatus.FAIL,"There is an issue in adding alias account in account setting page");
 			pf.getPubPage(ob).moveToSpecificWindow(0);
-			//ob.navigate().refresh();
-		    pf.getPubPage(ob).userVerification();
-		  
-			
-			
+			pf.getPubPage(ob).userVerification();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -111,6 +132,14 @@ public class PUBLONS031 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName()
 				+ " execution ends--->");
+	}
+
+	public void openNewWindow() throws AWTException {
+		robot = new Robot();
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_T);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyRelease(KeyEvent.VK_T);
 	}
 
 	@AfterTest
