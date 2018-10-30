@@ -1315,13 +1315,11 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_TOP_PUBLICATIONS_CSS("div[ng-repeat='publication in vm.publications track by $index'][class='ng-scope']"),
 	WAT_SEARCH_RESULTS_TAB_HIGHLIGHT_XPATH("//span[text()='Search Results']/ancestor::li"),
 
-	WAT_ORCID_SEARCH_BTN_XPATH("//span[text()='ORCiD search']"),
+	
 	WAT_ORCID_LOGO_XPATH("//div[@class='wat-search__orcid-logo']"),
-	WAT_ORCID_TEXTBOC_XPATH("//input[@class='wui-material-input__input-field ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required ng-valid-pattern']"),
 	WAT_ORCID_SEARCH_WELCOME_TEXT_XPATH("//p[contains(text(),'Enter the author')]"),
 	// WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH("//button[@ng-click='vm.findOrcidClusters()' and
 	// text()[normalize-space() = 'Find']]"),
-	WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH("//div[@class='col-xs-offset-2 col-xs-8']/descendant::button[@ng-disabled='vm.disableFindButton[vm.SEARCH.VIEW.ORCID]']"),
 	WAT_ORCID_SEARCH_ERROR_TEXT_XPATH("//span[@class='ng-scope']"),
 	WAT_ORCID_TO_NAME_SEARCH_LINK_XPATH("//button[text()='Name search']"),
 
@@ -1527,6 +1525,11 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_STRING_XPATH("//h2[@class='wui-title wat-search-results-count ng-binding ng-scope']"),
 	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_TIMESCITED_XPATH("//div[@class='wat-author-record__metrics-item-column'][2]/child::div"),
 	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_HINDEX_XPATH("//div[@class='wat-author-record__metrics-item-column'][1]/child::div"),
+	WAT_ORCID_SEARCH_BTN_XPATH("//span[text()='ResearcherID or ORCID Search']"),
+	WAT_ORCID_TEXTBOX_LAVEL_XPATH("//div[@class='wat-search__field-group']//label[@class='wui-material-input__label']"),
+	WAT_ORCID_TEXTBOX_XPATH("//input[@id='orcid']"),
+	WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH("//div[@class='wat-search-content-st']/descendant::button[@ng-disabled='vm.disableFindButton[vm.SEARCH.VIEW.ORCID]']"),
+
 	;
 
 	private String locator;
