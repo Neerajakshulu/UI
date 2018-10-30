@@ -102,5 +102,10 @@
 			<class name="Publons.PUBLONS021"></class>
 		</classes>
 	</test> 
+	<test name="Publon_Add_Alias_Account">
+		<classes>
+			<class name="Publons.PUBLONS031"></class>
+		</classes>
+	</test> 
 	
 </suite>
