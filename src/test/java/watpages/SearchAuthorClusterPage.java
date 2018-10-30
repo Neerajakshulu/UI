@@ -1770,13 +1770,13 @@ public class SearchAuthorClusterPage extends TestBase {
 	public void RIDSearch(String rid, ExtentTest test) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_RID_SEARCH_BTN_XPATH);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_RID_SEARCH_BTN_XPATH);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_RID_TEXTBOC_XPATH);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_RID_TEXTBOC_XPATH, rid);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_RID_TEXTBOC_ID);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_RID_TEXTBOC_ID, rid);
 		waitForAjax(ob);
 		boolean findButtonStatus = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_RID_FIND_BTN_XPATH).isEnabled();
+				.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_RID_FIND_BTN1_XPATH).isEnabled();
 		if (findButtonStatus) {
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_RID_FIND_BTN_XPATH);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_RID_FIND_BTN1_XPATH);
 		} else {
 			throw new Exception("FIND button is disabled for valid RID Search");
 		}
