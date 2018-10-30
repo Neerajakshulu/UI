@@ -11,11 +11,6 @@
 			<class name="Publons.PUBLONS001"></class>
 		</classes>
 	</test>
-	<test name="Publon_Email_format">
-		<classes>
-			<class name="Publons.PUBLONS002"></class>
-		</classes>
-	</test>
 	<test name="Publon_Email_Field_Empty_Error_Message">
 		<classes>
 			<class name="Publons.PUBLONS003"></class>
