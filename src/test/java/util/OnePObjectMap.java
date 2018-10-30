@@ -518,15 +518,20 @@ public enum OnePObjectMap {
 	LOGIN_PAGE_GMAIL_SIGN_IN_PASSWORD_TEXT_NAME("Passwd"),
 	LOGIN_PAGE_GMAIL_SIGN_IN_SIGNIN_BUTTON_NAME("signIn"),
 	LOGIN_PAGE_GMAIL_SIGN_IN_ACCESS_BUTTON_ID("submit_approve_access"),
+	LOGIN_PAGE_LINKEDLN_SIGN_IN_BUTTON_CSS("i[class='fa fa-linkedin share-menu-icon']"),
+	
+	
 	PUBLONS_BLOCKED_PAGE_ERROR_MESSAGE_XPATH("//h2[text()='Your account has been locked.']"),
 	PUBLONS_BLOCKED_PAGE_ERROR_MESSAGE_AFTER30MIN_XPATH("//p[text()='Please try again in 30 minutes.']"),
 	
 	
 	LOGIN_PAGE_GMAIL_EMAIL_TEXT_BOX_ID("identifierId"),
 	LOGIN_PAGE_GMAIL_EMAIL_NEXT_BUTTON_XPATH("//span[text()='Next']"),
-	LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID("session_key"),
-	LOGIN_PAGE_LI_PASSWORD_TEXT_BOX_ID("session_password"),
+	LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID("session_key-login"),
+	LOGIN_PAGE_LI_PASSWORD_TEXT_BOX_ID("session_password-login"),
 	LOGIN_PAGE_LI_ALLOW_ACCESS_BUTTON_ID("authorize"),
+	LOGIN_PAGE_LI_EMAIL_TEXT_BOX_SIGNIN_ID("btn-primary"),
+	LOGIN_PAGE_LI_ALLOW_ACCESS_BTN_ID("oauth__auth-form__submit-btn"),
 	LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID("m_login_email"),
 	LOGIN_PAGE_FB_EMAIL_TEXT_BOX_NAME("email"),
 	LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID("pass"),

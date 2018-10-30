@@ -53,7 +53,31 @@ public class PUBLONSPage extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_NAME);
 
 	}
+	// ===================================================================================
+		/**
+		 * Method for Login shared platform application using Linkedln valid login
+		 * credentials
+		 * 
+		 * @param username
+		 * @param pwd
+		 * @throws InterruptedException
+		 * @throws Exception
+		 *             , When user is not able to login using LN.
+		 */
+		public void loginWithLinkedlnCredentialsWithOutLinking(String username, String pwd) throws Exception {
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_LINKEDLN_SIGN_IN_BUTTON_CSS);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_LINKEDLN_SIGN_IN_BUTTON_CSS);
 
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID);
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID, username);
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_LI_PASSWORD_TEXT_BOX_ID, pwd);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_SIGNIN_ID);
+			
+			pf.getBrowserWaitsInstance(ob)
+			.waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_LI_ALLOW_ACCESS_BTN_ID);
+	        pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_LI_ALLOW_ACCESS_BTN_ID);
+
+		}
 	// ===================================================================================
 	/**
 	 * Method for Login shared platform application using Gmail valid login
@@ -311,11 +335,11 @@ public class PUBLONSPage extends TestBase {
 				Assert.assertEquals(str1, emailid);
 					}
 			ob.close();
-			test.log(LogStatus.PASS,"Linked accounts are available in connected page : Facebook and STeAM accounts");
+			test.log(LogStatus.PASS,"Linked accounts are available in connected page.");
 			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,
-					"Linked accounts are not available in connected page : Facebook and STeAM accounts");
+					"Linked accounts are not available in connected page.");
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
