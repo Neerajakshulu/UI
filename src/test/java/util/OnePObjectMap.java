@@ -1323,10 +1323,11 @@ public enum OnePObjectMap {
 	WAT_ORCID_SEARCH_ERROR_TEXT_XPATH("//span[@class='ng-scope']"),
 	WAT_ORCID_TO_NAME_SEARCH_LINK_XPATH("//button[text()='Name search']"),
 
-	WAT_RID_SEARCH_BTN_XPATH("//span[text()='ResearcherID search']"),
-	WAT_RID_TEXTBOC_XPATH("(//input[@class='wui-material-input__input-field ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required ng-valid-pattern'])[2]"),
-	WAT_AUTHOR_SEARCH_BY_RID_FIND_BTN_XPATH("//div[@class='col-xs-offset-2 col-xs-8']/descendant::button[@ng-disabled='vm.disableFindButton[vm.SEARCH.VIEW.RID]']"),
 
+	WAT_RID_TEXTBOC_XPATH("(//input[@class='wui-material-input__input-field ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required ng-valid-pattern'])[2]"),
+
+	WAT_AUTHOR_SEARCH_BY_RID_FIND_BTN_XPATH("//div[@class='col-xs-offset-2 col-xs-8']/descendant::button[@ng-disabled='vm.disableFindButton[vm.SEARCH.VIEW.RID]']"),
+	
 	GURILLA_LIST_EMAIL_WAT_PROJECT_TITLE_CSS("span[style*='color:#45749B;']"),
 	WAT_BRANDING_NAME_CSS("h3[class='wui-title login-header__app-name ng-binding']"),
 	WAT_SUPPORT_CONTACT_EMAIL_CSS("td[bgcolor='#ffffff'] span a"),
@@ -1529,7 +1530,9 @@ public enum OnePObjectMap {
 	WAT_ORCID_TEXTBOX_LAVEL_XPATH("//div[@class='wat-search__field-group']//label[@class='wui-material-input__label']"),
 	WAT_ORCID_TEXTBOX_XPATH("//input[@id='orcid']"),
 	WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH("//div[@class='wat-search-content-st']/descendant::button[@ng-disabled='vm.disableFindButton[vm.SEARCH.VIEW.ORCID]']"),
-
+	WAT_RID_SEARCH_BTN_XPATH("//span[text()='ResearcherID or ORCID Search']"),
+	WAT_RID_TEXTBOC_ID("orcid"),
+	WAT_AUTHOR_SEARCH_BY_RID_FIND_BTN1_XPATH("//button[@class='wui-btn wui-btn--primary']"),
 	;
 
 	private String locator;
