@@ -367,5 +367,17 @@ public class PUBLONSPage extends TestBase {
 			}
 		}
 	}
+	//=============================================================================
+	public void connectWithLN(String username, String pwd)throws Exception{
+		
+		waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_CONNECT_LINKEDLN_BUTTON_XPATH.toString()), 60);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.PUBLONS_CONNECT_LINKEDLN_BUTTON_XPATH);
+		
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID, username);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_LI_PASSWORD_TEXT_BOX_ID, pwd);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_SIGNIN_ID);
+
+	}
 
 }
