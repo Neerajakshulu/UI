@@ -274,7 +274,7 @@ public class AuthorRecordPage extends TestBase {
 		isTabDisabled = tabStatus.contains("disabled");
 		logger.info("Alternative names Tab Status : " + isTabDisabled);
 		logger.info("Actual Value : " + orgName);
-		if (!(orgName.equals("Organizations") && isTabDisabled)) {
+		if ((orgName.equals("Alternative names") && isTabDisabled)) {
 			throw new Exception("Alternative names tab displayed in active mode");
 		}
 	}

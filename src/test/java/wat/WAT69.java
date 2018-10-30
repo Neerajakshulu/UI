@@ -10,6 +10,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class WAT69 extends TestBase {
 
@@ -54,10 +55,8 @@ public class WAT69 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -79,10 +78,14 @@ public class WAT69 extends TestBase {
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, test);
+			test.log(LogStatus.INFO, "Clicking first author card");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);					
 			//pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
 			pf.getAuthorRecordPage(ob).checkAlternativenamesTabStatus();
 			test.log(LogStatus.PASS, "Alternativenames Tab should be disabled");
-			pf.getWatPageInstance(ob).logoutWAT();
+			//pf.getWatPageInstance(ob).logoutWAT();
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Alternativenames Tab should be disabled",
