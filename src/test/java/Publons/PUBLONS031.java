@@ -134,10 +134,10 @@ public class PUBLONS031 extends TestBase {
 			else
 			test.log(LogStatus.FAIL,"There is an issue in adding alias account in account setting page");
 			
-			for(int i=1;i<list2.size();i++){
-				if(list2.get(i).getText().equals(email)){
-					System.out.println(list2.get(i).getText());
-					list2.get(i).findElement(By.cssSelector("div[class='col-xs-1 text-center'] a")).click();
+			for(WebElement web:list2){
+				System.out.println(web.getText());
+				if(web.getText().contains(email)){
+					web.findElement(By.cssSelector("div[class='col-xs-1 text-center'] a")).click();
 				}
 			}
 			BrowserWaits.waitTime(2);

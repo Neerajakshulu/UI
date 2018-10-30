@@ -1522,7 +1522,7 @@ public enum OnePObjectMap {
 	PUBLONS_ACCOUNT_LINKING_MODEL_EMAIL_XPATH("//span[@class='wui-modal__email ng-binding']"),
 	PUBLONS_ACCOUNT_LINKING_MODEL_PASSWORD_TEXT_XPATH("//div[@class='wui-material-input']/input"),
 	PUBLONS_ACCOUNT_LINKING_MODEL_SIGNIN_BUTTON_XPATH("//button[@class='wui-btn wui-btn--primary wui-btn--modal-footer button-color-secondary']"),
-	PUBLONS_ACCOUNT_SETTING_PAGE_LIST_OF_EMAILS_CSS("div[class='col-xs-4 ng-binding']"),
+	PUBLONS_ACCOUNT_SETTING_PAGE_LIST_OF_EMAILS_CSS("div[class='col-xs-12 account-tabs__email-row divider-line']"),
 			
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_XPATH("//input[@name='oldPassword']//following::label"),
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_XPATH("//input[@name='newPassword']//following::label"),
