@@ -167,7 +167,7 @@ public class IAMPage extends TestBase {
 		WebElement element = ob.findElement(By.cssSelector(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_CSS.toString()));
 
 		List<WebElement> listOfElements = element.findElements(By.tagName("p"));
-		String resetPassText = element.findElement(By.tagName("h3")).getText();
+		String resetPassText = ob.findElement(By.tagName("h3")).getText();
 		// String resetPassText = listOfElements.get(0).getText();
 		logger.info("Title : " + resetPassText);
 		String newPassText = listOfElements.get(0).getText();

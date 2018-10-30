@@ -87,6 +87,11 @@
 			<class name="Publons.PUBLONS016"></class>
 		</classes>
 	</test>
+	<test name="Publon_Forgot_Password">
+		<classes>
+			<class name="Publons.PUBLONS018"></class>
+		</classes>
+	</test>
 	<test name="Publon_non-Verified_email_fn_ln_password">
 		<classes>
 			<class name="Publons.PUBLONS019"></class>
