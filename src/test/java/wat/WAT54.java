@@ -1,6 +1,8 @@
 package wat;
 
-import org.testng.SkipException;
+//Feature not present now, Hence disabling this test script
+
+/*import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -11,10 +13,10 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ExtentManager;
 
-/**
+*//**
  * Class for validate Help link under Profile Menu
  * @author UC202376
- */
+ *//*
 public class WAT54 extends TestBase {
 
 	static int count = -1;
@@ -23,13 +25,13 @@ public class WAT54 extends TestBase {
 	static boolean skip = false;
 	static int status = 1;
 
-	/**
+	*//**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
 	 * Reports
 	 * 
 	 * @throws Exception
 	 *             , When Something unexpected
-	 */
+	 *//*
 
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -38,12 +40,12 @@ public class WAT54 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("WAT");
 	}
 
-	/**
+	*//**
 	 * Method for login into Neon application using TR ID
 	 * 
 	 * @throws Exception
 	 *             , When TR Login is not done
-	 */
+	 *//*
 	@Test
 	@Parameters({"username","password"})
 	public void testLoginWATApp(String username,String password) throws Exception {
@@ -73,11 +75,11 @@ public class WAT54 extends TestBase {
 		}
 	}
 	
-	/**
+	*//**
 	 * Method for validate WAT Profile flyout links
 	 * @param proflieFlyoutLinks
 	 * @throws Exception, When Profile flyout links are not working 
-	 */
+	 *//*
 	@Test(dependsOnMethods = "testLoginWATApp")
 	@Parameters("proflieFlyoutLinks")
 	public void validateFlyoutLinks(String proflieFlyoutLinks) throws Exception {
@@ -100,3 +102,4 @@ public class WAT54 extends TestBase {
 	}
 
 }
+*/
