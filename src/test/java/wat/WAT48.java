@@ -16,7 +16,7 @@ import util.ExtentManager;
  * displayed with an example of orcid number
  * 
  * 
- * @author UC225218
+ * @author Amit
  *
  */
 public class WAT48 extends TestBase {
