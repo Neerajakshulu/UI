@@ -1555,17 +1555,11 @@ public class SearchAuthorClusterPage extends TestBase {
 	}
 
 	public void findButtonFunctionalityORCIDSearch(ExtentTest test) throws Exception {
-		// Verify whether control is in Author Search page
-		Assert.assertEquals(
-				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
-				wos_title, "Control is not in WOS Author Search page");
-		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
+		
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
+		test.log(LogStatus.INFO, "ResearcherID or ORCID Search Button clicked");
 
-		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
-		test.log(LogStatus.INFO, "ORCiD logo present");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_TEXTBOX_LAVEL_XPATH);
 
 		if (!pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH)
 				.isEnabled()) {

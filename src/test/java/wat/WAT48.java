@@ -86,8 +86,9 @@ public class WAT48 extends TestBase {
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	public void testOrcidSearch() throws Exception {
-		String example_orcid = "E.g., 0000-0001-5727-2427";
+		//String example_orcid = "E.g., 0000-0001-5727-2427";
 		try {
+			//pf.getSearchAuthClusterPage(ob).orcidSearch(example_orcid, test);
 			pf.getSearchAuthClusterPage(ob).orcidSearch(test);
 
 		} catch (Exception e) {
