@@ -10,6 +10,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class WAT81 extends TestBase {
 
@@ -54,10 +55,8 @@ public class WAT81 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -78,11 +77,11 @@ public class WAT81 extends TestBase {
 
 		try {
 			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(lastName, test);
-			pf.getAuthorRecordPage(ob).waitForAuthorRecordPage(test);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(lastName, test);
 			pf.getAuthorRecordPage(ob).checkForAlternativeNames();
 			test.log(LogStatus.PASS, "Alternative names tab displayed in author record page");
-			pf.getWatPageInstance(ob).logoutWAT();
+			//pf.getWatPageInstance(ob).logoutWAT();
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Alternative names tab not displaying in author record page",

@@ -172,9 +172,9 @@ public class AuthorRecordPage extends TestBase {
 
 	public void checkForAlternativeNames() throws Exception {
 		String altName = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS).getText();
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_XPATH).getText();
 		logger.info("Actual Value : " + altName);
-		Assert.assertTrue(altName.equals("Alternative names"));
+		Assert.assertTrue(altName.equals("+ Include alternative name"));
 		// test.log(LogStatus.PASS, "Alternative names tab displayed in author
 		// record page");
 

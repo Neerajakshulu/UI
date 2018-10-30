@@ -1385,6 +1385,7 @@ public enum OnePObjectMap {
 
 	WAT_AUTHOR_SEARCH_RESULT_SORT_XPATH("//div[@class='pull-right wat-author-record-publications-sort']"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS("ul[class='nav nav-tabs'] li+li a"),
+	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_XPATH("//button[@class=\"wat-search__button--add borderless-button ng-scope\"]"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_TAB_HILIGHTED_CSS("li[class='uib-tab nav-item ng-scope ng-isolate-scope']"),
 	WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS("div[class='tab-pane ng-scope active'] div div"),
 	WAT_AUTHOR_RECORD_PAGE_ORGANISATION_NAME_XPATH("//ul[@class='nav nav-tabs']/li[3]/a"),
