@@ -67,8 +67,9 @@ public class WAT50 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			test.log(LogStatus.INFO, "Login to WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+			ob.navigate().to(host);
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
+			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
@@ -93,7 +94,7 @@ public class WAT50 extends TestBase {
 		try {
 			pf.getSearchAuthClusterPage(ob).oRCIDSearchError(InvalidORCid, test);
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Error displayed when the ORCid or formar is invalid", "ORCid_Error_issue");
+			logFailureDetails(test, t, "Error displayed when the ORCid or format is invalid", "ORCid_Error_issue");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

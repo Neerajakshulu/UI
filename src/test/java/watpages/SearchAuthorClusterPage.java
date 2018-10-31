@@ -889,6 +889,7 @@ public class SearchAuthorClusterPage extends TestBase {
 				OrgName2, test);
 		test.log(LogStatus.PASS,
 				"Successfully searched for an author using only Last name and landed in Author search result page.");
+		pf.getBrowserActionInstance(ob).closeBrowser();
 	}
 
 	public void searchAuthorClusterWithOnlyFirstName(String FirstName, ExtentTest test)
@@ -1571,21 +1572,27 @@ public class SearchAuthorClusterPage extends TestBase {
 	}
 
 	public void oRCIDSearchError(String InvalidORCid, ExtentTest test) throws Exception {
-		// Verify whether control is in Author Search page
+		/*// Verify whether control is in Author Search page
 		Assert.assertEquals(
 				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
 				wos_title, "Control is not in WOS Author Search page");
-		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+		test.log(LogStatus.INFO, "Control is in WOS Author Search page");*/
 
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ORCID_SEARCH_BTN_XPATH);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
+		test.log(LogStatus.INFO, "ResearcherID or ORCID Search Button clicked");
 
-		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LOGO_XPATH).isDisplayed());
-		test.log(LogStatus.INFO, "ORCiD logo present");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_TEXTBOX_LAVEL_XPATH);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_LOGO_XPATH);
+
+		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOX_LAVEL_XPATH).isDisplayed());
+		test.log(LogStatus.INFO, "ResearcherID or ORCID Search lavel present.");
 
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_TEXTBOX_XPATH).sendKeys(InvalidORCid);
+		test.log(LogStatus.INFO, InvalidORCid + " is typed in ResearcherID or ORCID text box.");
 		// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH);
+		
+		//pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH);
+		
 		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_SEARCH_ERROR_TEXT_XPATH).isDisplayed()) {
 			test.log(LogStatus.PASS, "Error displayed when the ORCid or format is invalid");
 		} else {
