@@ -10,6 +10,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 /**
  * Class for Invalid RID Search Error messages 
@@ -60,11 +61,8 @@ public class WAT155 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
-
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -88,10 +86,12 @@ public class WAT155 extends TestBase {
 			test.log(LogStatus.PASS, "Error Message displayed for Invalid RID Pattern");
 			
 			test.log(LogStatus.INFO, "Entering Valid RID Pattern but DNE(Does Not Exist");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_NAME_SEARCH_BTN_XPATH);
 			pf.getSearchAuthClusterPage(ob).InvaidRIDSearchErrorMsgVaidation(rid2, errMsg2, test);
 			test.log(LogStatus.PASS, "Error Message displayed for Valid RID Pattern but DNE");
 			
 			test.log(LogStatus.INFO, "Entering RID Olderthan 2007");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_NAME_SEARCH_BTN_XPATH);
 			pf.getSearchAuthClusterPage(ob).InvaidRIDSearchErrorMsgVaidation(rid3, errMsg1, test);
 			test.log(LogStatus.PASS, "Error Message displayed for RID Olderthan 2007");
 		

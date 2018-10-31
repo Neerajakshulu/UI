@@ -1527,6 +1527,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_TIMESCITED_XPATH("//div[@class='wat-author-record__metrics-item-column'][2]/child::div"),
 	WAT_AUTHOR_RECORD_PAGE_METRICS_TAB_HINDEX_XPATH("//div[@class='wat-author-record__metrics-item-column'][1]/child::div"),
 	WAT_ORCID_SEARCH_BTN_XPATH("//span[text()='ResearcherID or ORCID Search']"),
+	WAT_NAME_SEARCH_BTN_XPATH("//span[text()='Name Search']"),
 	WAT_ORCID_TEXTBOX_LAVEL_XPATH("//div[@class='wat-search__field-group']//label[@class='wui-material-input__label']"),
 	WAT_ORCID_TEXTBOX_XPATH("//input[@id='orcid']"),
 	WAT_AUTHOR_SEARCH_BY_ORCID_FIND_BTN_XPATH("//div[@class='wat-search-content-st']/descendant::button[@ng-disabled='vm.disableFindButton[vm.SEARCH.VIEW.ORCID]']"),
