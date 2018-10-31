@@ -1,5 +1,7 @@
 package wat;
 
+//Feature not present now, Hence disabling this test script
+/*
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,19 +13,19 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ExtentManager;
 
-/**
+*//**
  * Class Verify that rejected publication should updated with new, when user rejected recommended publication
  * @author UC202376
- */
+ *//*
 public class WAT203 extends TestBase {
 
 	static int status = 1;
 
-	/**
+	*//**
 	 * Method to displaying JIRA ID's for test case in specified path of Extent Reports
 	 * 
 	 * @throws Exception, When Something unexpected
-	 */
+	 *//*
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -31,11 +33,11 @@ public class WAT203 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("WAT");
 	}
 
-	/**
+	*//**
 	 * Method for login into WAT application using TR ID
 	 * 
 	 * @throws Exception, When WAT Login is not done
-	 */
+	 *//*
 	@Test
 	public void testLoginWATApp() throws Exception {
 
@@ -58,22 +60,20 @@ public class WAT203 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 	}
 
-	/**
+	*//**
 	 * Method for Remove publication for single author
 	 * 
 	 * @param lastName
 	 * @throws Exception, When Something unexpected
-	 */
+	 *//*
 	@Test(dependsOnMethods = {"testLoginWATApp"})
 	@Parameters({"lastName","authorName"})
 	public void removePublicationSingleAuthor(String lastName,String authorName) throws Exception {
@@ -96,21 +96,22 @@ public class WAT203 extends TestBase {
 
 	}
 
-	/**
+	*//**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
-	 */
+	 *//*
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*
+		
 		 * if (status == 1) TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
 		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(profilexls,
 		 * "Test Cases", TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()), "FAIL"); else
 		 * TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
 		 * this.getClass().getSimpleName()), "SKIP");
-		 */
+		 
 
 	}
 
 }
+*/

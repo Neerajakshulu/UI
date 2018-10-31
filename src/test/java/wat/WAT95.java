@@ -22,7 +22,7 @@ import util.OnePObjectMap;
 public class WAT95 extends TestBase {
 
 	static int status = 1;
-	static String wos_title = "Web of Science: Author search";
+	static String wos_title = "Web of Science";
 
 	/**
 	 * Method to displaying JIRA ID's for test case in specified path of Extent Reports
@@ -63,10 +63,8 @@ public class WAT95 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
-			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
-			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
-			pf.getSearchAuthClusterPage(ob).validateAuthorSearchPage(test);
+			test.log(LogStatus.INFO, "Logging into WAT Applicaton through WoS Application.");
+			pf.getWatPageInstance(ob).loginToWOSWAT(test);
 
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
