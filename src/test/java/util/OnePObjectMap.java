@@ -1528,7 +1528,7 @@ public enum OnePObjectMap {
 	//We're sorry. We are unable to link your accounts. To get help, please send email to 
 	PUBLONS_MATCHING_ACCOUNT_EXIST_ERROR_MSG2_XPATH("//p[span[@class='ng-binding']]"),
 	PUBLONS_MATCHING_ACCOUNT_EXIST_ERROR_EMAILD_XPATH("//span[@class='ng-binding']"),
-	PUBLONS_CONNECT_LINKEDLN_BUTTON_XPATH("//div[span[text()='LinkedIn']]/following-sibling::div"),
+	PUBLONS_CONNECT_LINKEDLN_BUTTON_XPATH("//div[span[text()='LinkedIn']]/following-sibling::div/button"),
 	
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_XPATH("//input[@name='oldPassword']//following::label"),
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_XPATH("//input[@name='newPassword']//following::label"),

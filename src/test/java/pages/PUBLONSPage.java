@@ -194,7 +194,7 @@ public class PUBLONSPage extends TestBase {
 
 	public void moveToAccountSettingPage() throws Exception {
 		waitForAllElementsToBePresent(ob,
-				By.cssSelector(OnePObjectMap.PUBLONS_LOGIN_PAGE_ACCOUNT_PROFILE_IMAGE_CSS.toString()), 30);
+				By.cssSelector(OnePObjectMap.PUBLONS_LOGIN_PAGE_ACCOUNT_PROFILE_IMAGE_CSS.toString()), 60);
 		ob.findElement(By.cssSelector(OnePObjectMap.PUBLONS_LOGIN_PAGE_ACCOUNT_PROFILE_IMAGE_CSS.toString())).click();
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.PUBLONS_ACCOUNT_BUTTON_IN_PROFILE_PAGE.toString()),
 				30);
@@ -369,9 +369,10 @@ public class PUBLONSPage extends TestBase {
 	}
 	//=============================================================================
 	public void connectWithLN(String username, String pwd)throws Exception{
-		
+		scrollingToElementofAPage();
 		waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_CONNECT_LINKEDLN_BUTTON_XPATH.toString()), 60);
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.PUBLONS_CONNECT_LINKEDLN_BUTTON_XPATH);
+		//pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.PUBLONS_CONNECT_LINKEDLN_BUTTON_XPATH);
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.PUBLONS_CONNECT_LINKEDLN_BUTTON_XPATH.toString())));
 		
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID, username);
@@ -379,5 +380,23 @@ public class PUBLONSPage extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_SIGNIN_ID);
 
 	}
-
+   //=================================================================================
+	public void vrfyErrorMsgAccountAlreadyLinked(String unableToLinkmsg, String ErrorMessageWithEmail,String Useremailid)throws Exception{
+		//Verify Unable to link message
+		waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_MATCHING_ACCOUNT_EXIST_ERROR_MSG1_XPATH.toString()), 60);
+		String str1=
+				 ob.findElement(By.xpath(OnePObjectMap.PUBLONS_MATCHING_ACCOUNT_EXIST_ERROR_MSG1_XPATH.toString())).getText();
+		waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_MATCHING_ACCOUNT_EXIST_ERROR_MSG2_XPATH.toString()), 60);
+		String errorMsg2=
+				ob.findElement(By.xpath(OnePObjectMap.PUBLONS_MATCHING_ACCOUNT_EXIST_ERROR_MSG2_XPATH.toString())).getText();  
+		String emailid=
+				ob.findElement(By.xpath(OnePObjectMap.PUBLONS_MATCHING_ACCOUNT_EXIST_ERROR_EMAILD_XPATH.toString())).getText();
+		System.out.println(str1);
+		System.out.println(errorMsg2);
+		System.out.println(emailid);
+		Assert.assertEquals(unableToLinkmsg, str1, "Unable to link message not matching");
+		Assert.assertEquals(ErrorMessageWithEmail, errorMsg2, "We're sorry. We are unable to link your accounts message not matching .");
+		Assert.assertEquals(Useremailid, emailid, "User email id not matching with actual.");
+		
+	}
 }
