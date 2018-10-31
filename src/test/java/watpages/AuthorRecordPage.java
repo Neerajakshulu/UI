@@ -49,13 +49,15 @@ public class AuthorRecordPage extends TestBase {
 	 */
 	public void waitForAuthorRecordPage(ExtentTest test) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Search");
-	//	pf.getBrowserWaitsInstance(ob).waitUntilText("The following details are available for this author.",
-		//		"This author record is algorithmically generated and may not be complete.",
-		//		"All information is derived from the publication metadata.");
+		// pf.getBrowserWaitsInstance(ob).waitUntilText("The following details are
+		// available for this author.",
+		// "This author record is algorithmically generated and may not be complete.",
+		// "All information is derived from the publication metadata.");
 		// pf.getBrowserWaitsInstance(ob).waitUntilText("Future iterations of
 		// author search will allow you to claim and","edit your own profile to
 		// create a complete and accurate record of your work.");
-		//pf.getBrowserWaitsInstance(ob).waitUntilText("in Web of Science", "Sorted by");
+		// pf.getBrowserWaitsInstance(ob).waitUntilText("in Web of Science", "Sorted
+		// by");
 		test.log(LogStatus.INFO, "User navigated to Author Record page");
 	}
 
@@ -90,8 +92,7 @@ public class AuthorRecordPage extends TestBase {
 	public void defaultAvatar(ExtentTest test) throws Exception {
 		test.log(LogStatus.INFO, "Clicking first author card");
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 		isDefaultAvatarPresent = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS).isDisplayed();
 		if (!isDefaultAvatarPresent) {
@@ -108,8 +109,7 @@ public class AuthorRecordPage extends TestBase {
 	public void authorRecordMetaTitle(ExtentTest test) throws Exception {
 		test.log(LogStatus.INFO, "Clicking first author card");
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 		metaTitle = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_TITLE_CSS)
 				.getText();
 		String[] title = metaTitle.split(" ");
@@ -141,8 +141,7 @@ public class AuthorRecordPage extends TestBase {
 	public void authorRecordMetaOrganization(ExtentTest test) throws Exception {
 		test.log(LogStatus.INFO, "Clicking first author card");
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 		metaOrg = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_AFFILIATION_CSS)
 				.getText();
 		logger.info("Orgnization-->" + metaOrg);
@@ -160,8 +159,7 @@ public class AuthorRecordPage extends TestBase {
 	public void authorRecordMetaLocation(ExtentTest test) throws Exception {
 		test.log(LogStatus.INFO, "Clicking first author card");
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
 		location = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_LOCATION_CSS)
 				.getText();
 		logger.info("Location-->" + location);
@@ -352,8 +350,8 @@ public class AuthorRecordPage extends TestBase {
 				Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_CANCEL_UPDATE_BTN_XPATH)
 						.isDisplayed());
 				test.log(LogStatus.PASS, "Entered curation mode, Checking for confirmation");
-				scrollElementIntoView(ob,
-						pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH));
+				scrollElementIntoView(ob, pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH));
 				Assert.assertTrue(pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH).isDisplayed());
 				test.log(LogStatus.PASS, "Entered curation mode and confirmed successfully");
@@ -419,37 +417,39 @@ public class AuthorRecordPage extends TestBase {
 				"User not taken to the ORCID page of the Author");
 		test.log(LogStatus.PASS, "User is taken to the ORCID page of the Author successfully");
 	}
-	
+
 	/**
 	 * Method for to check ORCiD as URI
+	 * 
 	 * @throws Exception
 	 * @throws InterruptedException
 	 */
-	public void orcidAsURI(ExtentTest test) throws Exception{
+	public void orcidAsURI(ExtentTest test) throws Exception {
 		test.log(LogStatus.INFO, "Clicking first author card");
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
-		String ORCID = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LINK_XPATH).getAttribute("href");
-		logger.info("ORCID"+ORCID);
-		if(!(StringUtils.isNotEmpty(ORCID) && StringUtils.contains(ORCID, "https://orcid.org/"))){
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
+		String ORCID = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCID_LINK_XPATH)
+				.getAttribute("href");
+		logger.info("ORCID" + ORCID);
+		if (!(StringUtils.isNotEmpty(ORCID) && StringUtils.contains(ORCID, "https://orcid.org/"))) {
 			throw new Exception("Author record page ORCID not displayed as URI");
 		}
 	}
-	
+
 	/**
 	 * Method for to check RID as URI
+	 * 
 	 * @throws Exception
 	 * @throws InterruptedException
 	 */
-	public void ridAsURI(ExtentTest test) throws Exception{
+	public void ridAsURI(ExtentTest test) throws Exception {
 		test.log(LogStatus.INFO, "Clicking first author card");
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULT_FIRST_CARD_XPATH).click();
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
-		String rid = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RESEARCHERID_LINK_XPATH).getAttribute("href");
-		logger.info("RID-->"+rid);
-		if(!(StringUtils.isNotEmpty(rid) && StringUtils.contains(rid,"http://www.researcherid.com/rid/"))){
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_DEFAULT_AVATAR_CSS);
+		String rid = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_RESEARCHERID_LINK_XPATH)
+				.getAttribute("href");
+		logger.info("RID-->" + rid);
+		if (!(StringUtils.isNotEmpty(rid) && StringUtils.contains(rid, "http://www.researcherid.com/rid/"))) {
 			throw new Exception("Author record page RID not displayed as URI");
 		}
 	}
@@ -505,231 +505,259 @@ public class AuthorRecordPage extends TestBase {
 	}
 
 	/**
-	 * Method for recommend papers authors name should not match author record first name or intials
+	 * Method for recommend papers authors name should not match author record first
+	 * name or intials
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void recommendPapersAuthorName() throws Exception{
-		
-		metaTitle=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_TITLE_CSS).getText();
-		String[] title=metaTitle.split(" ");
-		logger.info("title 1-->"+title[0]);
-		logger.info("title 11-->"+title[1]);
+	public void recommendPapersAuthorName() throws Exception {
+
+		metaTitle = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_TITLE_CSS)
+				.getText();
+		String[] title = metaTitle.split(" ");
+		logger.info("title 1-->" + title[0]);
+		logger.info("title 11-->" + title[1]);
 		List<WebElement> recommendPapers = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_AUTHORS_XPATH);
-		
-		for(WebElement paper:recommendPapers){
-			if(!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")){
+
+		for (WebElement paper : recommendPapers) {
+			if (!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")) {
 				paper.findElement(By.tagName("a")).click();
-				waitForAjax(ob);}
-				List<WebElement> authors=paper.findElements(By.tagName("div"));
-				for(WebElement author:authors){
-					logger.info("recommend paper Author Name-->"+author.getText());
-					if(StringUtils.contains(author.getText(), title[1])){
-						throw new Exception("recommend paper author name should not have author record author first name or initilas");
-					}
+				waitForAjax(ob);
+			}
+			List<WebElement> authors = paper.findElements(By.tagName("div"));
+			for (WebElement author : authors) {
+				logger.info("recommend paper Author Name-->" + author.getText());
+				if (StringUtils.contains(author.getText(), title[1])) {
+					throw new Exception(
+							"recommend paper author name should not have author record author first name or initilas");
 				}
+			}
 		}
-		
-		
-    }
-	
+
+	}
+
 	/**
-	 * Method for recommend papers authors name should not match author record first name or intials
+	 * Method for recommend papers authors name should not match author record first
+	 * name or intials
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void recommendPapersLastnameCount() throws Exception{
-		
-		metaTitle=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_TITLE_CSS).getText();
-		String[] title=metaTitle.split(" ");
-		logger.info("title 1-->"+title[0]);
-		logger.info("title 11-->"+title[1]);
+	public void recommendPapersLastnameCount() throws Exception {
+
+		metaTitle = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_META_TITLE_CSS)
+				.getText();
+		String[] title = metaTitle.split(" ");
+		logger.info("title 1-->" + title[0]);
+		logger.info("title 11-->" + title[1]);
 		List<WebElement> recommendPapers = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_AUTHORS_XPATH);
-		
-		for(WebElement paper:recommendPapers){
-			int count=0;
-			if(!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")){
+
+		for (WebElement paper : recommendPapers) {
+			int count = 0;
+			if (!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")) {
 				paper.findElement(By.tagName("a")).click();
-				waitForAjax(ob);}
-				List<WebElement> authors=paper.findElements(By.tagName("div"));
-				for(WebElement author:authors){
-					logger.info("recommend paper Author Name-->"+author.getText());
-					if(StringUtils.contains(author.getText(), title[0])){
-						++count;
-					}
+				waitForAjax(ob);
+			}
+			List<WebElement> authors = paper.findElements(By.tagName("div"));
+			for (WebElement author : authors) {
+				logger.info("recommend paper Author Name-->" + author.getText());
+				if (StringUtils.contains(author.getText(), title[0])) {
+					++count;
 				}
-				logger.info("count match-->"+count);
-				if(count==0){
-					throw new Exception("Recommended papers atleast one last name not matched with author record last name variants");
-				}
+			}
+			logger.info("count match-->" + count);
+			if (count == 0) {
+				throw new Exception(
+						"Recommended papers atleast one last name not matched with author record last name variants");
+			}
 		}
-		
-		
-    }
-	
+
+	}
+
 	/**
-	 * Method for combined author recommend papers authors last name should match author record set of last names
+	 * Method for combined author recommend papers authors last name should match
+	 * author record set of last names
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void combinedRecommendPapersAuthorName() throws Exception{
-		List<String> alternativeNames=getAllAuthorLastNames();
-		logger.info("All alternative name-->"+alternativeNames);
+	public void combinedRecommendPapersAuthorName() throws Exception {
+		List<String> alternativeNames = getAllAuthorLastNames();
+		logger.info("All alternative name-->" + alternativeNames);
 		List<WebElement> recommendPapers = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_AUTHORS_XPATH);
-		
-		for(WebElement paper:recommendPapers){
-			count=0;
-			if(!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")){
+
+		for (WebElement paper : recommendPapers) {
+			count = 0;
+			if (!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")) {
 				pf.getBrowserActionInstance(ob).scrollToElement(paper.findElement(By.tagName("a")));
 				paper.findElement(By.tagName("a")).click();
-				waitForAjax(ob);}
-				List<WebElement> authors=paper.findElements(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
-				for(WebElement author:authors){
-					logger.info("recommend paper Author Name-->"+(author.getText().split("\\,")[0]));
-					String authorLastName=author.getText().split("\\,")[0].contains(";")?author.getText().split("\\,")[0].replace(";", ""):author.getText().split("\\,")[0];
-					if(alternativeNames.contains(authorLastName.trim())){
-						++count;
-					}
-				}
-				logger.info("count match-->"+count);
-				if(count==0){
-					throw new Exception("Combined Author Recommended papers last name not matches Author record set of last names");
-				 }
+				waitForAjax(ob);
 			}
-    }
-	
+			List<WebElement> authors = paper.findElements(
+					By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
+			for (WebElement author : authors) {
+				logger.info("recommend paper Author Name-->" + (author.getText().split("\\,")[0]));
+				String authorLastName = author.getText().split("\\,")[0].contains(";")
+						? author.getText().split("\\,")[0].replace(";", "")
+						: author.getText().split("\\,")[0];
+				if (alternativeNames.contains(authorLastName.trim())) {
+					++count;
+				}
+			}
+			logger.info("count match-->" + count);
+			if (count == 0) {
+				throw new Exception(
+						"Combined Author Recommended papers last name not matches Author record set of last names");
+			}
+		}
+	}
 
 	/**
 	 * Get Author last names only
+	 * 
 	 * @param test
 	 * @param tabName
 	 * @throws Exception
 	 */
 	public List<String> getAllAuthorLastNames() throws Exception {
-		List<String> alternativeNames= new ArrayList<String>();
+		List<String> alternativeNames = new ArrayList<String>();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_CSS);
 		waitForAjax(ob);
 		namesCount = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_ALTERNATIVE_NAME_COUNT_CSS);
-		for(WebElement name:namesCount){
+		for (WebElement name : namesCount) {
 			alternativeNames.add(name.getText().split("\\,")[0]);
 		}
 		return alternativeNames;
 	}
-	
+
 	/**
 	 * Method for More link should present in each publication
+	 * 
 	 * @throws Exception
 	 */
-	public void publicationsAuthorsMoreLink() throws Exception{
+	public void publicationsAuthorsMoreLink() throws Exception {
 		List<WebElement> publications = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_XPATH);
-		List<String> authorBefore= new ArrayList<String>();
-		List<String> authorAfter= new ArrayList<String>();
-		for(WebElement paper:publications){
-			if(!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")){
-				List<WebElement> beforeClickMore=paper.findElements(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
-				for(WebElement before:beforeClickMore){
+		List<String> authorBefore = new ArrayList<String>();
+		List<String> authorAfter = new ArrayList<String>();
+		for (WebElement paper : publications) {
+			if (!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")) {
+				List<WebElement> beforeClickMore = paper.findElements(
+						By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
+				for (WebElement before : beforeClickMore) {
 					authorBefore.add(before.getText());
-				}//for
-				if(paper.findElement(By.tagName("a")).getText().trim().equals("…More")){
+				} // for
+				if (paper.findElement(By.tagName("a")).getText().trim().equals("…More")) {
 					pf.getBrowserActionInstance(ob).scrollToElement(paper.findElement(By.tagName("a")));
 					BrowserWaits.waitTime(2);
 					pf.getBrowserActionInstance(ob).jsClick(paper.findElement(By.tagName("a")));
 					waitForAjax(ob);
-					List<WebElement> afterClickMore=paper.findElements(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
-					for(WebElement after:afterClickMore){
+					List<WebElement> afterClickMore = paper.findElements(
+							By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
+					for (WebElement after : afterClickMore) {
 						authorAfter.add(after.getText());
-					}//for
-				} //if
-				
-			}//if
-			//logger.info("Before click More-->"+authorBefore);
-			//logger.info("After click More-->"+authorAfter);
-			if((authorAfter.containsAll(authorBefore))){
+					} // for
+				} // if
+
+			} // if
+				// logger.info("Before click More-->"+authorBefore);
+				// logger.info("After click More-->"+authorAfter);
+			if ((authorAfter.containsAll(authorBefore))) {
 				throw new Exception("Publication MORE link not giving more authors list");
 			}
 			authorBefore.clear();
 			authorAfter.clear();
-			
+
 		}
-		
+
 	}
-	
+
 	/**
-	 * Method for Less link should present in each publication after click on More link
+	 * Method for Less link should present in each publication after click on More
+	 * link
+	 * 
 	 * @throws Exception
 	 */
-	public void publicationsAuthorsLessLink() throws Exception{
+	public void publicationsAuthorsLessLink() throws Exception {
 		List<WebElement> publications = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_XPATH);
-		for(WebElement paper:publications){
-			if(!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")){
-				if(paper.findElement(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_MORE_LINK_XPATH.toString())).getText().trim().equals("…More")){
+		for (WebElement paper : publications) {
+			if (!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")) {
+				if (paper.findElement(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_MORE_LINK_XPATH.toString()))
+						.getText().trim().equals("…More")) {
 					pf.getBrowserActionInstance(ob).scrollToElement(paper.findElement(By.tagName("a")));
 					BrowserWaits.waitTime(2);
-					pf.getBrowserActionInstance(ob).jsClick(paper.findElement(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_MORE_LINK_XPATH.toString())));
+					pf.getBrowserActionInstance(ob).jsClick(paper.findElement(
+							By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_MORE_LINK_XPATH.toString())));
 					waitForAjax(ob);
 					BrowserWaits.waitTime(2);
-					String linkName=paper.findElement(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_MORE_LINK_XPATH.toString())).getText();
-					logger.info("Link Name-->"+linkName);
-				} //if
-				
-			}//if
+					String linkName = paper
+							.findElement(
+									By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_MORE_LINK_XPATH.toString()))
+							.getText();
+					logger.info("Link Name-->" + linkName);
+				} // if
+
+			} // if
 		}
-		
+
 	}
-	
-	
+
 	/**
 	 * Method for Less link turn to More
+	 * 
 	 * @throws Exception
 	 */
-	public void publicationsAuthorsLessToMore() throws Exception{
+	public void publicationsAuthorsLessToMore() throws Exception {
 		List<WebElement> publications = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_XPATH);
-		List<String> authorBefore= new ArrayList<String>();
-		List<String> authorAfter= new ArrayList<String>();
-		for(WebElement paper:publications){
-			if(!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")){
-				List<WebElement> beforeClickMore=paper.findElements(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
-				for(WebElement before:beforeClickMore){
+		List<String> authorBefore = new ArrayList<String>();
+		List<String> authorAfter = new ArrayList<String>();
+		for (WebElement paper : publications) {
+			if (!paper.findElement(By.tagName("a")).getAttribute("class").endsWith("ng-hide")) {
+				List<WebElement> beforeClickMore = paper.findElements(
+						By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
+				for (WebElement before : beforeClickMore) {
 					authorBefore.add(before.getText());
-				}//for
-				if(paper.findElement(By.tagName("a")).getText().trim().equals("…More")){
+				} // for
+				if (paper.findElement(By.tagName("a")).getText().trim().equals("…More")) {
 					pf.getBrowserActionInstance(ob).scrollToElement(paper.findElement(By.tagName("a")));
 					BrowserWaits.waitTime(2);
 					pf.getBrowserActionInstance(ob).jsClick(paper.findElement(By.tagName("a")));
 					waitForAjax(ob);
-					List<WebElement> afterClickMore=paper.findElements(By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
-					for(WebElement after:afterClickMore){
+					List<WebElement> afterClickMore = paper.findElements(
+							By.xpath(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PAPER_MORE_AUTHORS_XPATH.toString()));
+					for (WebElement after : afterClickMore) {
 						authorAfter.add(after.getText());
-					}//for
-				} //if
-				
-			}//if
-			//logger.info("Before click More-->"+authorBefore);
-			//logger.info("After click More-->"+authorAfter);
-			if((authorAfter.containsAll(authorBefore))){
+					} // for
+				} // if
+
+			} // if
+				// logger.info("Before click More-->"+authorBefore);
+				// logger.info("After click More-->"+authorAfter);
+			if ((authorAfter.containsAll(authorBefore))) {
 				throw new Exception("Publication MORE link not giving more authors list");
 			}
 			authorBefore.clear();
 			authorAfter.clear();
-			
+
 		}
-		
+
 	}
-	
+
 	/**
 	 * Method to check cancel curation functionality on Recommendation
+	 * 
 	 * @param test
 	 * @throws Exception
 	 */
-	public void testRecommendPublicationCancelFunctionality(ExtentTest test) throws Exception{
-		
+	public void testRecommendPublicationCancelFunctionality(ExtentTest test) throws Exception {
+
 		List<WebElement> recommendPublicationsBeforeCancel = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PUBLICATIONS_XPATH);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_REJECT_FIRST_RECOMMENDATION_XPATH);
@@ -742,17 +770,18 @@ public class AuthorRecordPage extends TestBase {
 		waitForAjax(ob);
 		List<WebElement> recommendPublicationsAfterCancel = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PUBLICATIONS_XPATH);
-		for(WebElement publication:recommendPublicationsBeforeCancel){
-			int i=0;
-			if(publication.getText().equals(recommendPublicationsAfterCancel.get(i).getText())){
-				test.log(LogStatus.INFO, "Publication "+ recommendPublicationsAfterCancel.get(i).getText()+ " is available after cancelling curation");
+		for (WebElement publication : recommendPublicationsBeforeCancel) {
+			int i = 0;
+			if (publication.getText().equals(recommendPublicationsAfterCancel.get(i).getText())) {
+				test.log(LogStatus.INFO, "Publication " + recommendPublicationsAfterCancel.get(i).getText()
+						+ " is available after cancelling curation");
 				i++;
 			}
-				
+
 		}
 		test.log(LogStatus.PASS, "All 3 rejected publications are available after the curation is cancelled");
 	}
-	
+
 	/**
 	 * Method for check Suggest update button is displayed in Author Record page
 	 * 
@@ -766,10 +795,10 @@ public class AuthorRecordPage extends TestBase {
 			throw new Exception("Suggest updates button is not displayed in author record page");
 		}
 	}
-	
-	
+
 	/**
-	 * Method for check Submit update button is displayed in Author Record page for combined author
+	 * Method for check Submit update button is displayed in Author Record page for
+	 * combined author
 	 * 
 	 * @throws Exception
 	 */
@@ -781,7 +810,7 @@ public class AuthorRecordPage extends TestBase {
 			throw new Exception("Submit updates button is not displayed in author record page for combined author");
 		}
 	}
-	
+
 	/**
 	 * Method for submit authorship
 	 * 
@@ -789,98 +818,111 @@ public class AuthorRecordPage extends TestBase {
 	 */
 	public void submitAuthorship() throws Exception {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_XPATH);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_XPATH);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_SUCCESS_TOAST_MESSAGE_CSS);
-		String toastMessage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_SUCCESS_TOAST_MESSAGE_CSS).getText();
-		logger.info("success toast message-->"+toastMessage);
-		if(!StringUtils.equals(toastMessage, "Thank you. Your contributions have been submitted. We'll notify you when this author record is updated.")){
-			throw new Exception("Authorship Feedback not submitted and no success confirmation toast notification displayed ");
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_SUCCESS_TOAST_MESSAGE_CSS);
+		String toastMessage = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_SUCCESS_TOAST_MESSAGE_CSS).getText();
+		logger.info("success toast message-->" + toastMessage);
+		if (!StringUtils.equals(toastMessage,
+				"Thank you. Your contributions have been submitted. We'll notify you when this author record is updated.")) {
+			throw new Exception(
+					"Authorship Feedback not submitted and no success confirmation toast notification displayed ");
 		}
-		
+
 	}
-	
+
 	/**
-	 * Method for validate Submit updates modal 
+	 * Method for validate Submit updates modal
 	 * 
 	 * @throws Exception
 	 */
 	public void verifySubmitUpdatesModal() throws Exception {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_XPATH);
-		List<WebElement> buttons=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_BUTTONS_XPATH);
-		String header=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_HEADER_XPATH).getText();
-		List<WebElement> modalBody=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_BODY_XPATH);
-		logger.info("cancel button text-->"+buttons.get(1).getText());
-		logger.info("Submit updates button text-->"+buttons.get(2).getText());
-		logger.info("Header  text-->"+header);
-		logger.info("boddy  text-->"+modalBody.get(0).getText()+"text 2-->"+modalBody.get(1).getText());
-		
-		if (!(buttons.get(1).isEnabled()&&StringUtils.equals(buttons.get(1).getText(), "Cancel") && StringUtils.equals(buttons.get(2).getText(), "Submit updates")
-				&& StringUtils.equals(header, "Submit updates") && StringUtils.isNotEmpty(modalBody.get(0).getText()) && StringUtils.isNotEmpty(modalBody.get(1).getText()))) {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_XPATH);
+		List<WebElement> buttons = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_BUTTONS_XPATH);
+		String header = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_HEADER_XPATH).getText();
+		List<WebElement> modalBody = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_SUBMIT_UPDATES_MODAL_BODY_XPATH);
+		logger.info("cancel button text-->" + buttons.get(1).getText());
+		logger.info("Submit updates button text-->" + buttons.get(2).getText());
+		logger.info("Header  text-->" + header);
+		logger.info("boddy  text-->" + modalBody.get(0).getText() + "text 2-->" + modalBody.get(1).getText());
+
+		if (!(buttons.get(1).isEnabled() && StringUtils.equals(buttons.get(1).getText(), "Cancel")
+				&& StringUtils.equals(buttons.get(2).getText(), "Submit updates")
+				&& StringUtils.equals(header, "Submit updates") && StringUtils.isNotEmpty(modalBody.get(0).getText())
+				&& StringUtils.isNotEmpty(modalBody.get(1).getText()))) {
 			throw new Exception("Submit updates modal Title,body and Buttons are not available/displayed");
 		}
 	}
-	
+
 	/**
-	 * Method for validate Publication count decreased or not when publication removed
+	 * Method for validate Publication count decreased or not when publication
+	 * removed
 	 * 
 	 * @throws Exception
 	 */
 	public void validatePubRemoveCount() throws Exception {
-		int beforeRemove=getPublicationCount();
-		logger.info("before remove-->"+beforeRemove);
-		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
+		int beforeRemove = getPublicationCount();
+		logger.info("before remove-->" + beforeRemove);
+		pf.getBrowserActionInstance(ob)
+				.scrollToElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
 		waitForAjax(ob);
-		int afterRemove=getPublicationCount();
-		logger.info("before remove-->"+beforeRemove+"after remove-->"+afterRemove);
-		if(afterRemove == beforeRemove && afterRemove == beforeRemove-1){
-			throw new Exception("Publicaton count is not decreased when user removes publication for single/combined author");
+		int afterRemove = getPublicationCount();
+		logger.info("before remove-->" + beforeRemove + "after remove-->" + afterRemove);
+		if (afterRemove == beforeRemove && afterRemove == beforeRemove - 1) {
+			throw new Exception(
+					"Publicaton count is not decreased when user removes publication for single/combined author");
 		}
 	}
-	
-	
+
 	/**
 	 * Method for validate Publication Remove undo
 	 * 
 	 * @throws Exception
 	 */
 	public void validatePubRemoveUndo() throws Exception {
-		
-		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
+
+		pf.getBrowserActionInstance(ob)
+				.scrollToElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH);
 		waitForAjax(ob);
-		String undo=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATION_UNDO_LINK_XPATH).getText();
-		logger.info("undo text-->"+undo);
-		if(!undo.trim().equals("undo")){
+		String undo = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATION_UNDO_LINK_XPATH).getText();
+		logger.info("undo text-->" + undo);
+		if (!undo.trim().equals("undo")) {
 			throw new Exception("Removed Publication not avaible to perform undo");
 		}
 	}
-	
+
 	/**
-	 * Method for validate Recommend publication rejected updated with new publication
+	 * Method for validate Recommend publication rejected updated with new
+	 * publication
 	 * 
 	 * @throws Exception
 	 */
 	public void validateRecommendPubRejectUpdated(ExtentTest test) throws Exception {
-		String beforeRecmPubReject= pf.getBrowserActionInstance(ob)
+		String beforeRecmPubReject = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PUBLICATIONS_XPATH).get(0).getText();
-		logger.info("Before Recommend Reject-->"+beforeRecmPubReject);
+		logger.info("Before Recommend Reject-->" + beforeRecmPubReject);
 		getintoCuration(test, "RejectRecommendation");
 		waitForAjax(ob);
-		String afterRecmPubReject= pf.getBrowserActionInstance(ob)
+		String afterRecmPubReject = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_RECOMMEND_PUBLICATIONS_XPATH).get(0).getText();
-		logger.info("After Recommend Reject-->"+afterRecmPubReject);
-		
-		if(afterRecmPubReject.equals(beforeRecmPubReject)){
-			throw new Exception("Rejected publication not updated with new, when user rejected recommended publication");
+		logger.info("After Recommend Reject-->" + afterRecmPubReject);
+
+		if (afterRecmPubReject.equals(beforeRecmPubReject)) {
+			throw new Exception(
+					"Rejected publication not updated with new, when user rejected recommended publication");
 		}
 	}
-	
-	
-	
-
 
 	/**
 	 * @throws Exception
@@ -893,7 +935,7 @@ public class AuthorRecordPage extends TestBase {
 			pubCountBeforeDeletion = Integer.parseInt(pubCountText.substring(0, count - 1));
 		return pubCountBeforeDeletion;
 	}
-	
+
 	/**
 	 * Method to verify elements to be present in curation mode
 	 * 
@@ -901,8 +943,10 @@ public class AuthorRecordPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void verifyInCurationModeElements(ExtentTest test) throws Exception {
-		Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH)
-				.isDisplayed(), "Remove Publication button is not displayed");
+		Assert.assertTrue(
+				pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH).isDisplayed(),
+				"Remove Publication button is not displayed");
 		test.log(LogStatus.INFO, "Remove Publication button is displayed for each publication");
 		Assert.assertTrue(pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH).isDisplayed(),
@@ -937,8 +981,9 @@ public class AuthorRecordPage extends TestBase {
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUGGEST_UPDATE_BTN_XPATH)
 				.click();
 		test.log(LogStatus.PASS, "Entered Curation mode through the Suggest Update button");
-		Assert.assertTrue(!pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH).isEnabled(),
+		Assert.assertTrue(
+				!pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_PAGE_SUBMIT_UPDATE_BTN_XPATH).isEnabled(),
 				"Submit Update button is enabled (Blue colour) before any kind of editing.");
 		test.log(LogStatus.INFO, "Submit Update button is not Enabled before any kind of editing.");
 		BrowserWaits.waitTime(4);
@@ -988,8 +1033,8 @@ public class AuthorRecordPage extends TestBase {
 	public void getintoCuration(ExtentTest test, String CurarionVia) throws Exception {
 		checkSuggestUpdateBtn();
 		test.log(LogStatus.PASS, "Suggest updates button is displayed in author record page");
-		if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH)
-				.isDisplayed()) {
+		if (pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.WAT_AUTHOR_RECORD_FIRST_PUBLICATION_REMOVE_BTN_XPATH).isDisplayed()) {
 			throw new Exception("Remove Publication button displayed even before getting into curation mode");
 		}
 		switch (CurarionVia) {
@@ -1006,87 +1051,96 @@ public class AuthorRecordPage extends TestBase {
 			test.log(LogStatus.WARNING, "None of the curation mode executed");
 		}
 	}
-	
+
 	/**
 	 * Method for validate publication metadata
+	 * 
 	 * @throws Exception
 	 */
 	public void publicationMetaDataValidation() throws Exception {
 		List<WebElement> pubsMetadata = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_METADATA_XPATH);
 
-		for(WebElement metadata:pubsMetadata){
-			List<WebElement> data=metadata.findElements(By.tagName("div"));
-			logger.info("Publication metadata 0-->"+data.get(0).getText());
-			logger.info("Publication metadata 1-->"+data.get(1).getText());
-			logger.info("Publication metadata 2-->"+data.get(2).getText());
-			
-			if(data.size()==4){
-				logger.info("Publication metadata 3-->"+data.get(3).getText());
-				if(!StringUtils.isNotEmpty(data.get(0).getText()) && StringUtils.contains(data.get(1).getText(), "Volume") && StringUtils.contains(data.get(2).getText(), "Issue") && StringUtils.contains(data.get(3).getText(), "Published")){
+		for (WebElement metadata : pubsMetadata) {
+			List<WebElement> data = metadata.findElements(By.tagName("div"));
+			logger.info("Publication metadata 0-->" + data.get(0).getText());
+			logger.info("Publication metadata 1-->" + data.get(1).getText());
+			logger.info("Publication metadata 2-->" + data.get(2).getText());
+
+			if (data.size() == 4) {
+				logger.info("Publication metadata 3-->" + data.get(3).getText());
+				if (!StringUtils.isNotEmpty(data.get(0).getText())
+						&& StringUtils.contains(data.get(1).getText(), "Volume")
+						&& StringUtils.contains(data.get(2).getText(), "Issue")
+						&& StringUtils.contains(data.get(3).getText(), "Published")) {
 					throw new Exception("Publication Metadata not available");
 				}
 			} else {
-				if(!StringUtils.isNotEmpty(data.get(0).getText()) && StringUtils.contains(data.get(1).getText(), "Volume") && StringUtils.contains(data.get(2).getText(), "Published")){
+				if (!StringUtils.isNotEmpty(data.get(0).getText())
+						&& StringUtils.contains(data.get(1).getText(), "Volume")
+						&& StringUtils.contains(data.get(2).getText(), "Published")) {
 					throw new Exception("Publication Metadata not available");
 				}
 			}
 		}
-	}	
-	
+	}
+
 	/**
 	 * Method for validate publication metadata tile and authors
+	 * 
 	 * @throws Exception
 	 */
 	public void publicationMetaDataTitleAndAuthors() throws Exception {
 		List<WebElement> pubsTitle = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_METADATA_PUB_TITLE_XPATH);
-		
-		for(WebElement title:pubsTitle) {
-			logger.info("publication title -->"+title.getText());
-			if(!StringUtils.isNotEmpty(title.getText())){
+
+		for (WebElement title : pubsTitle) {
+			logger.info("publication title -->" + title.getText());
+			if (!StringUtils.isNotEmpty(title.getText())) {
 				throw new Exception("Each publication doesnot have publication Title");
 			}
 		}
-		
+
 		List<WebElement> pubAuthors = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_METADATA_AUTHORS_XPATH);
-		
-		for(WebElement author:pubAuthors) {
-			String authorName=author.getText();
-			logger.info("Author name-->"+authorName);
-			if(authorName.contains(";")){
-				String authorsList[]=authorName.split(";");
-				logger.info("no.of authors-->"+authorsList.length);
-				if(authorsList.length==3){
-					if(!StringUtils.contains(authorName, "…More")){
+
+		for (WebElement author : pubAuthors) {
+			String authorName = author.getText();
+			logger.info("Author name-->" + authorName);
+			if (authorName.contains(";")) {
+				String authorsList[] = authorName.split(";");
+				logger.info("no.of authors-->" + authorsList.length);
+				if (authorsList.length == 3) {
+					if (!StringUtils.contains(authorName, "…More")) {
 						throw new Exception("Each publication authors which are morethan 3 should contain More link");
 					}
 				}
 			}
-			
+
 		}
-		
-		
+
 	}
-	
-	
+
 	/**
 	 * Method for validate publication metadata Metrics count
+	 * 
 	 * @throws Exception
 	 */
 	public void publicationMetaDataMetricsCountValidation() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+				OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_METADATA_METRICS_COUNT1_XPATH);
 		List<WebElement> metricsCount = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_METADATA_METRICS_COUNT_XPATH);
-		logger.info("Time cited count11-->"+metricsCount.get(0).getText());
-		for(WebElement metric:metricsCount){
-			String [] citedCount=metric.getText().split("\n");
-			logger.info("Time cited count-->"+citedCount[0]+"-->"+citedCount[1]);
-			if(!StringUtils.equals(citedCount[0],"TIMES CITED")&&StringUtils.isNumeric(citedCount[1])){
-				throw new Exception("Publication Metadata Time cited count not available");
-			}
+				.getElements(OnePObjectMap.WAT_AUTHOR_RECORD_PUBLICATIONS_METADATA_METRICS_COUNT1_XPATH);
+		logger.info("Time cited count11-->" + metricsCount.get(0).getText());
+		/*
+		 * for(WebElement metric:metricsCount){ String []
+		 * citedCount=metric.getText().split("\n");
+		 * logger.info("Time cited count-->"+citedCount[0]+"-->"+citedCount[1]);
+		 * if(!StringUtils.equals(citedCount[0],"SUM OF TIMES CITED")&&StringUtils.
+		 * isNumeric(citedCount[1]))
+		 */
+		if (metricsCount.get(0).getText().isEmpty()) {
+			throw new Exception("Publication Metadata Time cited count not available");
 		}
 	}
-
-
 }
