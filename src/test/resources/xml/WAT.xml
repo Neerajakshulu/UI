@@ -7,7 +7,7 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="username"
+	<parameter name="username" 
 		value="chinna.putha@thomsonreuters.com" />
 	<parameter name="password" value="Thomson@123" />
 	<parameter name="LastName" value="UPADHYAYA" />
@@ -17,7 +17,7 @@
 	<parameter name="CountryName2" value="USA"></parameter>
 	<parameter name="OrgName2" value="UNIV MINNESOTA" />
 
-	<test name="WAT_Login" preserve-order="true">
+ 	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -250,7 +250,7 @@
 		<classes>
 			<class name="wat.WAT31"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="author_search_results_sub_org" preserve-order="true">
 		<parameter name="lastName" value="SHARMA" />
@@ -261,7 +261,7 @@
 		</classes>
 	</test>
 
-	<test name="search_results_tab_on_author_record"
+ <test name="search_results_tab_on_author_record"
 		preserve-order="true">
 		<parameter name="orcid" value="0000-0002-5895-7935" />
 		<classes>
@@ -426,26 +426,26 @@
 
 	<test name="WAT_author_record_default_avatar"
 		preserve-order="true">
-		<parameter name="lastName" value="JOHN B.F." />
+		<parameter name="lastName" value="JOHN B. F." />
 		<classes>
 			<class name="wat.WAT59"></class>
 		</classes>
-	</test>
+	</test>  
 
 	<test name="author_record_meta_title" preserve-order="true">
-		<parameter name="lastName" value="JOHN B.F." />
+		<parameter name="lastName" value="JOHN B. F." />
 		<classes>
 			<class name="wat.WAT60"></class>
 		</classes>
-	</test>
+	</test> 
 
 
 	<test name="author_record_meta_org" preserve-order="true">
-		<parameter name="lastName" value="JOHN B.F." />
+		<parameter name="lastName" value="JOHN B. F." />
 		<classes>
 			<class name="wat.WAT61"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="author_record_metrics_tab_status"
 		preserve-order="true">
@@ -530,32 +530,32 @@
 		<classes>
 			<class name="wat.WAT78"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="author_record_page_alternative_names"
 		preserve-order="true">
-		<parameter name="lastName" value="JOHN B.F." />
+		<parameter name="lastName" value="JOHN B. F." />
 		<classes>
 			<class name="wat.WAT81"></class>
 		</classes>
-	</test>
-	<test name="author_record_page_alternative_names_tab"
+	</test>  
+ 	<test name="author_record_page_alternative_names_tab"
 		preserve-order="true">
-		<parameter name="lastName" value="JOHN B.F." />
+		<parameter name="lastName" value="JOHN B. F." />
 		<classes>
 			<class name="wat.WAT82"></class>
 		</classes>
 	</test>
 	<test name="author_record_page_alternative_names_count"
 		preserve-order="true">
-		<parameter name="lastName" value="JOHN B.F." />
+		<parameter name="lastName" value="JOHN B. F." />
 		<classes>
 			<class name="wat.WAT83"></class>
 		</classes>
 	</test>
 	<test name="author_record_page_alternative_names_compare"
 		preserve-order="true">
-		<parameter name="lastName" value="JOHN B.F." />
+		<parameter name="lastName" value="JOHN B. F." />
 		<classes>
 			<class name="wat.WAT84"></class>
 		</classes>
@@ -593,7 +593,7 @@
 		<classes>
 			<class name="wat.WAT68"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="author_record_page_alternatives_tab_inactiive"
 		preserve-order="true">
@@ -731,21 +731,21 @@
 		<classes>
 			<class name="wat.WAT102"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="WAT_RESEARCHER_ID_Functionality" preserve-order="true">
 		<parameter name="lastName" value="BENZ-SCOTT" />
 		<classes>
 			<class name="wat.WAT103"></class>
 		</classes>
-	</test>
-
+	</test> 
+ 
 	<test name="WAT_RESEARCHER_ID_Format" preserve-order="true">
 		<parameter name="lastName" value="BENZ-SCOTT" />
 		<classes>
 			<class name="wat.WAT104"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="WAT_ORCID_Format" preserve-order="true">
 		<parameter name="lastName" value="BENZ-SCOTT" />
@@ -800,19 +800,19 @@
 		<classes>
 			<class name="wat.WAT113"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="WAT_Drill_down_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT114"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="WAT_Find_btn_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT115"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="WAT_Find_btn_2_test" preserve-order="true">
 		<classes>
@@ -824,9 +824,9 @@
 		<classes>
 			<class name="wat.WAT117"></class>
 		</classes>
-	</test>
+	</test> 
 
-	<test name="WAT_Ignore_Org_Filter_test" preserve-order="true">
+ 	<test name="WAT_Ignore_Org_Filter_test" preserve-order="true">
 		<classes>
 			<class name="wat.WAT118"></class>
 		</classes>
@@ -854,7 +854,7 @@
 		<classes>
 			<class name="wat.WAT122"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="WAT_author_search_ballon_popover"
 		preserve-order="true">
@@ -886,41 +886,41 @@
 		<classes>
 			<class name="wat.WAT153"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="RID_Search" preserve-order="true">
 		<parameter name="rid" value="A-9832-2009" />
 		<classes>
 			<class name="wat.WAT154"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Invalid_RID_Search_Error_Msgs" preserve-order="true">
 		<parameter name="rid1" value="Invalid RID" />
 		<parameter name="errMsg1"
-			value="Please enter a valid RID, or try searching by ORCiD or Name." />
+			value="Please enter a valid RID or ORCID, or try searching by Name." />
 		<parameter name="rid2" value="B-1234-2007" />
 		<parameter name="errMsg2"
-			value="We couldn't find a match. Please enter a valid RID, or try searching by ORCiD or Name." />
+			value="No matches found. Please enter a valid RID or ORCID, or try searching by Name." />
 		<parameter name="rid3" value="A-9832-2006" />
 		<classes>
 			<class name="wat.WAT155"></class>
 		</classes>
-	</test>
+	</test>  
 
-	<test name="Invalid_ORCID_Search_Error_Msgs" preserve-order="true">
+ <test name="Invalid_ORCID_Search_Error_Msgs" preserve-order="true">
 		<parameter name="orcid1" value="Invalid ORCRID" />
 		<parameter name="errMsg1"
-			value="Please enter a valid ORCiD, or try searching by RID or Name." />
+			value="Please enter a valid RID or ORCID, or try searching by Name." />
 		<parameter name="orcid2" value="0000-0001-5727-2427" />
 		<parameter name="errMsg2"
-			value="We couldn't find a match. Please enter a valid ORCiD, or try searching by RID or Name." />
+			value="No matches found. Please enter a valid RID or ORCID, or try searching by Name." />
 		<classes>
 			<class name="wat.WAT156"></class>
 		</classes>
 	</test>
 
-	<test name="Search_Resutls_Select_All_Morethan_50"
+ 	<test name="Search_Resutls_Select_All_Morethan_50"
 		preserve-order="true">
 		<parameter name="lastName" value="WANG" />
 		<parameter name="countryName" value="BRAZIL" />  
@@ -951,7 +951,7 @@
 		</classes>
 	</test>
 
-	<test name="combined_author_default_avatar_and_fullname"
+ 	<test name="combined_author_default_avatar_and_fullname"
 		preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
 		<classes>
@@ -1071,7 +1071,7 @@
 		<classes>
 			<class name="wat.WAT173"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="publications_more_link" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
@@ -1087,9 +1087,9 @@
 		<classes>
 			<class name="wat.WAT175"></class>
 		</classes>
-	</test>
+	</test> 
 
-	<test name="publications_more_to_less_link" preserve-order="true">
+ 	<test name="publications_more_to_less_link" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
 		<parameter name="authorName" value="TRANQUADA, RB" />
 		<classes>
@@ -1130,7 +1130,7 @@
 		<classes>
 			<class name="wat.WAT180"></class>
 		</classes>
-	</test>
+	</test> 
 	<test name="combined_author_record_page_alternative_names_tab"
 		preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
@@ -1151,7 +1151,7 @@
 		<classes>
 			<class name="wat.WAT183"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="authors_orcid_uri" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
@@ -1159,7 +1159,7 @@
 		<classes>
 			<class name="wat.WAT184"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="authors_rid_uri" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
@@ -1230,7 +1230,7 @@
 		<classes>
 			<class name="wat.WAT125"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test
 		name="Test_Filtered_unfiltered_seperation_line_for_author_name"
@@ -1238,14 +1238,14 @@
 		<classes>
 			<class name="wat.WAT126"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Test_Filtered_unfiltered_seperation_line_for_Journal"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT127"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test
 		name="Test_Filtered_unfiltered_seperation_line_for_Subject_Category"
@@ -1253,21 +1253,21 @@
 		<classes>
 			<class name="wat.WAT128"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Test_Author_Name_Filter_Selection_Location"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT129"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Test_Author_Name_Filtered_Unfiltered_Order"
 		preserve-order="true">
 		<classes>
 			<class name="wat.WAT130"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Test_Author_Name_Filter_DeSelection_Location"
 		preserve-order="true">
@@ -1346,7 +1346,7 @@
 		<classes>
 			<class name="wat.WAT142"></class>
 		</classes>
-	</test>
+	</test>  
 
 	<test name="Test_Metrics_dispalyed" preserve-order="true">
 		<parameter name="lastName" value="TRANQUADA" />
@@ -1374,7 +1374,7 @@
 		<classes>
 			<class name="wat.WAT146"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Test_Metrics_Single_Author" preserve-order="true">
 		<classes>
@@ -1382,11 +1382,11 @@
 		</classes>
 	</test>
 
-	<test name="Test_Metrics_Count_Single" preserve-order="true">
+ 	<test name="Test_Metrics_Count_Single" preserve-order="true">
 		<classes>
 			<class name="wat.WAT148"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Test_Metrics_Single" preserve-order="true">
 		<classes>
@@ -1413,7 +1413,7 @@
 		<classes>
 			<class name="wat.WAT192"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Test_Curation_Negative" preserve-order="true">
 		<classes>
@@ -1421,7 +1421,7 @@
 		</classes>
 	</test>
 
-	<test name="Test_MidCuration" preserve-order="true">
+ <test name="Test_MidCuration" preserve-order="true">
 		<classes>
 			<class name="wat.WAT194"></class>
 		</classes>
@@ -1514,7 +1514,7 @@
 		<classes>
 			<class name="wat.WAT205"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="author_lastknown_org_single_author"
 		preserve-order="true">
@@ -1562,5 +1562,5 @@
 		<classes>
 			<class name="wat.WAT225"></class>
 		</classes>
-	</test>
+	</test>  
 </suite>
