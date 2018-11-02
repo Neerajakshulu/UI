@@ -1523,6 +1523,7 @@ public enum OnePObjectMap {
 	PUBLONS_ACCOUNT_LINKING_MODEL_PASSWORD_TEXT_XPATH("//div[@class='wui-material-input']/input"),
 	PUBLONS_ACCOUNT_LINKING_MODEL_SIGNIN_BUTTON_XPATH("//button[@class='wui-btn wui-btn--primary wui-btn--modal-footer button-color-secondary']"),
 	PUBLONS_ACCOUNT_SETTING_PAGE_LIST_OF_EMAILS_CSS("div[class='col-xs-4 ng-binding']"),
+	PUBLONS_ACCOUNT_SETTING_PAGE_LIST_OF_EMAIL_ROW_TABLE_CSS("div[class='col-xs-12 account-tabs__email-row divider-line']"),
 	//Unable to link
 	PUBLONS_MATCHING_ACCOUNT_EXIST_ERROR_MSG1_XPATH("//h2[@class='login-title']"),
 	//We're sorry. We are unable to link your accounts. To get help, please send email to 

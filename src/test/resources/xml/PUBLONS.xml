@@ -107,5 +107,10 @@
 			<class name="Publons.PUBLONS031"></class>
 		</classes>
 	</test> 
+	<test name="Publon_Change_Primary_Account">
+		<classes>
+			<class name="Publons.PUBLONS032"></class>
+		</classes>
+	</test> 
 	
 </suite>
