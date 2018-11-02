@@ -2,18 +2,25 @@ package Publons;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+
 import com.relevantcodes.extentreports.LogStatus;
+
 import base.TestBase;
 
-public class PUBLONS027 extends TestBase{
+public class PUBLONS041 extends TestBase{
+
+	
 	static int count = -1;
 
 	static boolean fail = false;
@@ -41,7 +48,7 @@ public class PUBLONS027 extends TestBase{
 	 * @throws Exception , When TR Login is not done
 	 */
 	@Test
-	public void testcaseLinkedlnLinking() throws Exception {
+	public void testcaseFacebookLinkingErrorMessage() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -53,7 +60,7 @@ public class PUBLONS027 extends TestBase{
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 		try {
-			String usertrueid="0644e6a0-cddf-11e8-8e9d-05fb45806044";
+			String usertrueid="7b495950-b010-11e8-a40e-c11c5f4c9e73";
 			String statuCode = delinkUserAccounts(usertrueid);
 
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
@@ -72,18 +79,19 @@ public class PUBLONS027 extends TestBase{
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-				pf.getPubPage(ob).loginPublonsAccont(LOGIN.getProperty("PUBLONSLINKEDLNUSER"),LOGIN.getProperty("PUBLONSLINKEDLNPWD"));
+				pf.getPubPage(ob).loginPublonsAccont(LOGIN.getProperty("PUBLONSGMAILUSER"),LOGIN.getProperty("PUBLONSGMAILSTEAMPWD"));
 				test.log(LogStatus.PASS, "user has logged with Steam account in publons to make it Activated");
 					pf.getLoginTRInstance(ob).logOutApp();
 					test.log(LogStatus.PASS,"LogOut from the application Sucessfully .");
 					try{
 						//Now again navigate to application and Sign in using Facebook account. 
 						ob.navigate().to(host);
-						pf.getPubPage(ob).loginWithLinkedlnCredentialsWithOutLinking(LOGIN.getProperty("PUBLONSLINKEDLNUSER"), LOGIN.getProperty("PUBLONSLINKEDLNPWD"));	
+						pf.getPubPage(ob).loginWithFBCredentialsWithOutLinking(LOGIN.getProperty("UserFBENWIAM80"), LOGIN.getProperty("PWDUserFBENWIAM80"));	
 					   // Verify Linking model.
 						String expectedText1="Already have an account?";
 						String expectedText2="Your email address";
 						String expectedEmail="test_wnqvjum_user@tfbnw.net,";
+						String wrongPass="test123";
 						waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_TEXT1_XPATH.toString()), 60);
 						String str1=
 								ob.findElement(By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_TEXT1_XPATH.toString())).getText();
@@ -101,22 +109,27 @@ public class PUBLONS027 extends TestBase{
 						 else{
 							 test.log(LogStatus.PASS,"Linking Model has not been seen or text present on linking model is not matching.");
 						 }
-						 //Enter Password on linking model and click on SignIn.
-						 pf.getPubPage(ob).linkAccount(LOGIN.getProperty("PUBLONSLINKEDLNPWD"));
-						 pf.getPubPage(ob).verifyLinkedAccounts(LOGIN.getProperty("PUBLONSLINKEDLNUSER"),2,test);
-						 pf.getPubPage(ob).navigateMainWindow();
-						 pf.getLoginTRInstance(ob).logOutApp();
-						 
-						 // Now Verify Once Account linked then second tie user will not challenged linking model.
-						 try{
-							 pf.getPubPage(ob).loginPublonsAccont(LOGIN.getProperty("PUBLONSLINKEDLNUSER"),LOGIN.getProperty("PUBLONSLINKEDLNPWD"));
-							 pf.getLoginTRInstance(ob).logOutApp();
-							 test.log(LogStatus.PASS,"Once account linked then second time user not see the linking model.");
-						 }
-						 catch(Throwable t){
-							 t.printStackTrace();
-							 test.log(LogStatus.PASS,"After account linked User not able to login.");
-						 }
+						 //Enter wrong Password on linking model and click on SignIn.
+						 waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_PASSWORD_TEXT_XPATH.toString()), 60);
+							pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_PASSWORD_TEXT_XPATH, wrongPass);
+							waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_SIGNIN_BUTTON_XPATH.toString()), 60);
+							pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_SIGNIN_BUTTON_XPATH);
+						 // Now Verify Error message if user enter wrong password in the linking model.
+							try{
+							String actualString ="The email and password do not match. Please try again.";
+							//waitForElementTobePresent(ob, By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_ERROR_MESSAGE_XPATH.toString()), 60);
+							fluentwaitforElement(ob, By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_ERROR_MESSAGE_XPATH.toString()), 60);
+							String expectedErrorMsg=ob.findElement(By.xpath(OnePObjectMap.PUBLONS_ACCOUNT_LINKING_MODEL_ERROR_MESSAGE_XPATH.toString())).getText();
+							System.out.println(expectedErrorMsg);
+							Assert.assertEquals(actualString, expectedErrorMsg, "Error message is not matching.");
+							test.log(LogStatus.PASS,"After Enter wrong password ,Error message showing correctly.");
+							}
+							catch(Throwable t){
+								t.printStackTrace();
+								test.log(LogStatus.PASS,"After Enter wrong password ,Error message not seen.");
+								
+							}
+						
 					}
 					finally{	
 						closeBrowser();	
@@ -143,7 +156,5 @@ public class PUBLONS027 extends TestBase{
 		extent.endTest(test);
 
 	}
-
 }
-
 

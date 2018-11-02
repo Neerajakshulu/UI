@@ -1529,7 +1529,8 @@ public enum OnePObjectMap {
 	PUBLONS_MATCHING_ACCOUNT_EXIST_ERROR_MSG2_XPATH("//p[span[@class='ng-binding']]"),
 	PUBLONS_MATCHING_ACCOUNT_EXIST_ERROR_EMAILD_XPATH("//span[@class='ng-binding']"),
 	PUBLONS_CONNECT_LINKEDLN_BUTTON_XPATH("//div[span[text()='LinkedIn']]/following-sibling::div/button"),
-	
+	//Error Message on linking model.
+	PUBLONS_ACCOUNT_LINKING_MODEL_ERROR_MESSAGE_XPATH("//div[@class='form-level-error__message']/label"),
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_XPATH("//input[@name='oldPassword']//following::label"),
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_XPATH("//input[@name='newPassword']//following::label"),
 
